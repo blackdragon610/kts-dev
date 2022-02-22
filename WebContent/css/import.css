@@ -1,0 +1,327 @@
+.dn {
+	display:none}
+
+#messageArea {
+	text-align: left;
+	margin-left: 17em;
+	margin-bottom: -100px;
+	font-weight: bold;
+	float: left;
+}
+
+.registryMessage {
+	color: black;
+	font-size: 14px;
+	font-weight: bold;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.registrySuccess {
+	background-color: #90EE90;
+	padding-left: 10em;
+    padding-right: 138px;
+    width: 182px;
+}
+.registryFailure {
+	background-color: #ff9999;
+	padding-left: 10em;
+    padding-right: 138px;
+    width: 182px;
+}
+
+.input_fileupload {
+	border:1px solid #7F9DB9;
+	width:350px;
+	height:27px;
+	float:left;}
+
+.btn_fileupload {
+	background:transparent url('./../img/select_csv.gif');
+	border:none;
+	width:70px;
+	height:31px;
+	margin-left:10px;
+	cursor:pointer;
+/* 	float:left; */
+}
+.btn_fileupload_over {
+	background:transparent url('./../img/select_csv_over.gif');
+	border:none;
+	width:70px;
+	height:31px;
+	margin-left:10px;
+	cursor:pointer;
+/* 	float:left;} */
+}
+.btn_import {
+	border:1px solid #999999;
+	background:transparent url('./../img/import.gif');
+	border:none;
+	width:130px;
+	height:35px;
+	cursor:pointer;
+	margin:auto;}
+
+.btn_import_over {
+	border:1px solid #999999;
+	background:transparent url('./../img/import_over.gif');
+	border:none;
+	width:130px;
+	height:35px;
+	cursor:pointer;
+	margin:auto;
+}
+
+.fileUpload_red {
+	background:transparent url('./../img/fileUpload_red.gif');
+	border:none;
+	width:70px;
+	height:31px;
+	margin-left:10px;
+	cursor:pointer;
+/* 	float:left; */
+}
+.fileUpload_red_hover {
+	background:transparent url('./../img/fileUpload_red_hover.gif');
+	border:none;
+	width:70px;
+	height:31px;
+	margin-left:10px;
+	cursor:pointer;
+/* 	float:left;} */
+}
+.import_red {
+	border:1px solid #999999;
+	background:transparent url('./../img/import_red.gif');
+	border:none;
+	width:130px;
+	height:35px;
+	cursor:pointer;
+	margin:auto;}
+
+.import_red_hover {
+	border:1px solid #999999;
+	background:transparent url('./../img/import_red_hover.gif');
+	border:none;
+	width:130px;
+	height:35px;
+	cursor:pointer;
+	margin:auto;
+}
+
+
+.btn_fileupload_green {
+	background:transparent url('./../img/select_csv_green.gif');
+	border:none;
+	width:70px;
+	height:31px;
+	margin-left:10px;
+	cursor:pointer;
+/* 	float:left; */
+}
+.btn_fileupload_over_green {
+	background:transparent url('./../img/select_csv_green_over.gif');
+	border:none;
+	width:70px;
+	height:31px;
+	margin-left:10px;
+	cursor:pointer;
+/* 	float:left;} */
+}
+.btn_import_green {
+	border:1px solid #999999;
+	background:transparent url('./../img/import_green.gif');
+	border:none;
+	width:130px;
+	height:35px;
+	cursor:pointer;
+	margin:auto;}
+
+.btn_import_over_green {
+	border:1px solid #999999;
+	background:transparent url('./../img/import_over_green.gif');
+	border:none;
+	width:130px;
+	height:35px;
+	cursor:pointer;
+	margin:auto;
+}
+
+.btn_fileupload_orange {
+	background:transparent url('./../img/select_csv_orange.gif');
+	border:none;
+	width:70px;
+	height:31px;
+	margin-left:10px;
+	cursor:pointer;
+/* 	float:left; */
+}
+.btn_fileupload_over_orange {
+	background:transparent url('./../img/select_csv_orange_hover.gif');
+	border:none;
+	width:70px;
+	height:31px;
+	margin-left:10px;
+	cursor:pointer;
+/* 	float:left;} */
+}
+
+.btn_import_orange {
+	border:1px solid #999999;
+	background:transparent url('./../img/import_orange.gif');
+	border:none;
+	width:130px;
+	height:35px;
+	cursor:pointer;
+	margin:auto;
+	}
+
+.btn_import_orange_over {
+	border:1px solid #999999;
+	background:transparent url('./../img/import_orange_hover.gif');
+	border:none;
+	width:130px;
+	height:35px;
+	cursor:pointer;
+	margin:auto;
+}
+
+
+.btn_excelUpload {
+	background:transparent url('./../img/excel_button.gif');
+	border:none;
+	width:80px;
+	height:31px;
+	margin-left:10px;
+	cursor:pointer;
+/* 	float:left; */
+}
+.btn_excelUpload_over {
+	background:transparent url('./../img/excel_hover.gif');
+	border:none;
+	width:80px;
+	height:31px;
+	margin-left:10px;
+	cursor:pointer;
+/* 	float:left;} */
+}
+
+p.import_message{
+	margin:0px 0px 3px 210px;
+}
+
+#select_box{
+	height:31px;
+	font-size:18px;
+	}
+
+#deliveryCompanyId{
+	height:31px;
+	font-size:18px;
+	}
+
+p.import_elements{
+	margin:0px 0px 30px 210px;
+}
+
+p.import_submit{
+	margin:0px 0px 0px 510px;
+}
+
+p.excel_import_submit{
+	margin:0px 0px 0px 525px;
+}
+
+
+p.import_elements_multi{
+	margin:10px 0px 10px 210px;
+}
+
+p.import_submit_multi{
+	margin:0px 0px 0px 510px;
+}
+
+.input_fileupload_multi {
+	border:1px solid #7F9DB9;
+	width:350px;
+	height:27px;
+	float:left;
+}
+
+.btn_fileupload_multi {
+	background:transparent url('./../img/select_csv.gif');
+	border:none;
+	width:70px;
+	height:31px;
+	margin-left:10px;
+	cursor:pointer;
+/* 	float:left; */
+}
+.btn_fileupload_over_multi {
+	background:transparent url('./../img/select_csv_over.gif');
+	border:none;
+	width:70px;
+	height:31px;
+	margin-left:10px;
+	cursor:pointer;
+	float:left;
+}
+
+.multi_import{
+	margin-left: 210px;
+}
+
+.buttonPositionTop {
+	margin: 40px 0 50px 515px;
+}
+
+.buttonPositionBottom {
+	margin: 0px 0 50px 515px;
+}
+
+#import_div {
+	min-width: 850px;
+}
+
+#errorArea {
+	width: 800px;
+	margin: 30px 0 30px 210px;
+}
+
+.fileName {
+	color:red;
+	font-size: 15px;
+}
+
+.errorMessageBlue {
+	color:blue;
+	font-size: 13px;
+}
+
+.errorMessageGreen {
+	color:#3CB371;
+	font-size: 13px;
+}
+
+.errorMessageYellow {
+	color:#f4ca22;
+	font-size: 13px;
+}
+
+.errorMessagePurple {
+	color:#82318E;
+	font-size: 13px;
+}
+
+
+.errorMessage {
+	color:red;
+	font-size: 13px;
+}
+
+.copyRadio {
+	min-width: 400px;
+	margin: 0 0 10px 200px;
+}
+

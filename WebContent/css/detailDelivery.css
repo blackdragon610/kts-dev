@@ -1,0 +1,22 @@
+.contents {
+	margin: 0 auto;
+	width: 700px;
+}
+
+.contents table {
+	table-layout: fixed;
+	width: 100%;
+}
+
+.contents table tr td{
+	text-align: left;
+}
+
+.contents table th{
+	width: 100px;
+	max-width: 100px;
+	min-width: 100px;
+}
+
+.w150{width:150px;}
+.w100p{width:100%;}

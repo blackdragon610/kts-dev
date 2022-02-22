@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context reloadable="true" antiJARLocking="true" antiResourceLocking="true">
+	<Resource auth="Container" type="javax.sql.DataSource"
+		maxActive="20" maxIdle="10" maxWait="-1"
+		name="jdbc/postgresql"
+		driverClassName="org.postgresql.Driver"
+		url="jdbc:postgresql://133.242.141.188:5432/sunad_db"
+		username="sunad" password="sunad" />
+</Context>

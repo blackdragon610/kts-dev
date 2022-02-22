@@ -1,0 +1,173 @@
+.head {
+	padding: 5px 10px;
+	font-size: 1.3em;
+	border-left: 20px #2ca9e1 groove;
+	border-bottom: 1px #333 dotted;
+	font-weight: 700;
+	width: 180px;
+	margin: 10px 20px 20px 20px;
+}
+
+.searchOptionArea {
+	margin: 0px 20px 10px 20px;
+
+}
+
+.searchOptionTable tr td {
+	padding: 5px 5px 0 5px;
+}
+
+.paging_num {
+	margin: 0px 0 10px 20px;
+}
+
+.searchButton {
+	margin-left: 470px;
+}
+
+.out_Div {
+	position: relative;
+	padding-top: 26px;
+	min-width: 640px;
+	max-width: 640px;
+	margin: 0 20px 20px 20px;
+}
+
+.in_Div {
+	overflow: auto;
+	height: 240px;
+	min-width: 767px;
+	max-width: 850px;
+}
+
+table.list_table thead tr {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 750px;
+}
+
+table.list_table tr.change_color:hover {
+	background: #EAF1F5;
+	cursor:pointer;
+}
+
+.list_table{
+	min-width: 651px;
+	max-width: 651px;
+	border-collapse: separate;
+	border-spacing: 0px;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+}
+.list_table th{
+	padding: 4px;
+	text-align: center;
+	color: #FFFFFF;
+	background: #258;
+	border-top: 1px solid #fff;
+	border-left: 1px solid #fff;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	vertical-align: middle;
+}
+.list_table td{
+	padding: 8px;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	text-align: center;
+}
+
+.wCode {
+	min-width: 102px;
+	max-width: 102px;
+}
+
+.wNm {
+	min-width: 200px;
+	max-width: 226px;
+}
+
+.wNum {
+	min-width: 70px;
+	max-width: 70px;
+}
+
+.wSelect {
+	min-width: 140px;
+	max-width: 140px;
+}
+
+.wButton {
+	min-width: 61px;
+	max-width: 61px;
+}
+
+.wListCode {
+	min-width: 95px;
+	max-width: 95px;
+	waed-break: break-all;
+}
+
+.wListNm {
+	min-width: 193px;
+	max-width: 193px;
+	waed-break: break-all;
+}
+
+.wListNum {
+	min-width: 63px;
+	max-width: 63px;
+	waed-break: break-all;
+}
+
+.wListSelect {
+	min-width: 104px;
+	max-width: 104px;
+	waed-break: break-all;
+}
+
+.wListButton {
+	min-width: 53px;
+	max-width: 53px;
+	waed-break: break-all;
+}
+
+#errorMessageArea {
+	margin-left: 50px;
+	margin-bottom: 10px;
+}
+
+#messageArea {
+	text-align: left;
+	margin-left: 17em;
+	margin-bottom: -100px;
+	font-weight: bold;
+	float: left;
+	width: 540px;
+	margin-right: 298px;
+}
+
+.registryMessage {
+	color: black;
+	font-size: 14px;
+	font-weight: bold;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.registrySuccess {
+	background-color: #90EE90;
+	padding-left: 10em;
+    padding-right: 308px;
+}
+.registryFailure {
+	background-color: #ff9999;
+	padding-left: 10em;
+    padding-right: 400px;
+}
+
+span.explain {
+	color: red;
+	font-size: 13px;
+}

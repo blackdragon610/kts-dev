@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" [
+    <!-- ログ出力先ディレクトリ -->
+	<!ENTITY LOG_DIR "/usr/local/kts/logs/">
+<!-- <!ENTITY LOG_DIR "ローカルディレクトリを指定してください。"> -->
+]>
+<!-- - システム名 : kts - ファイル概要: Log4j 設定ファイル - Copyright(C) CLEAVE Inc. 2008,
+	All rights reserved. -->
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- ===== Appenderの設定 ================================================================== -->
+
+	<!-- アクセスログ用ファイル出力 -->
+	<appender name="AccessLogFileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="&LOG_DIR;/kts_access_log.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p %d [%t] [%X{sessionId}] [%X{loginCd}] - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="levelMin" value="debug" />
+			<param name="levelMax" value="fatal" />
+		</filter>
+	</appender>
+
+	<!-- デバッグ用ファイル出力 -->
+	<appender name="DebugFileAppender" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="&LOG_DIR;/kts_debug.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p %d [%t] [%X{sessionId}] [%X{loginCd}] - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="levelMin" value="debug" />
+			<param name="levelMax" value="fatal" />
+		</filter>
+	</appender>
+
+	<!-- 処理用ファイル出力(サイズによるローテーション) -->
+<!-- 	<appender name="ProcessFileAppender" class="org.apache.log4j.RollingFileAppender"> -->
+<!-- 		<param name="File" value="&LOG_DIR;/kts_process.log" /> -->
+<!-- 		<param name="MaxBackupIndex" value="10" /> -->
+<!-- 		<param name="MaxFileSize" value="10MB" /> -->
+<!-- 		<param name="Append" value="true" /> -->
+<!-- 		<param name="Encoding" value="UTF-8" /> -->
+<!-- 		<layout class="org.apache.log4j.PatternLayout"> -->
+<!-- 			<param name="ConversionPattern" value="%-5p %d [%t] [%X{sessionId}] [%X{loginCd}] - %m%n" /> -->
+<!-- 		</layout> -->
+<!-- 		<filter class="org.apache.log4j.varia.LevelRangeFilter"> -->
+<!-- 			<param name="levelMin" value="trace" /> -->
+<!-- 			<param name="levelMax" value="fatal" /> -->
+<!-- 		</filter> -->
+<!-- 	</appender> -->
+
+	<!-- デバッグ用コンソール出力 -->
+	<appender name="DebugConsoleAppender" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%-5p %d [%t] [%X{sessionId}] [%X{loginCd}] - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="levelMin" value="debug" />
+			<param name="levelMax" value="fatal" />
+		</filter>
+	</appender>
+
+	<!-- ===== Loggerの設定 ==================================================================== -->
+
+	<logger name="jp.co.irric.cdb.service.GaroonLoginIdParseService"
+		additivity="false">
+		<!-- TODO: 運用開始後は、ログレベルはinfoとする -->
+		<level value="info" />
+		<appender-ref ref="DebugFileAppender" />
+		<appender-ref ref="DebugConsoleAppender" />
+	</logger>
+
+
+	<logger name="jp.co.keyaki.cleave.fw.dao" additivity="false">
+		<!-- TODO: 運用開始後は、ログレベルはinfoとする -->
+		<level value="info" />
+		<appender-ref ref="DebugFileAppender" />
+		<appender-ref ref="DebugConsoleAppender" />
+	</logger>
+
+	<logger name="org.apache" additivity="false">
+		<!-- TODO: 運用開始後は、ログレベルはinfoとする -->
+		<level value="info" />
+		<appender-ref ref="DebugFileAppender" />
+		<appender-ref ref="DebugConsoleAppender" />
+	</logger>
+
+	<logger name="access_log" additivity="false">
+		<!-- TODO: 運用開始後は、ログレベルはinfoとする -->
+		<level value="info" />
+		<appender-ref ref="AccessLogFileAppender" />
+		<appender-ref ref="DebugConsoleAppender" />
+	</logger>
+
+	<!-- ルートロガー -->
+	<root>
+		<level value="info" />
+		<appender-ref ref="DebugFileAppender" />
+		<appender-ref ref="DebugConsoleAppender" />
+	</root>
+
+</log4j:configuration>

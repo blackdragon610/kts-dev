@@ -1,0 +1,368 @@
+footer_button {
+	display: inline;
+	padding-left: 20px;
+}
+
+.orderStatus{
+	display: inline-block;
+	border-left: 1px solid #c7cad3;
+	padding: 0 12px 0 12px;
+}
+
+ul.hmenu{
+	margin-left: 20px;
+}
+
+ul.hmenu .status:first-child{
+	border-left: none;
+	padding-left: 3px;
+}
+
+ul.hmenu .status{
+	display: inline-block;
+	border-left: 1px solid #c7cad3;
+	padding: 0 12px 0 12px;
+}
+
+ul.corpmenu li{
+	margin-top:10px;
+}
+
+.searchOptionField {
+	margin-top: 30px;
+	margin-left: 30px;
+	margin-right: 30px;
+	border:solid 1px #dddddd;
+	border-radius:3px;
+	background: #ffffff;
+	border-left-width: 3px;
+	border-right-width: 3px;
+	border-top-width: 3px;
+	border-bottom-width: 3px;
+	max-width: 1400px;
+	min-width: 1400px;
+	width: 100%;
+	margin-bottom: 50px;
+}
+
+#searchOptionOpen {
+	font-size: 20px;
+	cursor: pointer;
+}
+
+#searchOptionArea table td {
+	padding: 5px;
+	white-space: nowrap;
+}
+
+/* #list_area { */
+/* 	margin: 20px 30px 50px 30px; */
+/* 	padding-right: 240px; */
+/* 	width: 100%; */
+/* 	clear: both; */
+/* } */
+
+#list_area {
+	margin: 20px 30px 25px 30px;
+	max-width: 1500px;
+	min-width: 1500px;
+}
+
+.list_table {
+	border-collapse: separate;
+	border-spacing: 0px;
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	table-layout: fixed;
+	width: 100%;
+}
+
+.list_table th {
+	color: #fff;
+	padding: 6px 4px;
+	background: #258;
+	font-weight: bold;
+	border-left:1px solid;
+	border-top:1px solid #258;
+	border-bottom:1px solid #258;
+	line-height: 120%;
+	text-align: center;
+	text-shadow:0 -1px 0 rgba(34,85,136,0.9);
+	box-shadow: 0px 1px 1px rgba(255,255,255,0.3) inset;
+}
+
+.list_table td {
+	text-align: center;
+	padding: 4px;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+#addDeleteCheck {
+	text-align: center;
+}
+.buttonArea {
+	position: fixed !important;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 25px;
+	background-color: #EEEEEE;
+	padding: 10px;
+	text-align: center !important;
+}
+
+#searchOptionArea table td {
+	padding: 5px;
+}
+
+#searchOptionOpen {
+	font-size: 20px;
+	cursor: pointer;
+}
+
+/* .paging_area { */
+/* 	margin: 20px 30px 15px 30px; */
+/* 	max-width: 1410px; */
+/* 	min-width: 1410px; */
+/* 	text-align: center */
+/* } */
+
+/* .under_paging_area { */
+/* 	margin: 1px 30px 155px 30px; */
+/* 	max-width: 1410px; */
+/* 	min-width: 1410px; */
+/* } */
+
+/* .paging_total_top { */
+/* 	float: left; */
+/* } */
+
+/* .paging_num_top { */
+/* 	float: left; */
+/* 	margin-left: 340px; */
+/* } */
+
+/* .paging_total_bottom { */
+/* 	float: left; */
+/* 	margin-top: -25px; */
+/* } */
+
+/* .paging_num_bottom { */
+/* 	margin-top: -10px; */
+/* 	margin-left: 385px; */
+/* } */
+
+.paging_area {
+	margin: 20px 30px 15px 30px;
+}
+
+.under_paging_area {
+	margin: 1px 30px 100px 30px;
+}
+
+.paging_total_top {
+	float: left;
+	margin-bottom: 20px;
+}
+
+.paging_num_top {
+	float: left;
+	margin-left: 340px;
+}
+
+.paging_total_bottom {
+	float: left;
+}
+
+.paging_num_bottom {
+	margin-top: -10px;
+	margin-left: 385px;
+}
+
+.td_padding {
+	padding-left: 5px;
+	padding-right:10px;
+}
+
+/* pager */
+ul.pager { margin-top:0; display:inline-block; margin-left:0; margin-bottom:0; -webkit-border-radius:4px; -moz-border-radius:4px; border-radius:4px; -webkit-box-shadow:0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow:0 1px 2px rgba(0, 0, 0, 0.05); box-shadow:0 1px 2px rgba(0, 0, 0, 0.05); }
+ul.pager > li { display:inline; }
+ul.pager > li a, ul.pager > li span { float:left; padding:6px 12px 4px 12px; line-height:20px; text-decoration:none; background-color:#ffffff; border:1px solid #dddddd; border-left-width:0; }
+ul.pager > li > a:hover, ul.pager > .current > a, ul.pager > .current > span { background-color:#f5f5f5; }
+ul.pager > .current > a, ul.pager > .current > span { font-weight:bold; cursor:default; }
+ul.pager > .disabled > span, ul.pager > .disabled > a, ul.pager > .disabled > a:hover { color:#999999; background-color:transparent; cursor:default; }
+ul.pager > li:first-child > a, ul.pager > li:first-child > span { border-left-width:1px; -webkit-border-top-left-radius:4px; -moz-border-radius-topleft:4px; border-top-left-radius:4px; -webkit-border-bottom-left-radius:4px; -moz-border-radius-bottomleft:4px; border-bottom-left-radius:4px; }
+ul.pager > li:last-child > a, ul.pager > li:last-child > span { -webkit-border-top-right-radius:4px; -moz-border-radius-topright:4px; border-top-right-radius:4px; -webkit-border-bottom-right-radius:4px; -moz-border-radius-bottomright:4px; border-bottom-right-radius:4px; }
+
+.untreated {
+	color: white;
+	background-color: #008000;
+}
+.treated {
+	color: white;
+	background-color: #0000ff;
+}
+
+.option1 {
+	margin-left: 15px;
+	margin-right: 30px;
+}
+
+.option2 {
+	margin-left: 15px;
+	margin-right: 30px;
+}
+
+.option3 {
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
+#deliveryDateOverFlg1 {
+	background-color: #FFDB99;
+}
+
+#deliveryDateOverFlg2 {
+	background-color: #FFA500;
+}
+
+#messageArea {
+	text-align: left;
+	margin-left: 17em;
+	margin-bottom: -100px;
+	font-weight: bold;
+	float: left;
+	width: 477px;
+}
+
+.registryMessage {
+	padding: 0.5em 10em;
+	color: black;
+	font-size: 14px;
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+.registrySuccess {
+	background-color: #90EE90;
+}
+.registryFailure {
+	background-color: #ff9999;
+}
+
+#errorMessage {
+	text-align: center;
+	font-weight: bold;
+	color: red;
+}
+
+.allOrderCheckSize {
+	width: 1px;
+}
+
+.orderDate {
+	width: 10px;
+}
+
+.poNo {
+	width: 25px;
+	white-space: nowrap;
+}
+
+.factoryNm {
+    width: 40px;
+}
+
+.statusSize {
+    width: 12px;
+    white-space: nowrap;
+}
+
+.codeNum {
+	width: 16px;
+}
+
+.codeNumWidth {
+	width: 115px;
+	word-break: break-word;
+}
+
+.itemNm {
+	width: 55px;
+	word-break: break-word;
+}
+
+.itemNmWidth {
+	width: 320px;
+	word-break: break-word;
+}
+
+.orderNum {
+	width: 1px;
+}
+
+.orderNumWidth {
+	width: 35px;
+}
+
+.arrivalDate {
+	width: 10px;
+}
+
+.arrivalDateWidth {
+	width: 87px;
+}
+
+.arraival {
+	width: 1px;
+}
+
+.arraivalWidth {
+	width: 35px;
+}
+
+.payment {
+	width: 1px;
+}
+
+.slideButton {
+	width: 1px;
+}
+
+li.buttonSpase{
+	margin-right: 15px;
+	display: inline-block;
+}
+
+.innerTable {
+	table-layout: fixed;
+}
+
+/* .itemList { */
+/* 	padding: 1px !important; */
+/* } */
+
+/* .item { */
+/* 	padding: 0px !important; */
+
+/* } */
+
+/* .schedule { */
+/* 	padding: 0px !important; */
+/* } */
+
+.accordion {
+	height: 37px;
+}
+
+.radioArea {
+	margin-left: 30px;
+	margin-right: 30px;
+}
+
+/* li.radioarea { */
+/* 	display: inline-block; */
+/* } */
+

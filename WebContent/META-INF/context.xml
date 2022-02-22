@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <Context reloadable="true" antiJARLocking="true" antiResourceLocking="true"> -->
+<!-- 	<Resource auth="Container" type="javax.sql.DataSource" -->
+<!-- 		maxActive="20" maxIdle="10" maxWait="-1" -->
+<!-- 		name="jdbc/postgresql" -->
+<!-- 		driverClassName="org.postgresql.Driver" -->
+<!-- 		url="jdbc:postgresql://192.168.0.55:5432/kts" -->
+<!-- 		username="postgres" password="postgres" /> -->
+<!-- </Context> -->
+<Context reloadable="true" antiJARLocking="true" antiResourceLocking="true">
+	<Resource auth="Container" type="javax.sql.DataSource"
+		maxActive="20" maxIdle="10" maxWait="-1"
+		name="jdbc/postgresql" driverClassName="org.postgresql.Driver"
+		url="jdbc:postgresql://localhost:5432/ktsstage" username="postgres" password="postgres" />
+</Context>

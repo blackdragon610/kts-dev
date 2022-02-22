@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <xml fileName="jp/co/keyaki/cleave/fw/dao/config/database-config.xml" >
+<!--     <expressionEngine config-class="org.apache.commons.configuration.tree.xpath.XPathExpressionEngine" />  -->
+  </xml>
+<!--   <xml fileName="jp/co/nexio/service/config/service-config.xml" /> -->
+  <xml fileName="jp/co/keyaki/cleave/fw/ui/web/taglib/jsutil/config/jsutil-config.xml" />
+</configuration>

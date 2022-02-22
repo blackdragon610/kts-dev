@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+        
+    <wb-module deploy-name="Sunad">
+                
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+                
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/fw/core"/>
+                
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/fw/dao"/>
+                
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/fw/service"/>
+                
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/fw/ui"/>
+                
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/dao"/>
+                
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/entities"/>
+                
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/WebContent/util"/>
+                
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/util"/>
+                
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/ui"/>
+                
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/service"/>
+                
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/core"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/ui/jp/co/kts/ui/btobBill"/>
+                
+        <property name="java-output-path" value="/Sunad/build/classes"/>
+                
+        <property name="context-root" value="kts"/>
+            
+    </wb-module>
+    
+</project-modules>

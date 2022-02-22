@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsutil-config>
+  <java-script-variable-define-factory>
+    <variable-defines>
+      <variable-define>
+        <java-type>java.lang.Boolean</java-type>
+        <define-class>jp.co.keyaki.cleave.fw.ui.web.taglib.jsutil.JavaScriptBooleanVariableDefine</define-class>
+      </variable-define>
+      <variable-define>
+        <java-type>java.lang.Number</java-type>
+        <define-class>jp.co.keyaki.cleave.fw.ui.web.taglib.jsutil.JavaScriptDecimalVariableDefine</define-class>
+      </variable-define>
+      <variable-define>
+        <java-type>java.lang.Character</java-type>
+        <define-class>jp.co.keyaki.cleave.fw.ui.web.taglib.jsutil.JavaScriptCharVariableDefine</define-class>
+      </variable-define>
+      <variable-define>
+        <java-type>java.lang.CharSequence</java-type>
+        <define-class>jp.co.keyaki.cleave.fw.ui.web.taglib.jsutil.JavaScriptCharVariableDefine</define-class>
+      </variable-define>
+      <variable-define>
+        <java-type>java.util.Date</java-type>
+        <define-class>jp.co.keyaki.cleave.fw.ui.web.taglib.jsutil.JavaScriptDateVariableDefine</define-class>
+      </variable-define>
+      <variable-define>
+        <java-type>java.util.Collection</java-type>
+        <define-class>jp.co.keyaki.cleave.fw.ui.web.taglib.jsutil.JavaScriptCollectionVariableDefine</define-class>
+      </variable-define>
+    </variable-defines>
+  </java-script-variable-define-factory>
+</jsutil-config>

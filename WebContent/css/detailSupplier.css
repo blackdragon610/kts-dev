@@ -1,0 +1,64 @@
+#messageArea {
+	text-align: left;
+	margin-left: 17em;
+	margin-bottom: -100px;
+	font-weight: bold;
+	float: left;
+	width: 477px;
+}
+
+.registryMessage {
+	padding: 0.5em 10em;
+	color: black;
+	font-size: 14px;
+	font-weight: bold;
+	white-space: nowrap;
+}
+
+.registrySuccess {
+	background-color: #90EE90;
+}
+.registryFailure {
+	background-color: #ff9999;
+}
+
+.footerButtonArea {
+	position: fixed !important;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 25px;
+	background-color: #EEEEEE;
+	padding: 10px;
+	text-align: center !important;
+}
+
+.supplierTable {
+	padding-bottom: 100px;
+}
+
+li.buttonSpase{
+	margin-right: 15px;
+	display:inline-block;
+}
+
+.leadTime {
+	width: 90px;
+}
+
+#swiftCode {
+	width: 200px;
+	height: 18px;
+}
+
+#accountNo {
+	width: 200px;
+	height: 18px;
+}
+
+#errorMessage {
+	text-align: center;
+	font-weight: bold;
+	color: red;
+}

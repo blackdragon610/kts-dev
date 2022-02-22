@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE digester-rules PUBLIC "-//Jakarta Apache //DTD digester-rules XML V1.0//EN" "digester-rules.dtd">
+<digester-rules>
+  <pattern value="sql-templates">
+    <object-create-rule classname="jp.co.keyaki.cleave.fw.dao.template.xml.XMLSQLTemplates" />
+    <pattern value="sql-template">
+      <object-create-rule classname="jp.co.keyaki.cleave.fw.dao.template.xml.XMLSQLTemplate" />
+      <set-next-rule methodname="addSQLTemplate"
+        paramtype="jp.co.keyaki.cleave.fw.dao.template.xml.XMLSQLTemplate" />
+      <set-properties-rule />
+    </pattern>
+  </pattern>
+  <pattern value="*/static">
+    <object-create-rule classname="jp.co.keyaki.cleave.fw.dao.template.xml.StaticSQLPart" />
+    <set-next-rule methodname="addChildSQLPart" paramtype="jp.co.keyaki.cleave.fw.dao.template.xml.SQLPart" />
+    <set-properties-rule />
+    <call-method-rule methodname="setSqlContent" paramcount="1" paramtypes="java.lang.String"/>
+    <call-param-rule  paramnumber="0" />
+  </pattern>
+  <pattern value="*/if-not-null">
+    <object-create-rule classname="jp.co.keyaki.cleave.fw.dao.template.xml.IfNotNullSQLPart" />
+    <set-next-rule methodname="addChildSQLPart" paramtype="jp.co.keyaki.cleave.fw.dao.template.xml.SQLPart" />
+    <set-properties-rule />
+    <call-method-rule methodname="setSqlContent" paramcount="1" paramtypes="java.lang.String"/>
+    <call-param-rule  paramnumber="0" />
+  </pattern>
+  <pattern value="*/if-null">
+    <object-create-rule classname="jp.co.keyaki.cleave.fw.dao.template.xml.IfNullSQLPart" />
+    <set-next-rule methodname="addChildSQLPart" paramtype="jp.co.keyaki.cleave.fw.dao.template.xml.SQLPart" />
+    <set-properties-rule />
+    <call-method-rule methodname="setSqlContent" paramcount="1" paramtypes="java.lang.String"/>
+    <call-param-rule  paramnumber="0" />
+  </pattern>
+<!-- 20140313 伊東敦史 start -->
+  <pattern value="*/if-not-empty">
+    <object-create-rule classname="jp.co.keyaki.cleave.fw.dao.template.xml.IfNotEmptySQLPart" />
+    <set-next-rule methodname="addChildSQLPart" paramtype="jp.co.keyaki.cleave.fw.dao.template.xml.SQLPart" />
+    <set-properties-rule />
+    <call-method-rule methodname="setSqlContent" paramcount="1" paramtypes="java.lang.String"/>
+    <call-param-rule  paramnumber="0" />
+  </pattern>
+<!-- 20140313 伊東敦史 end -->
+  <pattern value="*/if-equals">
+    <object-create-rule classname="jp.co.keyaki.cleave.fw.dao.template.xml.IfEqualsSQLPart" />
+    <set-next-rule methodname="addChildSQLPart" paramtype="jp.co.keyaki.cleave.fw.dao.template.xml.SQLPart" />
+    <set-properties-rule />
+    <call-method-rule methodname="setSqlContent" paramcount="1" paramtypes="java.lang.String"/>
+    <call-param-rule  paramnumber="0" />
+  </pattern>
+  <pattern value="*/if-not-equals">
+    <object-create-rule classname="jp.co.keyaki.cleave.fw.dao.template.xml.IfNotEqualsSQLPart" />
+    <set-next-rule methodname="addChildSQLPart" paramtype="jp.co.keyaki.cleave.fw.dao.template.xml.SQLPart" />
+    <set-properties-rule />
+    <call-method-rule methodname="setSqlContent" paramcount="1" paramtypes="java.lang.String"/>
+    <call-param-rule  paramnumber="0" />
+  </pattern>
+  <pattern value="*/sql-ref">
+    <object-create-rule classname="jp.co.keyaki.cleave.fw.dao.template.xml.ReferenceSQLPart" />
+    <set-next-rule methodname="addChildSQLPart" paramtype="jp.co.keyaki.cleave.fw.dao.template.xml.SQLPart" />
+    <set-properties-rule />
+  </pattern>
+</digester-rules>

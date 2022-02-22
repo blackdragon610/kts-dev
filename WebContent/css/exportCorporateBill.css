@@ -1,0 +1,310 @@
+body {
+	margin: 0;
+}
+
+h5 {
+	margin: 20px 0 20px 30px;
+}
+
+.text{
+	width: 120px;
+    height: 18px;
+}
+
+#makeOptionField {
+	float: left;
+	margin-left: 30px;
+	margin-right: 10px;
+	border:solid 1px #dddddd;
+	border-radius:3px;
+	background: #ffffff;
+	border-left-width: 3px;
+	border-right-width: 3px;
+	border-top-width: 3px;
+	border-bottom-width: 3px;
+	max-width: 500px;
+	min-width: 450px;
+}
+#searchOptionField {
+	float: left;
+	margin-left: 10px;
+	margin-right: 30px;
+	border:solid 1px #dddddd;
+	border-radius:3px;
+	background: #ffffff;
+	border-left-width: 3px;
+	border-right-width: 3px;
+	border-top-width: 3px;
+	border-bottom-width: 3px;
+	margin-bottom:30px;
+	max-width: 750px;
+	min-width: 650px;
+}
+
+#searchOptionOpen {
+	font-size: 20px;
+	cursor: pointer;
+}
+
+#checkBoxTable {
+	margin-left: 70px;
+
+}
+
+.flgCheck {
+	font-weight: bold;
+	padding-left: 20px;
+}
+
+.arrow {
+	padding-left: 20px;
+	font-size: 22px;
+}
+
+.searchOptionTable {
+	margin: 10px;
+}
+
+.searchOptionTable tr td {
+	padding: 3px;
+}
+
+#search_sort {
+	float:right;
+	margin-right:inherit;
+}
+
+.buttonArea {
+	margin: 0 auto;
+	padding: 20px 0 20px 880px;
+}
+
+.buttonArea {
+	margin: 0 auto;
+	padding: 20px 0 20px 880px;
+}
+
+.paging_area {
+	margin: 20px 30px 5px 30px;
+	max-width: 1410px;
+	min-width: 1410px;
+	clear: both;
+}
+
+.checkButtonArea {
+    float: left;
+    margin: 0px 0 5px 28px;
+    clear: both;
+}
+
+.under_paging_area {
+	margin: 1px 30px 155px 30px;
+	max-width: 1000px;
+	min-width: 1000px;
+	clear: both;
+}
+
+.paging_total_top {
+	float: left;
+}
+
+.paging_num_top {
+	float: left;
+	margin-left: 340px;
+}
+
+.paging_total_bottom {
+	float: left;
+	margin-top: -25px;
+}
+
+.paging_num_bottom {
+	margin-top: -10px;
+	margin-left: 385px;
+}
+
+.middleArea {
+	margin: 20px 30px 5px 30px;
+	max-width: 500px;
+	min-width: 600px;
+	padding-left: 900px;
+}
+
+.editButtonTable {
+	padding: 0px 0px 30px 0px;
+	margin: 0px 30px 0px 30px;
+	float: right;
+	text-align:right ;
+}
+
+#list_area {
+	margin: 20px 30px 50px 30px;
+	padding-right: 240px;
+	clear: both;
+	max-width: 1200px;
+	min-width: 1200px;
+}
+
+/* pager */
+ul.pager { margin-top:0; display:inline-block; margin-left:0; margin-bottom:0; -webkit-border-radius:4px; -moz-border-radius:4px; border-radius:4px; -webkit-box-shadow:0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow:0 1px 2px rgba(0, 0, 0, 0.05); box-shadow:0 1px 2px rgba(0, 0, 0, 0.05); }
+ul.pager > li { display:inline; }
+ul.pager > li a, ul.pager > li span { float:left; padding:6px 12px 4px 12px; line-height:20px; text-decoration:none; background-color:#ffffff; border:1px solid #dddddd; border-left-width:0; }
+ul.pager > li > a:hover, ul.pager > .current > a, ul.pager > .current > span { background-color:#f5f5f5; }
+ul.pager > .current > a, ul.pager > .current > span { font-weight:bold; cursor:default; }
+ul.pager > .disabled > span, ul.pager > .disabled > a, ul.pager > .disabled > a:hover { color:#999999; background-color:transparent; cursor:default; }
+ul.pager > li:first-child > a, ul.pager > li:first-child > span { border-left-width:1px; -webkit-border-top-left-radius:4px; -moz-border-radius-topleft:4px; border-top-left-radius:4px; -webkit-border-bottom-left-radius:4px; -moz-border-radius-bottomleft:4px; border-bottom-left-radius:4px; }
+ul.pager > li:last-child > a, ul.pager > li:last-child > span { -webkit-border-top-right-radius:4px; -moz-border-radius-topright:4px; border-top-right-radius:4px; -webkit-border-bottom-right-radius:4px; -moz-border-radius-bottomright:4px; border-bottom-right-radius:4px; }
+
+table.list_table tbody.change_color_only:hover {
+  background: #EAF1F5;
+  z-index: 1;
+}
+
+.list_table{
+width:100%;
+border-collapse: separate;
+border-spacing: 0px;
+border-top: 1px solid #ccc;
+border-left: 1px solid #ccc;
+/* padding-right: 30px; */
+}
+.list_table th{
+color: #ffffff;
+background-color: #8b0000;
+border-top: 1px solid #fff;
+border-left: 1px solid #fff;
+border-right: 1px solid #ccc;
+border-bottom: 1px solid #ccc;
+vertical-align: middle;
+padding: 8px 0 8px 0;
+font-weight: 100;
+}
+.list_table td{
+padding: 4px;
+/* background-color: #fafafa; */
+border-right: 1px solid #ccc;
+border-bottom: 1px solid #ccc;
+}
+
+.tdButton {
+	min-width: 80px;
+	max-width: 80px;
+	text-align: center;
+}
+
+.nowPage {
+	color: #000000;
+}
+
+.corporateBillNoHd {
+	max-width: 100px;
+	min-width: 100px;
+}
+
+.billdataCreateDateHd {
+	max-width: 100px;
+	min-width: 100px;
+}
+
+.clientCorporationNmHd {
+	max-width: 140px;
+	min-width: 140px;
+}
+
+.clientBillingNmHd {
+	max-width: 140px;
+	min-width: 140px;
+}
+
+.clientCutoffDateNmHd {
+	max-width: 100px;
+	min-width: 100px;
+}
+
+.billAmountHd {
+	max-width: 100px;
+	min-width: 100px;
+}
+
+.billAccountNmHd {
+	max-width: 100px;
+	min-width: 100px;
+}
+
+.freeWordHd {
+	max-width: 150px;
+	min-width: 150px;
+}
+
+.receiveDateHd {
+	max-width: 150px;
+	min-width: 150px;
+}
+
+.receivePriceHd {
+	max-width: 140px;
+	min-width: 140px;
+}
+
+.chargeHd {
+	max-width: 85px;
+	min-width: 85px;
+}
+
+.exportBillHd {
+	max-width: 80px;
+	min-width: 80px;
+}
+
+.deleteBillHd {
+	max-width: 80px;
+	min-width: 80px;
+}
+
+.freeWord:focus{
+	background-color:#FFCCCC;
+}
+
+.receiveDate:focus{
+	background-color:#FFCCCC;
+}
+
+.receivePrice:focus{
+	background-color:#FFCCCC;
+}
+
+.charge:focus{
+	background-color:#FFCCCC;
+}
+
+ul.hmenu{
+	margin-left: 20px;
+}
+
+ul.hmenu .corp:first-child{
+	border-left: none;
+	padding-left: 3px;
+}
+
+ul.hmenu .corp{
+	display: inline-block;
+	border-left: 1px solid #c7cad3;
+	padding: 0 12px 0 12px;
+}
+
+.corp {
+	vertical-align:top;
+}
+
+#errorArea {
+	text-align: center;
+	margin-top: 50px;
+
+
+}
+
+.errorMessage {
+	color:red;
+	font-size: 16px;
+    padding-top: 200px;
+}

@@ -1,0 +1,211 @@
+.head {
+	padding: 5px 10px;
+	font-size: 1.3em;
+	border-left: 20px #2ca9e1 groove;
+	border-bottom: 1px #333 dotted;
+	font-weight: 700;
+	width: 180px;
+	margin: 10px 20px 20px 20px;
+}
+
+.searchOptionArea {
+	margin: 0px 20px 10px 20px;
+
+}
+
+.s_size {
+	width: 64px;
+}
+
+.s_size_th {
+	width: 71px;
+}
+
+.s_size_td {
+	width: 176px;
+}
+
+.searchOptionTable {
+	padding: 5px 5px 0 5px;
+	width: 64em;
+}
+
+.searchOptionMakerTable {
+	padding: 5px 5px 0 5px;
+	width: 64em;
+}
+
+.paging_num {
+	margin: 0px 0 10px 20px;
+}
+
+h3 {
+	float: left;
+}
+
+.searchButton {
+	margin-left: 502px;
+}
+
+.out_Div {
+	position: relative;
+	padding-top: 26px;
+	/* min-width: 640px; */
+	max-width: 820px;
+	margin: 0 20px 20px 20px;
+}
+
+.in_Div {
+	overflow: auto;
+	height: 501px;
+	/* min-width: 655px; */
+	max-width: 820px;
+}
+
+table.list_table thead tr {
+	position: absolute;
+	top: 0;
+	left: 0;
+	eidth: 800px;
+}
+
+table.list_table tr.change_color:hover {
+  background: #EAF1F5;
+  cursor:pointer;
+}
+
+.list_table{
+width: 800px;
+border-collapse: separate;
+border-spacing: 0px;
+border-top: 1px solid #ccc;
+border-left: 1px solid #ccc;
+/* 	table-layout: fixed; */
+}
+.list_table th{
+padding: 4px;
+text-align: center;
+color: #FFFFFF;
+background: #258;
+border-top: 1px solid #fff;
+border-left: 1px solid #fff;
+border-right: 1px solid #ccc;
+border-bottom: 1px solid #ccc;
+vertical-align: middle;
+}
+.list_table td{
+padding: 8px;
+/* background-color: #fafafa; */
+border-right: 1px solid #ccc;
+border-bottom: 1px solid #ccc;
+text-align: center;
+}
+
+.addDomestic {
+	word-break:break-all;
+}
+
+.wCode {
+	width: 105px;
+}
+
+.wNm {
+	width: 284px;
+	table-layout: fixed;
+}
+
+.wNum {
+	min-width: 146px;
+}
+
+.wButton {
+	min-width: 78px;
+}
+
+.wListCode {
+	width: 85px;
+}
+
+.wListNm {
+	width: 242px;
+}
+
+.wListNum {
+	width: 120px;
+}
+
+.wListButton {
+	width: 52px;
+}
+
+span.explain {
+	color: red;
+	font-size: 13px;
+}
+
+.searchMakerNm {
+	width: 200px;
+}
+
+.searchMakerNmKana {
+	width: 200px;
+}
+.searchManagementCode {
+	width: 145px;
+}
+
+.searchWholsesalerNm {
+	width: 145px;
+}
+
+.searchItemNm	 {
+	width: 200px;
+}
+
+.right {
+	text-align: right;
+}
+
+#messageArea {
+	text-align: left;
+	margin-left: 17em;
+	margin-bottom: -100px;
+	font-weight: bold;
+	float: left;
+}
+
+.registryMessage {
+	color: black;
+	font-size: 14px;
+	font-weight: bold;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.registrySuccess {
+	background-color: #90EE90;
+	padding-left: 7em;
+    padding-right: 318px;
+}
+.registryFailure {
+	background-color: #E7292D;
+	padding-left: 7em;
+    padding-right: 318px;
+}
+
+span.explain {
+	color: red;
+	font-size: 13px;
+}
+
+.wholsesalerNm {
+	width: 150px;
+}
+
+.wholsesaler_td {
+	width: 63px
+}
+
+.maker_td {
+	width: 73px
+}

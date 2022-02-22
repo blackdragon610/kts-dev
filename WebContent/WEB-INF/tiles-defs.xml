@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+       "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+
+
+	<definition name="layout-header" path="/WEB-INF/page/layout/layout-header.jsp" />
+	<definition name="layout-content" path="/WEB-INF/page/layout/layout-content.jsp" />
+	<definition name="layout-footer" path="/WEB-INF/page/layout/layout-footer.jsp" />
+
+	<definition name="layout.base" path="/WEB-INF/page/layout/layout-base.jsp">
+		<put name="header" value="layout-header" />
+		<put name="content" value="layout-content" />
+		<put name="footer" value="layout-footer" />
+	</definition>
+
+	<!-- ログイン -->
+	<definition name="login" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/lgn/test.jsp" />
+		<put name="title" value="ログイン画面" type="string" />
+	</definition>
+
+	<!-- 在庫管理 -->
+	<definition name="itm0101" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/itm/itm0101.jsp" />
+		<put name="title" value="在庫一覧画面" type="string" />
+	</definition>
+	<definition name="itm0102" extends="layout.base">
+		<put name="header" value="" />
+		<put name="content" value="/WEB-INF/page/itm/itm0102.jsp" />
+		<put name="title" value="在庫検索画面" type="string" />
+	</definition>
+	<definition name="itm0103" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/itm/itm0201.jsp" />
+		<put name="title" value="商品修正画面" type="string" />
+	</definition>
+	<definition name="itm0201" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/itm/itm0201.jsp" />
+		<put name="title" value="商品登録画面" type="string" />
+	</definition>
+	<definition name="itm0301" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/itm/itm0301.jsp" />
+		<put name="title" value="商品・在庫ＣＳＶ取り込み画面" type="string" />
+	</definition>
+
+	<!-- 受注管理 -->
+	<definition name="odr0101" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/odr/odr0101.jsp" />
+		<put name="title" value="受注情報一覧画面" type="string" />
+	</definition>
+	<definition name="odr0201" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/odr/odr0201.jsp" />
+		<put name="title" value="受注登録画面" type="string" />
+	</definition>
+	<definition name="odr0202" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/odr/odr0201.jsp" />
+		<put name="title" value="受注修正画面" type="string" />
+	</definition>
+
+	<definition name="odr0301" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/odr/odr0301.jsp" />
+		<put name="title" value="受注ＣＳＶ取り込み画面" type="string" />
+	</definition>
+	<definition name="odr0401" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/odr/odr0401.jsp" />
+		<put name="title" value="訂正伝票一覧画面" type="string" />
+	</definition>
+	<definition name="odr0501" path="/WEB-INF/page/odr/odr0501.jsp"/>
+	<definition name="odr0502" extends="layout.base">
+		<put name="header" value="" />
+		<put name="content" value="/WEB-INF/page/odr/odr0501.jsp" />
+		<put name="footer" value=""/>
+		<put name="title" value="訂正伝票登録画面" type="string" />
+	</definition>
+	<!-- マスタ管理 -->
+	<definition name="mst0101" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/mst/mst0101.jsp" />
+		<put name="title" value="ユーザー一覧画面" type="string" />
+	</definition>
+
+	<definition name="mst0102" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/mst/mst0102.jsp" />
+		<put name="title" value="ユーザー登録画面" type="string" />
+	</definition>
+
+	<definition name="mst0103" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/mst/mst0103.jsp" />
+		<put name="title" value="ユーザー変更・削除画面" type="string" />
+	</definition>
+
+	<definition name="mst0201" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/mst/mst0201.jsp" />
+		<put name="title" value="ジャンル一覧画面" type="string" />
+	</definition>
+
+	<definition name="mst0202" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/mst/mst0202.jsp" />
+		<put name="title" value="ジャンル登録画面" type="string" />
+	</definition>
+
+	<definition name="mst0203" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/mst/mst0203.jsp" />
+		<put name="title" value="ジャンル変更・削除画面" type="string" />
+	</definition>
+
+	<definition name="mst0301" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/mst/mst0301.jsp" />
+		<put name="title" value="パスワード変更画面" type="string" />
+	</definition>
+
+	<definition name="mail0101" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/mail/mail0101.jsp" />
+		<put name="title" value="B2CSV取込画面" type="string" />
+	</definition>
+
+	<definition name="mail0201" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/mail/mail0201.jsp" />
+		<put name="title" value="未送信メール一覧画面" type="string" />
+	</definition>
+
+	<definition name="mail0202" extends="layout.base">
+		<put name="content" value="/WEB-INF/page/mail/mail0202.jsp" />
+		<put name="title" value="未送信メール画面" type="string" />
+	</definition>
+
+	<definition name="customer-select" path="/WEB-INF/page/mst/customer-select.jsp" />
+	<definition name="customer-group-select" path="/WEB-INF/page/mst/customer-group-select.jsp" />
+
+<!--
+	<definition name="layout-header" path="/WEB-INF/pages/layout/layout-header.jsp" />
+	<definition name="layout-menu" path="/WEB-INF/pages/layout/layout-menu.jsp" />
+	<definition name="layout-content" path="/WEB-INF/pages/layout/layout-content.jsp" />
+	<definition name="layout-footer" path="/WEB-INF/pages/layout/layout-footer.jsp" />
+
+	<definition name="layout.base" path="/WEB-INF/pages/layout/layout-base.jsp">
+	  <put name="header" value="layout-header" />
+	  <put name="menu" value="layout-menu" />
+	  <put name="content" value="layout-content" />
+	  <put name="footer" value="layout-footer" />
+	</definition>
+
+	<definition name="login" extends="layout.base">
+	  <put name="content" value="/WEB-INF/pages/login/login.jsp" />
+	  <put name="title" value="ログイン" />
+	</definition>
+
+	<definition name="passwordChange" extends="layout.base">
+	  <put name="content" value="/WEB-INF/pages/login/password-change.jsp" />
+	  <put name="title" value="パスワード変更" />
+	</definition>
+ -->
+
+</tiles-definitions>

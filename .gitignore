@@ -1,0 +1,7 @@
+/.metadata/
+/bin/
+WebContent/WEB-INF/page/.DS_Store
+.idea/i18nally.xml
+.idea/kts-update.iml
+.idea/modules.xml
+.idea/vcs.xml

@@ -1,0 +1,481 @@
+.foreignOrder_area1 {
+	margin-left: 30px;
+	margin-right: 80px;
+	padding: 10px;
+	border-radius: 3px;
+	background: #E5FEFF;
+	border-left-width: 2px;
+	border-right-width: 2px;
+	border-top-width: 2px;
+	border-bottom-width: 2px;
+	width: 605px;
+	height: 210px;
+	float: left;
+}
+
+/* .foreignOrder_area2 { */
+/* 	margin-left: 30px; */
+/* 	margin-right: 30px; */
+/* 	padding:10px; */
+/* 	border-radius:3px; */
+/* 	background: #E5FEFF; */
+/* 	border-left-width: 2px; */
+/* 	border-right-width: 2px; */
+/* 	border-top-width: 2px; */
+/* 	border-bottom-width: 2px; */
+/* 	width: 400px; */
+/* } */
+.foreignOrder_area1 table tr td {
+	padding: 3px;
+	white-space: nowrap;
+}
+
+/* .foreignOrder_area2 table tr td { */
+/* 	padding: 3px; */
+/* 	white-space: nowrap; */
+/* } */
+.item_area {
+	margin-left: 30px;
+	margin-right: 30px;
+	border: solid 1px #C5C5C5;
+	padding: 10px;
+	border-radius: 3px;
+	background: #ffffff;
+	border-left-width: 2px;
+	border-right-width: 2px;
+	border-top-width: 2px;
+	border-bottom-width: 2px;
+	margin-top: 30px;
+	width: 1710px;
+}
+
+.item_area table td {
+	text-align: center;
+	padding: 3px;
+}
+
+.listTable {
+	/* width:100%; */
+	max-width: 1710px;
+	min-width: 1710px;
+	border-collapse: separate;
+	/* margin-left: 30px; */
+}
+
+.item_area table tr:nth-child(2n+4) {
+	background: #FFFFC0;
+}
+
+.item_area table th {
+	padding-bottom: 10px;
+	white-space: nowrap;
+}
+
+#code {
+	max-width: 140px;
+	min-width: 140px;
+}
+
+#factoryCode {
+	max-width: 140px;
+	min-width: 140px;
+}
+
+#item_nm {
+	width: 120px;
+}
+
+#order_num {
+	width: 60px;
+}
+
+.unitPrice {
+	text-align: right
+}
+
+.supplier_area {
+	margin-left: 30px;
+	margin-right: 80px;
+	border: solid 1px #C5C5C5;
+	padding: 10px;
+	border-radius: 3px;
+	background: #ffffff;
+	border-left-width: 2px;
+	border-right-width: 2px;
+	border-top-width: 2px;
+	border-bottom-width: 2px;
+	margin-top: 30px;
+	margine-bottom: 100px;
+	width: 500px;
+}
+
+#supplier {
+	float: left;
+	border-left-width: 2px;
+	border-right-width: 2px;
+	border-top-width: 2px;
+	border-bottom-width: 2px;
+	margin-right: 30px;
+	padding-bottom: 100px;
+}
+
+.supplier_area table tr td {
+	padding: 3px;
+}
+
+.price_area {
+	margin-left: 30px;
+	margin-right: 30px;
+	border: solid 1px #C5C5C5;
+	padding: 10px;
+	border-radius: 3px;
+	background: #ffffff;
+	border-left-width: 2px;
+	border-right-width: 2px;
+	border-top-width: 2px;
+	border-bottom-width: 2px;
+	margin-top: 30px;
+	margin-bottom: 24px;
+	width: 400px;
+	float: left;
+}
+
+.price_area table {
+	width: 380px;
+}
+
+.price_area table td {
+	text-align: right;
+}
+
+.remarks_area1 {
+	margin-left: 30px;
+	margin-right: 30px;
+	border: solid 1px #C5C5C5;
+	padding: 10px;
+	border-radius: 3px;
+	background: #ffffff;
+	border-left-width: 2px;
+	border-right-width: 2px;
+	border-top-width: 2px;
+	border-bottom-width: 2px;
+	margin-top: 30px;
+	margin-bottom: 4px;
+	width: 400px;
+	float: left;
+}
+
+.area1_height {
+	height: 35px;
+}
+
+.remarks_area2 {
+	margin-left: 30px;
+	margin-right: 30px;
+	border: solid 1px #C5C5C5;
+	padding: 10px;
+	border-radius: 3px;
+	background: #ffffff;
+	border-left-width: 2px;
+	border-right-width: 2px;
+	border-top-width: 2px;
+	border-bottom-width: 2px;
+	margin-top: 35px;
+	margin-bottom: 4px;
+	width: 400px;
+	float: left;
+}
+
+legend {
+	font-size: 20px;
+	font-weight: bold;
+	padding: 5px;
+	border-radius: 5px;
+	color: #3767FF;
+}
+
+.sPlanning {
+	position: fixed !important;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 25px;
+	background-color: #EEEEEE;
+	padding: 10px;
+	text-align: center !important;
+}
+
+.footer_button {
+	display: inline;
+	padding-left: 20px;
+}
+
+a.button_item_delete {
+	border-top-color: #F70F0F;
+	border-right-color: #F70F0F;
+	border-bottom-color: #F70F0F;
+	border-left-color: #F70F0F;
+	border-width: 1px 1px 1px 1px;
+	border-style: solid;
+	-webkit-box-shadow: #FEFFFF 0px 1px 3px inset;
+	-moz-box-shadow: #FEFFFF 0px 1px 3px inset;
+	box-shadow: #FEFFFF 0px 1px 3px inset;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 13px;
+	font-family: verdana, sans-serif;
+	padding: 3px 6px 3px 6px;
+	text-decoration: none;
+	display: inline-block;
+	text-shadow: 0px 1px 0 rgba(255, 255, 255, 0.5);
+	font-weight: bold;
+	color: #F2F2F2;
+	background-color: #F70F0F;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#F70F0F),
+		to(#F70F0F));
+	background-image: -webkit-linear-gradient(top, #F70F0F, #F70F0F);
+	background-image: -moz-linear-gradient(top, #F70F0F, #F70F0F);
+	background-image: -ms-linear-gradient(top, #F70F0F, #F70F0F);
+	background-image: -o-linear-gradient(top, #F70F0F, #F70F0F);
+	background-image: linear-gradient(to bottom, #F70F0F, #F70F0F);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,
+		startColorstr=#F70F0F, endColorstr=#F70F0F);
+}
+
+.sceduleDateCompleteButton {
+
+}
+
+#errorMessageArea {
+	margin-left: 50px;
+	margin-bottom: 10px;
+}
+
+#messageArea {
+	text-align: left;
+	margin-left: 17em;
+	margin-bottom: -100px;
+	font-weight: bold;
+	float: left;
+	width: 540px;
+	margin-right: 298px;
+}
+
+.registryMessage {
+	color: black;
+	font-size: 14px;
+	font-weight: bold;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.registrySuccess {
+	background-color: #90EE90;
+	padding-left: 10em;
+	padding-right: 308px;
+}
+
+.registryFailure {
+	background-color: #ff9999;
+	padding-left: 10em;
+	padding-right: 400px;
+}
+
+tr.wordBreak {
+	word-break: break-all;
+}
+
+tr.itemRow {
+	word-break: break-all;
+}
+
+tr.addItemRow {
+	word-break: break-all;
+}
+
+#add_th {
+	width: 185px;
+	text-align: -webkit-left;
+}
+
+#delete_th {
+	width: 40px;
+}
+
+#itemCode_th {
+	width: 190px;
+}
+
+#factoryItemCode_th {
+	width: 200px;
+}
+
+#itemNm_th {
+	width: 210px;
+}
+
+#arrivalNum_th {
+	width: 100px;
+}
+
+#orderNum_th {
+	width: 100px;
+}
+
+#unitPrice_th {
+	width: 160px;
+}
+
+#arrivalScheduleDate_th {
+	width: 213px;
+}
+
+#vagueArrivalSchedule_th {
+	width: 100px;
+}
+
+#arrivalScheduleDateAll_th {
+	width: 170px;
+}
+
+#vagueArrivalScheduleAll_th {
+	width: 100px;
+}
+
+#sceduleDateCompleteButton_th {
+	width: 100px;
+}
+
+#add_td {
+	width: 130px;
+}
+
+#delete_td {
+	width: 40px;
+}
+
+#itemCode_td {
+	width: 190px;
+}
+
+#factoryItemCode_td {
+	width: 220px;
+}
+
+#itemNm_td {
+	width: 180px;
+}
+
+#arrivalNum_td {
+	width: 100px;
+}
+
+#orderNum_td {
+	width: 100px;
+}
+
+#unitPrice_td {
+	width: 160px;
+}
+
+#arrivalScheduleDate_td {
+	width: 170px;
+}
+
+#detailVagueArrivalSchedule_td {
+	width: 100px;
+}
+
+#sceduleDateCompleteButton_td {
+	width: 100px;
+}
+
+
+#addAdd_td {
+	width: 130px;
+}
+
+#addDelete_td {
+	width: 40px;
+}
+
+#addItemCode_td {
+	width: 180px;
+}
+
+#addFactoryItemCode_td {
+	width: 180px;
+}
+
+#addItemNm_td {
+	width: 180px;
+}
+
+#addArrivalNum_td {
+	width: 100px;
+}
+
+#addOrderNum_td {
+	width: 100px;
+}
+
+#addUnitPrice_td {
+	width: 160px;
+}
+
+#addArrivalScheduleDate_td {
+	width: 205px;
+}
+
+#addVagueArrivalSchedule_td {
+	width: 100px;
+}
+
+#addSceduleDateCompleteButton_td {
+	width: 100px;
+}
+
+
+.td_size {
+	width: 100px;
+}
+
+.td_size_small {
+	width: 40px;
+}
+
+.td_size_normal {
+	width: 80px;
+}
+
+.td_size_big {
+	width: 130px;
+}
+
+.td_size_bigs2 {
+	width: 180px;
+}
+
+.td_size_bigs {
+	width: 150px;
+	white-space: nowrap;
+}
+
+.arrivalNumSize {
+	width: 40px;
+	text-align: right;
+}
+
+.detailArrivalDateSize {
+	width: 100px;
+}
+
+.detailArrivalAlign {
+	text-align: left !important;
+}
+
+.transferReasonColor {
+	color: #BBBBBB;
+}

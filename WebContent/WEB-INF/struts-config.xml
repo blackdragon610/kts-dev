@@ -1,0 +1,2734 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor
+	license agreements. See the NOTICE file distributed with this work for additional
+	information regarding copyright ownership. The ASF licenses this file to
+	You under the Apache License, Version 2.0 (the "License"); you may not use
+	this file except in compliance with the License. You may obtain a copy of
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required
+	by applicable law or agreed to in writing, software distributed under the
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+	OF ANY KIND, either express or implied. See the License for the specific
+	language governing permissions and limitations under the License. -->
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<!-- This is a blank Struts configuration file with an example welcome action/page
+	and other commented sample elements. Struts Validator is configured using
+	the factory defaults and is ready-to-use. NOTE: If you have a generator tool
+	to create the corresponding Java classes for you, you could include the details
+	in the "form-bean" declarations. Otherwise, you would only define the "form-bean"
+	element itself, with the corresponding "name" and "type" attributes, as shown
+	here. -->
+
+
+<struts-config>
+
+
+	<!-- ================================================ Form Bean Definitions -->
+
+	<form-beans>
+		<!-- sample form bean descriptor for an ActionForm <form-bean name="inputForm"
+			type="app.InputForm"/> end sample -->
+
+
+		<form-bean name="loginForm" type="jp.co.kts.ui.login.LoginForm" />
+		<form-bean name="userForm" type="jp.co.kts.ui.mst.UserForm" />
+		<form-bean name="corporationForm" type="jp.co.kts.ui.mst.CorporationForm" />
+		<form-bean name="csvImportForm" type="jp.co.kts.ui.fileImport.CsvImportForm" />
+		<form-bean name="excelImportForm" type="jp.co.kts.ui.fileImport.ExcelImportForm" />
+		<form-bean name="saleSlipImportForm" type="jp.co.kts.ui.fileImport.SaleSlipImportForm" />
+		<form-bean name="itemForm" type="jp.co.kts.ui.item.ItemForm" />
+		<form-bean name="saleForm" type="jp.co.kts.ui.sale.SaleForm" />
+		<form-bean name="domesticExhibitionImportForm" type="jp.co.kts.ui.fileImport.DomesticExhibitionImportForm" />
+
+		<form-bean name="channelForm" type="jp.co.kts.ui.mst.channelForm" />
+		<form-bean name="groupNmForm" type="jp.co.kts.ui.mst.GroupNmForm" />
+		<form-bean name="variousGroupForm" type="jp.co.kts.ui.mst.VariousGroupForm" />
+		<form-bean name="channelForm" type="jp.co.kts.ui.mst.ChannelForm" />
+		<form-bean name="warehouseForm" type="jp.co.kts.ui.mst.WarehouseForm" />
+		<form-bean name="setItemForm" type="jp.co.kts.ui.mst.SetItemForm" />
+		<form-bean name="itemSearchForm" type="jp.co.kts.ui.itemSearch.ItemSearchForm" />
+		<form-bean name="clientSearchForm" type="jp.co.kts.ui.clientSearch.ClientSearchForm" />
+		<form-bean name="clientForm" type="jp.co.kts.ui.mst.ClientForm" />
+		<form-bean name="accountForm" type="jp.co.kts.ui.mst.AccountForm" />
+		<form-bean name="deliveryForm" type="jp.co.kts.ui.mst.DeliveryForm" />
+		<form-bean name="corporateSaleForm" type="jp.co.kts.ui.sale.CorporateSaleForm" />
+		<form-bean name="btobBillForm" type="jp.co.kts.ui.btobBill.BtobBillForm" />
+		<form-bean name="currencyLedgerForm" type="jp.co.kts.ui.currency.CurrencyLedgerForm" />
+		<form-bean name="domesticExhibitionForm" type="jp.co.kts.ui.domestic.DomesticExhibitionForm" />
+		<form-bean name="supplierForm" type="jp.co.kts.ui.mst.SupplierForm" />
+		<form-bean name="domesticOrderForm" type="jp.co.kts.ui.domestic.DomesticOrderForm" />
+		<form-bean name="domesticOrderListForm" type="jp.co.kts.ui.domestic.DomesticOrderListForm" />
+		<form-bean name="foreignOrderForm" type="jp.co.kts.ui.mst.ForeignOrderForm" />
+		<form-bean name="makerForm" type="jp.co.kts.ui.mst.MakerForm" />
+
+
+		<!-- sample form bean descriptor for a DynaActionForm <form-bean name="logonForm"
+			type="org.apache.struts.action.DynaActionForm"> <form-property name="username"
+			type="java.lang.String"/> <form-property name="password" type="java.lang.String"/>
+			</form-bean> end sample -->
+	</form-beans>
+
+
+	<!-- ========================================= Global Exception Definitions -->
+
+	<global-exceptions>
+		<!-- sample exception handler <exception key="expired.password" type="app.ExpiredPasswordException"
+			path="/changePassword.jsp"/> end sample -->
+	</global-exceptions>
+
+
+	<!-- =========================================== Global Forward Definitions -->
+
+	<global-forwards>
+
+		<forward name="global_error" path="/WEB-INF/page/system-error.jsp"/>
+		<forward name="global_nologin_error" path="/initLogin.do"/>
+        <!--
+        <forward name="session_error" path="/WEB-INF/jsp/common/SessionError.jsp"/>
+        <forward name="token_error" path="/WEB-INF/jsp/common/TokenError.jsp"/>
+        <forward name="changed_error" path="/WEB-INF/jsp/common/ChangedError.jsp"/>
+        <forward name="auth_error" path="initLgn0201.do" redirect="true" />
+         -->
+		<!-- Default forward to "Welcome" action -->
+		<!-- Demonstrates using index.jsp to forward -->
+		<forward name="welcome" path="/Welcome.do" />
+	</global-forwards>
+
+	<!-- =========================================== Action Mapping Definitions -->
+
+	<action-mappings
+		type="jp.co.keyaki.cleave.fw.ui.web.struts.AppActionMapping">
+		<!-- action-mappings -->
+		<!-- Default "Welcome" action -->
+		<!-- Forwards to Welcome.jsp -->
+
+
+		<!-- sample input and input submit actions <action path="/Input" type="org.apache.struts.actions.ForwardAction"
+			parameter="/pages/Input.jsp"/> <action path="/InputSubmit" type="app.InputAction"
+			name="inputForm" scope="request" validate="true" input="/pages/Input.jsp"/>
+			<action path="/edit*" type="app.Edit{1}Action" name="inputForm" scope="request"
+			validate="true" input="/pages/Edit{1}.jsp"/> end samples -->
+
+		<action path="/initLogin" type="jp.co.kts.ui.login.LoginAction"
+			name="loginForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="true" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/login/login.jsp" />
+		</action>
+
+		<action path="/login" type="jp.co.kts.ui.login.LoginAction"
+			name="loginForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="true" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/login/login.jsp" />
+			<forward name="success" path="/WEB-INF/page/top/top.jsp" />
+		</action>
+
+		<action path="/logout" name="loginForm" validate="false" scope="session"
+			type="jp.co.kts.ui.login.LoginAction">
+			<set-property property="nonSecureAction" value="true" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/initLogin.do" />
+		</action>
+
+		<action path="/registryNotice" name="loginForm" validate="false" scope="session"
+			type="jp.co.kts.ui.login.LoginAction">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/initNotice.do" />
+		</action>
+
+		<action path="/updateNotice" name="loginForm" validate="false" scope="session"
+			type="jp.co.kts.ui.login.LoginAction">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/initNotice.do" />
+		</action>
+
+		<action path="/deleteNotice" name="loginForm" validate="false" scope="session"
+			type="jp.co.kts.ui.login.LoginAction">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/initNotice.do" />
+		</action>
+
+		<action path="/initNotice" name="loginForm" validate="false" scope="session"
+			type="jp.co.kts.ui.login.LoginAction">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/top/top.jsp" />
+		</action>
+
+	<!-- ============== マスタ =============== -->
+		<action path="/initUserList" type="jp.co.kts.ui.mst.UserAction"
+			name="userForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/userList.jsp" />
+		</action>
+
+		<action path="/detailUser" type="jp.co.kts.ui.mst.UserAction"
+			name="userForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailUser.jsp" />
+		</action>
+
+		<action path="/updateUser" type="jp.co.kts.ui.mst.UserAction"
+			name="userForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailUser.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailUser.jsp" />
+		</action>
+
+		<action path="/deleteUser" type="jp.co.kts.ui.mst.UserAction"
+			name="userForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/userList.jsp" />
+		</action>
+
+		<action path="/initRegistryUser" type="jp.co.kts.ui.mst.UserAction"
+			name="userForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailUser.jsp" />
+		</action>
+
+		<action path="/registryUser" type="jp.co.kts.ui.mst.UserAction"
+			name="userForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailUser.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/userList.jsp" />
+		</action>
+
+		<action path="/initCorporationList" type="jp.co.kts.ui.mst.CorporationAction"
+			name="corporationForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/corporationList.jsp" />
+		</action>
+
+		<action path="/detailCorporation" type="jp.co.kts.ui.mst.CorporationAction"
+			name="corporationForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailCorporation.jsp" />
+		</action>
+
+		<action path="/updateCorporation" type="jp.co.kts.ui.mst.CorporationAction"
+			name="corporationForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailCorporation.jsp" />
+		</action>
+
+		<action path="/deleteCorporation" type="jp.co.kts.ui.mst.CorporationAction"
+			name="corporationForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailCorporation.jsp" />
+		</action>
+
+		<action path="/initRegistryCorporation" type="jp.co.kts.ui.mst.CorporationAction"
+			name="corporationForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailCorporation.jsp" />
+		</action>
+
+		<action path="/registryCorporation" type="jp.co.kts.ui.mst.CorporationAction"
+			name="corporationForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailCorporation.jsp" />
+		</action>
+
+		<!-- 得意先マスタ -->
+		<action path="/initClientList" type="jp.co.kts.ui.mst.ClientAction"
+			name="clientForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/clientList.jsp" />
+		</action>
+		<action path="/clientList" type="jp.co.kts.ui.mst.ClientAction"
+			name="clientForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/clientList.jsp" />
+		</action>
+
+		<action path="/detailClient" type="jp.co.kts.ui.mst.ClientAction"
+			name="clientForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailClient.jsp" />
+		</action>
+
+		<action path="/updateClient" type="jp.co.kts.ui.mst.ClientAction"
+			name="clientForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailClient.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailClient.jsp" />
+		</action>
+
+		<action path="/deleteClient" type="jp.co.kts.ui.mst.ClientAction"
+			name="clientForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/clientList.jsp" />
+		</action>
+
+		<action path="/initRegistryClient" type="jp.co.kts.ui.mst.ClientAction"
+			name="clientForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="subWindow" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailClient.jsp" />
+		</action>
+
+		<action path="/copyRegistryClient" type="jp.co.kts.ui.mst.ClientAction"
+			name="clientForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="subWindow" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailClient.jsp" />
+		</action>
+
+		<action path="/registryClient" type="jp.co.kts.ui.mst.ClientAction"
+			name="clientForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="subWindow" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailClient.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailClient.jsp" />
+		</action>
+
+		<!-- 口座マスタ -->
+		<action path="/initRegistryAccount" type="jp.co.kts.ui.mst.AccountAction"
+			name="accountForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailAccount.jsp" />
+		</action>
+
+		<action path="/registryAccount" type="jp.co.kts.ui.mst.AccountAction"
+			name="accountForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="check" />
+			<forward name="global_token_error" path="/initAccountList.do" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/accountList.jsp" />
+		</action>
+
+		<action path="/detailAccount" type="jp.co.kts.ui.mst.AccountAction"
+			name="accountForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailAccount.jsp" />
+		</action>
+
+		<action path="/updateAccount" type="jp.co.kts.ui.mst.AccountAction"
+			name="accountForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailAccount.jsp" />
+		</action>
+
+		<action path="/deleteAccount" type="jp.co.kts.ui.mst.AccountAction"
+			name="accountForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/accountList.jsp" />
+		</action>
+
+		<action path="/initAccountList" type="jp.co.kts.ui.mst.AccountAction"
+			name="accountForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/accountList.jsp" />
+		</action>
+		<!-- 納入先マスタ -->
+		<action path="/initRegistryDelivery" type="jp.co.kts.ui.mst.DeliveryAction"
+			name="deliveryForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailDelivery.jsp" />
+		</action>
+
+		<action path="/registryDelivery" type="jp.co.kts.ui.mst.DeliveryAction"
+			name="deliveryForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailDelivery.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/deliveryList.jsp" />
+		</action>
+
+		<action path="/detailDelivery" type="jp.co.kts.ui.mst.DeliveryAction"
+			name="deliveryForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailDelivery.jsp" />
+		</action>
+
+		<action path="/getClientList" type="jp.co.kts.ui.mst.DeliveryAction"
+			name="deliveryForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/mst/detailDelivery.jsp" />
+		</action>
+
+		<action path="/updateDelivery" type="jp.co.kts.ui.mst.DeliveryAction"
+			name="deliveryForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailDelivery.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailDelivery.jsp" />
+		</action>
+
+		<action path="/deleteDelivery" type="jp.co.kts.ui.mst.DeliveryAction"
+			name="deliveryForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/deliveryList.jsp" />
+		</action>
+
+		<action path="/initDeliveryList" type="jp.co.kts.ui.mst.DeliveryAction"
+			name="deliveryForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/deliveryList.jsp" />
+		</action>
+
+
+
+
+		<!-- ============== CSVインポート =============== -->
+
+		<action path="/initCsvImport" type="jp.co.kts.ui.fileImport.CsvImportAction"
+			name="csvImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="true" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/import/csvImport.jsp" />
+		</action>
+
+		<action path="/csvImport" type="jp.co.kts.ui.fileImport.CsvImportAction"
+			name="csvImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/import/csvImport.jsp" />
+			<forward name="success" path="/WEB-INF/page/import/csvImport.jsp" />
+		</action>
+
+		<action path="/csvListImport" type="jp.co.kts.ui.fileImport.CsvImportAction"
+			name="csvImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/import/csvImport.jsp" />
+			<forward name="success" path="/WEB-INF/page/import/csvImport.jsp" />
+		</action>
+
+		<action path="/initDeliveryCsvImport" type="jp.co.kts.ui.fileImport.CsvImportAction"
+			name="csvImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="true" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/import/deliveryCsvImport.jsp" />
+		</action>
+
+		<action path="/saveDeliveryCsvImport" type="jp.co.kts.ui.fileImport.CsvImportAction"
+			name="csvImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/import/deliveryCsvImport.jsp" />
+			<forward name="success" path="/WEB-INF/page/import/deliveryCsvImport.jsp" />
+		</action>
+
+		<action path="/addSlipNoDeliveryCsvImport" type="jp.co.kts.ui.fileImport.CsvImportAction"
+			name="csvImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/import/deliveryCsvImport.jsp" />
+			<forward name="success" path="/WEB-INF/page/import/deliveryCsvImport.jsp" />
+		</action>
+
+		<action path="/saveDeliveryCsvImportList" type="jp.co.kts.ui.fileImport.CsvImportAction"
+			name="csvImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/import/deliveryCsvImport.jsp" />
+			<forward name="success" path="/WEB-INF/page/import/deliveryCsvImport.jsp" />
+		</action>
+
+		<action path="/addSlipNoDeliveryCsvImportList" type="jp.co.kts.ui.fileImport.CsvImportAction"
+			name="csvImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/import/deliveryCsvImport.jsp" />
+			<forward name="success" path="/WEB-INF/page/import/deliveryCsvImport.jsp" />
+		</action>
+
+		<action path="/initKeepCsvImport" type="jp.co.kts.ui.fileImport.CsvImportAction"
+			name="csvImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="true" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/import/csvKeepImport.jsp" />
+		</action>
+
+		<action path="/keepCsvImport" type="jp.co.kts.ui.fileImport.CsvImportAction"
+			name="csvImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/import/csvKeepImport.jsp" />
+			<forward name="success" path="/WEB-INF/page/import/csvKeepImport.jsp" />
+		</action>
+
+		<action path="/keepCsvListImport" type="jp.co.kts.ui.fileImport.CsvImportAction"
+			name="csvImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/import/csvKeepImport.jsp" />
+			<forward name="success" path="/WEB-INF/page/import/csvKeepImport.jsp" />
+		</action>
+
+		<action path="/initRemoveKeepCsvImport" type="jp.co.kts.ui.fileImport.CsvImportAction"
+			name="csvImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="true" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/import/csvKeepRemoveImport.jsp" />
+		</action>
+
+		<action path="/keepRemoveCsvImport" type="jp.co.kts.ui.fileImport.CsvImportAction"
+			name="csvImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/import/csvKeepRemoveImport.jsp" />
+			<forward name="success" path="/WEB-INF/page/import/csvKeepRemoveImport.jsp" />
+		</action>
+
+		<!-- ============== マスタ系 =============== -->
+
+		<action path="/initWarehouseList" type="jp.co.kts.ui.mst.WarehouseAction"
+			name="warehouseForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/warehouseList.jsp" />
+		</action>
+
+		<action path="/detailWarehouse" type="jp.co.kts.ui.mst.WarehouseAction"
+			name="warehouseForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailWarehouse.jsp" />
+		</action>
+
+		<action path="/updateWarehouse" type="jp.co.kts.ui.mst.WarehouseAction"
+			name="warehouseForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailWarehouse.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailWarehouse.jsp" />
+		</action>
+
+		<action path="/deleteWarehouse" type="jp.co.kts.ui.mst.WarehouseAction"
+			name="warehouseForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/warehouseList.jsp" />
+		</action>
+
+		<action path="/initRegistryWarehouse" type="jp.co.kts.ui.mst.WarehouseAction"
+			name="warehouseForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailWarehouse.jsp" />
+		</action>
+
+		<action path="/registryWarehouse" type="jp.co.kts.ui.mst.WarehouseAction"
+			name="warehouseForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="check" />
+			<forward name="global_token_error" path="/initWarehouseList.do" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailWarehouse.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/warehouseList.jsp" />
+		</action>
+
+		<action path="/initVariousGroupList" type="jp.co.kts.ui.mst.VariousGroupAction"
+			name="variousGroupForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/variousGroupList.jsp" />
+		</action>
+
+		<action path="/variousGroupList" type="jp.co.kts.ui.mst.VariousGroupAction"
+			name="variousGroupForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/variousGroupList.jsp" />
+		</action>
+
+		<action path="/detailVariousGroup" type="jp.co.kts.ui.mst.VariousGroupAction"
+			name="variousGroupForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailVariousGroup.jsp" />
+		</action>
+
+		<action path="/updateVariousGroup" type="jp.co.kts.ui.mst.VariousGroupAction"
+			name="variousGroupForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailVariousGroup.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailVariousGroup.jsp" />
+		</action>
+
+		<action path="/deleteVariousGroup" type="jp.co.kts.ui.mst.VariousGroupAction"
+			name="variousGroupForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/variousGroupList.jsp" />
+		</action>
+
+		<action path="/initRegistryVariousGroup" type="jp.co.kts.ui.mst.VariousGroupAction"
+			name="variousGroupForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailVariousGroup.jsp" />
+		</action>
+
+		<action path="/registryVariousGroup" type="jp.co.kts.ui.mst.VariousGroupAction"
+			name="variousGroupForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailVariousGroup.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/variousGroupList.jsp" />
+		</action>
+
+		<action path="/groupNmList" type="jp.co.kts.ui.mst.GroupNmAction"
+			name="groupNmForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/groupNmList.jsp" />
+		</action>
+
+		<action path="/detailGroupNm" type="jp.co.kts.ui.mst.GroupNmAction"
+			name="groupNmForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailGroupNm.jsp" />
+		</action>
+
+		<action path="/updateGroupNm" type="jp.co.kts.ui.mst.GroupNmAction"
+			name="groupNmForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailGroupNm.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailGroupNm.jsp" />
+		</action>
+
+		<action path="/deleteGroupNm" type="jp.co.kts.ui.mst.GroupNmAction"
+			name="groupNmForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/groupNmList.jsp" />
+		</action>
+
+		<action path="/initRegistryGroupNm" type="jp.co.kts.ui.mst.GroupNmAction"
+			name="groupNmForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailGroupNm.jsp" />
+		</action>
+
+		<action path="/registryGroupNm" type="jp.co.kts.ui.mst.GroupNmAction"
+			name="groupNmForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailGroupNm.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/groupNmList.jsp" />
+		</action>
+
+		<action path="/initChannelList" type="jp.co.kts.ui.mst.ChannelAction"
+			name="channelForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/channelList.jsp" />
+		</action>
+
+		<action path="/detailChannel" type="jp.co.kts.ui.mst.ChannelAction"
+			name="channelForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailChannel.jsp" />
+		</action>
+
+		<action path="/updateChannel" type="jp.co.kts.ui.mst.ChannelAction"
+			name="channelForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailChannel.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailChannel.jsp" />
+		</action>
+
+		<action path="/deleteChannel" type="jp.co.kts.ui.mst.ChannelAction"
+			name="channelForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/channelList.jsp" />
+		</action>
+
+		<action path="/initRegistryChannel" type="jp.co.kts.ui.mst.ChannelAction"
+			name="channelForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailChannel.jsp" />
+		</action>
+
+		<action path="/registryChannel" type="jp.co.kts.ui.mst.ChannelAction"
+			name="channelForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="check" />
+			<forward name="global_token_error" path="/initChannelList.do" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailChannel.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/channelList.jsp" />
+		</action>
+
+			<!-- ============== 仕入管理 =============== -->
+		<action path="/initCurrencyLedgerList" type="jp.co.kts.ui.currency.CurrencyLedgerAction"
+			name="currencyLedgerForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/currencyLedger.jsp" />
+		</action>
+
+		<action path="/updateCurrencyLedger" type="jp.co.kts.ui.currency.CurrencyLedgerAction"
+			name="currencyLedgerForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="check" />
+			<forward name="global_token_error" path="/initCurrencyLedgerList.do" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/currencyLedger.jsp" />
+		</action>
+
+		<action path="/deleteCurrencyLedger" type="jp.co.kts.ui.currency.CurrencyLedgerAction"
+			name="currencyLedgerForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="failure" path="/WEB-INF/page/mst/currencyLedger.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/currencyLedger.jsp" />
+		</action>
+
+		<!-- ============== 国内出品データベース一覧 =============== -->
+
+		<action path="/initDomesticExhibitionList" type="jp.co.kts.ui.domestic.DomesticExhibitionAction"
+			name="domesticExhibitionForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticExhibition.jsp" />
+		</action>
+
+		<action path="/searchDomesticExhibition" type="jp.co.kts.ui.domestic.DomesticExhibitionAction"
+			name="domesticExhibitionForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticExhibition.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticExhibition.jsp" />
+		</action>
+
+		<action path="/updateDomesticExhibition" type="jp.co.kts.ui.domestic.DomesticExhibitionAction"
+			name="domesticExhibitionForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticExhibition.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticExhibition.jsp" />
+		</action>
+
+		<action path="/deleteDomesticExhibition" type="jp.co.kts.ui.domestic.DomesticExhibitionAction"
+			name="domesticExhibitionForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticExhibition.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticExhibition.jsp" />
+		</action>
+
+		<action path="/domesticListDownload" type="jp.co.kts.ui.domestic.DomesticExhibitionAction"
+			name="domesticExhibitionForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticExhibition.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticExhibition.jsp" />
+		</action>
+
+		<action path="/domesticExhibitionPageNo" type="jp.co.kts.ui.domestic.DomesticExhibitionAction"
+			name="domesticExhibitionForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticExhibition.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticExhibition.jsp" />
+		</action>
+
+
+
+		<action path="/searchDomesticExhibitionItem" type="jp.co.kts.ui.domestic.DomesticExhibitionAction"
+			name="domesticExhibitionForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticExhibition.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticExhibition.jsp" />
+		</action>
+
+		<action path="/initSetManegementRegist" type="jp.co.kts.ui.domestic.DomesticExhibitionAction"
+			name="domesticExhibitionForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/setDomesticExhibition.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/setDomesticExhibition.jsp" />
+		</action>
+
+		<action path="/initSetManegementEdit" type="jp.co.kts.ui.domestic.DomesticExhibitionAction"
+			name="domesticExhibitionForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/setDomesticExhibition.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/setDomesticExhibition.jsp" />
+		</action>
+
+		<action path="/registSetManagementItem" type="jp.co.kts.ui.domestic.DomesticExhibitionAction"
+			name="domesticExhibitionForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/setDomesticExhibition.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/setDomesticExhibition.jsp" />
+		</action>
+
+		<action path="/updateSetManagementItem" type="jp.co.kts.ui.domestic.DomesticExhibitionAction"
+			name="domesticExhibitionForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/setDomesticExhibition.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/setDomesticExhibition.jsp" />
+		</action>
+		<action path="/deleteSetDomesticExhibition" type="jp.co.kts.ui.domestic.DomesticExhibitionAction"
+			name="domesticExhibitionForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/setDomesticExhibition.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/setDomesticExhibition.jsp" />
+		</action>
+
+		<!-- ============== 国内注文管理一覧 =============== -->
+
+		<action path="/initDomesticOrderList" type="jp.co.kts.ui.domestic.DomesticOrderListAction"
+			name="domesticOrderListForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticOrderList.jsp" />
+		</action>
+
+		<action path="/searchDomesticOrderList" type="jp.co.kts.ui.domestic.DomesticOrderListAction"
+			name="domesticOrderListForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticOrderList.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticOrderList.jsp" />
+		</action>
+
+		<action path="/updateDomesticOrderList" type="jp.co.kts.ui.domestic.DomesticOrderListAction"
+			name="domesticOrderListForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticOrderList.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticOrderList.jsp" />
+		</action>
+
+		<action path="/domesticListPageNo" type="jp.co.kts.ui.domestic.DomesticOrderListAction"
+			name="domesticOrderListForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticOrderList.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticOrderList.jsp" />
+		</action>
+
+		<action path="/domesticListItemDelete" type="jp.co.kts.ui.domestic.DomesticOrderListAction"
+			name="domesticOrderListForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticOrderList.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticOrderList.jsp" />
+		</action>
+
+		<action path="/exportDomesticOrdeList" type="jp.co.kts.ui.domestic.DomesticOrderListAction"
+			name="domesticOrderListForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<action path="/domesticOrderListPrintOutFile" type="jp.co.kts.ui.domestic.DomesticOrderListAction"
+			name="domesticOrderListForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+
+		<action path="/domesticSlipListDownLoad" type="jp.co.kts.ui.domestic.DomesticOrderListAction"
+			name="domesticOrderListForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticOrderList.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticOrderList.jsp" />
+		</action>
+
+		<action path="/domesticOrderStatusMove" type="jp.co.kts.ui.domestic.DomesticOrderListAction"
+			name="domesticOrderListForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticOrderList.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticOrderList.jsp" />
+		</action>
+
+		<action path="/setDomesticValue" type="jp.co.kts.ui.domestic.DomesticOrderListAction"
+			name="domesticOrderListForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticOrderList.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticOrderList.jsp" />
+		</action>
+
+		<!-- ============== 国内出品データベースインポート =============== -->
+
+		<action path="/initDomesticExhibitionImportList" type="jp.co.kts.ui.fileImport.DomesticExhibitionImportAction"
+			name="domesticExhibitionImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/import/domesticExhibitionImport.jsp" />
+		</action>
+
+		<action path="/dmstcExibtExclImprt" type="jp.co.kts.ui.fileImport.DomesticExhibitionImportAction"
+			name="domesticExhibitionImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/import/domesticExhibitionImport.jsp" />
+			<forward name="success" path="/WEB-INF/page/import/domesticExhibitionImport.jsp" />
+		</action>
+
+		<action path="/dmstcExibtExclImprtUpdItm" type="jp.co.kts.ui.fileImport.DomesticExhibitionImportAction"
+			name="domesticExhibitionImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/import/domesticExhibitionImport.jsp" />
+			<forward name="success" path="/WEB-INF/page/import/domesticExhibitionImport.jsp" />
+		</action>
+
+
+		<!-- ============== 国内注文文書作成 =============== -->
+
+		<action path="/initDomesticOrder" type="jp.co.kts.ui.domestic.DomesticOrderAction"
+			name="domesticOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticOrder.jsp" />
+		</action>
+
+		<action path="/registryDomesticOrderSlip" type="jp.co.kts.ui.domestic.DomesticOrderAction"
+			name="domesticOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticOrder.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticOrder.jsp" />
+		</action>
+
+		<action path="/getDomesticOrderWarehouse" type="jp.co.kts.ui.domestic.DomesticOrderAction"
+			name="domesticOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticOrder.jsp" />
+		</action>
+
+		<action path="/updateDomesticOrderSlip" type="jp.co.kts.ui.domestic.DomesticOrderAction"
+			name="domesticOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticOrder.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticOrder.jsp" />
+		</action>
+
+		<action path="/detailDomesticOrderSlip" type="jp.co.kts.ui.domestic.DomesticOrderAction"
+			name="domesticOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticOrder.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticOrder.jsp" />
+		</action>
+
+		<action path="/deleteDomesticOrderSlip" type="jp.co.kts.ui.domestic.DomesticOrderAction"
+			name="domesticOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticOrder.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticOrder.jsp" />
+		</action>
+
+		<action path="/searchDomesticSlipItem" type="jp.co.kts.ui.domestic.DomesticOrderAction"
+			name="domesticOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticOrder.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticOrder.jsp" />
+		</action>
+
+		<action path="/searchSetDomesticOrder" type="jp.co.kts.ui.domestic.DomesticOrderAction"
+			name="domesticOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<action path="/exportDomesticOrderAcceptanceList" type="jp.co.kts.ui.domestic.DomesticOrderAction"
+			name="domesticOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<action path="/domesticOrderAcceptancePrintOutFile" type="jp.co.kts.ui.domestic.DomesticOrderAction"
+			name="domesticOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<!-- ============== セット商品 =============== -->
+		<action path="/initSetItemList" type="jp.co.kts.ui.mst.SetItemAction"
+			name="setItemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/mst/setItemList.jsp" />
+		</action>
+
+		<action path="/initRegistrySetItem" type="jp.co.kts.ui.mst.SetItemAction"
+			name="setItemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="success" path="/WEB-INF/page/mst/detailSetItem.jsp" />
+		</action>
+
+		<action path="/registrySetItem" type="jp.co.kts.ui.mst.SetItemAction"
+			name="setItemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailSetItem.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/setItemList.jsp" />
+		</action>
+
+		<action path="/detailSetItem" type="jp.co.kts.ui.mst.SetItemAction"
+			name="setItemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="success" path="/WEB-INF/page/mst/detailSetItem.jsp" />
+		</action>
+		<action path="/updateSetItem" type="jp.co.kts.ui.mst.SetItemAction"
+			name="setItemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="check" />
+			<forward name="global_token_error" path="/detailSetItem.do" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailSetItem.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailSetItem.jsp" />
+		</action>
+
+		<action path="/deleteSetItem" type="jp.co.kts.ui.mst.SetItemAction"
+			name="setItemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailSetItem.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/setItemList.jsp" />
+		</action>
+
+		<action path="/setItemManualDownLoad" type="jp.co.kts.ui.mst.SetItemAction"
+			name="setItemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+
+		<action path="/sumFormItemPrice" type="jp.co.kts.ui.mst.SetItemAction"
+			name="setItemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailSetItem.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailSetItem.jsp" />
+		</action>
+
+	<!-- ============== 在庫一覧 =============== -->
+		<action path="/initItemList" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/item/itemList.jsp" />
+		</action>
+
+		<action path="/itemList" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/item/itemList.jsp" />
+			<forward name="success" path="/WEB-INF/page/item/itemList.jsp" />
+		</action>
+
+		<action path="/itemListPageNo" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/item/itemList.jsp" />
+			<forward name="success" path="/WEB-INF/page/item/itemList.jsp" />
+		</action>
+
+		<action path="/lumpDeleteItem" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/item/itemList.jsp" />
+			<forward name="success" path="/WEB-INF/page/item/itemList.jsp" />
+		</action>
+
+		<!-- 組立可数更新 -->
+		<action path="/updAssemblyNum" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/item/itemList.jsp" />
+			<forward name="success" path="/WEB-INF/page/item/itemList.jsp" />
+		</action>
+
+
+		<action path="/itemListDownLoad" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<action path="/itemListCsvDownLoad" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<action path="/addOrderPool" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/item/itemList.jsp" />
+			<forward name="success" path="/WEB-INF/page/item/itemList.jsp" />
+		</action>
+
+		<action path="/deleteOrderPool" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/item/itemList.jsp" />
+			<forward name="success" path="/WEB-INF/page/item/itemList.jsp" />
+		</action>
+
+	<!-- ============== 在庫数一括変更 =============== -->
+		<action path="/lumpUpdateStock" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/item/itemList.jsp" />
+			<forward name="success" path="/WEB-INF/page/item/itemList.jsp" />
+		</action>
+
+	<!-- ============== 売上一覧 =============== -->
+		<action path="/initSaleList" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/saleList.jsp" />
+		</action>
+
+		<action path="/searchSaleList" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/saleList.jsp" />
+			<forward name="failure" path="/WEB-INF/page/sale/saleList.jsp" />
+		</action>
+
+		<action path="/exportPickList" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+		<action path="/pickListPrintOutFile" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+		<action path="/exportTotalPickList" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+		<action path="/totalPickListPrintOutFile" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<action path="/saleListPageNo" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/sale/saleList.jsp" />
+			<forward name="success" path="/WEB-INF/page/sale/saleList.jsp" />
+		</action>
+
+		<action path="/lumpUpdateSales" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/saleList.jsp" />
+		</action>
+
+		<action path="/saleListDownLoad" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<action path="/initSaleSlipExcelImport" type="jp.co.kts.ui.fileImport.SaleSlipImportAction"
+			name="saleSlipImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/import/saleSlipImport.jsp" />
+			<forward name="failure" path="/WEB-INF/page/import/saleSlipImport.jsp" />
+		</action>
+
+		<action path="/saleSlipExcelImport" type="jp.co.kts.ui.fileImport.SaleSlipImportAction"
+			name="saleSlipImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/import/saleSlipImport.jsp" />
+			<forward name="failure" path="/WEB-INF/page/import/saleSlipImport.jsp" />
+		</action>
+
+	<!-- ============== 売上統計 =============== -->
+		<action path="/initSaleSummary" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/saleSummary.jsp" />
+		</action>
+
+		<action path="/saleSummaryDownLoad" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+	<!-- ============== 一括入荷 =============== -->
+<!-- 		<action path="/initLumpArrival" type="jp.co.kts.ui.item.ItemAction" -->
+<!-- 			name="itemForm" scope="session" validate="false"> -->
+<!-- 			<set-property property="nonSecureAction" value="false" /> -->
+<!-- 			<set-property property="tokenType" value="nocheck" /> -->
+<!-- 			<forward name="success" path="/WEB-INF/page/item/lumpArrival.jsp" /> -->
+<!-- 			<forward name="failure" path="/WEB-INF/page/item/itemList.jsp" /> -->
+<!-- 		</action> -->
+
+<!-- 		<action path="/lumpArrival" type="jp.co.kts.ui.item.ItemAction" -->
+<!-- 			name="itemForm" scope="session" validate="false"> -->
+<!-- 			<set-property property="nonSecureAction" value="false" /> -->
+<!-- 			<set-property property="tokenType" value="nocheck" /> -->
+<!-- 			<forward name="success" path="/WEB-INF/page/item/lumpArrival.jsp" /> -->
+<!-- 		</action> -->
+
+	<!-- ============== 一括入荷予定登録 =============== -->
+		<action path="/initScheduledLumpArrivalRegistry" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/item/scheduledLumpArrivalRegistry.jsp" />
+		</action>
+
+		<action path="/registryLumpArrivalSchedule" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/item/scheduledLumpArrivalRegistry.jsp" />
+			<forward name="failure" path="/WEB-INF/page/item/scheduledLumpArrivalRegistry.jsp" />
+		</action>
+
+	<!-- ============== 出庫処理 =============== -->
+		<action path="/initLeaveStock" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/leaveStock.jsp" />
+			<forward name="failure" path="/WEB-INF/page/sale/saleList.jsp" />
+		</action>
+
+		<action path="/leaveStock" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/leaveStock.jsp" />
+			<forward name="failure" path="/WEB-INF/page/sale/leaveStock.jsp" />
+		</action>
+
+	<!-- ============== 売上詳細 =============== -->
+		<action path="/detailSale" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="success" path="/WEB-INF/page/sale/saleDetail.jsp" />
+			<forward name="failure" path="/WEB-INF/page/sale/saleDetail.jsp" />
+		</action>
+
+		<action path="/updateDetailSale" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="check" />
+			<forward name="global_token_error" path="/detailSale.do" />
+			<forward name="success" path="/WEB-INF/page/sale/saleDetail.jsp" />
+			<forward name="failure" path="/WEB-INF/page/sale/saleDetail.jsp" />
+		</action>
+
+		<action path="/initRegistrySales" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="success" path="/WEB-INF/page/sale/saleDetail.jsp" />
+		</action>
+
+		<action path="/registrySales" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="check" />
+			<forward name="global_token_error" path="/detailSale.do" />
+			<forward name="success" path="/WEB-INF/page/sale/saleDetail.jsp" />
+			<forward name="failure" path="/WEB-INF/page/sale/saleDetail.jsp" />
+		</action>
+
+		<action path="/initReturnSales" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/saleDetail.jsp" />
+			<forward name="failure" path="/detailSale.do" />
+		</action>
+
+		<action path="/returnSales" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/saleDetail.jsp" />
+			<forward name="failure" path="/WEB-INF/page/sale/saleDetail.jsp" />
+		</action>
+
+		<action path="/deleteSales" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="success" path="/WEB-INF/page/sale/saleDetail.jsp" />
+			<forward name="failure" path="/WEB-INF/page/sale/saleDetail.jsp" />
+		</action>
+
+		<action path="/initCopySlip" type="jp.co.kts.ui.sale.SaleAction"
+			name="saleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/saleDetail.jsp" />
+			<forward name="failure" path="/detailSale.do" />
+		</action>
+
+
+
+	<!-- ============== 商品詳細 =============== -->
+
+		<action path="/initDetailItem" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/item/itemDetail.jsp" />
+		</action>
+
+		<action path="/initRegistryItem" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="success" path="/WEB-INF/page/item/itemDetail.jsp" />
+		</action>
+
+		<action path="/registryItem" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="check" />
+			<forward name="global_token_error" path="/detailItem.do" />
+			<forward name="failure" path="/WEB-INF/page/item/itemDetail.jsp" />
+			<forward name="success" path="/WEB-INF/page/item/itemDetail.jsp" />
+		</action>
+
+		<action path="/detailItem" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="success" path="/WEB-INF/page/item/itemDetail.jsp" />
+		</action>
+
+		<action path="/updateItem" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="check" />
+			<forward name="global_token_error" path="/detailItem.do" />
+			<forward name="failure" path="/WEB-INF/page/item/itemDetail.jsp" />
+			<forward name="success" path="/WEB-INF/page/item/itemDetail.jsp" />
+		</action>
+
+		<action path="/deleteItem" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/item/itemDetail.jsp" />
+		</action>
+
+		<action path="/itemManualDownLoad" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+
+	<!-- ============== 検索系子画面 =============== -->
+
+<!-- 		<action path="/enterItemSearch" type="jp.co.kts.ui.itemSearch.ItemSearchBaseAction" -->
+<!-- 			name="itemSearchBaseForm" scope="session" validate="false"> -->
+<!-- 			<set-property property="nonSecureAction" value="false" /> -->
+<!-- 			<set-property property="tokenType" value="nocheck" /> -->
+<!-- 			<forward name="success" path="/WEB-INF/page/itemSearch/itemSearch.jsp" /> -->
+<!-- 		</action> -->
+
+		<action path="/initSubWinItem" type="jp.co.kts.ui.itemSearch.ItemSearchAction"
+			name="itemSearchForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="subWindow" />
+			<forward name="success" path="/WEB-INF/page/itemSearch/itemSearch.jsp" />
+		</action>
+
+		<action path="/subWinItemSearch" type="jp.co.kts.ui.itemSearch.ItemSearchAction"
+			name="itemSearchForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="subWindow" />
+			<forward name="success" path="/WEB-INF/page/itemSearch/itemSearch.jsp" />
+		</action>
+
+		<action path="/subWinItemSearchSetItem" type="jp.co.kts.ui.mst.SetItemAction"
+			name="setItemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="subWindow" />
+			<forward name="success" path="/WEB-INF/page/itemSearch/itemSearch.jsp" />
+<!-- 			<forward name="success" path="/initSubWinItem.do" /> -->
+		</action>
+
+
+		<action path="/subWinClientSearch" type="jp.co.kts.ui.clientSearch.ClientSearchAction"
+			name="clientSearchForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="subWindow" />
+			<forward name="success" path="/WEB-INF/page/clientSearch/clientSearch.jsp" />
+		</action>
+
+		<action path="/getDeliveryList" type="jp.co.kts.ui.clientSearch.ClientSearchAction"
+			name="clientSearchForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="subWindow" />
+			<forward name="success" path="/WEB-INF/page/clientSearch/clientSearch.jsp" />
+		</action>
+
+		<action path="/searchDomesticOrder" type="jp.co.kts.ui.domestic.DomesticOrderAction"
+			name="domesticOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/domestic/domesticItemSearch.jsp" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticItemSearch.jsp" />
+		</action>
+
+		<action path="/subWinDomesticItemSearch" type="jp.co.kts.ui.domestic.DomesticOrderAction"
+			name="domesticOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/domestic/domesticItemSearch.jsp" />
+		</action>
+
+		<action path="/subWinSupplierSearch" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="subWindow" />
+			<forward name="failure" path="/WEB-INF/page/foreignOrder/supplierSearch.jsp" />
+			<forward name="success" path="/WEB-INF/page/foreignOrder/supplierSearch.jsp" />
+		</action>
+
+		<action path="/subWinItemSupplierSearch" type="jp.co.kts.ui.item.ItemAction"
+			name="itemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="subWindow" />
+			<forward name="success" path="/WEB-INF/page/item/itemSupplierSearch.jsp" />
+		</action>
+
+		<action path="/subWinSetItemSupplierSearch" type="jp.co.kts.ui.mst.SetItemAction"
+			name="setItemForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/item/setItemSupplierSearch.jsp" />
+		</action>
+
+		<action path="/subWinInitOrderPoolItemSearch" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="subWindow" />
+			<forward name="success" path="/WEB-INF/page/foreignOrder/orderPoolItemSearch.jsp" />
+		</action>
+
+		<action path="/subWinOrderPoolItemSearch" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="subWindow" />
+			<forward name="failure" path="/WEB-INF/page/foreignOrder/orderPoolItemSearch.jsp" />
+			<forward name="success" path="/WEB-INF/page/foreignOrder/orderPoolItemSearch.jsp" />
+		</action>
+
+	<!-- ============== 仕入データインポート =============== -->
+
+		<action path="/initExcelImport" type="jp.co.kts.ui.fileImport.ExcelImportAction"
+			name="excelImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/import/excelImport.jsp" />
+		</action>
+
+		<action path="/excelImport" type="jp.co.kts.ui.fileImport.ExcelImportAction"
+			name="excelImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/import/excelImport.jsp" />
+			<forward name="success" path="/WEB-INF/page/import/excelImport.jsp" />
+		</action>
+
+		<action path="/excelImportUpdateItem" type="jp.co.kts.ui.fileImport.ExcelImportAction"
+			name="excelImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/import/excelImport.jsp" />
+			<forward name="success" path="/WEB-INF/page/import/excelImport.jsp" />
+		</action>
+
+	<!-- ============== 業販管理 =============== -->
+		<action path="/initRegistryCorporateSales" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateSaleDetail.jsp" />
+		</action>
+
+		<action path="/initRegistryCorporateSalesButton" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateSaleDetailButton.jsp" />
+		</action>
+
+		<action path="/registryCorporateSales" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="check" />
+			<forward name="global_token_error" path="/detailCorporateSale.do" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateSaleDetailButton.jsp" />
+			<forward name="failure" path="/WEB-INF/page/sale/corporateSaleDetailButton.jsp" />
+		</action>
+
+		<action path="/registryCorporateSalesButton" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="check" />
+			<forward name="global_token_error" path="/detailCorporateSale.do" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateSaleDetailButton.jsp" />
+			<forward name="failure" path="/WEB-INF/page/sale/corporateSaleDetailButton.jsp" />
+		</action>
+
+		<action path="/initCorporateSaleList" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateSaleList.jsp" />
+		</action>
+
+		<action path="/detailCorporateSale" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateSaleDetailButton.jsp" />
+		</action>
+
+		<action path="/updateDetailCorporateSale" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="check" />
+			<forward name="global_token_error" path="/detailCorporateSale.do" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateSaleDetailButton.jsp" />
+			<forward name="failure" path="/WEB-INF/page/sale/corporateSaleDetailButton.jsp" />
+		</action>
+
+		<action path="/updateDetailCorporateSaleButton" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="check" />
+			<forward name="global_token_error" path="/detailCorporateSale.do" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateSaleDetailButton.jsp" />
+			<forward name="failure" path="/WEB-INF/page/sale/corporateSaleDetailButton.jsp" />
+		</action>
+
+		<action path="/initReturnCorporateSales" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateSaleDetail.jsp" />
+			<forward name="failure" path="/detailCorporateSale.do" />
+		</action>
+
+		<action path="/returnCorporateSales" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateSaleDetail.jsp" />
+			<forward name="failure" path="/WEB-INF/page/sale/corporateSaleDetail.jsp" />
+		</action>
+
+		<action path="/deleteCorporateSales" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="check" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateSaleDetail.jsp" />
+			<forward name="failure" path="/WEB-INF/page/sale/corporateSaleDetail.jsp" />
+		</action>
+
+		<action path="/searchCorporateSaleList" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateSaleList.jsp" />
+			<forward name="failure" path="/WEB-INF/page/sale/corporateSaleList.jsp" />
+		</action>
+
+		<action path="/initCopyCorporateSalesSlip" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateSaleDetail.jsp" />
+			<forward name="failure" path="/detailCorporateSale.do" />
+		</action>
+
+		<action path="/corporateSaleListPageNo" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/sale/corporateSaleList.jsp" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateSaleList.jsp" />
+		</action>
+
+		<action path="/lumpUpdateCorporateSales" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateSaleList.jsp" />
+		</action>
+
+		<action path="/lumpUpdateCorporateReceivePrice" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateSaleList.jsp" />
+		</action>
+
+		<!-- ピッキングリスト -->
+		<action path="/exportCorporatePickList" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+		<action path="/corporatePickListPrintOutFile" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+		<action path="/exportCorporateTotalPickList" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+		<action path="/corporateTotalPickListPrintOutFile" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<!-- ダウンロード -->
+		<action path="/corporateSaleListDownLoad" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<action path="/ehidenCsvDownLoad" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<action path="/b2CsvDownLoad" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<action path="/yubinExcelDownLoad" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<action path="/seinoCsvDownLoad" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<action path="/exportCorporateEstimate" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+		</action>
+
+		<action path="/exportCorporateEstimateList" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<action path="/corporateEstimatePrintOutFile" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<action path="/exportCorporateOrderAcceptance" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<action path="/exportCorporateOrderAcceptanceList" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<action path="/corporateOrderAcceptancePrintOutFile" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<action path="/initExportCorporateBill" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/exportCorporateBill.jsp" />
+		</action>
+
+		<action path="/createExportCorporateBill" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/exportCorporateBill.jsp" />
+              	<forward name="failure" path="/WEB-INF/page/sale/exportCorporateBill.jsp"/>
+		</action>
+
+		<action path="/updateExportCorporateBill" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/exportCorporateBill.jsp" />
+		</action>
+
+		<action path="/deleteExportCorporateBill" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/exportCorporateBill.jsp" />
+		</action>
+
+		<action path="/initCorporatePaymentManagement" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/corporatePaymentManagement.jsp" />
+		</action>
+
+		<action path="/corporatePaymentManagementPageNo" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property value ="false" property ="nonSecureAction"/>
+			<set-property value ="nocheck" property ="tokenType"/>
+			<forward name="success" path="/WEB-INF/page/sale/corporatePaymentManagement.jsp"/>
+			<forward name="failure" path="/WEB-INF/page/sale/corporatePaymentManagement.jsp"/>
+		</action>
+
+		<action path="/paymentManagementList" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property value ="false" property ="nonSecureAction"/>
+			<set-property value ="nocheck" property ="tokenType"/>
+			<forward name="success" path="/WEB-INF/page/sale/corporatePaymentManagement.jsp"/>
+			<forward name="failure" path="/WEB-INF/page/sale/corporatePaymentManagement.jsp"/>
+		</action>
+
+		<action path="/searchPaymentManagement" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property value ="false" property ="nonSecureAction"/>
+			<set-property value ="nocheck" property ="tokenType"/>
+			<forward name="success" path="/WEB-INF/page/sale/corporatePaymentManagement.jsp"/>
+			<forward name="failure" path="/WEB-INF/page/sale/corporatePaymentManagement.jsp"/>
+		</action>
+
+		<action path="/updatePaymentManagement" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property value ="false" property ="nonSecureAction"/>
+			<set-property value ="nocheck" property ="tokenType"/>
+			<forward name="success" path="/WEB-INF/page/sale/corporatePaymentManagement.jsp"/>
+			<forward name="failure" path="/WEB-INF/page/sale/corporatePaymentManagement.jsp"/>
+		</action>
+
+   		<action type="jp.co.kts.ui.sale.CorporateSaleAction"
+   			name="corporateSaleForm"
+   			path="/corporateBillList"
+        scope="session"
+        validate="false">
+		<set-property value ="false" property ="nonSecureAction"/>
+		<set-property value ="nocheck" property ="tokenType"/>
+		<forward name="success" path="/WEB-INF/page/sale/exportCorporateBill.jsp" />
+		<forward name="failure" path="/WEB-INF/page/sale/exportCorporateBill.jsp" />
+
+       	</action>
+
+   		<action type="jp.co.kts.ui.sale.CorporateSaleAction"
+   			name="corporateSaleForm"
+   			path="/corporateBillListPageNo"
+               scope="session"
+               validate="false">
+               <set-property value ="false" property ="nonSecureAction"/>
+               <set-property value ="nocheck" property ="tokenType"/>
+               	<forward name="success" path="/WEB-INF/page/sale/exportCorporateBill.jsp"/>
+               	<forward name="failure" path="/WEB-INF/page/sale/exportCorporateBill.jsp"/>
+       	</action>
+
+		<action path="/exportCorporateBillList" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property value ="false" property ="nonSecureAction"/>
+			<set-property value ="nocheck" property ="tokenType"/>
+		</action>
+
+		<action path="/corporateBillPrintOutFile" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+		<!-- 業販請求書出力画面検索 -->
+		<action path="/searchExportCorporateBill" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/exportCorporateBill.jsp" />
+			<forward name="failure" path="/WEB-INF/page/sale/exportCorporateBill.jsp" />
+		</action>
+
+		<!-- 業販請求書出力画面一括出力 -->
+		<action path="/batchExportCorporateBill" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+
+	<!-- ============== 出庫処理 =============== -->
+		<action path="/initCorporateLeaveStock" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateLeaveStock.jsp" />
+			<forward name="failure" path="/WEB-INF/page/sale/corporateSaleList.jsp" />
+		</action>
+
+		<action path="/corporateLeaveStock" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateLeaveStock.jsp" />
+			<forward name="failure" path="/WEB-INF/page/sale/corporateLeaveStock.jsp" />
+		</action>
+	<!-- ============== 売上統計 =============== -->
+		<action path="/initCorporateSaleSummary" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/sale/corporateSaleSummary.jsp" />
+		</action>
+
+		<action path="/corporateSaleSummaryDownLoad" type="jp.co.kts.ui.sale.CorporateSaleAction"
+			name="corporateSaleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+
+	<!-- ============== 法人間請求書処理 =============== -->
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/kindCostList"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/kindCostList.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/kindCostList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/kindCostListPageNo"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/kindCostList.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/kindCostList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/detailKindCost"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/detailKindCost.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/kindCostList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/initKindCostList"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/kindCostList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/corporateSaleCostList"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/corporateSaleCostList.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/corporateSaleCostList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/corporateSaleCostListPageNo"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/corporateSaleCostList.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/corporateSaleCostList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/editCorporateSaleCost"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/editCorporateSaleCost.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/corporateSaleCostList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/reflectLatestCorporateSaleCost"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/editCorporateSaleCost.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/editCorporateSaleCost.jsp"/>
+
+        	</action>
+
+			<action path="/reflectLatestCorporateSaleCostById" type="jp.co.kts.ui.btobBill.BtobBillAction"
+				name="btobBillForm" scope="session" validate="false">
+				<set-property property="nonSecureAction" value="false" />
+				<set-property property="tokenType" value="nocheck" />
+			</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/savecorporateSaleCost"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/editCorporateSaleCost.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/editCorporateSaleCost.jsp"/>
+
+        	</action>
+			<action path="/savecorporateSaleCostById" type="jp.co.kts.ui.btobBill.BtobBillAction"
+				name="btobBillForm" scope="session" validate="false">
+				<set-property property="nonSecureAction" value="false" />
+				<set-property property="tokenType" value="nocheck" />
+			</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/initCorporateSaleCostList"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/corporateSaleCostList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/saleCostList"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/saleCostList.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/saleCostList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/saleCostListPageNo"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/saleCostList.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/saleCostList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/editsaleCost"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/editSaleCost.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/saleCostList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/reflectLatestSaleCostCost"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/editSaleCost.jsp"/>
+
+        	</action>
+
+			<action path="/reflectLatestSaleCostById" type="jp.co.kts.ui.btobBill.BtobBillAction"
+				name="btobBillForm" scope="session" validate="false">
+				<set-property property="nonSecureAction" value="false" />
+				<set-property property="tokenType" value="nocheck" />
+			</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/reflectLatestSaleCostlist"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/saleCostList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/saveSaleCost"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/editSaleCost.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/editSaleCost.jsp"/>
+
+        	</action>
+
+			<action path="/saveSaleCostById" type="jp.co.kts.ui.btobBill.BtobBillAction"
+				name="btobBillForm" scope="session" validate="false">
+				<set-property property="nonSecureAction" value="false" />
+				<set-property property="tokenType" value="nocheck" />
+			</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/initSaleCostList"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/saleCostList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/btobBillList"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/btobBillList.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/btobBillList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/createBtobBill"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/btobBillList.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/btobBillList.jsp"/>
+
+        	</action>
+
+        	<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/searchBtobBill"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/btobBillList.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/btobBillList.jsp"/>
+
+        	</action>
+
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/btobBillListPageNo"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/btobBillList.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/btobBillList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/updateBtobBill"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/btobBillList.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/btobBillList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/deleteBtobBill"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/btobBillList.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/btobBillList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/initBtobBillList"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/btobBillList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/registryKindCost"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/WEB-INF/page/btobBill/detailKindCost.jsp"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/detailKindCost.jsp"/>
+
+        	</action>
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/exportBillBtobBill"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/billBtobBillPrintOutFile"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/initSaleDetail"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/detailSale.do"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/saleCostList.jsp"/>
+
+        	</action>
+
+    		<action type="jp.co.kts.ui.btobBill.BtobBillAction"
+    			name="btobBillForm"
+    			path="/initCorporateSaleDetail"
+                scope="session"
+                validate="false">
+                <set-property value ="false" property ="nonSecureAction"/>
+                <set-property value ="nocheck" property ="tokenType"/>
+
+
+                	<forward name="success" path="/detailCorporateSale.do"/>
+
+                	<forward name="failure" path="/WEB-INF/page/btobBill/corporateSaleCostList.jsp"/>
+
+        	</action>
+
+<!--      		<action type="jp.co.kts.ui.btobBill.BtobBillAction" -->
+<!--     			name="btobBillForm" -->
+<!--     			path="/registryDomesticOrderSlip" -->
+<!--                 scope="session" -->
+<!--                 validate="false"> -->
+<!--                 <set-property value ="false" property ="nonSecureAction"/> -->
+<!--                 <set-property value ="nocheck" property ="tokenType"/> -->
+<!--                	<forward name="success" path="detailDomesticOrder"/> -->
+<!--                	<forward name="failure" path="/WEB-INF/page/btobBill/corporateSaleCostList.jsp"/> -->
+<!--         	</action> -->
+
+
+
+        <!-- ==============仕入先台帳=============== -->
+		<action path="/initSupplierList" type="jp.co.kts.ui.mst.SupplierAction"
+			name="supplierForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/supplierList.jsp" />
+		</action>
+		<action path="/detailSupplier" type="jp.co.kts.ui.mst.SupplierAction"
+			name="supplierForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailSupplier.jsp" />
+		</action>
+		<action path="/updateSupplier" type="jp.co.kts.ui.mst.SupplierAction"
+			name="supplierForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailSupplier.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailSupplier.jsp" />
+		</action>
+		<action path="/deleteSupplier" type="jp.co.kts.ui.mst.SupplierAction"
+			name="supplierForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailSupplier.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/supplierList.jsp" />
+		</action>
+		<action path="/initRegistrySupplier" type="jp.co.kts.ui.mst.SupplierAction"
+			name="supplierForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailSupplier.jsp" />
+		</action>
+		<action path="/registrySupplier" type="jp.co.kts.ui.mst.SupplierAction"
+			name="supplierForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailSupplier.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailSupplier.jsp" />
+		</action>
+		<action path="/getCurrencyList" type="jp.co.kts.ui.mst.SupplierAction"
+			name="supplierForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/mst/detailSupplier.jsp" />
+		</action>
+
+		<!-- ==============海外注文管理=============== -->
+		<action path="/initForeignOrderList" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/foreignOrderList.jsp" />
+		</action>
+		<action path="/searchForeignOrder" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/foreignOrderList.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/foreignOrderList.jsp" />
+		</action>
+		<action path="/orderStatusList" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/foreignOrderList.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/foreignOrderList.jsp" />
+		</action>
+		<action path="/detailForeignOrderSlip" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailForeignOrder.jsp" />
+		</action>
+		<action path="/returnForeignOrderList" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/foreignOrderList.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/foreignOrderList.jsp" />
+		</action>
+		<action path="/updateForeignOrder" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="check" />
+			<forward name="global_token_error" path="/detailForeignOrderSlip.do" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailForeignOrder.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailForeignOrder.jsp" />
+		</action>
+		<action path="/deleteForeignOrderItem" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailForeignOrder.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailForeignOrder.jsp" />
+		</action>
+		<action path="/deleteForeignOrder" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailForeignOrder.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailForeignOrder.jsp" />
+		</action>
+		<action path="/resetForeignOrderItem" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+		<action path="/initRegistryForeignOrder" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailForeignOrder.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailForeignOrder.jsp" />
+		</action>
+		<action path="/registryForeignOrder" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="check" />
+			<forward name="global_token_error" path="/detailForeignOrderSlip.do" />
+			<forward name="failure" path="/detailForeignOrderSlip.do" />
+			<forward name="success" path="/WEB-INF/page/mst/detailForeignOrder.jsp" />
+		</action>
+		<action path="/getSupplierDetail" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/mst/detailForeignOrder.jsp" />
+		</action>
+		<action path="/initLumpPayment" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/foreignOrder/lumpPayment.jsp" />
+			<forward name="failure" path="/WEB-INF/page/mst/foreignOrderList.jsp" />
+		</action>
+		<action path="/lumpPayment" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/foreignOrder/lumpPayment.jsp" />
+			<forward name="failure" path="/WEB-INF/page/foreignOrder/lumpPayment.jsp" />
+		</action>
+		<action path="/lumpForeignSlipDelete" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/foreignOrderList.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/foreignOrderList.jsp" />
+		</action>
+		<action path="/lumpOrderStatusMove" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/foreignOrderList.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/foreignOrderList.jsp" />
+		</action>
+		<action path="/foreignOrderListDownLoad" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/mst/foreignOrderList.jsp" />
+		</action>
+		<action path="/foreignSlipPageNo" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/mst/foreignOrderList.jsp" />
+		</action>
+		<action path="/initLumpArrival" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="success" path="/WEB-INF/page/foreignOrder/lumpArrival.jsp" />
+			<forward name="failure" path="/WEB-INF/page/mst/foreignOrderList.jsp" />
+		</action>
+		<action path="/lumpArrival" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="check" />
+			<forward name="global_token_error" path="/initLumpArrival.do" />
+			<forward name="success" path="/WEB-INF/page/foreignOrder/lumpArrival.jsp" />
+			<forward name="failure" path="/WEB-INF/page/foreignOrder/lumpArrival.jsp" />
+		</action>
+
+		<action path="/exportForeignOrderAcceptanceList" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="subWindow" />
+		</action>
+
+		<action path="/foreignOrderAcceptancePrintOutFile" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="subWindow" />
+		</action>
+
+		<action path="/exportForeignOrderTransferFst" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="subWindow" />
+		</action>
+
+		<action path="/foreignOrderTransferPrintOutFileFst" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="subWindow" />
+		</action>
+
+		<action path="/exportForeignOrderTransferSnd" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="subWindow" />
+		</action>
+
+		<action path="/foreignOrderTransferPrintOutFileSnd" type="jp.co.kts.ui.mst.ForeignOrderAction"
+			name="foreignOrderForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="subWindow" />
+		</action>
+		<!-- ==============メーカー一覧=============== -->
+		<action path="/initMakerList" type="jp.co.kts.ui.mst.MakerAction"
+			name="makerForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/makerList.jsp" />
+		</action>
+
+		<action path="/initRegistryMaker" type="jp.co.kts.ui.mst.MakerAction"
+			name="makerForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/makerDetail.jsp" />
+		</action>
+
+		<action path="/registryMaker" type="jp.co.kts.ui.mst.MakerAction"
+			name="makerForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="check" />
+			<forward name="global_token_error" path="/detailMaker.do" />
+			<forward name="failure" path="/WEB-INF/page/mst/makerDetail.jsp" />
+			<forward name="success" path="/detailMaker.do" />
+		</action>
+
+		<action path="/updateMaker" type="jp.co.kts.ui.mst.MakerAction"
+			name="makerForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/makerDetail.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/makerDetail.jsp" />
+		</action>
+
+		<action path="/deleteMaker" type="jp.co.kts.ui.mst.MakerAction"
+			name="makerForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/makerDetail.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/makerList.jsp" />
+		</action>
+
+		<action path="/detailMaker" type="jp.co.kts.ui.mst.MakerAction"
+			name="makerForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/mst/makerList.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/makerDetail.jsp" />
+		</action>
+
+		<!-- ============== 国内CSVインポート =============== -->
+		<action path="/initDomesticCsvImport" type="jp.co.kts.ui.fileImport.CsvImportAction"
+			name="csvImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="true" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/import/domesticCsvImport.jsp" />
+		</action>
+
+		<action path="/domesticCsvImport" type="jp.co.kts.ui.fileImport.CsvImportAction"
+			name="csvImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/import/domesticCsvImport.jsp" />
+			<forward name="failure" path="/WEB-INF/page/import/domesticCsvImport.jsp" />
+		</action>
+
+		<action path="/csvDomesticListImport" type="jp.co.kts.ui.fileImport.CsvImportAction"
+			name="csvImportForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="success" path="/WEB-INF/page/import/domesticCsvImport.jsp" />
+			<forward name="failure" path="/WEB-INF/page/import/domesticCsvImport.jsp" />
+		</action>
+
+	</action-mappings>
+
+	<controller maxFileSize="250M"
+				bufferSize="7000K"
+				memFileSize="7000K"
+				tempDir="/usr/local/kts/tmp"></controller>
+
+	<!-- ======================================== Message Resources Definitions -->
+
+	<message-resources parameter="jp.co.kts.ui.web.struts.MessageResources" />
+
+	<!-- =============================================== Plug Ins Configuration -->
+
+	<!-- ======================================================= Tiles plugin -->
+	<!-- This plugin initialize Tiles definition factory. This later can takes
+		some parameters explained here after. The plugin first read parameters from
+		web.xml, thenoverload them with parameters defined here. All parameters are
+		optional. The plugin should be declared in each struts-config file. - definitions-config:
+		(optional) Specify configuration file names. There can be several comma separated
+		file names (default: ?? ) - moduleAware: (optional - struts1.1) Specify if
+		the Tiles definition factory is module aware. If true (default), there will
+		be one factory for each Struts module. If false, there will be one common
+		factory for all module. In this later case, it is still needed to declare
+		one plugin per module. The factory will be initialized with parameters found
+		in the first initialized plugin (generally the one associated with the default
+		module). true : One factory per module. (default) false : one single shared
+		factory for all modules - definitions-parser-validate: (optional) Specify
+		if xml parser should validate the Tiles configuration file. true : validate.
+		DTD should be specified in file header (default) false : no validation Paths
+		found in Tiles definitions are relative to the main context. To use this
+		plugin, download and add the Tiles jar to your WEB-INF/lib directory then
+		uncomment the plugin definition below. -->
+	<plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
+		<set-property property="moduleAware" value="true" />
+	</plug-in>
+
+	<!-- =================================================== Validator plugin -->
+
+	<plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+		<set-property property="pathnames"
+			value="/org/apache/struts/validator/validator-rules.xml,
+               /WEB-INF/validation.xml" />
+	</plug-in>
+
+	<plug-in className="jp.co.keyaki.cleave.fw.ui.web.struts.AppInitPlugIn">
+		<set-property property="sqlBuilderClass"
+			value="jp.co.keyaki.cleave.fw.dao.template.xml.XMLSQLBuilder" />
+		<set-property property="templatePath" value="/WEB-INF/sql-template.xml" />
+	</plug-in>
+
+</struts-config>
+

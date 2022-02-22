@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+	<xsd:element name="sql-templates" type="SqlTemplatesType" />
+	<xsd:element name="sql-template" type="SqlTemplateType" />
+	<xsd:element name="static" type="xsd:string" />
+	<xsd:element name="if-not-equals" type="IfNotEqualsType" />
+	<xsd:element name="if-equals" type="IfEqualsType" />
+	<xsd:element name="if-not-null" type="IfNotNullType" />
+	<xsd:element name="if-null" type="IfNullType" />
+	<xsd:element name="sql-ref" type="SqlRefType" />
+
+	<xsd:complexType name="SqlTemplatesType">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:element ref="sql-template"  />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="SqlTemplateType" mixed="true">
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element ref="if-not-equals" />
+			<xsd:element ref="if-equals" />
+			<xsd:element ref="if-not-null" />
+			<xsd:element ref="if-null" />
+			<xsd:element ref="sql-ref" />
+			<xsd:element ref="static" />
+		</xsd:choice>
+		<xsd:attribute name="id" use="required" type="xsd:ID" />
+	</xsd:complexType>
+
+	<xsd:complexType name="IfNotEqualsType" mixed="true">
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element ref="if-not-equals" />
+			<xsd:element ref="if-equals" />
+			<xsd:element ref="if-not-null" />
+			<xsd:element ref="if-null" />
+			<xsd:element ref="sql-ref" />
+			<xsd:element ref="static" />
+		</xsd:choice>
+		<xsd:attribute name="varName" type="xsd:string" use="required" />
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="IfEqualsType" mixed="true">
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element ref="if-not-equals" />
+			<xsd:element ref="if-equals" />
+			<xsd:element ref="if-not-null" />
+			<xsd:element ref="if-null" />
+			<xsd:element ref="sql-ref" />
+			<xsd:element ref="static" />
+		</xsd:choice>
+		<xsd:attribute name="varName" type="xsd:string" use="required" />
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="IfNotNullType" mixed="true">
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element ref="if-not-equals" />
+			<xsd:element ref="if-equals" />
+			<xsd:element ref="if-not-null" />
+			<xsd:element ref="if-null" />
+			<xsd:element ref="sql-ref" />
+			<xsd:element ref="static" />
+		</xsd:choice>
+		<xsd:attribute name="varName" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="IfNullType" mixed="true">
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element ref="if-not-equals" />
+			<xsd:element ref="if-equals" />
+			<xsd:element ref="if-not-null" />
+			<xsd:element ref="if-null" />
+			<xsd:element ref="sql-ref" />
+			<xsd:element ref="static" />
+		</xsd:choice>
+		<xsd:attribute name="varName" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="SqlRefType">
+		<xsd:attribute name="refId" type="xsd:IDREF" use="required" />
+		<xsd:attribute name="alias" type="xsd:string" use="optional" />
+	</xsd:complexType>
+
+</xsd:schema>

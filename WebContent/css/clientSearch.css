@@ -1,0 +1,132 @@
+.head {
+	padding: 5px 10px;
+	font-size: 1.3em;
+	border-left: 20px #2ca9e1 groove;
+	border-bottom: 1px #333 dotted;
+	font-weight: 700;
+	width: 180px;
+	margin: 10px 20px 20px 20px;
+}
+
+.searchOptionArea {
+	margin: 0px 20px 10px 20px;
+
+}
+
+.searchOptionTable {
+
+}
+
+.searchOptionTable tr td {
+	padding: 5px 5px 0 5px;
+}
+
+.paging_num {
+	margin: 0px 0 10px 20px;
+}
+
+h3 {
+	float: left;
+}
+
+.searchButton {
+	margin-left: 470px;
+}
+
+.out_Div {
+	position: relative;
+	padding-top: 26px;
+	min-width: 640px;
+	max-width: 640px;
+	margin: 0 20px 20px 20px;
+}
+
+.in_Div {
+	overflow: auto;
+	height: 240px;
+	min-width: 655px;
+	max-width: 655px;
+}
+
+table.list_table thead tr {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+table.list_table tr.change_color:hover {
+  background: #EAF1F5;
+  cursor:pointer;
+}
+
+.list_table{
+min-width: 581px;
+max-width: 581px;
+border-collapse: separate;
+border-spacing: 0px;
+border-top: 1px solid #ccc;
+border-left: 1px solid #ccc;
+}
+.list_table th{
+padding: 4px;
+text-align: center;
+color: #FFFFFF;
+background: #258;
+border-top: 1px solid #fff;
+border-left: 1px solid #fff;
+border-right: 1px solid #ccc;
+border-bottom: 1px solid #ccc;
+vertical-align: middle;
+}
+.list_table td{
+padding: 8px;
+/* background-color: #fafafa; */
+border-right: 1px solid #ccc;
+border-bottom: 1px solid #ccc;
+text-align: center;
+}
+
+.wCode {
+	min-width: 90px;
+	max-width: 90px;
+}
+
+.wNm {
+	min-width: 399px;
+	max-width: 399px;
+}
+
+.wNum {
+	min-width: 48px;
+	max-width: 48px;
+}
+
+.wButton {
+	min-width: 61px;
+	max-width: 61px;
+}
+
+.wListCode {
+	min-width: 80px;
+	max-width: 80px;
+}
+
+.wListNm {
+	min-width: 380px;
+	max-width: 380px;
+}
+
+.wListNum {
+	min-width: 40px;
+	max-width: 40px;
+}
+
+.wListButton {
+	min-width: 51px;
+	max-width: 51px;
+}
+
+span.explain {
+	color: red;
+	font-size: 13px;
+}

@@ -1,0 +1,698 @@
+body {
+	margin: 0;
+}
+
+.searchOptionField {
+	margin-left: 30px;
+	margin-right: 30px;
+	border:solid 1px #dddddd;
+	border-radius:3px;
+	background: #ffffff;
+	border-left-width: 3px;
+	border-right-width: 3px;
+	border-top-width: 3px;
+	border-bottom-width: 3px;
+	max-width: 850px;
+	min-width: 850px;
+	margin-bottom: 50px;
+}
+
+.searchOptionField01 {
+	margin-left: 30px;
+	margin-right: 30px;
+	border:solid 1px #dddddd;
+	border-radius:3px;
+	background: #ffffff;
+	border-left-width: 3px;
+	border-right-width: 3px;
+	border-top-width: 3px;
+	border-bottom-width: 3px;
+	max-width: 1300px;
+	min-width: 1300px;
+	margin-bottom: 50px;
+}
+
+#searchOptionArea table td {
+	padding: 5px;
+}
+
+#searchOptionOpen {
+	font-size: 20px;
+	cursor: pointer;
+}
+
+#checkBoxTable {
+	margin: 10px;
+	float: left;
+}
+
+#rootTable {
+	float: left;
+	margin: 10px;
+}
+
+#orderTable {
+	float: left;
+	clear: both;
+	margin: 10px;
+	border-radius: 10px;
+	border: solid 1px #CECECE;
+	background-color: #FAFAFA;
+}
+
+#centerArea {
+	float: left;
+	margin: 10px;
+	width: 400px;
+}
+
+#destinationTable {
+	border-radius: 10px;
+	border: solid 1px #CECECE;
+	background-color: #FAFAFA;
+}
+
+#deliveryTable {
+	margin-bottom: 29px;
+	border-radius: 10px;
+	border: solid 1px #CECECE;
+	background-color: #FAFAFA;
+	width: 400px;
+}
+
+#itemTable {
+	float: left;
+	margin: 10px;
+	border-radius: 10px;
+	border: solid 1px #CECECE;
+	background-color: #FAFAFA;
+}
+
+#buttonTable {
+	float: left;
+	margin: 0px 10px 10px 10px;
+}
+
+.flgCheck {
+	font-weight: bold;
+	padding-left: 20px;
+}
+
+.arrow {
+	padding-left: 20px;
+	font-size: 22px;
+}
+
+.searchOptionTable {
+	margin: 10px;
+	width: 95%;
+}
+
+.searchOptionTable tr td {
+	padding: 3px;
+}
+
+#search_sort {
+	float:right;
+	margin-right:inherit;
+}
+
+.middleArea {
+	margin: 0px 30px 5px 30px;
+	max-width: 1480px;
+	min-width: 1480px;
+}
+
+.check_ctrl {
+	float: left;
+}
+
+.allCheck {
+	cursor: pointer;
+	text-decoration: underline;
+	margin-bottom: 8px;
+}
+
+.allClear{
+	cursor: pointer;
+	text-decoration: underline;
+	text-align: center;
+}
+
+.editButtonTable {
+	padding: 0px 70px 30px 0px;
+	/*float: right;*/
+}
+
+.paging_area {
+	margin: 20px 30px 0px 30px;
+	max-width: 1410px;
+	min-width: 1410px;
+	clear: both;
+}
+
+.under_paging_area {
+	margin: 1px 30px 155px 30px;
+	max-width: 1410px;
+	min-width: 1410px;
+	clear: both;
+}
+
+.paging_total_top {
+	float: left;
+}
+
+.paging_num_top {
+	float: left;
+	margin-left: 340px;
+}
+
+.paging_total_bottom {
+	float: left;
+	margin-top: -25px;
+}
+
+.paging_num_bottom {
+	margin-top: -10px;
+	margin-left: 385px;
+}
+
+#button_area {
+	margin-left: 30px;
+	margin-top: 20px;
+	margin-bottom: 15px;
+	margin-right: 30px;
+}
+
+.checkButtonArea {
+	float: left;
+	margin: 0px 0 5px 28px;
+	clear: both;
+}
+
+#list_set_area {
+	margin: 0px 30px 10px 0px;
+	padding-left: 50em;
+	width: 100%;
+}
+
+
+.code_link {
+	text-decoration: none;
+}
+
+
+/* pager */
+ul.pager { margin-top:0; display:inline-block; margin-left:0; margin-bottom:0; -webkit-border-radius:4px; -moz-border-radius:4px; border-radius:4px; -webkit-box-shadow:0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow:0 1px 2px rgba(0, 0, 0, 0.05); box-shadow:0 1px 2px rgba(0, 0, 0, 0.05); }
+ul.pager > li { display:inline; }
+ul.pager > li a, ul.pager > li span { float:left; padding:6px 12px 4px 12px; line-height:20px; text-decoration:none; background-color:#ffffff; border:1px solid #dddddd; border-left-width:0; }
+ul.pager > li > a:hover, ul.pager > .current > a, ul.pager > .current > span { background-color:#f5f5f5; }
+ul.pager > .current > a, ul.pager > .current > span { font-weight:bold; cursor:default; }
+ul.pager > .disabled > span, ul.pager > .disabled > a, ul.pager > .disabled > a:hover { color:#999999; background-color:transparent; cursor:default; }
+ul.pager > li:first-child > a, ul.pager > li:first-child > span { border-left-width:1px; -webkit-border-top-left-radius:4px; -moz-border-radius-topleft:4px; border-top-left-radius:4px; -webkit-border-bottom-left-radius:4px; -moz-border-radius-bottomleft:4px; border-bottom-left-radius:4px; }
+ul.pager > li:last-child > a, ul.pager > li:last-child > span { -webkit-border-top-right-radius:4px; -moz-border-radius-topright:4px; border-top-right-radius:4px; -webkit-border-bottom-right-radius:4px; -moz-border-radius-bottomright:4px; border-bottom-right-radius:4px; }
+
+table.list_table tr.change_color:hover {
+  background: #EAF1F5;
+  cursor:pointer;
+}
+
+/* .list_table{ */
+/* width: 100%; */
+/* border-collapse: collapse; */
+/* border-right: 1px solid #999; */
+/* } */
+/* .list_table th{ */
+/* width: 25%; */
+/* padding: 6px; */
+/* text-align: left; */
+/* vertical-align: top; */
+/* color: #fff; */
+/* background-color: #555; */
+/* border-left: 5px solid #ff6633; */
+/* border-top: 1px solid #fff; */
+/* } */
+/* .list_table td{ */
+/* width: 25%; */
+/* padding: 6px; */
+/* background-color: #fff; */
+/* border-bottom: 1px solid #999; */
+/* border-left: 1px solid #999; */
+/* } */
+
+.list_table{
+/* width:100%; */
+max-width:1300px;
+min-width:1300px;
+border-collapse: separate;
+border-spacing: 0px;
+border-top: 1px solid #ccc;
+border-left: 1px solid #ccc;
+margin-left: 30px;
+}
+
+.list_table th{
+color: #ffffff;
+background: #258;
+border-top: 1px solid #fff;
+border-left: 1px solid #fff;
+border-right: 1px solid #ccc;
+border-bottom: 1px solid #ccc;
+vertical-align: middle;
+padding: 8px 0 8px 0;
+font-weight: 100;
+}
+.list_table td{
+padding: 4px;
+/* background-color: #fafafa; */
+border-right: 1px solid #ccc;
+border-bottom: 1px solid #ccc;
+}
+
+
+
+.list_table01{
+/* width:100%; */
+max-width:2500px;
+min-width:2100px;
+border-collapse: separate;
+border-spacing: 0px;
+border-top: 1px solid #ccc;
+border-left: 1px solid #ccc;
+margin-left: 30px;
+}
+
+
+.list_table01 th{
+color: #ffffff;
+background: #258;
+border-top: 1px solid #fff;
+border-left: 1px solid #fff;
+border-right: 1px solid #ccc;
+border-bottom: 1px solid #ccc;
+vertical-align: middle;
+padding: 3px 0 3px 0;
+font-weight: 100;
+}
+.list_table01 td{
+padding: 1px;
+/* background-color: #fafafa; */
+border-right: 1px solid #ccc;
+border-bottom: 1px solid #ccc;
+}
+
+#summary {
+	width: 400px;
+	margin-left: 400px;
+}
+
+.summary_nm {
+	width: 130px;
+}
+
+.summary_price {
+	text-align: center;
+}
+
+
+table.summary {
+  margin-top: -10px;
+  margin-bottom: 1em;
+  width: 380px;
+  border-collapse: separate;
+  border-spacing: 2px;
+  font-size: 100%;
+  float: right;
+}
+
+table.summary th,
+table.summary td {
+  padding: 4px 6px;
+}
+
+table.summary th {
+  background: #1B3AB4;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 92%;
+  color: #FFF;
+}
+
+table.summary td {
+  background: #E5EAFF;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.buttonArea {
+	position: fixed !important;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 25px;
+	background-color: #EEEEEE;
+	padding: 10px;
+	text-align: center !important;
+}
+
+.footer_button {
+	display: inline;
+	padding-left: 20px;
+}
+
+.check {
+	width: 20px;
+}
+
+.status {
+	max-width: 100px;
+	min-width: 100px;
+}
+
+.orderRoot {
+	max-width: 140px;
+	min-width: 140px;
+}
+
+.orderDate {
+	max-width: 80px;
+	min-width: 80px;
+}
+
+.orderInf {
+	max-width: 150px;
+	min-width: 150px;
+}
+
+.demandInf {
+	max-width: 100px;
+	min-width: 100px;
+}
+
+.destinationInf {
+	max-width: 160px;
+	min-width: 160px;
+}
+
+.deliveryInf {
+	max-width: 110px;
+	min-width: 110px;
+}
+
+.deliveryAppoint {
+	max-width: 90px;
+	min-width: 90px;
+}
+
+.shipmentPlan {
+	max-width: 80px;
+	min-width: 80px;
+}
+
+.memo {
+	max-width: 160px;
+	min-width: 160px;
+}
+
+.textRed {
+	color: #C40000;
+}
+
+.editRemarks {
+
+}
+
+.boundary {
+	background-color: #B0BDCC;
+}
+
+.nowPage {
+	color: #000000;
+}
+
+.greenLabel {
+	font-color: green;
+}
+
+.blueLabel {
+	font-color: blue;
+}
+
+.redLabel {
+	font-color: red;
+}
+
+span.memoColor {
+	color: #FF00D6;;
+}
+
+.remarksHeight {
+	max-height: 80px;
+	min-height: 80px;
+	overflow: hidden;
+}
+
+#errorArea {
+	text-align: center;
+	margin-top: 50px;
+}
+
+.errorMessage {
+	color:red;
+	font-size: 16px;
+}
+
+#messageArea {
+	text-align: left;
+	margin-left: 17em;
+	margin-bottom: -100px;
+	font-weight: bold;
+	float: left;
+	width: 477px;
+}
+
+.registryMessage {
+	color: black;
+	font-size: 14px;
+	font-weight: bold;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.registrySuccess {
+	background-color: #90EE90;
+	padding-left: 10em;
+	padding-right: 500px;
+}
+.registryFailure {
+	background-color: #ff9999;
+	padding-left: 10em;
+    padding-right: 500px;
+}
+
+span.explain {
+	color: red;
+	font-size: 13px;
+}
+
+.slipNoLabel {
+	background-color: #FAFAFA;
+	border: solid 1px #CECECE;
+	border-radius: 10px 0px 0px 10px;
+	padding: 10px 0px 10px 0px !important;
+	border-width: 1px 0px 1px 1px;
+}
+
+.slipNoCheckBoxTd {
+	border: solid 1px #CECECE;
+	background-color: #FAFAFA;
+	border-width: 1px 0px 1px 0px;
+}
+
+.slipNoNoneCheckBoxTd {
+	border: solid 1px #CECECE;
+	background-color: #FAFAFA;
+	border-radius: 0px 10px 10px 0px;
+	border-width: 1px 1px 1px 0px;
+}
+
+.mb10{
+	margin-bottom:10px;
+}
+
+ul.hmenu{
+	margin-left: 20px;
+}
+
+ul.hmenu .corp:first-child{
+	border-left: none;
+	padding-left: 3px;
+}
+
+ul.hmenu .corp{
+	display: inline-block;
+	border-left: 1px solid #c7cad3;
+	padding: 0 12px 0 12px;
+}
+
+ul.corpmenu li{
+	margin-top:10px;
+}
+
+span.slipStatus {
+ 	color:white;
+ 	padding:3px 20px;
+}
+
+td.deliveryStatus{
+	color:red;
+}
+
+#sysMakerId {
+	width: 210px;
+}
+
+.right {
+	text-align: right;
+}
+
+.makerNm {
+	width: 100px;
+}
+
+.serealNum {
+	width: 43px
+}
+
+.itemOrderDate {
+	width: 65px;
+}
+
+.chargeDate {
+	width: 70px;
+}
+
+.allOrderCheckSize{
+	width: 20px;
+}
+
+.orderCharge {
+	width: 60px;
+}
+
+.stockCharge {
+	width: 60px;
+}
+
+.orderNum{
+	width: 59px;
+}
+
+.orderNumText{
+	width: 53px;
+}
+
+.orderNo {
+	width: 170px
+}
+
+.purchasingCost {
+	width: 83px;
+}
+
+.costComfFlag{
+	width: 55px;
+}
+
+.postage{
+	width: 60px;
+}
+
+.listRemarks {
+	width: 185px;
+}
+
+.statusNm {
+	width: 55px;
+}
+
+.correspondence {
+	width: 53px;
+}
+
+.makerNmKana {
+	width: 210px;
+}
+
+.itemNm {
+	width: 210px;
+}
+
+.wholsesalerNm {
+	width: 100px;
+}
+
+.arrivalScheduleDate {
+    width: 80px;
+}
+
+.arrivalScheduleDateSize {
+	width: 90px;
+}
+
+tr.domestic{
+	word-break:break-all;
+}
+
+tr.rowSize{
+	word-break:break-all;
+}
+
+.nextButton{
+	padding-right: 30px;
+}
+
+.listRemarksVal{
+	width: 90%;
+}
+
+.itemListRow {
+	cursor:pointer;
+	color:blue;
+	text-decoration:underline;
+}
+
+li.buttonSpase{
+	margin-right: 30px;
+	display:inline-block;
+}
+
+.checkBoxTransForm {
+	transform: scale(1.25);
+}
+
+.textSize_240 {
+	width: 240px;
+}
+.quantity {
+	width: 65px;
+}
+.serealNumText {
+	width: 135px;
+}
+.numberOrderType {
+	width: 49px;
+}
+
+.deliveryType {
+	width: 89px;
+}
+
+#searchStatus {
+	width: 89px;
+}
+
+.chargesSize {
+	width: 156px;
+}
