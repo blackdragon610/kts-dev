@@ -34,9 +34,11 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import jp.co.keyaki.cleave.common.util.StringUtil;
+import jp.co.kts.app.common.entity.DomesticCsvImportDTO;
 import jp.co.kts.app.common.entity.DomesticExhibitionDTO;
 import jp.co.kts.app.common.entity.DomesticOrderListDTO;
 import jp.co.kts.app.extendCommon.entity.ExtendDomesticOrderSlipDTO;
+import jp.co.kts.dao.fileImport.DomesticCsvImportDAO;
 import jp.co.kts.dao.mst.DomesticExhibitionDAO;
 
 public class ExportDomesticOrderService {
@@ -330,7 +332,7 @@ public class ExportDomesticOrderService {
 		PdfPTable pdfPTable = new PdfPTable(TABLE_COLS);
 		pdfPTable.setTotalWidth(535);
 		//テーブルにおけるセルの最大表示数
-		int maxRow = 80;
+		int maxRow = 100;
 
 		//空のセルを用意
 		PdfPCell cellItemOrderRemarks = new PdfPCell();
@@ -343,10 +345,29 @@ public class ExportDomesticOrderService {
 
 		//備考欄のみのリストを作成する処理
 		List<String> listRemarksList = new ArrayList<>();
+		DomesticCsvImportDAO daoo = new DomesticCsvImportDAO();
+		int cntRows = 0;
 		for (DomesticOrderListDTO dto : slipDto.getDomesticOrderItemList()) {
 			//空っぽ、またはnullはこの時点で除外する。
 			if (dto.getListRemarks() == null || dto.getListRemarks().isEmpty()) {
+				DomesticCsvImportDTO data = new DomesticCsvImportDTO();
+				data = daoo.getDomesticCsvdataFromDomesticimportId(slipDto.getSysDomesticimportId());
+				
+				if(!StringUtils.isEmpty(dto.getOrderRemarks())) {
+					listRemarksList.add("[備考:]" + " " + dto.getOrderRemarks());
+					cntRows += 1;
+				}
+				if(!StringUtils.isEmpty(data.getDestinationAppointDate()) || !StringUtils.isEmpty(data.getDestinationAppointTime())) 
+				{
+					listRemarksList.add("\n[お届け指定日:]" + " " + data.getDestinationAppointDate() + data.getDestinationAppointTime()); 
+					cntRows += 1;
+				}
+				if(!StringUtils.isEmpty(data.getSenderMemo())) {
+					listRemarksList.add("\n[一言メモ（お届け先）:]" + " " + data.getSenderMemo());
+					cntRows += 1;
+				}
 				continue;
+				
 			}
 			listRemarksList.add(dto.getListRemarks());
 		}
@@ -525,6 +546,7 @@ public class ExportDomesticOrderService {
 		orderRemarksMap.put("isRemarksDisplayAll", 1);
 
 	}
+	
 
 	/**
 	 * 備考欄上の注意書き文言を出力する

@@ -15,6 +15,9 @@ public class DomesticOrderSlipDTO {
 	/** システム伝票ID */
 	private long sysDomesticSlipId;
 
+	/** 国内システムインポートID */
+	private long sysDomesticimportId;
+	
 	/** 注文書No */
 	private long purchaseOrderNo;
 
@@ -91,6 +94,14 @@ public class DomesticOrderSlipDTO {
 
 	public void setSysDomesticSlipId(long sysDomesticSlipId) {
 		this.sysDomesticSlipId = sysDomesticSlipId;
+	}
+
+	public long getSysDomesticimportId() {
+		return sysDomesticimportId;
+	}
+
+	public void setSysDomesticimportId(long sysDomesticimportId) {
+		this.sysDomesticimportId = sysDomesticimportId;
 	}
 
 	/**

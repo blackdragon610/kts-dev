@@ -156,6 +156,15 @@
 				<div id="centerArea">
 					<table id="deliveryTable">
 						<tr>
+							<td>会社名</td>
+							<td><nested:select property="sysCorporationId" styleId="sysCorporationId">
+								<html:option value=""></html:option>
+								<html:optionsCollection property="corporationListDTO"
+									label="corporationNm" value="sysCorporationId" />
+							</nested:select></td>
+						</tr>
+					
+						<tr>
 							<td>ステータス</td>
 							<td>
 								<nested:select property="status" styleId="searchStatus">

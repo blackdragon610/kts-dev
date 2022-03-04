@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import jp.co.keyaki.cleave.fw.ui.web.struts.AppActionMapping;
 import jp.co.keyaki.cleave.fw.ui.web.struts.AppBaseForm;
 import jp.co.kts.app.common.entity.DomesticOrderListDTO;
+import jp.co.kts.app.common.entity.MstCorporationDTO;
 import jp.co.kts.app.common.entity.MstMakerDTO;
 import jp.co.kts.app.output.entity.RegistryMessageDTO;
 import jp.co.kts.app.search.entity.DomesticOrderListSearchDTO;
@@ -22,6 +23,10 @@ public class DomesticOrderListForm extends AppBaseForm {
 	private DomesticOrderListSearchDTO domesticOrderListSearchDTO = new DomesticOrderListSearchDTO();
 	/** メーカーリスト */
 	private List<MstMakerDTO> makerListDTO = new ArrayList<>();
+	
+	
+	private List<MstCorporationDTO> corporationListDto = new ArrayList<>();
+	
 	/** システムメーカーID */
 	private long sysMakerId;
 	/** システム国内商品IDリスト */
@@ -322,6 +327,15 @@ public class DomesticOrderListForm extends AppBaseForm {
 	    this.strSysDomesticSlipId = strSysDomesticSlipId;
 	}
 
+	/** 会社一覧 */
+	public List<MstCorporationDTO> getCorporationListDTO() {
+		return corporationListDto;
+	}
+
+
+	public void setCorporationListDTO(List<MstCorporationDTO> corporationListDto) {
+		this.corporationListDto = corporationListDto;
+	}
 
 	/**
 	 *

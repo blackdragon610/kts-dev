@@ -89,6 +89,11 @@ public class DomesticSlipDAO extends BaseDAO {
 		} else {
 			parameters.addParameter(("printType"), "1");
 		}
+		
+		// 会社ID
+		if (dto.getSysCorporationId() > 0) {
+			parameters.addParameter(("sysCorporationId"), dto.getSysCorporationId());
+		}
 
 		return selectList("SEL_DOMESTIC_ORDER_ITEM_ID", parameters,
 				ResultSetHandlerFactory.getNameMatchBeanRowHandler(DomesticOrderListDTO.class));

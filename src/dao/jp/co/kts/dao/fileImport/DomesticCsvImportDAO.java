@@ -63,4 +63,18 @@ public class DomesticCsvImportDAO extends BaseDAO{
 
 		return select("SEL_DOMESTIC_CSV_IMPORT", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(DomesticCsvImportDTO.class));
 	}
+	
+	/**
+	 * 国内CSVフインポートのファイル名取得
+	 * @param orderNo
+	 * @return
+	 * @throws DaoException
+	 */
+	public DomesticCsvImportDTO getDomesticCsvdataFromDomesticimportId(long sysDomesticImportId) throws DaoException {
+
+		SQLParameters parameters = new SQLParameters();
+		parameters.addParameter("sysDomesticImportId", sysDomesticImportId);
+
+		return select("SEL_DOMESTIC_CSV_IMPORT", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(DomesticCsvImportDTO.class));
+	}
 }

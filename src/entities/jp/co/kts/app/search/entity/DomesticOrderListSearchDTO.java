@@ -18,6 +18,10 @@ public class DomesticOrderListSearchDTO {
 
 	/**システム伝票ID*/
 	private long sysDomesticSlipId;
+	
+	/**会社ID*/
+	private long sysCorporationId;
+
 
 	/** 注文書作成日From */
 	private String orderCreatDateFrom;
@@ -714,4 +718,12 @@ public class DomesticOrderListSearchDTO {
 	    this.printedData = printedData;
 	}
 
+
+	public long getSysCorporationId() {
+		return sysCorporationId;
+	}
+
+	public void setSysCorporationId(long sysCorporationId) {
+		this.sysCorporationId = sysCorporationId;
+	}
 }

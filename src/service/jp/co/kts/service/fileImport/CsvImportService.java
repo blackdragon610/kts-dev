@@ -586,13 +586,15 @@ public class CsvImportService {
 
 		//チャンネルID
 		long sysChannelId = new ChannelDAO().getChannelId(csvImportDTO.getOrderRoute());
-		slipDto = getMallId(sysChannelId, csvImportDTO.getSysCorporationId());
+		String orderNo = csvImportDTO.getOrderNo();
+		slipDto = getMallId(sysChannelId, csvImportDTO.getSysCorporationId(), orderNo);
 		//伝票情報格納
 		domesticDto.setItemOrderDate(csvImportDTO.getOrderDate());
 		domesticDto.setSysCorporationId(slipDto.getSysCorporationId());
 		domesticDto.setMall(slipDto.getMall());
 		domesticDto.setOrderNo(csvImportDTO.getOrderNo());
 		domesticDto.setNoteTurn(slipDto.getNoteTurn());
+		domesticDto.setSysDomesticimportId(slipDto.getSysDomesticimportId());
 
 
 		//決済方法が「代引き以外」かつ「商品コード(店舗)」に下記いずれかの文字列が含まれている場合
@@ -633,7 +635,7 @@ public class CsvImportService {
 	 * @return
 	 * @throws Exception
 	 */
-	private DomesticOrderSlipDTO getMallId(long sysChannelId, long sysCorporationId) throws Exception {
+	private DomesticOrderSlipDTO getMallId(long sysChannelId, long sysCorporationId, String orderNo) throws Exception {
 		DomesticOrderSlipDTO dto = new DomesticOrderSlipDTO();
 		MstUserDTO userInfo = new MstUserDTO();
 		long userId = ActionContext.getLoginUserInfo().getUserId();
@@ -644,6 +646,13 @@ public class CsvImportService {
 		String channelId = String.valueOf(sysChannelId);
 		String corporationId = String.valueOf(sysCorporationId);
 		String noteTune = "";
+		String addKey = "";
+		String[] arrSplit = orderNo.split("-"); 
+		if(arrSplit.length > 1)
+		{
+			addKey = arrSplit[arrSplit.length-2].substring(arrSplit[arrSplit.length-2].length()-2) + "-" + arrSplit[arrSplit.length-1];	
+		}
+		else addKey = arrSplit[arrSplit.length-1];
 		switch (corporationId) {
 		case "1":
 			noteTune = "K";
@@ -744,8 +753,8 @@ public class CsvImportService {
 				noteTune = "";
 				dto.setMall(noteTune);
 		}
-
-		dto.setNoteTurn(authInfo + " - " + noteTune);
+		
+		dto.setNoteTurn(authInfo + " - " + noteTune + "/" + addKey);
 
 
 		return dto;
@@ -813,6 +822,7 @@ public class CsvImportService {
 			//※システム伝票IDはinsert時に格納する
 			domesticItemDto.setManagementCode(exhbyRsltDto.getManagementCode());
 			domesticItemDto.setOrderNum(csvImportDTO.getItemNum());
+			domesticItemDto.setOrderRemarks(csvImportDTO.getOrderRemarks());
 			domesticItemDto.setWholsesalerNm(exhbyRsltDto.getWholsesalerNm());
 			domesticItemDto.setMakerCode(exhbyRsltDto.getMakerCode());
 			domesticItemDto.setMakerId(exhbyRsltDto.getSysMakerId());
