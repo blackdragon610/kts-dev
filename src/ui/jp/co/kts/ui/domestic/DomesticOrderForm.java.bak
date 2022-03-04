@@ -41,6 +41,11 @@ public class DomesticOrderForm extends AppBaseForm {
 	private List<DomesticOrderSlipDTO> domesticOrderSlipList = new ArrayList<>();
 	private ExtendDomesticOrderSlipDTO extendDomesticOrderSlipDto = new ExtendDomesticOrderSlipDTO();
 	private List<ExtendDomesticOrderSlipDTO> extendDomesticOrderSlipList = new ArrayList<>();
+	
+//	/** company list */
+//	private MstCorporationDTO corporationListDto = new MstCorporationDTO();
+//	private List<MstCorporationDTO> corporationList = new ArrayList<>();
+	
 	/** システム伝票ID */
 	private long sysDomesticSlipId;
 	/** システム倉庫ID */

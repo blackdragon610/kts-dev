@@ -550,6 +550,7 @@
 			var resultArea = $("tr.domestic");
 			//詳細画面時、問屋名、定価、メーカー名の表示
 			for (var i = 0; i < resultArea.size(); i++) {
+				console.log("aaaaaaaaa", resultArea.eq(i).find(".detailHiddenWholsesalerNm").val());
 				if (resultArea.eq(i).find(".detailManagementCode").val() != 0) {
 					resultArea.eq(i).find(".detailWholsesalerNm").html(resultArea.eq(i).find(".detailHiddenWholsesalerNm").val());
 					resultArea.eq(i).find(".detailMakerNm").html(resultArea.eq(i).find(".detailHiddenMakerNm").val());
