@@ -70,11 +70,11 @@ public class DomesticCsvImportDAO extends BaseDAO{
 	 * @return
 	 * @throws DaoException
 	 */
-	public DomesticCsvImportDTO getDomesticCsvdataFromDomesticimportId(long sysDomesticImportId) throws DaoException {
+	public DomesticCsvImportDTO getDomesticCsvdataFromDomesticimportId(long sysImportId) throws DaoException {
 
 		SQLParameters parameters = new SQLParameters();
-		parameters.addParameter("sysDomesticImportId", sysDomesticImportId);
+		parameters.addParameter("sysImportId", sysImportId);
 
-		return select("SEL_DOMESTIC_CSV_IMPORT", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(DomesticCsvImportDTO.class));
+		return select("SEL_DOMESTIC_CSV_IMPORT_BY_IMPORT_ID", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(DomesticCsvImportDTO.class));
 	}
 }

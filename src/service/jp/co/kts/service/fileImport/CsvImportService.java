@@ -594,7 +594,10 @@ public class CsvImportService {
 		domesticDto.setMall(slipDto.getMall());
 		domesticDto.setOrderNo(csvImportDTO.getOrderNo());
 		domesticDto.setNoteTurn(slipDto.getNoteTurn());
-		domesticDto.setSysDomesticimportId(slipDto.getSysDomesticimportId());
+		
+		
+		
+		domesticDto.setSysDomesticImportId(csvImportDTO.getSysImportId());
 
 
 		//決済方法が「代引き以外」かつ「商品コード(店舗)」に下記いずれかの文字列が含まれている場合

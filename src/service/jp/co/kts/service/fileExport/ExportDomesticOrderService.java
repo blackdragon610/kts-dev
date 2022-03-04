@@ -350,21 +350,23 @@ public class ExportDomesticOrderService {
 		for (DomesticOrderListDTO dto : slipDto.getDomesticOrderItemList()) {
 			//空っぽ、またはnullはこの時点で除外する。
 			if (dto.getListRemarks() == null || dto.getListRemarks().isEmpty()) {
-				DomesticCsvImportDTO data = new DomesticCsvImportDTO();
-				data = daoo.getDomesticCsvdataFromDomesticimportId(slipDto.getSysDomesticimportId());
-				
-				if(!StringUtils.isEmpty(dto.getOrderRemarks())) {
-					listRemarksList.add("[備考:]" + " " + dto.getOrderRemarks());
-					cntRows += 1;
-				}
-				if(!StringUtils.isEmpty(data.getDestinationAppointDate()) || !StringUtils.isEmpty(data.getDestinationAppointTime())) 
-				{
-					listRemarksList.add("\n[お届け指定日:]" + " " + data.getDestinationAppointDate() + data.getDestinationAppointTime()); 
-					cntRows += 1;
-				}
-				if(!StringUtils.isEmpty(data.getSenderMemo())) {
-					listRemarksList.add("\n[一言メモ（お届け先）:]" + " " + data.getSenderMemo());
-					cntRows += 1;
+				if(slipDto.getSysDomesticImportId() > 0) {
+					DomesticCsvImportDTO data = new DomesticCsvImportDTO();
+					data = daoo.getDomesticCsvdataFromDomesticimportId(slipDto.getSysDomesticImportId());
+					
+					if(!StringUtils.isEmpty(dto.getOrderRemarks())) {
+						listRemarksList.add("[備考:]" + " " + dto.getOrderRemarks());
+						cntRows += 1;
+					}
+					if(!StringUtils.isEmpty(data.getDestinationAppointDate()) || !StringUtils.isEmpty(data.getDestinationAppointTime())) 
+					{
+						listRemarksList.add("\n[お届け指定日:]" + " " + data.getDestinationAppointDate() + data.getDestinationAppointTime()); 
+						cntRows += 1;
+					}
+					if(!StringUtils.isEmpty(data.getSenderMemo())) {
+						listRemarksList.add("\n[一言メモ（お届け先）:]" + " " + data.getSenderMemo());
+						cntRows += 1;
+					}
 				}
 				continue;
 				

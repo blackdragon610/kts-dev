@@ -225,6 +225,8 @@ public class DomesticOrderAction extends AppBaseAction {
 		//インスタンスを生成
 		DomesticOrderService service = new DomesticOrderService();
 		form.setExtendDomesticOrderItemSearchList(service.getSearchDomesticOrder(form.getDomesticExhibitionSearchDTO()));
+		
+		
 
 		//検索結果数をカウント
 		form.setItemListSize(form.getExtendDomesticOrderItemSearchList().size());
