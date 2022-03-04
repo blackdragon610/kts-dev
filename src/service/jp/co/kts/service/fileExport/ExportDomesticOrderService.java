@@ -341,12 +341,11 @@ public class ExportDomesticOrderService {
 		//「発送後、配送業者、送り状番号をお知らせ下さいませ。宜しくお願いします。」の文言を開始する位置。備考欄の常に上に表示する。
 		int noteStartPointY = 0;
 		//備考欄終了位置。これが222を下回ると、直送先を表示するのに改ページが必要になる。 ※処理最後の判別で使用する
-		float remarksEndPoint = 800;
+		float remarksEndPoint = 222;
 
 		//備考欄のみのリストを作成する処理
 		List<String> listRemarksList = new ArrayList<>();
 		DomesticCsvImportDAO daoo = new DomesticCsvImportDAO();
-		int cntRows = 0;
 		for (DomesticOrderListDTO dto : slipDto.getDomesticOrderItemList()) {
 			//空っぽ、またはnullはこの時点で除外する。
 			if (dto.getListRemarks() == null || dto.getListRemarks().isEmpty()) {
@@ -355,17 +354,14 @@ public class ExportDomesticOrderService {
 					data = daoo.getDomesticCsvdataFromDomesticimportId(slipDto.getSysDomesticImportId());
 					
 					if(!StringUtils.isEmpty(dto.getOrderRemarks())) {
-						listRemarksList.add("[備考:]" + " " + dto.getOrderRemarks());
-						cntRows += 1;
+						listRemarksList.add("[備考:]" + "\n" + dto.getOrderRemarks());
 					}
 					if(!StringUtils.isEmpty(data.getDestinationAppointDate()) || !StringUtils.isEmpty(data.getDestinationAppointTime())) 
 					{
-						listRemarksList.add("\n[お届け指定日:]" + " " + data.getDestinationAppointDate() + data.getDestinationAppointTime()); 
-						cntRows += 1;
+						listRemarksList.add("\n[お届け指定日:]" + "\n" + data.getDestinationAppointDate() + data.getDestinationAppointTime()); 
 					}
 					if(!StringUtils.isEmpty(data.getSenderMemo())) {
-						listRemarksList.add("\n[一言メモ（お届け先）:]" + " " + data.getSenderMemo());
-						cntRows += 1;
+						listRemarksList.add("\n[一言メモ（お届け先）:]" + "\n" + data.getSenderMemo());
 					}
 				}
 				continue;
@@ -389,6 +385,11 @@ public class ExportDomesticOrderService {
 
 			//備考欄と直送先の間(20px)を考慮してあらかじめ引いておく
 			tableLastDrawingYPosition -= 20;
+//			int totalLines = 1;
+//			for (int i = 0; i < listRemarksList.size(); i++) {
+//				
+//				totalLines += stringIsmanyLinesHaveIsCheck(listRemarksList.get(i));
+//			}
 
 			//備考欄がそのページに収まりきるかを調べる
 			for (int i = 0; i < listRemarksList.size(); i++) {
@@ -417,7 +418,10 @@ public class ExportDomesticOrderService {
 			//セルをテーブルに追加
 			pdfPTable.addCell(cellItemOrderRemarks);
 			//備考欄テーブルを描画
-			pdfPTable.writeSelectedRows(0, TABLE_COLS,  0, maxRow + 2, 30, 362, writer.getDirectContent());
+			if(tableLastDrawingYPosition >= 342) 
+				pdfPTable.writeSelectedRows(0, TABLE_COLS,  0, maxRow + 2, 30, 362, writer.getDirectContent());	
+			
+			else pdfPTable.writeSelectedRows(0, TABLE_COLS,  0, maxRow + 2, 30, 362+(342 - tableLastDrawingYPosition), writer.getDirectContent());
 
 			//備考欄の表示が終わったら注意書き文言の開始位置を設定 ※備考欄の表示位置 + 10pxの位置
 			noteStartPointY = 362 + 10;
