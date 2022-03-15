@@ -385,12 +385,7 @@ public class ExportDomesticOrderService {
 
 			//備考欄と直送先の間(20px)を考慮してあらかじめ引いておく
 			tableLastDrawingYPosition -= 20;
-//			int totalLines = 1;
-//			for (int i = 0; i < listRemarksList.size(); i++) {
-//				
-//				totalLines += stringIsmanyLinesHaveIsCheck(listRemarksList.get(i));
-//			}
-
+			
 			//備考欄がそのページに収まりきるかを調べる
 			for (int i = 0; i < listRemarksList.size(); i++) {
 				//備考欄のフォントサイズは10px。備考欄の文字数が50文字を超えると改行され、行数が増えるため計算する。
@@ -418,17 +413,28 @@ public class ExportDomesticOrderService {
 			//セルをテーブルに追加
 			pdfPTable.addCell(cellItemOrderRemarks);
 			//備考欄テーブルを描画
-			if(tableLastDrawingYPosition >= 342) 
-				pdfPTable.writeSelectedRows(0, TABLE_COLS,  0, maxRow + 2, 30, 362, writer.getDirectContent());	
-			
-			else pdfPTable.writeSelectedRows(0, TABLE_COLS,  0, maxRow + 2, 30, 362+(342 - tableLastDrawingYPosition), writer.getDirectContent());
+//			
+			if(tableLastDrawingYPosition >= 342) {
+				if(orderRemarksMap.get("isNewPage") == 0) {	
+					pdfPTable.writeSelectedRows(0, TABLE_COLS,  0, maxRow + 2, 30, 362, writer.getDirectContent());	
+					//備考欄の表示が終わったら注意書き文言の開始位置を設定 ※備考欄の表示位置 + 10pxの位置
+					noteStartPointY = 362 + 10;
+				}
+				else {
+					pdfPTable.writeSelectedRows(0, TABLE_COLS,  0, maxRow + 2, 30, orderRemarksMap.get("remarksDisplayStartPointY"), writer.getDirectContent());
+					noteStartPointY = orderRemarksMap.get("remarksDisplayStartPointY") + 10;
+				}
+			}
+			else {
+				pdfPTable.writeSelectedRows(0, TABLE_COLS,  0, maxRow + 2, 30, 362+(342 - tableLastDrawingYPosition), writer.getDirectContent());
+				//備考欄の表示が終わったら注意書き文言の開始位置を設定 ※備考欄の表示位置 + 10pxの位置
+				noteStartPointY = (int) (362 + (342 - tableLastDrawingYPosition) + 10);
+			}
 
-			//備考欄の表示が終わったら注意書き文言の開始位置を設定 ※備考欄の表示位置 + 10pxの位置
-			noteStartPointY = 362 + 10;
+			
 
 		//商品テーブル終了Y地点の場所によって備考欄の基準が変わる。760以上の時、改ページ先には商品テーブルは存在せず備考欄以下のみである。
 		} else if (tableLastDrawingYPosition >= 760) {
-
 			//続きから表示する際のインデックスを用意するためにカウンタ変数はここで用意した。
 			int i;
 			//備考欄の続きインデックスがある場合はそれから、無い場合は0から始める。
