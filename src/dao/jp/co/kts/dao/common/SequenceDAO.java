@@ -211,6 +211,16 @@ public class SequenceDAO extends BaseDAO {
 
 		return select("SEL_MAX_SYS_MAKER_ID", ResultSetHandlerFactory.getFirstColumnLongRowHandler());
 	}
+	
+	public long getMaxRuleId() throws DaoException {
+
+		return select("SEL_MAX_RULE_ID", ResultSetHandlerFactory.getFirstColumnLongRowHandler());
+	}
+	
+	public long getMaxRuleListId() throws DaoException {
+
+		return select("SEL_MAX_RULE_LIST_ID", ResultSetHandlerFactory.getFirstColumnLongRowHandler());
+	}
 
 	public long getMaxSysForeignSlipId() throws DaoException {
 		return select("SEL_MAX_SYS_FOREIGN_SLIP_ID", ResultSetHandlerFactory.getFirstColumnLongRowHandler());

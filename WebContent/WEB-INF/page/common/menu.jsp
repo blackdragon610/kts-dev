@@ -51,6 +51,9 @@
 			<ul>
 				<logic:equal name="LOGIN_USER_OVERSEAS_INFO_AUTH" value="1">
 					<li><html:link href="initUserList.do" title="ユーザー一覧"><span>ユーザー一覧</span></html:link></li>
+					<!-- dana add 20220315 -->
+					<li><html:link href="ruleList.do" title="ID・PASS一覧"><span>ID・PASS一覧</span></html:link></li>
+					<!-- end -->
 				</logic:equal>
 				<li><html:link href="initCorporationList.do" title="会社一覧"><span>会社一覧</span></html:link></li>
 				<li><html:link href="initAccountList.do" title="口座一覧"><span>口座一覧</span></html:link></li>

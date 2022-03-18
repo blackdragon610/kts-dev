@@ -170,7 +170,7 @@ table.list tr:hover {
 .tabheader table {
   border-collapse: collapse; /* for IE */
   border-spacing: 0; /* for N6 */
-  width = 453px;
+  width : 453px;
 }
 
 .tabheader table tr td {
@@ -213,6 +213,6 @@ table.list tr:hover {
   border-style: solid;
   border-width: 0 1px 1px 1px;
   padding: 1em;
-    width = 453px;
-  height = 260px;
+  width : 453px;
+  height : 260px;
 }

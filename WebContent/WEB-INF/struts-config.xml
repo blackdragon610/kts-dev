@@ -35,6 +35,7 @@
 
 		<form-bean name="loginForm" type="jp.co.kts.ui.login.LoginForm" />
 		<form-bean name="userForm" type="jp.co.kts.ui.mst.UserForm" />
+		<form-bean name="ruleForm" type="jp.co.kts.ui.mst.RuleForm" />
 		<form-bean name="corporationForm" type="jp.co.kts.ui.mst.CorporationForm" />
 		<form-bean name="csvImportForm" type="jp.co.kts.ui.fileImport.CsvImportForm" />
 		<form-bean name="excelImportForm" type="jp.co.kts.ui.fileImport.ExcelImportForm" />
@@ -170,6 +171,80 @@
 			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
 			<forward name="success" path="/WEB-INF/page/mst/userList.jsp" />
 		</action>
+		<!-- ================================ dana add 20220315 ======================== -->
+		<action path="/ruleList" type="jp.co.kts.ui.mst.RuleAction"
+			name="ruleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/ruleList.jsp" />
+		</action>
+		<action path="/ruleItemDelete" type="jp.co.kts.ui.mst.RuleAction"
+			name="ruleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/ruleList.jsp" />
+		</action>
+		<action path="/registryRule" type="jp.co.kts.ui.mst.RuleAction"
+			name="ruleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/ruleList.jsp" />
+		</action>
+		<action path="/updateRule" type="jp.co.kts.ui.mst.RuleAction"
+			name="ruleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/ruleList.jsp" />
+		</action>
+		
+		<action path="/detailRule" type="jp.co.kts.ui.mst.RuleAction"
+			name="ruleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/ruleDetail.jsp" />
+		</action>
+		<action path="/registryRuleList" type="jp.co.kts.ui.mst.RuleAction"
+			name="ruleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/ruleDetail.jsp" />
+		</action>
+		<action path="/deleteRuleList" type="jp.co.kts.ui.mst.RuleAction"
+			name="ruleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/ruleDetail.jsp" />
+		</action>
+		<action path="/initUpdateRuleList" type="jp.co.kts.ui.mst.RuleAction"
+			name="ruleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/ruleDetail.jsp" />
+		</action>
+		<action path="/updateRuleList" type="jp.co.kts.ui.mst.RuleAction"
+			name="ruleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="start" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/ruleDetail.jsp" />
+		</action>
+		<!-- <action path="/initRuleList" type="jp.co.kts.ui.mst.RuleAction"
+			name="ruleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/ruleList.jsp" />
+		</action>
+		 -->
+		<!-- ================================= end dana =============================== -->
 
 		<action path="/detailUser" type="jp.co.kts.ui.mst.UserAction"
 			name="userForm" scope="session" validate="false">

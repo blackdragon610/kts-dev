@@ -152,6 +152,144 @@
 		AND PASSWORD =
 		${password}
 	</sql-template>
+	<!-- =============== Rules Start ================= -->
+	<sql-template id="SEL_RULES">
+		SELECT
+		RULE_ID
+		,RULE_NAME
+		,DELETE_FLAG
+		FROM
+		MST_RULES
+		WHERE
+			DELETE_FLAG = '0'
+		ORDER BY
+		RULE_ID
+	</sql-template>
+	<sql-template id="SEL_MST_RULE_LIST">
+		SELECT
+		RULE_LIST_ID
+		,RULE_ID
+		,SYS_USER_ID
+		,LIST_NAME
+		,LIST_ID
+		,LIST_PASS
+		,LIST_LINK
+		,LIST_REMARKS
+		,LIST_VISIBLE
+		,DEL_FLG
+		,CREATE_DATE
+		,UPDATE_DATE
+		FROM
+		MST_RULES_LIST
+		WHERE
+		DEL_FLG = '0'
+		AND RULE_ID = ${ruleId}
+		AND SYS_USER_ID = ${sysUserId}
+		<if-not-equals value="0" varName="ruleListId">
+			AND RULE_LIST_ID = ${ruleListId}
+		</if-not-equals>
+		ORDER BY
+		RULE_LIST_ID
+	</sql-template>
+	<sql-template id="DELETE_RULE_ITEM">
+		UPDATE
+		MST_RULES
+		SET
+		DELETE_FLAG = '1'
+		,UPDATE_DATE = current_timestamp
+		WHERE
+		RULE_ID = ${ruleId}
+	</sql-template>
+	<sql-template id="DELETE_RULE_LIST_ITEM">
+		UPDATE
+		MST_RULES_LIST
+		SET
+		DEL_FLG = '1'
+		,UPDATE_DATE = current_timestamp
+		WHERE
+		RULE_LIST_ID = ${ruleListId}
+	</sql-template>
+	<sql-template id="SEL_MAX_RULE_ID">
+		SELECT
+		COALESCE(MAX(RULE_ID),0)
+		FROM
+		MST_RULES
+	</sql-template>
+	
+	<sql-template id="SEL_MAX_RULE_LIST_ID">
+		SELECT
+		COALESCE(MAX(RULE_LIST_ID),0)
+		FROM
+		MST_RULES_LIST
+	</sql-template>
+	
+	<sql-template id="INS_RULE">
+		INSERT INTO
+		MST_RULES(
+		RULE_ID
+		,RULE_NAME
+		,CREATE_DATE
+		,UPDATE_DATE
+		,DELETE_FLAG)
+		VALUES(
+		${ruleId}
+		,${ruleName}
+		,current_timestamp
+		,current_timestamp
+		,'0')
+	</sql-template>
+	<sql-template id="INS_RULE_LIST">
+		INSERT INTO
+		MST_RULES_LIST(
+		RULE_LIST_ID
+		,RULE_ID
+		,SYS_USER_ID
+		,LIST_NAME
+		,LIST_ID
+		,LIST_PASS
+		,LIST_LINK
+		,LIST_REMARKS
+		,CREATE_DATE
+		,UPDATE_DATE
+		,DEL_FLG)
+		VALUES(
+		${ruleListId}
+		,${ruleId}
+		,${sysUserId}
+		,${listName}
+		,${listId}
+		,${listPass}
+		,${listLink}
+		,${listRemarks}
+		,current_timestamp
+		,current_timestamp
+		,'0')
+	</sql-template>
+	
+	<sql-template id="UPD_RULE">
+		UPDATE
+		MST_RULES
+		SET
+		RULE_NAME = ${ruleName}
+		,UPDATE_DATE = current_timestamp
+		WHERE
+		RULE_ID = ${ruleID}
+	</sql-template>
+	<sql-template id="UPD_RULE_LIST">
+		UPDATE
+		MST_RULES_LIST
+		SET
+		LIST_NAME = ${listName}
+		,LIST_ID = ${listId}
+		,LIST_PASS = ${listPass}
+		,LIST_REMARKS = ${listRemarks}
+		,LIST_LINK = ${listLink}
+		,UPDATE_DATE = current_timestamp
+		WHERE
+		RULE_LIST_ID = ${ruleListID}
+	</sql-template>
+	
+	<!-- =============== Rules End =================== -->
 
 	<sql-template id="SEL_USER">
 		SELECT

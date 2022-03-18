@@ -368,6 +368,9 @@ body {
 	padding-left: 200px;
 }
 
+.pdg_top_5px {
+	padding-top: 5px;
+}
 .pdg_top_10px {
 	padding-top: 10px;
 }
@@ -446,7 +449,7 @@ body {
 }
 /* reset */
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,em,img,strong,dl,dt,dd,ol,ul,li,form,label,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,dialog,figure,figcaption,footer,header,hgroup,menu,nav,section,time,mark,audio,video {
-	margin:0; padding:0; outline:0; vertical-align:middle; background:transparent; list-style-type:none; font-family:"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",Osaka,Meiryo,"メイリオ","ＭＳ Ｐゴシック","MS PGothic", font-style:normal; font-size:14px; }
+	margin:0; padding:0; outline:0; vertical-align:middle; background:transparent; list-style-type:none; font-family:"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",Osaka,Meiryo,"メイリオ","ＭＳ Ｐゴシック","MS PGothic"; font-style:normal; font-size:14px; }
 select,input,textarea { font-family:"ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro",Osaka,Meiryo,"メイリオ","ＭＳ Ｐゴシック","MS PGothic",sans-serif; }
 article,aside,dialog,div,figure,footer,header,hgroup,nav,section { display:block; }
 

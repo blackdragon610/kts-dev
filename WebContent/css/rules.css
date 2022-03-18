@@ -1,0 +1,46 @@
+.justify-content-arround {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+.justify-content-center {
+    display: flex;
+    justify-content: center;
+}
+
+.w-50{
+	width:50%;
+}
+
+@media (max-width:760px){
+	.w-50{
+		width:100%;
+	}
+		
+}
+.buttonArea {
+    position: fixed !important;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #EEEEEE;
+    padding: 10px !important;
+    text-align: center !important;
+}
+.ms-20{
+	margin-left:20px;
+}
+
+li.footer_button {
+    display: inline;
+}
+.txt-right{
+	text-align: right;
+}
+
+fieldset table input[type=text] {
+    padding: 5px;
+    width: 95%;
+}
