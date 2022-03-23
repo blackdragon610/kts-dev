@@ -119,12 +119,13 @@
 							</nested:equal>
 						</nested:iterate>
 						<td>
-							<nested:equal property="overseasInfoAuth" value="1">&#9898;</nested:equal>
-							<nested:notEqual property="overseasInfoAuth" value="1">&#9932;</nested:notEqual>
-						</td>
-						<td>
 							<nested:equal property="btobBillAuth" value="1">&#9898;</nested:equal>
 							<nested:notEqual property="btobBillAuth" value="1">&#9932;</nested:notEqual>
+							
+						</td>
+						<td>
+							<nested:equal property="overseasInfoAuth" value="1">&#9898;</nested:equal>
+							<nested:notEqual property="overseasInfoAuth" value="1">&#9932;</nested:notEqual>
 						</td>
 						<nested:iterate property="mstRulesList" indexId="idx">
 							<nested:notEqual property="ruleName" value="マスタ">
@@ -235,8 +236,8 @@
 						<nested:iterate property="mstRulesList" indexId="idx">
 							<nested:notEqual property="ruleName" value="マスタ">
 								<td class="itemColumn">
-									<nested:hidden property="isvisible" styleClass="hidden_visibleFlag_${id}"/>
-									<nested:checkbox property="isvisible" styleClass="visibleFlag_${id} checkBoxTransForm listCheck"></nested:checkbox>
+									<nested:hidden property="isvisible" styleClass="hidden_visibleFlag_${id}_${idx }"/>
+									<nested:checkbox property="isvisible" styleClass="visibleFlag_${id}_${idx } checkBoxTransForm listCheck"></nested:checkbox>
 									<nested:notEqual property="childCount" value="0">
 										<nested:notEqual property="childCount" value="1">
 											<span class="editChildRule" id="editRulesList_${id}_${idx}"> 詳細</span>
@@ -359,23 +360,6 @@
 				
 			});
 			return;
-			
-			/* $.ajax({
-				url : "./saveExtraRuleDetailByUserId.do",
-				type : 'POST',
-				data : {'ruleDetailList': ruleDetailList },
-				dataType : 'json',
-				success : function(data, text_status, xhr) {
-					$("h4.heading").html("ユーザー一覧");
-					$("#tblUserList").css("display","");
-					$("#tblExtraUserRuleDetail").css("display","none");
-				},
-				error : function(data, text_status, xhr) {
-					alert("資料取得に失敗");
-				}
-			}); */
-			
-			
 		}
 		
 		function onclickBack(){
@@ -438,8 +422,8 @@
 				
 				var dynamicColumnsCount = resultArea.eq(i).find("td.itemColumn").length;
 				for(var j = 0; j < dynamicColumnsCount; j++){
-					if(resultArea.eq(i).find(".hidden_visibleFlag_"+j).val() == 1)
-						resultArea.eq(i).find(".visibleFlag_"+j).prop( "checked", true );
+					if(resultArea.eq(i).find(".hidden_visibleFlag_"+i+"_"+j).val() == 1)
+						resultArea.eq(i).find(".visibleFlag_"+i+"_"+j).prop( "checked", true );
 				}
 			}
 		}
