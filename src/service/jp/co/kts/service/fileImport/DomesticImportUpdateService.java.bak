@@ -93,7 +93,7 @@ public class DomesticImportUpdateService extends DomesticExhibitionImportService
 			for (List<String> strList: strDomesticInfoList) {
 				//管理品番を一時的に取得します
 				String managementCd = strList.get(0);
-				managementCdSet.add(managementCd.toLowerCase());
+				managementCdSet.add(managementCd);
 			}
 			DomesticExhibitionService domesticService = new DomesticExhibitionService();
 			List<DomesticExhibitionDTO> domesticExhibitionDtoList = domesticService.getDomesticExhibitionDTOList(managementCdSet);
@@ -172,13 +172,10 @@ public class DomesticImportUpdateService extends DomesticExhibitionImportService
 				//管理品番半角英数ハイフンチェック
 				ServiceValidator.strMatchesCheckSlash(dto.getResult(), managementCd, String.valueOf(errorIndex),"管理品番");
 
-				String newCd = String.valueOf(managementCd.toLowerCase());
 				//品番が存在しない場合エラー
 				boolean existsManagementCode = false;
 				for(DomesticExhibitionDTO domesticExhibitonDto : domesticExhibitionDtoList) {
-					String oldCd = String.valueOf(domesticExhibitonDto.getManagementCode().toLowerCase());
-					if(newCd.equals(oldCd)) {
-						managementCd = domesticExhibitonDto.getManagementCode();
+					if(managementCd.equals(domesticExhibitonDto.getManagementCode())) {
 						existsManagementCode = true;
 						break;
 					}

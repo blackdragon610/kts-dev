@@ -14520,7 +14520,7 @@
 		WHERE
 		DELETE_FLAG = '0'
 		AND
-		MANAGEMENT_CODE IN
+		MANAGEMENT_CODE ILIKE
 		(${managementCodesSet})
 	</sql-template>
 
