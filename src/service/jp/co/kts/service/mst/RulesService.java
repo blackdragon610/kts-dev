@@ -9,6 +9,7 @@ import jp.co.kts.app.common.entity.MstMakerDTO;
 import jp.co.kts.app.common.entity.MstRulesDTO;
 import jp.co.kts.app.common.entity.MstRulesListDTO;
 import jp.co.kts.app.common.entity.MstUserDTO;
+import jp.co.kts.app.common.entity.MstUserExtraRulesDTO;
 import jp.co.kts.app.extendCommon.entity.ExtendMstUserDTO;
 import jp.co.kts.dao.common.SequenceDAO;
 import jp.co.kts.dao.mst.DomesticSlipDAO;
@@ -29,8 +30,17 @@ public class RulesService {
 	public List<MstRulesDTO> getRulesList() throws DaoException {
 		// TODO 自動生成されたメソッド・スタブ
 		RulesDAO dao = new RulesDAO();
+		
+		List<MstRulesDTO> dto = dao.getRulesList();
+		
+		for (MstRulesDTO rDto : dto) 
+		{
+			rDto.setMstRulesDetailList(dao.getRuleDetailInfo(rDto.getRuleId()));
+		}
+		
+		return dto;
 
-		return dao.getRulesList();
+//		return dao.getRulesList();
 	}
 
 	public int ruleItemDelete(List<MstRulesDTO> dto) throws DaoException {
@@ -41,6 +51,8 @@ public class RulesService {
 				continue;
 			}
 			resultCnt += dao.deleteRuleItem(ruleDto);
+			//基本権限が削除されると、子も削除されます。
+			dao.deletRuleListByRuleId(ruleDto.getRuleId());
 		}
 
 		return resultCnt;
@@ -61,6 +73,7 @@ public class RulesService {
 		result = dao.updateRule(dto, id);
 		return result;
 	}
+	
 	public Result<MstRulesDTO> validate(String ruleName) {
 
 		Result<MstRulesDTO> result = new Result<MstRulesDTO>();
@@ -70,57 +83,55 @@ public class RulesService {
 
 		return result;
 	}
-
-//	public MstUserDTO getUser(long sysUserId) throws Exception {
-//
-//		UserDAO dao = new UserDAO();
-//		MstUserDTO dto = new MstUserDTO();
-//		 dto = dao.getUser(sysUserId);
-//		 dto.setPassword(CipherUtil.decodeString(dto.getPassword()));
-//		 return dto;
-//	}
-//
-//	public void updateUser(MstUserDTO dto) throws Exception {
-//		UserDAO dao = new UserDAO();
-//		dto.setPassword(CipherUtil.encodeString(dto.getPassword()));
-//		dao.updateUser(dto);
-//		dto.setPassword(CipherUtil.decodeString(dto.getPassword()));
-//	}
-//
-//	public void deleteUser(long sysUserId) throws Exception {
-//		UserDAO dao = new UserDAO();
-//		dao.deleteUser(sysUserId);
-//	}
-//
-//	public void registryUser(MstUserDTO dto) throws Exception {
-//		UserDAO dao = new UserDAO();
-//		dto.setSysUserId(new SequenceDAO().getMaxSysUserId() + 1);
-//		dto.setPassword(CipherUtil.encodeString(dto.getPassword()));
-//		dao.registryUser(dto);
-//		dto.setPassword(CipherUtil.decodeString(dto.getPassword()));
-//	}
-//
-//	public ExtendMstUserDTO getUserName(long sysUserId) throws Exception {
-//		UserDAO dao = new UserDAO();
-//		ExtendMstUserDTO dto = new ExtendMstUserDTO();
-//		 dto = dao.getUserName(sysUserId);
-//
-//		 return dto;
-//	}
-//
-//	public Result<MstUserDTO> validate(String loginCd, String password, long sysUserId) throws Exception {
-//
-//		LoginService service = new LoginService();
-//		Result<MstUserDTO> result = service.validate(loginCd,password);
-//
-//		if (result.isSuccess()) {
-//			UserDAO dao = new UserDAO();
-//			long countSameLoginCd = 0;
-//			countSameLoginCd = dao.cheackSameLoginCd(loginCd, sysUserId);
-//			if (countSameLoginCd > 0) {
-//				result.addErrorMessage("LED00104");
-//			}
-//		}
-//		return result;
-//	}
+	
+	public int updateExtraRule( MstRulesDTO dto, long userId)throws Exception {
+		int result = 0;
+		
+		if(dto.getIsvisible().equals("1")) {
+			result = this.checkVisible(dto, userId);
+		}
+		else 
+			result = this.unCheckVisible(dto, userId);
+		return result;
+	}
+	
+	private int checkVisible(MstRulesDTO ruleDto, long userId) throws Exception
+	{
+		int result = 0;
+		RulesDAO dao = new RulesDAO();
+		List<MstUserExtraRulesDTO> extraRulesList = dao.getExtraRulesByUserId(ruleDto.getRuleId(), userId);
+		
+		if(extraRulesList.size() < 1) {
+			List<MstRulesListDTO> childrenRules = dao.getRuleDetailInfo(ruleDto.getRuleId());
+			for(MstRulesListDTO chDto : childrenRules) {
+				result = dao.insertExtraRule(ruleDto.getRuleId(), userId, chDto.getRuleListId());	
+			}
+		}
+			
+		else {
+			for (MstUserExtraRulesDTO extraDto : extraRulesList) 
+			{
+				result = dao.updateExtraRule(extraDto);
+			}
+		}
+			
+		return result;
+		
+	}
+	
+	private int unCheckVisible(MstRulesDTO ruleDto, long userId) throws Exception
+	{
+		int result = 0;
+		RulesDAO dao = new RulesDAO();
+		List<MstUserExtraRulesDTO> extraRulesList = dao.getExtraRulesByUserId(ruleDto.getRuleId(), userId);
+		
+		if(extraRulesList.size() > 0) {
+			for (MstUserExtraRulesDTO extraDto : extraRulesList) 
+			{
+				result = dao.deleteExtraRule(extraDto);
+			}
+		}
+		return result;
+		
+	}
 }

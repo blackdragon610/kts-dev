@@ -17,7 +17,7 @@ public class UserDAO extends BaseDAO {
 
 		SQLParameters parameters = new SQLParameters();
 		parameters.addParameter("getListFlg", "1");
-
+		
 		return selectList("SEL_USER", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstUserDTO.class));
 	}
 
@@ -88,5 +88,14 @@ public class UserDAO extends BaseDAO {
 		}
 		return select("SEL_CHECK_SAME_LOGIN_CD", parameters, ResultSetHandlerFactory.getFirstColumnLongRowHandler());
 	}
+	
+	public void updateUserMainRule(MstUserDTO dto) throws DaoException {
 
+		SQLParameters parameters = new SQLParameters();
+		addParametersFromBeanProperties(dto, parameters);
+
+		UserInfo userInfo = ActionContext.getLoginUserInfo();
+		parameters.addParameter("updateUserId", userInfo.getUserId());
+		update("UPD_MAIN_USER_RULE", parameters);
+	}
 }

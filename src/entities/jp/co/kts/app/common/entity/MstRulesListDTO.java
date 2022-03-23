@@ -46,6 +46,8 @@ public class MstRulesListDTO  {
 	
 	/** 項目削除フラグ */
 	private String itemCheckFlg;
+	
+	private String isvisible;
 
 	/**
 	 * @return the ruleId
@@ -227,6 +229,20 @@ public class MstRulesListDTO  {
 	 */
 	public void setItemCheckFlg(String itemCheckFlg) {
 		this.itemCheckFlg = itemCheckFlg;
+	}
+
+	/**
+	 * @return the isvisible
+	 */
+	public String getIsvisible() {
+		return isvisible;
+	}
+
+	/**
+	 * @param isvisible the isvisible to set
+	 */
+	public void setIsvisible(String isvisible) {
+		this.isvisible = isvisible;
 	}
 
 	

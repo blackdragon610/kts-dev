@@ -165,31 +165,70 @@
 		ORDER BY
 		RULE_ID
 	</sql-template>
+	<sql-template id="SEL_RULES_BY_USERID">
+		SELECT
+		 R.RULE_ID
+		, RULE_NAME
+		, CASE WHEN E.SYS_USER_ID IS NULL THEN 0 ELSE 1 END AS ISVISIBLE
+		FROM
+		MST_RULES AS R 
+		LEFT JOIN (SELECT * FROM MST_EXTRA_USER_RULE WHERE sys_user_id=${sysUserId} AND DEL_FLG = '0') AS E ON E.RULE_ID = R.RULE_ID
+		WHERE R.DELETE_FLAG = '0'
+		GROUP BY R.rule_id , E.sys_user_id
+		ORDER BY R.RULE_ID
+	</sql-template>
 	<sql-template id="SEL_MST_RULE_LIST">
 		SELECT
-		RULE_LIST_ID
-		,RULE_ID
-		,SYS_USER_ID
-		,LIST_NAME
-		,LIST_ID
-		,LIST_PASS
-		,LIST_LINK
-		,LIST_REMARKS
-		,LIST_VISIBLE
-		,DEL_FLG
-		,CREATE_DATE
-		,UPDATE_DATE
+		R.RULE_LIST_ID
+		,R.RULE_ID
+		,R.LIST_NAME
+		,R.LIST_ID
+		,R.LIST_PASS
+		,R.LIST_LINK
+		,R.LIST_REMARKS
+		,R.LIST_VISIBLE
+		,R.DEL_FLG
+		,R.CREATE_DATE
+		,R.UPDATE_DATE
 		FROM
-		MST_RULES_LIST
+		MST_RULES_LIST AS R
 		WHERE
-		DEL_FLG = '0'
-		AND RULE_ID = ${ruleId}
-		AND SYS_USER_ID = ${sysUserId}
+		R.DEL_FLG = '0'
+		AND R.RULE_ID = ${ruleId}
 		<if-not-equals value="0" varName="ruleListId">
-			AND RULE_LIST_ID = ${ruleListId}
+			AND R.RULE_LIST_ID = ${ruleListId}
 		</if-not-equals>
 		ORDER BY
-		RULE_LIST_ID
+		R.RULE_LIST_ID
+	</sql-template>
+	<sql-template id="SEL_MST_RULE_LIST_BY_USERID">
+		SELECT
+		R.RULE_LIST_ID
+		,R.RULE_ID
+		<!-- ,E.SYS_USER_ID -->
+		,R.LIST_NAME
+		,R.LIST_ID
+		,R.LIST_PASS
+		,R.LIST_LINK
+		,R.LIST_REMARKS
+		,R.LIST_VISIBLE
+		,R.DEL_FLG
+		,R.CREATE_DATE
+		,R.UPDATE_DATE
+		, CASE WHEN E.SYS_USER_ID IS NULL THEN 0 ELSE 1 END AS ISVISIBLE
+		FROM
+		MST_RULES_LIST AS R
+		LEFT JOIN (SELECT * FROM MST_EXTRA_USER_RULE WHERE SYS_USER_ID=${sysUserId} AND DEL_FLG = '0') AS E ON E.RULE_LIST_ID = R.RULE_LIST_ID
+		
+		WHERE
+		R.DEL_FLG = '0'
+		AND R.RULE_ID = ${ruleId}
+		<if-not-equals value="0" varName="ruleListId">
+			AND R.RULE_LIST_ID = ${ruleListId}
+		</if-not-equals>
+		GROUP BY R.RULE_LIST_ID , E.SYS_USER_ID
+		ORDER BY
+		R.RULE_LIST_ID
 	</sql-template>
 	<sql-template id="DELETE_RULE_ITEM">
 		UPDATE
@@ -208,6 +247,15 @@
 		,UPDATE_DATE = current_timestamp
 		WHERE
 		RULE_LIST_ID = ${ruleListId}
+	</sql-template>
+	<sql-template id="DELETE_RULE_LIST_BY_RULEID">
+		UPDATE
+		MST_RULES_LIST
+		SET
+		DEL_FLG = '1'
+		,UPDATE_DATE = current_timestamp
+		WHERE
+		RULE_ID = ${ruleId}
 	</sql-template>
 	<sql-template id="SEL_MAX_RULE_ID">
 		SELECT
@@ -241,9 +289,7 @@
 	<sql-template id="INS_RULE_LIST">
 		INSERT INTO
 		MST_RULES_LIST(
-		RULE_LIST_ID
-		,RULE_ID
-		,SYS_USER_ID
+		RULE_ID
 		,LIST_NAME
 		,LIST_ID
 		,LIST_PASS
@@ -253,9 +299,7 @@
 		,UPDATE_DATE
 		,DEL_FLG)
 		VALUES(
-		${ruleListId}
-		,${ruleId}
-		,${sysUserId}
+		${ruleId}
 		,${listName}
 		,${listId}
 		,${listPass}
@@ -288,7 +332,59 @@
 		WHERE
 		RULE_LIST_ID = ${ruleListID}
 	</sql-template>
-	
+	<sql-template id="SEL_EXTRA_RULES_BY_USERID">
+		SELECT
+		EXTRA_ID
+		,SYS_USER_ID
+		,RULE_ID
+		FROM
+		MST_EXTRA_USER_RULE
+		WHERE
+			RULE_ID = ${ruleId}
+			AND SYS_USER_ID = ${sysUserId}
+		ORDER BY
+		RULE_ID
+	</sql-template>
+	<sql-template id="INS_EXTRA_RULE_BY_USERID">
+		INSERT INTO
+		MST_EXTRA_USER_RULE(
+		SYS_USER_ID
+		,RULE_ID
+		,CREATE_DATE
+		,UPDATE_DATE
+		,RULE_LIST_ID
+		)
+		VALUES(
+		${sysUserId}
+		,${ruleId}
+		,current_timestamp
+		,current_timestamp
+		,${ruleListId}
+		)
+	</sql-template>
+	<sql-template id="DEL_EXTRA_RULE_BY_USERID">
+		UPDATE
+		DEL_FLG = '1'
+		WHERE
+		EXTRA_ID = ${extraId}
+	</sql-template>
+	<sql-template id="UPD_EXTRA_RULE_BY_USERID">
+		UPDATE
+		MST_EXTRA_USER_RULE
+		SET
+		DEL_FLG = '0'
+		WHERE
+		EXTRA_ID = ${extraId}
+	</sql-template>
+	<sql-template id="UPD_MAIN_USER_RULE">
+		UPDATE MST_USER SET
+		BTOB_BILL_AUTH = ${btobBillAuth}
+		,OVERSEAS_INFO_AUTH = ${overseasInfoAuth}
+		,UPDATE_DATE = current_timestamp
+		,UPDATE_USER_ID = ${updateUserId}
+		WHERE
+		SYS_USER_ID = ${sysUserId}
+	</sql-template>
 	<!-- =============== Rules End =================== -->
 
 	<sql-template id="SEL_USER">

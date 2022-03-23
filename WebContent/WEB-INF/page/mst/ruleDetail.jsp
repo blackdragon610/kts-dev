@@ -158,11 +158,11 @@
 			<div class="buttonArea">
 				<ul style="position: relative;">
 					<li class="footer_button">
+						<a class="button_white" href="javascript:void(0);" onclick="goTransaction('ruleList.do');">戻る</a>
+					</li>
+					<li class="footer_button">
 						<a class="button_main addRuleListItem" href="javascript:void(0);">新規追加</a>
 					</li>
-					<!-- <li class="footer_button">
-						<a class="button_main editRuleListItem" href="javascript:void(0);">編集</a>
-					</li> -->
 					<li class="footer_button">
 						<a class="button_white deleteRuleListItem" href="javascript:void(0);">選択した分類を削除</a>
 					</li>

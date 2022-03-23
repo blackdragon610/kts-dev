@@ -44,3 +44,8 @@ fieldset table input[type=text] {
     padding: 5px;
     width: 95%;
 }
+
+.viewChildRule, 
+.editChildRule{
+	cursor: pointer;	
+}

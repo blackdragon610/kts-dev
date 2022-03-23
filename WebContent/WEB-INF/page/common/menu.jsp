@@ -48,23 +48,36 @@
 		</logic:equal>
 		<!--  2015/12/15 ooyama ADD END 法人間請求書機能対応  -->
 		<li class='has-sub last'><a href='#'><span>マスタ</span></a>
-			<ul>
-				<logic:equal name="LOGIN_USER_OVERSEAS_INFO_AUTH" value="1">
+			<ul id="ruleClass">
+			
+			<logic:iterate name="LOGIN_USER_RULES_LIST" id="listRuleId">
+				<logic:iterate name="listRuleId" property="mstRulesDetailList" id="listRuleId">
+					<logic:equal name="listRuleId" property="isvisible" value="1">
+						<li>
+							<html:link href="">
+								<span><bean:write name="listRuleId" property="listName"/></span>
+								<nested:hidden property="listLink" name="listRuleId" ></nested:hidden>
+							</html:link>
+						</li>
+					</logic:equal>
+				</logic:iterate>
+			</logic:iterate>
+				
+				
+				<%-- <logic:equal name="LOGIN_USER_OVERSEAS_INFO_AUTH" value="1">
 					<li><html:link href="initUserList.do" title="ユーザー一覧"><span>ユーザー一覧</span></html:link></li>
-					<!-- dana add 20220315 -->
-					<li><html:link href="ruleList.do" title="ID・PASS一覧"><span>ID・PASS一覧</span></html:link></li>
-					<!-- end -->
+					
 				</logic:equal>
 				<li><html:link href="initCorporationList.do" title="会社一覧"><span>会社一覧</span></html:link></li>
 				<li><html:link href="initAccountList.do" title="口座一覧"><span>口座一覧</span></html:link></li>
 				<li><html:link href="initChannelList.do" title="販売チャネル一覧"><span>販売チャネル一覧</span></html:link></li>
 				<li><html:link href="initWarehouseList.do" title="倉庫一覧"><span>倉庫一覧</span></html:link></li>
-<%-- 				<li><html:link href="initVariousGroupList.do" title="各分類一覧"><span>各分類一覧</span></html:link></li> --%>
-<%-- 				<li><html:link href="groupNmList.do" title="分類一覧"><span>分類一覧</span></html:link></li> --%>
+				<li><html:link href="initVariousGroupList.do" title="各分類一覧"><span>各分類一覧</span></html:link></li>
+				<li><html:link href="groupNmList.do" title="分類一覧"><span>分類一覧</span></html:link></li>
 				<li><html:link href="initMakerList.do" title="メーカー一覧"><span>メーカー一覧</span></html:link></li>
 				<li><html:link href="initSetItemList.do" title="セット商品一覧"><span>セット商品一覧</span></html:link></li>
 				<li><html:link href="initClientList.do" title="得意先一覧"><span>得意先一覧</span></html:link></li>
-				<li><html:link href="initDeliveryList.do" title="納入先一覧"><span>納入先一覧</span></html:link></li>
+				<li><html:link href="initDeliveryList.do" title="納入先一覧"><span>納入先一覧</span></html:link></li> --%>
 			</ul>
 		</li>
 		<!--  2016/11/8 nozawa ADD END 法人間請求書機能対応  -->
@@ -89,3 +102,14 @@
 		<li id="loginName" style="float: right;"><span class="nameLabel"><bean:write name="LOGIN_USER_NAME" />   | </span><span class="logout"><a style="color: #F8F8F8;" href="logout.do" >ログアウト</a></span></li>
 	</ul>
 </div>
+
+<script type="text/javascript">
+window.onload = function() {
+	var ruleList_li = document.querySelectorAll("#ruleClass > li > a");
+	console.log(ruleList_li);
+	for(var i=0; i < ruleList_li.length; i++ ){
+		console.info(ruleList_li[i].children);
+		ruleList_li[i].setAttribute("href", ruleList_li[i].children[1].value);
+	}
+};
+</script>

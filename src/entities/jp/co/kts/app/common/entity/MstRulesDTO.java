@@ -36,7 +36,11 @@ public class MstRulesDTO  {
 	/** 項目削除フラグ */
 	private String itemCheckFlg;
 	
-	private List<MstRulesListDTO> mstRulesList = new ArrayList<>();
+	private String isvisible;
+	
+	private List<MstRulesListDTO> mstRulesDetailList = new ArrayList<>();
+	
+	private int childCount;
 
 	public long getRuleId() {
 		return ruleId;
@@ -95,20 +99,41 @@ public class MstRulesDTO  {
 	}
 
 	/**
-	 * @return the mstRulesList
+	 * @return the isvisible
 	 */
-	public List<MstRulesListDTO> getMstRulesList() {
-		return mstRulesList;
+	public String getIsvisible() {
+		return isvisible;
 	}
 
 	/**
-	 * @param mstRulesList the mstRulesList to set
+	 * @param isvisible the isvisible to set
 	 */
-	public void setMstRulesList(List<MstRulesListDTO> mstRulesList) {
-		this.mstRulesList = mstRulesList;
+	public void setIsvisible(String isvisible) {
+		this.isvisible = isvisible;
+	}
+
+	/**
+	 * @return the mstRulesDetailList
+	 */
+	public List<MstRulesListDTO> getMstRulesDetailList() {
+		return mstRulesDetailList;
+	}
+
+	/**
+	 * @param mstRulesDetailList the mstRulesDetailList to set
+	 */
+	public void setMstRulesDetailList(List<MstRulesListDTO> mstRulesDetailList) {
+		this.mstRulesDetailList = mstRulesDetailList;
+	}
+
+	public int getChildCount() {
+		return this.mstRulesDetailList.size();
+	}
+
+	public void setChildCount(int childCount) {
+		this.childCount = childCount;
 	}
 
 	
-
 }
 

@@ -14,6 +14,7 @@ import jp.co.kts.app.common.entity.MstMakerDTO;
 import jp.co.kts.app.common.entity.MstRulesDTO;
 import jp.co.kts.app.common.entity.MstRulesListDTO;
 import jp.co.kts.app.common.entity.MstUserDTO;
+import jp.co.kts.app.common.entity.MstUserExtraRulesDTO;
 import jp.co.kts.app.extendCommon.entity.ExtendMstUserDTO;
 
 public class RulesDAO extends BaseDAO {
@@ -23,6 +24,14 @@ public class RulesDAO extends BaseDAO {
 		SQLParameters parameters = new SQLParameters();
 
 		return selectList("SEL_RULES", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstRulesDTO.class));
+	}
+	
+	public List<MstRulesDTO> getRulesByUserId(long userId) throws DaoException {
+
+		SQLParameters parameters = new SQLParameters();
+		parameters.addParameter("sysUserId", userId);
+
+		return selectList("SEL_RULES_BY_USERID", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstRulesDTO.class));
 	}
 	
 	public int deleteRuleItem(MstRulesDTO dto) throws DaoException{
@@ -48,12 +57,21 @@ public class RulesDAO extends BaseDAO {
 
 		//パラメータ設定
 		SQLParameters parameters = new SQLParameters();
-		UserInfo userInfo = ActionContext.getLoginUserInfo();
 		parameters.addParameter("ruleId", ruleId);
 		parameters.addParameter("ruleListId", 0);
-		parameters.addParameter("sysUserId", userInfo.getUserId());
 
 		return selectList("SEL_MST_RULE_LIST", parameters , ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstRulesListDTO.class));
+	}
+	
+	public List<MstRulesListDTO> getRuleDetailInfoByUserId(long ruleId, long userId) throws DaoException {
+
+		//パラメータ設定
+		SQLParameters parameters = new SQLParameters();
+		parameters.addParameter("ruleId", ruleId);
+		parameters.addParameter("ruleListId", 0);
+		parameters.addParameter("sysUserId", userId);
+
+		return selectList("SEL_MST_RULE_LIST_BY_USERID", parameters , ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstRulesListDTO.class));
 	}
 	
 	public int registryRuleList(MstRulesListDTO dto) throws DaoException {
@@ -73,10 +91,8 @@ public class RulesDAO extends BaseDAO {
 
 		//パラメータ設定
 		SQLParameters parameters = new SQLParameters();
-		UserInfo userInfo = ActionContext.getLoginUserInfo();
 		parameters.addParameter("ruleId", ruleId);
 		parameters.addParameter("ruleListId", listId);
-		parameters.addParameter("sysUserId", userInfo.getUserId());
 
 		return selectList("SEL_MST_RULE_LIST", parameters , ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstRulesListDTO.class));
 	}
@@ -87,63 +103,43 @@ public class RulesDAO extends BaseDAO {
 		parameters.addParameter("ruleListID", dto.getRuleListId());
 		return update("UPD_RULE_LIST", parameters);
 	}
-//	public MstUserDTO getUser(long sysUserId) throws DaoException {
-//
-//		SQLParameters parameters = new SQLParameters();
-//		parameters.addParameter("getListFlg", "0");
-//		parameters.addParameter("sysUserId", sysUserId);
-//
-//		return select("SEL_USER", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstUserDTO.class));
-//	}
-//
-//	public ExtendMstUserDTO getUserName(long sysUserId) throws DaoException {
-//
-//		SQLParameters parameters = new SQLParameters();
-//		parameters.addParameter("sysUserId", sysUserId);
-//
-//		return select("SEL_USERNAME", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(ExtendMstUserDTO.class));
-//	}
-//
-//	public void updateUser(MstUserDTO dto) throws DaoException {
-//
-//		SQLParameters parameters = new SQLParameters();
-//		addParametersFromBeanProperties(dto, parameters);
-//
-//		UserInfo userInfo = ActionContext.getLoginUserInfo();
-//		parameters.addParameter("updateUserId", userInfo.getUserId());
-//		update("UPD_USER", parameters);
-//	}
-//
-//	public void deleteUser(long sysUserId) throws DaoException {
-//
-//		SQLParameters parameters = new SQLParameters();
-//		parameters.addParameter("sysUserId", sysUserId);
-//
-//		UserInfo userInfo = ActionContext.getLoginUserInfo();
-//		parameters.addParameter("updateUserId", userInfo.getUserId());
-//		update("UPD_DEL_USER", parameters);
-//	}
-//	public void registryUser(MstUserDTO dto) throws DaoException {
-//
-//		SQLParameters parameters = new SQLParameters();
-//		addParametersFromBeanProperties(dto, parameters);
-//
-//		UserInfo userInfo = ActionContext.getLoginUserInfo();
-//		parameters.addParameter("createUserId", userInfo.getUserId());
-//		parameters.addParameter("updateUserId", userInfo.getUserId());
-//
-//		update("INS_USER", parameters);
-//	}
-//
-//	public long cheackSameLoginCd(String loginCd,long sysUserId) throws DaoException {
-//
-//		SQLParameters parameters = new SQLParameters();
-//		parameters.addParameter("loginCd", loginCd);
-//
-//		if (sysUserId != 0){
-//			parameters.addParameter("sysUserId", sysUserId);
-//		}
-//		return select("SEL_CHECK_SAME_LOGIN_CD", parameters, ResultSetHandlerFactory.getFirstColumnLongRowHandler());
-//	}
+	
+	public int deletRuleListByRuleId(long ruleId) throws DaoException{
+		SQLParameters parameters = new SQLParameters();
+		parameters.addParameter("ruleId", ruleId);
+		return update("DELETE_RULE_LIST_BY_RULEID", parameters);
+	}
+	
+	public List<MstUserExtraRulesDTO> getExtraRulesByUserId(long ruleId, long userId) throws DaoException {
+
+		SQLParameters parameters = new SQLParameters();
+		parameters.addParameter("sysUserId", userId);
+		parameters.addParameter("ruleId", ruleId);
+
+		return selectList("SEL_EXTRA_RULES_BY_USERID", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstUserExtraRulesDTO.class));
+	}
+	
+	public int insertExtraRule(long ruleId, long userId, long ruleListId) throws DaoException {
+
+		SQLParameters parameters = new SQLParameters();
+		parameters.addParameter("ruleId", ruleId);
+		parameters.addParameter("sysUserId", userId);
+		parameters.addParameter("ruleListId", ruleListId);
+		return update("INS_EXTRA_RULE_BY_USERID", parameters);
+	}
+	public int deleteExtraRule(MstUserExtraRulesDTO dto) throws DaoException {
+
+		SQLParameters parameters = new SQLParameters();
+		addParametersFromBeanProperties(dto, parameters);
+		parameters.addParameter("extraId", dto.getExtraId());
+		return update("DEL_EXTRA_RULE_BY_USERID", parameters);
+	}
+	public int updateExtraRule(MstUserExtraRulesDTO dto) throws DaoException {
+
+		SQLParameters parameters = new SQLParameters();
+		addParametersFromBeanProperties(dto, parameters);
+		parameters.addParameter("extraId", dto.getExtraId());
+		return update("UPD_EXTRA_RULE_BY_USERID", parameters);
+	}
 
 }

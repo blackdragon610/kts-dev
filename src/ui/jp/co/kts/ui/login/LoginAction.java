@@ -1,13 +1,16 @@
 package jp.co.kts.ui.login;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForward;
 
@@ -19,6 +22,8 @@ import jp.co.keyaki.cleave.fw.ui.web.struts.AppActionMapping;
 import jp.co.keyaki.cleave.fw.ui.web.struts.AppBaseAction;
 import jp.co.keyaki.cleave.fw.ui.web.struts.AppBaseForm;
 import jp.co.keyaki.cleave.fw.ui.web.struts.StrutsBaseConst;
+import jp.co.kts.app.common.entity.MstRulesDTO;
+import jp.co.kts.app.common.entity.MstRulesListDTO;
 import jp.co.kts.app.common.entity.MstUserDTO;
 import jp.co.kts.app.extendCommon.entity.ExtendNoticeBoardDTO;
 import jp.co.kts.core.SystemSetting;
@@ -29,6 +34,8 @@ import jp.co.kts.ui.web.struts.WebConst;
 
 
 public class LoginAction extends AppBaseAction{
+	
+	
 
 	@Override
 	protected ActionForward doExecute(AppActionMapping appMapping,
@@ -158,6 +165,18 @@ public class LoginAction extends AppBaseAction{
 
 		// 海外注文管理権限を設定
 		request.getSession().setAttribute("LOGIN_USER_OVERSEAS_INFO_AUTH", userDTO.getOverseasInfoAuth());
+		
+		/* 2022/03/22 */
+//		Map<String, String> userRuleDetailList = new HashMap<String, String>();
+//		for(MstRulesDTO ruleDto : form.getUserDTO().getMstRulesList()) {
+//			for (MstRulesListDTO rDto : ruleDto.getMstRulesDetailList()) {
+//				if(rDto.getIsvisible().equals("1"))
+//					userRuleDetailList.put(rDto.getListLink(), rDto.getListName());
+//			}
+//		}
+		
+		request.getSession().setAttribute("LOGIN_USER_RULES_LIST", form.getUserDTO().getMstRulesList());
+		
 
 		//掲示板表示用
 		form.setNoticeList(service.getNoticeBoard());

@@ -236,14 +236,43 @@
 			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
 			<forward name="success" path="/WEB-INF/page/mst/ruleDetail.jsp" />
 		</action>
-		<!-- <action path="/initRuleList" type="jp.co.kts.ui.mst.RuleAction"
-			name="ruleForm" scope="session" validate="false">
+		
+		<action path="/editAllUserList" type="jp.co.kts.ui.mst.UserAction"
+			name="userForm" scope="session" validate="false">
 			<set-property property="nonSecureAction" value="false" />
 			<set-property property="tokenType" value="nocheck" />
 			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
-			<forward name="success" path="/WEB-INF/page/mst/ruleList.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/userList.jsp" />
 		</action>
-		 -->
+		<action path="/goUpdateExtraUserRule" type="jp.co.kts.ui.mst.UserAction"
+			name="userForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/userList.jsp" />
+		</action>
+		<action path="/updateAllUserList" type="jp.co.kts.ui.mst.UserAction"
+			name="userForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/userList.jsp" />
+		</action>
+		<action path="/backViewList" type="jp.co.kts.ui.mst.UserAction"
+			name="userForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/userList.jsp" />
+		</action>
+		<action path="/saveExtraRuleDetailByUserId" type="jp.co.kts.ui.mst.UserAction"
+			name="userForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/userList.jsp" />
+		</action>
+		
 		<!-- ================================= end dana =============================== -->
 
 		<action path="/detailUser" type="jp.co.kts.ui.mst.UserAction"

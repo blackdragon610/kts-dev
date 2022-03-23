@@ -5,6 +5,15 @@
 	margin-bottom: 5em;
 }
 
+#mstTable.user-list tr {
+	cursor: default;
+}
+
+.flex-hor-arround{
+	display: flex;
+    justify-content: space-around;
+}
+
 #leftArea {
 	float: left;
 	width: 700px;

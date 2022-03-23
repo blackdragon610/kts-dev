@@ -4,7 +4,9 @@
  */
 package jp.co.kts.app.common.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 /**
  * M_ユーザー情報を格納します。
  *
@@ -53,10 +55,12 @@ public class MstUserDTO  {
 
 	/** 海外情報閲覧権限 */
 	private String overseasInfoAuth;
-
+	
 	/** 担当者番号 */
 	private String responsibleNo;
-
+	
+	private List<MstRulesDTO> mstRulesList = new ArrayList<>();
+	
 	/**
 	 * <p>
 	 * システムユーザーID を返却します。
@@ -347,6 +351,20 @@ public class MstUserDTO  {
 	 */
 	public void setResponsibleNo(String responsibleNo) {
 	    this.responsibleNo = responsibleNo;
+	}
+
+	/**
+	 * @return the mstRulesList
+	 */
+	public List<MstRulesDTO> getMstRulesList() {
+		return mstRulesList;
+	}
+
+	/**
+	 * @param mstRulesList the mstRulesList to set
+	 */
+	public void setMstRulesList(List<MstRulesDTO> mstRulesList) {
+		this.mstRulesList = mstRulesList;
 	}
 
 }
