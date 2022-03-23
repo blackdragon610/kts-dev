@@ -40,6 +40,8 @@ public class MstRulesDTO  {
 	
 	private List<MstRulesListDTO> mstRulesDetailList = new ArrayList<>();
 	
+	private String childrenRuleCheckedFlag = "-1";
+	
 	private int childCount;
 
 	public long getRuleId() {
@@ -132,6 +134,20 @@ public class MstRulesDTO  {
 
 	public void setChildCount(int childCount) {
 		this.childCount = childCount;
+	}
+
+	/**
+	 * @return the childrenRuleCheckedFlag
+	 */
+	public String getChildrenRuleCheckedFlag() {
+		return childrenRuleCheckedFlag;
+	}
+
+	/**
+	 * @param childrenRuleCheckedFlag the childrenRuleCheckedFlag to set
+	 */
+	public void setChildrenRuleCheckedFlag(String childrenRuleCheckedFlag) {
+		this.childrenRuleCheckedFlag = childrenRuleCheckedFlag;
 	}
 
 	

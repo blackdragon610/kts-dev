@@ -99,21 +99,35 @@ public class RulesService {
 	{
 		int result = 0;
 		RulesDAO dao = new RulesDAO();
-		List<MstUserExtraRulesDTO> extraRulesList = dao.getExtraRulesByUserId(ruleDto.getRuleId(), userId);
 		
-		if(extraRulesList.size() < 1) {
-			List<MstRulesListDTO> childrenRules = dao.getRuleDetailInfo(ruleDto.getRuleId());
-			for(MstRulesListDTO chDto : childrenRules) {
-				result = dao.insertExtraRule(ruleDto.getRuleId(), userId, chDto.getRuleListId());	
+		List<MstRulesListDTO> childrenRules = dao.getRuleDetailInfo(ruleDto.getRuleId());
+		for(MstRulesListDTO chDto : childrenRules) {
+			List<MstUserExtraRulesDTO> extraRulesList = dao.getExtraRulesByListId(chDto.getRuleListId(), userId);
+			if(extraRulesList.size() < 1) {
+				result = dao.insertExtraRule(ruleDto.getRuleId(), userId, chDto.getRuleListId());
+			}
+			else {
+				for (MstUserExtraRulesDTO extraDto : extraRulesList) 
+				{
+					result = dao.updateExtraRule(extraDto);
+				}
 			}
 		}
+//		List<MstUserExtraRulesDTO> extraRulesList = dao.getExtraRulesByUserId(ruleDto.getRuleId(), userId);
+//		
+//		if(extraRulesList.size() < 1) {
+//			List<MstRulesListDTO> childrenRules = dao.getRuleDetailInfo(ruleDto.getRuleId());
+//			for(MstRulesListDTO chDto : childrenRules) {
+//				result = dao.insertExtraRule(ruleDto.getRuleId(), userId, chDto.getRuleListId());	
+//			}
+//		}
 			
-		else {
-			for (MstUserExtraRulesDTO extraDto : extraRulesList) 
-			{
-				result = dao.updateExtraRule(extraDto);
-			}
-		}
+//		else {
+//			for (MstUserExtraRulesDTO extraDto : extraRulesList) 
+//			{
+//				result = dao.updateExtraRule(extraDto);
+//			}
+//		}
 			
 		return result;
 		

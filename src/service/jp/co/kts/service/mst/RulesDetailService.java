@@ -11,6 +11,7 @@ import jp.co.kts.app.common.entity.MstMakerDTO;
 import jp.co.kts.app.common.entity.MstRulesDTO;
 import jp.co.kts.app.common.entity.MstRulesListDTO;
 import jp.co.kts.app.common.entity.MstUserDTO;
+import jp.co.kts.app.common.entity.MstUserExtraRulesDTO;
 import jp.co.kts.app.extendCommon.entity.ExtendMstUserDTO;
 import jp.co.kts.dao.common.SequenceDAO;
 import jp.co.kts.dao.mst.DomesticSlipDAO;
@@ -65,13 +66,54 @@ public class RulesDetailService {
 		result = dao.updateRuleList(dto);
 		return result;
 	}
-//	public Result<MstRulesDTO> validate(String ruleName) {
-//
-//		Result<MstRulesDTO> result = new Result<MstRulesDTO>();
-//
-//		//入力チェック(必須・文字数)
-//		ServiceValidator.inputChecker(result, ruleName, "名", 30, true);
-//
-//		return result;
-//	}
+	public int updateExtraRuleDetail(MstRulesListDTO dto, long userId, long ruleId, long[] listVisble)throws Exception {
+		int result = 0;
+//		RulesDAO dao = new RulesDAO();
+		for(long visible : listVisble) {
+			if(visible == 1) result = this.checkVisible(dto, userId);
+			else result = this.unCheckVisible(dto, userId);
+		}
+//		if(dto.getIsvisible().equals("1")) {
+//			result = this.checkVisible(dto, userId);
+//		}
+//		else 
+//			result = this.unCheckVisible(dto, userId);
+		return result;
+	}
+	
+	private int checkVisible(MstRulesListDTO dto, long userId) throws Exception
+	{
+		int result = 0;
+		RulesDAO dao = new RulesDAO();
+		List<MstUserExtraRulesDTO> extraRulesList = dao.getExtraRulesByListId(dto.getRuleListId(), userId);
+		
+		if(extraRulesList.size() < 1) {
+			result = dao.insertExtraRule(dto.getRuleId(), userId, dto.getRuleListId());	
+		}
+		else {
+			for (MstUserExtraRulesDTO extraDto : extraRulesList) 
+			{
+				result = dao.updateExtraRule(extraDto);
+			}
+		}
+			
+		return result;
+		
+	}
+	
+	private int unCheckVisible(MstRulesListDTO dto, long userId) throws Exception
+	{
+		int result = 0;
+		RulesDAO dao = new RulesDAO();
+		List<MstUserExtraRulesDTO> extraRulesList = dao.getExtraRulesByUserId(dto.getRuleId(), userId);
+		
+		if(extraRulesList.size() > 0) {
+			for (MstUserExtraRulesDTO extraDto : extraRulesList) 
+			{
+				result = dao.deleteExtraRule(extraDto);
+			}
+		}
+		return result;
+		
+	}
 }

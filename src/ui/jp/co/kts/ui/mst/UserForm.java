@@ -32,9 +32,9 @@ public class UserForm extends AppBaseForm {
 	
 	public int isEditModeAll;
 	
-	private List<MstRulesListDTO> extraRuleList = new ArrayList<>();
+	private long[] ruleDetailList;
 	
-	private MstRulesListDTO extraRuleListDTO = new MstRulesListDTO();
+	private long ruleId;
 
 	/**
 	 * @return sysUserId
@@ -170,39 +170,36 @@ public class UserForm extends AppBaseForm {
 	}
 
 
-
 	/**
-	 * @return the extraRuleList
+	 * @return the ruleId
 	 */
-	public List<MstRulesListDTO> getExtraRuleList() {
-		return extraRuleList;
+	public long getRuleId() {
+		return ruleId;
 	}
 
 
 
 	/**
-	 * @param extraRuleList the extraRuleList to set
+	 * @param ruleId the ruleId to set
 	 */
-	public void setExtraRuleList(List<MstRulesListDTO> extraRuleList) {
-		this.extraRuleList = extraRuleList;
+	public void setRuleId(long ruleId) {
+		this.ruleId = ruleId;
+	}
+
+	/**
+	 * @return the ruleDetailList
+	 */
+	public long[] getRuleDetailList() {
+		return ruleDetailList;
 	}
 
 
 
 	/**
-	 * @return the extraRuleListDTO
+	 * @param ruleDetailList the ruleDetailList to set
 	 */
-	public MstRulesListDTO getExtraRuleListDTO() {
-		return extraRuleListDTO;
-	}
-
-
-
-	/**
-	 * @param extraRuleListDTO the extraRuleListDTO to set
-	 */
-	public void setExtraRuleListDTO(MstRulesListDTO extraRuleListDTO) {
-		this.extraRuleListDTO = extraRuleListDTO;
+	public void setRuleDetailList(long[] ruleDetailList) {
+		this.ruleDetailList = ruleDetailList;
 	}
 
 }

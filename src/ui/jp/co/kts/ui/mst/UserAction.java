@@ -15,8 +15,10 @@ import jp.co.keyaki.cleave.fw.ui.web.struts.AppBaseAction;
 import jp.co.keyaki.cleave.fw.ui.web.struts.AppBaseForm;
 import jp.co.keyaki.cleave.fw.ui.web.struts.StrutsBaseConst;
 import jp.co.kts.app.common.entity.MstRulesDTO;
+import jp.co.kts.app.common.entity.MstRulesListDTO;
 import jp.co.kts.app.common.entity.MstUserDTO;
 import jp.co.kts.service.common.Result;
+import jp.co.kts.service.mst.RulesDetailService;
 import jp.co.kts.service.mst.RulesService;
 import jp.co.kts.service.mst.UserService;
 import net.arnx.jsonic.JSON;
@@ -66,7 +68,8 @@ public class UserAction extends AppBaseAction {
 		 UserService service = new UserService();
 		 RulesService ruleService = new RulesService();
 
-		 form.setUserList(service.getUserList());
+		 List<MstUserDTO> userList = service.getUserList();
+		 form.setUserList(userList);
 		 form.setRuleList(ruleService.getRulesList());
 		 
 		 form.setIsEditModeAll(0);
@@ -115,7 +118,9 @@ public class UserAction extends AppBaseAction {
 			if(userDto.getSysUserId() == form.getSysUserId()) {
 				for (MstRulesDTO ruleDto : userDto.getMstRulesList()) {
 					
-					ruleService.updateExtraRule(ruleDto, userDto.getSysUserId());
+					if(!ruleDto.getChildrenRuleCheckedFlag().equals("-1")) {
+						ruleService.updateExtraRule(ruleDto, userDto.getSysUserId());
+					}
 				}
 				
 				userService.updateUserMainRule(userDto);	
@@ -138,7 +143,9 @@ public class UserAction extends AppBaseAction {
 			
 				for (MstRulesDTO ruleDto : userDto.getMstRulesList()) {
 					
-					ruleService.updateExtraRule(ruleDto, userDto.getSysUserId());
+					if(!ruleDto.getChildrenRuleCheckedFlag().equals("-1")) {
+						ruleService.updateExtraRule(ruleDto, userDto.getSysUserId());
+					}
 				}
 			
 			userService.updateUserMainRule(userDto);
@@ -155,7 +162,8 @@ public class UserAction extends AppBaseAction {
 		 UserService service = new UserService();
 		 RulesService ruleService = new RulesService();
 
-		 form.setUserList(service.getUserList());
+		 List<MstUserDTO> userList = service.getUserList();
+		 form.setUserList(userList);
 		 form.setRuleList(ruleService.getRulesList());
 		 form.setIsEditModeAll(1);
 
@@ -223,20 +231,24 @@ public class UserAction extends AppBaseAction {
 	 protected ActionForward saveExtraRuleDetailByUserId(AppActionMapping appMapping, UserForm form,
 	            HttpServletRequest request,  HttpServletResponse response) throws Exception {
 		 
-		UserService userService = new UserService();
-		RulesService ruleService = new RulesService();
+//		UserService userService = new UserService();
+		RulesDetailService dService = new RulesDetailService();
+//		dService.updateExtraRuleDetail(form.getSysUserId(), form.getRuleId(), form.getRuleDetailList());
 		
 		for (MstUserDTO userDto : form.getUserList()) {
 			
 			if(userDto.getSysUserId() == form.getSysUserId()) {
 				for (MstRulesDTO ruleDto : userDto.getMstRulesList()) {
-					
-					ruleService.updateExtraRule(ruleDto, userDto.getSysUserId());
+					if(ruleDto.getRuleId() == form.getRuleId()) {
+						
+						for (MstRulesListDTO dDto : ruleDto.getMstRulesDetailList()) {
+							dService.updateExtraRuleDetail(dDto, userDto.getSysUserId(), form.getRuleId(), form.getRuleDetailList());
+						}
+					}
 				}
-				
-				userService.updateUserMainRule(userDto);	
 			}
 		}
+		return null;
 //		if (itemList.size() == 0) {
 //			PrintWriter printWriter = response.getWriter();
 //			printWriter.print(JSON.encode(""));
@@ -245,10 +257,10 @@ public class UserAction extends AppBaseAction {
 //			PrintWriter printWriter = response.getWriter();
 //			printWriter.print(JSON.encode("success"));
 //		}
-		response.setCharacterEncoding("UTF-8");
-		PrintWriter printWriter = response.getWriter();
-		printWriter.print(JSON.encode("success"));
-		return null;
+//		response.setCharacterEncoding("UTF-8");
+//		PrintWriter printWriter = response.getWriter();
+//		printWriter.print(JSON.encode("success"));
+//		return null;
 	 }
 
 }

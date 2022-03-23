@@ -340,8 +340,16 @@
 		FROM
 		MST_EXTRA_USER_RULE
 		WHERE
-			RULE_ID = ${ruleId}
-			AND SYS_USER_ID = ${sysUserId}
+			TRUE
+			<if-not-equals value="0" varName="ruleId">
+				AND RULE_ID = ${ruleId}
+			</if-not-equals>
+			<if-not-equals value="0" varName="ruleListId">
+				AND RULE_LIST_ID = ${ruleListId}
+			</if-not-equals>
+			<if-not-equals value="0" varName="sysUserId">
+				AND SYS_USER_ID = ${sysUserId}
+			</if-not-equals>
 		ORDER BY
 		RULE_ID
 	</sql-template>
@@ -364,6 +372,8 @@
 	</sql-template>
 	<sql-template id="DEL_EXTRA_RULE_BY_USERID">
 		UPDATE
+		MST_EXTRA_USER_RULE
+		SET
 		DEL_FLG = '1'
 		WHERE
 		EXTRA_ID = ${extraId}

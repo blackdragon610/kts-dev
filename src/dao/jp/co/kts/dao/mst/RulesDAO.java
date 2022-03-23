@@ -115,6 +115,17 @@ public class RulesDAO extends BaseDAO {
 		SQLParameters parameters = new SQLParameters();
 		parameters.addParameter("sysUserId", userId);
 		parameters.addParameter("ruleId", ruleId);
+		parameters.addParameter("ruleListId", 0);
+
+		return selectList("SEL_EXTRA_RULES_BY_USERID", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstUserExtraRulesDTO.class));
+	}
+	
+	public List<MstUserExtraRulesDTO> getExtraRulesByListId(long ruleListId, long userId) throws DaoException {
+
+		SQLParameters parameters = new SQLParameters();
+		parameters.addParameter("ruleListId", ruleListId);
+		parameters.addParameter("sysUserId", userId);
+		parameters.addParameter("ruleId", 0);
 
 		return selectList("SEL_EXTRA_RULES_BY_USERID", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstUserExtraRulesDTO.class));
 	}
