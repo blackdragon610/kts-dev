@@ -55,20 +55,58 @@
 				<li><html:link href="ruleList.do" title="ユーザー一覧"><span>ID・PASS一覧</span></html:link></li>
 				
 			</logic:equal>
+			<logic:iterate name="LOGIN_USER_MASTER_LIST" id="listMasterId">
+				<logic:equal name="listMasterId" property="corporationListFlg" value="1">
+					<li>
+						<html:link href="initCorporationList"><span><bean:write name="listMasterId" property="corporationListName"/></span></html:link>
+					</li>
+				</logic:equal>
+				<logic:equal name="listMasterId" property="accountListFlg" value="1">
+					<li>
+						<html:link href="initAccountList.do"><span><bean:write name="listMasterId" property="accountListName"/></span></html:link>
+					</li>
+				</logic:equal>
+				<logic:equal name="listMasterId" property="channelListFlg" value="1">
+					<li>
+						<html:link href="initChannelList.do"><span><bean:write name="listMasterId" property="channelListName"/></span></html:link>
+					</li>
+				</logic:equal>
+				<logic:equal name="listMasterId" property="warehouseListFlg" value="1">
+					<li>
+						<html:link href="initWarehouseList.do"><span><bean:write name="listMasterId" property="warehouseListName"/></span></html:link>
+					</li>
+				</logic:equal>
+				<logic:equal name="listMasterId" property="makerListFlg" value="1">
+					<li>
+						<html:link href="initMakerList.do"><span><bean:write name="listMasterId" property="makerListName"/></span></html:link>
+					</li>
+				</logic:equal>
+				<logic:equal name="listMasterId" property="setItemListFlg" value="1">
+					<li>
+						<html:link href="initSetItemList.do"><span><bean:write name="listMasterId" property="setItemListName"/></span></html:link>
+					</li>
+				</logic:equal>
+				<logic:equal name="listMasterId" property="clientListFlg" value="1">
+					<li>
+						<html:link href="initClientList.do"><span><bean:write name="listMasterId" property="clientListName"/></span></html:link>
+					</li>
+				</logic:equal>
+				<logic:equal name="listMasterId" property="deliveryListFlg" value="1">
+					<li>
+						<html:link href="initDeliveryList.do"><span><bean:write name="listMasterId" property="deliveryListName"/></span></html:link>
+					</li>
+				</logic:equal>
+			</logic:iterate>
 			<logic:notEmpty name="LOGIN_USER_RULES_LIST"> 
 				<logic:iterate name="LOGIN_USER_RULES_LIST" id="listRuleId">
 					<logic:iterate name="listRuleId" property="mstRulesDetailList" id="listRuleId">
 						<logic:equal name="listRuleId" property="isvisible" value="1">
-							<logic:notEqual name="listRuleId" property="listName" value="ユーザー一覧">
-							<logic:notEqual name="listRuleId" property="listName" value="ID・PASS一覧">
-							<li>
-								<html:link href="">
+							<li class="ruleList">
+								<html:link href="" target="_blank">
 									<span><bean:write name="listRuleId" property="listName"/></span>
 									<nested:hidden property="listLink" name="listRuleId" ></nested:hidden>
 								</html:link>
 							</li>
-							</logic:notEqual>
-							</logic:notEqual>
 						</logic:equal>
 					</logic:iterate>
 				</logic:iterate>
@@ -114,8 +152,8 @@
 </div>
 
 <script type="text/javascript">
-	var ruleList_li = document.querySelectorAll("#ruleClass > li > a");
-	for(var i=2; i < ruleList_li.length; i++ ){
-		ruleList_li[i].setAttribute("href", ruleList_li[i].children[1].value);
+	var ruleList_li = document.querySelectorAll("#ruleClass > li.ruleList > a");
+	for(var i=0; i < ruleList_li.length; i++ ){
+		ruleList_li[i].setAttribute("href", "http://"+ruleList_li[i].children[1].value);
 	}
 </script>

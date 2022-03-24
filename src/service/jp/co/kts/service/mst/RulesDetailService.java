@@ -72,8 +72,9 @@ public class RulesDetailService {
 		RulesDAO dao = new RulesDAO();
 		List<MstUserExtraRulesDTO> extraRulesList = dao.getExtraRulesByListId(dto.getRuleListId(), userId);
 		
-		if(extraRulesList.size() < 1) {
-			result = dao.insertExtraRule(dto.getRuleId(), userId, dto.getRuleListId());	
+		if(extraRulesList.size() < 1 ) {
+			if(visible > 0) 
+				result = dao.insertExtraRule(dto.getRuleId(), userId, dto.getRuleListId());	
 		}
 		else {
 			for (MstUserExtraRulesDTO extraDto : extraRulesList) 

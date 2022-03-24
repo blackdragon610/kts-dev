@@ -14,6 +14,7 @@ import jp.co.keyaki.cleave.fw.ui.web.struts.AppActionMapping;
 import jp.co.keyaki.cleave.fw.ui.web.struts.AppBaseAction;
 import jp.co.keyaki.cleave.fw.ui.web.struts.AppBaseForm;
 import jp.co.keyaki.cleave.fw.ui.web.struts.StrutsBaseConst;
+import jp.co.kts.app.common.entity.MstMasterDTO;
 import jp.co.kts.app.common.entity.MstRulesDTO;
 import jp.co.kts.app.common.entity.MstRulesListDTO;
 import jp.co.kts.app.common.entity.MstUserDTO;
@@ -123,6 +124,11 @@ public class UserAction extends AppBaseAction {
 					}
 				}
 				
+				for (MstMasterDTO masterDto : userDto.getMstMasterList()) {
+					if(!masterDto.getChildrenMasterCheckedFlag().equals("-1")) {
+						userService.updateMasterByUser(masterDto);
+					}
+				}
 				userService.updateUserMainRule(userDto);	
 			}
 		}
@@ -141,13 +147,17 @@ public class UserAction extends AppBaseAction {
 		
 		for (MstUserDTO userDto : form.getUserList()) {
 			
-				for (MstRulesDTO ruleDto : userDto.getMstRulesList()) {
-					
-					if(!ruleDto.getChildrenRuleCheckedFlag().equals("-1")) {
-						ruleService.updateExtraRule(ruleDto, userDto.getSysUserId());
-					}
+			for (MstRulesDTO ruleDto : userDto.getMstRulesList()) {
+				
+				if(!ruleDto.getChildrenRuleCheckedFlag().equals("-1")) {
+					ruleService.updateExtraRule(ruleDto, userDto.getSysUserId());
 				}
-			
+			}
+			for (MstMasterDTO masterDto : userDto.getMstMasterList()) {
+				if(!masterDto.getChildrenMasterCheckedFlag().equals("-1")) {
+					userService.updateMasterByUser(masterDto);
+				}
+			}
 			userService.updateUserMainRule(userDto);
 		}
 		
@@ -231,13 +241,12 @@ public class UserAction extends AppBaseAction {
 	 protected ActionForward saveExtraRuleDetailByUserId(AppActionMapping appMapping, UserForm form,
 	            HttpServletRequest request,  HttpServletResponse response) throws Exception {
 		 
-//		UserService userService = new UserService();
+		UserService userService = new UserService();
 		RulesDetailService dService = new RulesDetailService();
-//		dService.updateExtraRuleDetail(form.getSysUserId(), form.getRuleId(), form.getRuleDetailList());
 		
 		for (MstUserDTO userDto : form.getUserList()) {
 			
-			if(userDto.getSysUserId() == form.getSysUserId()) {
+			if(userDto.getSysUserId() == form.getSysUserId() && form.getRuleId() != 0) {
 				for (MstRulesDTO ruleDto : userDto.getMstRulesList()) {
 					if(ruleDto.getRuleId() == form.getRuleId()) {
 						int index = 0;
@@ -246,6 +255,22 @@ public class UserAction extends AppBaseAction {
 							index++;
 						}
 					}
+				}
+			}
+			else if(userDto.getSysUserId() == form.getSysUserId() && form.getRuleId() == 0) {
+				for (MstMasterDTO masterDto : userDto.getMstMasterList()) {
+					masterDto.setSysUserId(form.getSysUserId());
+					masterDto.setUserListFlg(form.getRuleDetailList()[0] > 0 ? "1" : "0");
+					masterDto.setRuleListFlg(form.getRuleDetailList()[1] > 0 ? "1" : "0");
+					masterDto.setCorporationListFlg(form.getRuleDetailList()[2] > 0 ? "1" : "0");
+					masterDto.setAccountListFlg(form.getRuleDetailList()[3] > 0 ? "1" : "0");
+					masterDto.setChannelListFlg(form.getRuleDetailList()[4] > 0 ? "1" : "0");
+					masterDto.setWarehouseListFlg(form.getRuleDetailList()[5] > 0 ? "1" : "0");
+					masterDto.setMakerListFlg(form.getRuleDetailList()[6] > 0 ? "1" : "0");
+					masterDto.setSetItemListFlg(form.getRuleDetailList()[7] > 0 ? "1" : "0");
+					masterDto.setClientListFlg(form.getRuleDetailList()[8] > 0 ? "1" : "0");
+					masterDto.setDeliveryListFlg(form.getRuleDetailList()[9] > 0 ? "1" : "0");
+					userService.updateMasterByUser(masterDto);
 				}
 			}
 		}

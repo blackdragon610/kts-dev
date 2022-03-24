@@ -46,6 +46,160 @@
 				<th class="w50">権限</th>
 			</tr>
 			<nested:iterate property="userList" indexId="id">
+				<nested:iterate property="mstMasterList" indexId="idx">
+					<tr class="masterList_${id}_${idx}" style="display:none;">
+						<td><nested:write property="userListName" /></td>
+						<td>
+							<nested:equal property="userListFlg" value="1">&#9898;</nested:equal>
+							<nested:notEqual property="userListFlg" value="1">&#9932;</nested:notEqual>
+						</td>
+					</tr>
+					<tr class="masterList_${id}_${idx}" style="display:none;">
+						<td><nested:write property="ruleListName" /></td>
+						<td>
+							<nested:equal property="ruleListFlg" value="1">&#9898;</nested:equal>
+							<nested:notEqual property="ruleListFlg" value="1">&#9932;</nested:notEqual>
+						</td>
+					</tr>
+					<tr class="masterList_${id}_${idx}" style="display:none;">
+						<td><nested:write property="corporationListName" /></td>
+						<td>
+							<nested:equal property="corporationListFlg" value="1">&#9898;</nested:equal>
+							<nested:notEqual property="corporationListFlg" value="1">&#9932;</nested:notEqual>
+						</td>
+					</tr>
+					<tr class="masterList_${id}_${idx}" style="display:none;">
+						<td><nested:write property="accountListName" /></td>
+						<td>
+							<nested:equal property="accountListFlg" value="1">&#9898;</nested:equal>
+							<nested:notEqual property="accountListFlg" value="1">&#9932;</nested:notEqual>
+						</td>
+					</tr>
+					<tr class="masterList_${id}_${idx}" style="display:none;">
+						<td><nested:write property="channelListName" /></td>
+						<td>
+							<nested:equal property="channelListFlg" value="1">&#9898;</nested:equal>
+							<nested:notEqual property="channelListFlg" value="1">&#9932;</nested:notEqual>
+						</td>
+					</tr>
+					<tr class="masterList_${id}_${idx}" style="display:none;">
+						<td><nested:write property="warehouseListName" /></td>
+						<td>
+							<nested:equal property="warehouseListFlg" value="1">&#9898;</nested:equal>
+							<nested:notEqual property="warehouseListFlg" value="1">&#9932;</nested:notEqual>
+						</td>
+					</tr>
+					<tr class="masterList_${id}_${idx}" style="display:none;">
+						<td><nested:write property="makerListName" /></td>
+						<td>
+							<nested:equal property="makerListFlg" value="1">&#9898;</nested:equal>
+							<nested:notEqual property="makerListFlg" value="1">&#9932;</nested:notEqual>
+						</td>
+					</tr>
+					<tr class="masterList_${id}_${idx}" style="display:none;">
+						<td><nested:write property="setItemListName" /></td>
+						<td>
+							<nested:equal property="setItemListFlg" value="1">&#9898;</nested:equal>
+							<nested:notEqual property="setItemListFlg" value="1">&#9932;</nested:notEqual>
+						</td>
+					</tr>
+					<tr class="masterList_${id}_${idx}" style="display:none;">
+						<td><nested:write property="clientListName" /></td>
+						<td>
+							<nested:equal property="clientListFlg" value="1">&#9898;</nested:equal>
+							<nested:notEqual property="clientListFlg" value="1">&#9932;</nested:notEqual>
+						</td>
+					</tr>
+					<tr class="masterList_${id}_${idx}" style="display:none;">
+						<td><nested:write property="deliveryListName" /></td>
+						<td>
+							<nested:equal property="deliveryListFlg" value="1">&#9898;</nested:equal>
+							<nested:notEqual property="deliveryListFlg" value="1">&#9932;</nested:notEqual>
+						</td>
+					</tr>
+					
+					
+					<tr class="editMasterList_${id}_${idx}" style="display:none;">
+						<td> <nested:write property="userListName" /></td>
+						<td class="editCheckBox">
+							<nested:hidden property="userListFlg" styleClass="hidden_visibleFlag_0"/>
+							<nested:checkbox property="userListFlg" styleClass="visibleFlag_0 checkBoxClass"></nested:checkbox>
+							
+						</td>
+					</tr>
+					<tr class="editMasterList_${id}_${idx}" style="display:none;">
+						<td> <nested:write property="ruleListName" /></td>
+						<td class="editCheckBox">
+							<nested:hidden property="ruleListFlg" styleClass="hidden_visibleFlag_1"/>
+							<nested:checkbox property="ruleListFlg" styleClass="visibleFlag_1 checkBoxClass"></nested:checkbox>
+							
+						</td>
+					</tr>
+					<tr class="editMasterList_${id}_${idx}" style="display:none;">
+						<td> <nested:write property="corporationListName" /></td>
+						<td class="editCheckBox">
+							<nested:hidden property="corporationListFlg" styleClass="hidden_visibleFlag_2"/>
+							<nested:checkbox property="corporationListFlg" styleClass="visibleFlag_2 checkBoxClass"></nested:checkbox>
+							
+						</td>
+					</tr>
+					<tr class="editMasterList_${id}_${idx}" style="display:none;">
+						<td> <nested:write property="accountListName" /></td>
+						<td class="editCheckBox">
+							<nested:hidden property="accountListFlg" styleClass="hidden_visibleFlag_3"/>
+							<nested:checkbox property="accountListFlg" styleClass="visibleFlag_3 checkBoxClass"></nested:checkbox>
+							
+						</td>
+					</tr>
+					<tr class="editMasterList_${id}_${idx}" style="display:none;">
+						<td> <nested:write property="channelListName" /></td>
+						<td class="editCheckBox">
+							<nested:hidden property="channelListFlg" styleClass="hidden_visibleFlag_4"/>
+							<nested:checkbox property="channelListFlg" styleClass="visibleFlag_4 checkBoxClass"></nested:checkbox>
+							
+						</td>
+					</tr>
+					<tr class="editMasterList_${id}_${idx}" style="display:none;">
+						<td> <nested:write property="warehouseListName" /></td>
+						<td class="editCheckBox">
+							<nested:hidden property="warehouseListFlg" styleClass="hidden_visibleFlag_5"/>
+							<nested:checkbox property="warehouseListFlg" styleClass="visibleFlag_5 checkBoxClass"></nested:checkbox>
+							
+						</td>
+					</tr>
+					<tr class="editMasterList_${id}_${idx}" style="display:none;">
+						<td> <nested:write property="makerListName" /></td>
+						<td class="editCheckBox">
+							<nested:hidden property="makerListFlg" styleClass="hidden_visibleFlag_6"/>
+							<nested:checkbox property="makerListFlg" styleClass="visibleFlag_6 checkBoxClass"></nested:checkbox>
+							
+						</td>
+					</tr>
+					<tr class="editMasterList_${id}_${idx}" style="display:none;">
+						<td> <nested:write property="setItemListName" /></td>
+						<td class="editCheckBox">
+							<nested:hidden property="setItemListFlg" styleClass="hidden_visibleFlag_7"/>
+							<nested:checkbox property="setItemListFlg" styleClass="visibleFlag_7 checkBoxClass"></nested:checkbox>
+							
+						</td>
+					</tr>
+					<tr class="editMasterList_${id}_${idx}" style="display:none;">
+						<td> <nested:write property="clientListName" /></td>
+						<td class="editCheckBox">
+							<nested:hidden property="clientListFlg" styleClass="hidden_visibleFlag_8"/>
+							<nested:checkbox property="clientListFlg" styleClass="visibleFlag_8 checkBoxClass"></nested:checkbox>
+							
+						</td>
+					</tr>
+					<tr class="editMasterList_${id}_${idx}" style="display:none;">
+						<td> <nested:write property="deliveryListName" /></td>
+						<td class="editCheckBox">
+							<nested:hidden property="deliveryListFlg" styleClass="hidden_visibleFlag_9"/>
+							<nested:checkbox property="deliveryListFlg" styleClass="visibleFlag_9 checkBoxClass"></nested:checkbox>
+							
+						</td>
+					</tr>
+				</nested:iterate>
 				<nested:iterate property="mstRulesList" indexId="idx">
 					<nested:iterate property="mstRulesDetailList" indexId="indx">
 						<tr class="rulesList_${id}_${idx}" style="display:none;">
@@ -63,7 +217,7 @@
 							</td>
 							<td class="editCheckBox">
 								<nested:hidden property="isvisible" styleClass="hidden_visibleFlag_${indx}"/>
-								<nested:checkbox property="listVisible" styleClass="visibleFlag_${indx} checkBoxTransForm"></nested:checkbox>
+								<nested:checkbox property="listVisible" styleClass="visibleFlag_${indx} checkBoxClass"></nested:checkbox>
 								
 							</td>
 						</tr>
@@ -83,17 +237,11 @@
 		<table id="mstTable" class="user-list">
 			<tr>
 				<th>ユーザー名</th>
-				<nested:iterate property="ruleList" indexId="idx">
-					<nested:equal property="ruleName" value="マスタ">
-						<th><nested:write property="ruleName"/></th>
-					</nested:equal>
-				</nested:iterate>
+				<th>マスタ</th>
 				<th>法人間請求権限</th>
 				<th>海外情報閲覧権限</th>
 				<nested:iterate property="ruleList" indexId="idx">
-					<nested:notEqual property="ruleName" value="マスタ">
-						<th><nested:write property="ruleName"/></th>
-					</nested:notEqual>
+					<th><nested:write property="ruleName"/></th>
 				</nested:iterate>
 				<nested:equal property="isEditModeAll" value="0">
 					<th></th>
@@ -108,22 +256,20 @@
 						<td ondblclick="goDetailUser(<nested:write  property="sysUserId"/>);" style="cursor:pointer">
 							<nested:write  property="userFamilyNmKanji"/><nested:write  property="userFirstNmKanji"/>
 						</td>
-						<nested:notEmpty property="mstRulesList">
-							<nested:iterate property="mstRulesList" indexId="idx">
-								<nested:equal property="ruleName" value="マスタ">
-								<td>
+						<td>
+							<nested:notEmpty property="mstMasterList">
+								<nested:iterate property="mstMasterList" indexId="idx">
 									<nested:equal property="isvisible" value="1">
-										<nested:equal property="childCount" value="1">&#9898;</nested:equal>
-											<nested:notEqual property="childCount" value="1">
-												<span class="viewChildRule" id="rulesList_${id}_${idx}"> &#9651; 詳細</span>
-											</nested:notEqual>
+										<nested:equal property="viewableCount" value="1">&#9898;</nested:equal>
+										<nested:notEqual property="viewableCount" value="1">
+											<span class="viewChildRule" id="masterList_${id}_${idx}"> &#9651; 詳細</span>
+										</nested:notEqual>
 									</nested:equal>
-										
 									<nested:notEqual property="isvisible" value="1">&#9932;</nested:notEqual>
-								</td>
-								</nested:equal>
-							</nested:iterate>
-						</nested:notEmpty>
+								</nested:iterate>
+							</nested:notEmpty>
+						</td>
+							
 						<td>
 							<nested:equal property="btobBillAuth" value="1">&#9898;</nested:equal>
 							<nested:notEqual property="btobBillAuth" value="1">&#9932;</nested:notEqual>
@@ -134,8 +280,7 @@
 							<nested:notEqual property="overseasInfoAuth" value="1">&#9932;</nested:notEqual>
 						</td>
 						<nested:notEmpty property="mstRulesList">
-						<nested:iterate property="mstRulesList" indexId="idx">
-							<nested:notEqual property="ruleName" value="マスタ">
+							<nested:iterate property="mstRulesList" indexId="idx">
 								<td>
 									<nested:equal property="isvisible" value="1">
 										<nested:equal property="childCount" value="1">&#9898;</nested:equal>
@@ -145,15 +290,14 @@
 									</nested:equal>
 									<nested:notEqual property="isvisible" value="1">&#9932;</nested:notEqual>
 								</td>
-							</nested:notEqual>
-						</nested:iterate>
+							</nested:iterate>
 						</nested:notEmpty>
-							<td>
-								<a class="button_main" href="Javascript:void(0);" onclick="goEditUser(<nested:write property="sysUserId"/>, '${id}');">編集</a>
-							</td>
-							<td>
-								<a class="button_white" href="Javascript:void(0);" onclick="goDelUser(<nested:write property="sysUserId"/>);">削除</a>
-							</td>
+						<td>
+							<a class="button_main" href="Javascript:void(0);" onclick="goEditUser(<nested:write property="sysUserId"/>, '${id}');">編集</a>
+						</td>
+						<td>
+							<a class="button_white" href="Javascript:void(0);" onclick="goDelUser(<nested:write property="sysUserId"/>);">削除</a>
+						</td>
 					</tr>
 					<!-- 個々のユーザー権限の編集 -->
 					<tr class="edit_row_${id}" style="display:none;">
@@ -162,43 +306,36 @@
 							<nested:write  property="userFirstNmKanji"/>
 							<nested:hidden property="sysUserId" styleId="sysUserIdx_${id}"/>
 						</td>
-						<nested:iterate property="mstRulesList" indexId="idx">
-							<nested:equal property="ruleName" value="マスタ">
-								<td>
+						<td><div class="justify-content-arround">
+							<nested:notEmpty property="mstMasterList">
+								<nested:iterate property="mstMasterList" indexId="idx">
 									<nested:hidden property="isvisible" styleClass="hidden_mastareItemCheckFlg"/>
-									<nested:checkbox property="isvisible" styleClass="mastareItemCheckFlg checkBoxTransForm listCheck"></nested:checkbox>
-									<nested:notEqual property="childCount" value="0">
-										<nested:notEqual property="childCount" value="1">
-											<span class="editChildRule" id="editRulesList_${id}_${idx}"> 詳細</span>
-											<nested:hidden property="ruleId" styleId="ruleId_${id}"/>
-											<nested:hidden property="childrenRuleCheckedFlag" styleClass="hidden_mastareItemCheckFlg"/>
-										</nested:notEqual>
-									</nested:notEqual>
-								</td>
-							</nested:equal>
-						</nested:iterate>
+									<nested:checkbox property="isvisible" styleClass="mastareItemCheckFlg checkBoxClass listCheck"></nested:checkbox>
+									<span class="editChildRule" id="editMasterList_${id}_${idx}"> 詳細</span>
+									<nested:hidden property="childrenMasterCheckedFlag" styleClass="hidden_mastareItemCheckFlg"/>
+								</nested:iterate>
+							</nested:notEmpty>
+						</div></td>
 						<td>
 							<nested:hidden property="btobBillAuth" styleClass="hidden_btobItemCheckFlg"/>
-							<nested:checkbox property="btobBillAuth" styleClass="btobItemCheckFlg checkBoxTransForm"/>
+							<nested:checkbox property="btobBillAuth" styleClass="btobItemCheckFlg checkBoxClass"/>
 						</td>
 						<td>
 							<nested:hidden property="overseasInfoAuth" styleClass="hidden_infoAuthItemCheckFlg"/>
-							<nested:checkbox property="overseasInfoAuth" styleClass="infoAuthItemCheckFlg checkBoxTransForm"/>
+							<nested:checkbox property="overseasInfoAuth" styleClass="infoAuthItemCheckFlg checkBoxClass"/>
 						</td>
 						<nested:iterate property="mstRulesList" indexId="idx">
-							<nested:notEqual property="ruleName" value="マスタ">
-								<td class="itemColumn">
-									<nested:hidden property="isvisible" styleClass="hidden_visibleFlag_${idx}"/>
-									<nested:checkbox property="isvisible" styleClass="visibleFlag_${idx} checkBoxTransForm listCheck"></nested:checkbox>
-									<nested:notEqual property="childCount" value="0">
-										<nested:notEqual property="childCount" value="1">
-											<span class="editChildRule" id="editRulesList_${id}_${idx}"> 詳細</span>
-											<nested:hidden property="ruleId" styleId="ruleId_${id}"/>
-											<nested:hidden property="childrenRuleCheckedFlag" styleClass="hidden_visibleFlag_${id}"/>
-										</nested:notEqual>
+							<td class="itemColumn"><div class="justify-content-arround">
+								<nested:hidden property="isvisible" styleClass="hidden_visibleFlag_${id}_${idx}"/>
+								<nested:checkbox property="isvisible" styleClass="visibleFlag_${id}_${idx} checkBoxClass listCheck"></nested:checkbox>
+								<nested:notEqual property="childCount" value="0">
+									<nested:notEqual property="childCount" value="1">
+										<span class="editChildRule" id="editRulesList_${id}_${idx}"> 詳細</span>
+										<nested:hidden property="ruleId" styleId="ruleId_${id}"/>
+										<nested:hidden property="childrenRuleCheckedFlag" styleClass="hidden_visibleFlag_${id}_${idx}"/>
 									</nested:notEqual>
-								</td>
-							</nested:notEqual>
+								</nested:notEqual>
+							</div></td>
 						</nested:iterate>
 						<td>
 							<a class="button_main" href="Javascript:void(0);" onclick="goUpdateExtraUserRule(<nested:write  property="sysUserId"/>);">登録</a>
@@ -218,43 +355,36 @@
 							<nested:write  property="userFirstNmKanji"/>
 							<nested:hidden property="sysUserId" styleId="sysUserIdx_${id}"/>
 						</td>
-						<nested:iterate property="mstRulesList" indexId="idx">
-							<nested:equal property="ruleName" value="マスタ">
-								<td>
+						<td><div class="justify-content-arround">
+							<nested:notEmpty property="mstMasterList">
+								<nested:iterate property="mstMasterList" indexId="idx">
 									<nested:hidden property="isvisible" styleClass="hidden_mastareItemCheckFlg"/>
-									<nested:checkbox property="isvisible" styleClass="mastareItemCheckFlg checkBoxTransForm listCheck"/>
-									<nested:notEqual property="childCount" value="0">
-										<nested:notEqual property="childCount" value="1">
-											<span class="editChildRule" id="editRulesList_${id}_${idx}"> 詳細</span>
-											<nested:hidden property="ruleId" styleId="ruleId_${id}"/>
-											<nested:hidden property="childrenRuleCheckedFlag" styleClass="hidden_mastareItemCheckFlg"/>
-										</nested:notEqual>
-									</nested:notEqual>
-								</td>
-							</nested:equal>
-						</nested:iterate>
+									<nested:checkbox property="isvisible" styleClass="mastareItemCheckFlg checkBoxClass listCheck"></nested:checkbox>
+									<span class="editChildRule" id="editMasterList_${id}_${idx}"> 詳細</span>
+									<nested:hidden property="childrenMasterCheckedFlag" styleClass="hidden_mastareItemCheckFlg"/>
+								</nested:iterate>
+							</nested:notEmpty>
+						</div></td>
 						<td>
 							<nested:hidden property="btobBillAuth" styleClass="hidden_btobItemCheckFlg"/>
-							<nested:checkbox property="btobBillAuth" styleClass="btobItemCheckFlg checkBoxTransForm"/>
+							<nested:checkbox property="btobBillAuth" styleClass="btobItemCheckFlg checkBoxClass"/>
 						</td>
 						<td>
 							<nested:hidden property="overseasInfoAuth" styleClass="hidden_infoAuthItemCheckFlg"/>
-							<nested:checkbox property="overseasInfoAuth" styleClass="infoAuthItemCheckFlg checkBoxTransForm"/>
+							<nested:checkbox property="overseasInfoAuth" styleClass="infoAuthItemCheckFlg checkBoxClass"/>
 						</td>
 						<nested:iterate property="mstRulesList" indexId="idx">
-							<nested:notEqual property="ruleName" value="マスタ">
-								<td class="itemColumn">
-									<nested:hidden property="isvisible" styleClass="hidden_visibleFlag_${id}_${idx }"/>
-									<nested:checkbox property="isvisible" styleClass="visibleFlag_${id}_${idx } checkBoxTransForm listCheck"></nested:checkbox>
-									<nested:notEqual property="childCount" value="0">
-										<nested:notEqual property="childCount" value="1">
-											<span class="editChildRule" id="editRulesList_${id}_${idx}"> 詳細</span>
-											<nested:hidden property="ruleId" styleId="ruleId_${id}"/>
-											<nested:hidden property="childrenRuleCheckedFlag" styleClass="hidden_visibleFlag_${id}"/>
-										</nested:notEqual>
+							<td class="itemColumn"><div class="justify-content-arround">
+								<nested:hidden property="isvisible" styleClass="hidden_visibleFlag_${id}_${idx }"/>
+								<nested:checkbox property="isvisible" styleClass="visibleFlag_${id}_${idx } checkBoxClass listCheck"></nested:checkbox>
+								<nested:notEqual property="childCount" value="0">
+									<nested:notEqual property="childCount" value="1">
+										<span class="editChildRule" id="editRulesList_${id}_${idx}"> 詳細</span>
+										<nested:hidden property="ruleId" styleId="ruleId_${id}"/>
+										<nested:hidden property="childrenRuleCheckedFlag" styleClass="hidden_visibleFlag_${id}_${idx}"/>
 									</nested:notEqual>
-								</td>
-							</nested:notEqual>
+								</nested:notEqual>
+							</div></td>
 						</nested:iterate>
 					</tr>
 				</nested:iterate>
@@ -291,7 +421,7 @@
 				initCheckBox();
 			}
 			
-			$(document).on('click', '.checkBoxTransForm', function () {
+			$(document).on('click', '.checkBoxClass', function () {
 				$(this).unbind().each(function() {
 					var classList = $(this).attr('class').split(' ');
 					console.log($(this).parent().find(".hidden_" + classList[0]));
@@ -302,21 +432,26 @@
 			$(document).on('click', '.editChildRule', function () {
 				$(this).unbind().each(function() {
 					seleletElmentId = $(this).attr('id');
-					var arrItem = seleletElmentId.split('_');
-					var selectUserId = $(this).parent().parent().find("#sysUserIdx_"+ arrItem[1]).val();
-					var selectRuleId = $(this).parent().find("#ruleId_"+ arrItem[1]).val();
-					
-					$("#sysUserId").val(selectUserId); $("#ruleId").val(selectRuleId);
-					
+					// console.log("seleletElmentId", seleletElmentId);
 					$("h4.heading").html("詳細画面");
 					$("#tblUserList").css("display","none");
 					$(".btnUpdateExtraUserList").css("display","");
 					$("#tblExtraUserRuleDetail").css("display","");
 					$("#tblExtraUserRuleDetail ."+ seleletElmentId).css("display","");
 					
+					var arrItem = seleletElmentId.split('_');
+					var selectUserId = $(this).parent().parent().parent().find("#sysUserIdx_"+ arrItem[1]).val();
+					var selectRuleId = 0;
+					$("#sysUserId").val(selectUserId); 
+					
+					
 					var tdElement = $("."+ seleletElmentId).find("td.editCheckBox");
-					console.log("seleletElmentId = ", seleletElmentId);
+					
 					var dynamicColumnsCount = tdElement.length;
+					if(arrItem[0] != "editMasterList"){
+						selectRuleId = $(this).parent().find("#ruleId_"+ arrItem[1]).val();
+					}
+					$("#ruleId").val(selectRuleId);
 					for(var i = 0; i < dynamicColumnsCount; i++){
 						if(tdElement.find(".hidden_visibleFlag_"+i).val() == 1)
 							tdElement.find(".visibleFlag_"+i).prop( "checked", true );
@@ -341,12 +476,11 @@
 			var ruleId = $("#ruleId").val();
 			var ruleDetailList = [];
 			var checkList = $("." + seleletElmentId + " .editCheckBox").find(':hidden');
-			
+			var ruleCheck = 0;
 			for(var i = 0; i < checkList.size(); i++){
 				ruleDetailList.push(checkList[i].value);
+				if(checkList[i].value == 1) ruleCheck = 1;
 			}
-			
-			console.log(ruleDetailList); 
 			
 			$.ajax({
 				url : "./saveExtraRuleDetailByUserId.do"
@@ -362,6 +496,18 @@
 				$("#tblUserList").css("display","");
 				$("#tblExtraUserRuleDetail").css("display","none");
 				$("#tblExtraUserRuleDetail ."+ seleletElmentId).css("display","none");
+				
+				var arrItemId = seleletElmentId.split('_');
+				var targetId = "";
+				if(ruleId == 0) targetId = "mastareItemCheckFlg";
+				else targetId = "visibleFlag_"+ arrItemId[1] + "_" + arrItemId[2];
+				
+				console.log("targetId", $("#" + seleletElmentId).parent().find("." + targetId));
+				if(ruleCheck > 0)
+					$("#" + seleletElmentId).parent().find("." + targetId).prop( "checked", true );
+				else 
+					$("#" + seleletElmentId).parent().find("." + targetId).prop( "checked", false );
+				
 			}).fail(function(data) {
 				
 			});
@@ -395,8 +541,8 @@
 			
 			var dynamicColumnsCount = $(".edit_row_"+rowIndex).find("td.itemColumn").length;
 			for(var j = 0; j < dynamicColumnsCount; j++){
-				if($(".edit_row_"+rowIndex).find(".hidden_visibleFlag_"+j).val() == 1)
-					$(".edit_row_"+rowIndex).find(".visibleFlag_"+j).prop( "checked", true );
+				if($(".edit_row_"+rowIndex).find(".hidden_visibleFlag_"+rowIndex+"_"+j).val() == 1)
+					$(".edit_row_"+rowIndex).find(".visibleFlag_"+rowIndex+"_"+j).prop( "checked", true );
 			}
 		}
 		

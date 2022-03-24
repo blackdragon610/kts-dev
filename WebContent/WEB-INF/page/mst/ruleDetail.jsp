@@ -57,7 +57,6 @@
 	function editRuleList(id){
 		
 		$("#ruleListId").val(id);
-		$(".overlay").css("display", "block");
 
 		$.ajax({
 			url : "./initUpdateRuleList.do",
@@ -65,7 +64,6 @@
 			data : {'ruleListId': id},
 			dataType : 'json',
 			success : function(data, text_status, xhr) {
-				$(".overlay").css("display", "none");
 				$(".searchOptionField").css("visibility","visible");
 				$("legend").html("情報変更");
 				$("#input_name").val(data[0].listName);
@@ -76,7 +74,6 @@
 				isAddData = false;
 			},
 			error : function(data, text_status, xhr) {
-				$(".overlay").css("display", "none");
 				alert("資料取得に失敗");
 			}
 		});
@@ -126,7 +123,7 @@
 			</nested:nest>
 	
 			<html:errors/>
-			<fieldset class="searchOptionField pdg_top_10px pdg_bottom_10px ms-20" style="visibility: hidden;">
+			<fieldset class="searchOptionField pdg_top_10px pdg_bottom_10px mx-20" style="visibility: hidden;">
 				<legend>新規追加</legend>
 				<nested:nest property="ruleDetailDTO">
 					<table class="list justify-content-center">
@@ -176,9 +173,9 @@
 					<th class="td_center allDelCheckSize"><input type="checkbox" id="allDelCheck"class="allDelCheck checkBoxTransForm"></th>
 					<th class="w200">名称</th>
 					<th class="w100">ID</th>
-					<th>コピー</th>
+					<!-- <th>コピー</th> -->
 					<th class="w200">PASS</th>
-					<th>コピー</th>
+					<!-- <th>コピー</th> -->
 					<th class="w150">備考</th>
 					<th class="w200">リンク</th>
 					<th></th>
@@ -191,15 +188,15 @@
 						</td>
 						<td><nested:write property="listName" /></td>
 						<td><nested:write property="listId" /></td>
-						<td>
+						<%-- <td>
 							<a class="button_white" href="javascript:void(0);" onclick="copyClipBoard('<nested:write property="listId" />','id_<nested:write property="ruleListId" />')" id="id_<nested:write property="ruleListId" />"> 
 							コピー</a>
-						</td>
-						<td><nested:password property="listPass" /></td>
-						<td>
+						</td> --%>
+						<td><nested:password property="listPass" styleClass="border-none hand text-center" readonly="true"/></td>
+						<%-- <td>
 							<a class="button_white" href="javascript:void(0);" onclick="copyClipBoard('<nested:write property="listPass" />','pass_<nested:write property="ruleListId" />')" id="pass_<nested:write property="ruleListId" />"> 
 							コピー</a>
-						</td>
+						</td> --%>
 						<td><nested:write property="listRemarks" /></td>
 						<td><a href="<nested:write property="listLink" />"><nested:write property="listLink" /></a></td>
 						<td><a class="button_main" href="javascript:void(0);" onclick="editRuleList(<nested:write  property="ruleListId"/>);">編集</a></td>

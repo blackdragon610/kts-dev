@@ -5,6 +5,8 @@ import java.util.List;
 
 import jp.co.keyaki.cleave.fw.core.util.CipherUtil;
 import jp.co.keyaki.cleave.fw.dao.DaoException;
+import jp.co.keyaki.cleave.fw.ui.web.struts.StrutsBaseConst;
+import jp.co.kts.app.common.entity.MstMasterDTO;
 import jp.co.kts.app.common.entity.MstRulesDTO;
 import jp.co.kts.app.common.entity.MstUserDTO;
 import jp.co.kts.app.common.entity.MstUserExtraRulesDTO;
@@ -24,6 +26,7 @@ public class UserService {
 		List<MstUserDTO> dto = dao.getUserList();
 		RulesDAO ruleDao = new RulesDAO();
 		
+		
 		for (MstUserDTO uDto : dto) 
 		{
 			
@@ -34,7 +37,8 @@ public class UserService {
 				rDto.setMstRulesDetailList(ruleDao.getRuleDetailInfoByUserId(rDto.getRuleId(), uDto.getSysUserId()));
 				rDto.setChildCount(rDto.getChildCount());
 			}
-			
+			List<MstMasterDTO> masterList = dao.getMasterList(uDto.getSysUserId());
+			uDto.setMstMasterList(this.setMasterList(masterList));
 		}
 		
 		return dto;
@@ -60,6 +64,13 @@ public class UserService {
 				rDto.setMstRulesDetailList(ruleDao.getRuleDetailInfoByUserId(rDto.getRuleId(), uDto.getSysUserId()));
 				rDto.setChildCount(rDto.getChildCount());
 			}
+			List<MstMasterDTO> masterList = dao.getMasterList(uDto.getSysUserId());
+			try {
+				uDto.setMstMasterList(this.setMasterList(masterList));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return dto;
 
@@ -80,6 +91,8 @@ public class UserService {
 			rDto.setMstRulesDetailList(ruleDao.getRuleDetailInfoByUserId(rDto.getRuleId(), sysUserId));
 			rDto.setChildCount(rDto.getChildCount());
 		}
+		List<MstMasterDTO> masterList = dao.getMasterList(dto.getSysUserId());
+		dto.setMstMasterList(this.setMasterList(masterList));
 		dto.setMstRulesList(ruleDto);
 		return dto;
 	}
@@ -132,5 +145,68 @@ public class UserService {
 		UserDAO dao = new UserDAO();
 		
 		dao.updateUserMainRule(dto);
+	}
+	
+	public void updateMasterByUser(MstMasterDTO dto) throws Exception {
+		UserDAO dao = new UserDAO();
+		
+		List<MstMasterDTO> mdto = dao.getMasterList(dto.getSysUserId());
+		
+		if(mdto.size() < 1)
+			dao.insetMasterByUser(dto);
+		else
+			dao.updateMasterByUser(dto);
+	}
+	
+	public List<MstMasterDTO> setMasterList(List<MstMasterDTO> masterList) throws Exception {
+		UserDAO dao = new UserDAO();
+		
+		
+		int viewableCount = 0;
+		
+		List<MstMasterDTO> mdto = new ArrayList<MstMasterDTO>();
+		MstMasterDTO masterDto = new MstMasterDTO();
+		masterDto.setUserListName(StrutsBaseConst.MASTER_USER_LIST_NAME);
+		masterDto.setRuleListName(StrutsBaseConst.MASTER_RULE_LIST_NAME);
+		masterDto.setCorporationListName(StrutsBaseConst.MASTER_CORPORATION_LIST_NAME);
+		masterDto.setAccountListName(StrutsBaseConst.MASTER_ACCOUNT_LIST_NAME);
+		masterDto.setChannelListName(StrutsBaseConst.MASTER_CHANNEL_LIST_NAME);
+		masterDto.setWarehouseListName(StrutsBaseConst.MASTER_WAREHOUSE_LIST_NAME);
+		masterDto.setMakerListName(StrutsBaseConst.MASTER_MAKER_LIST_NAME);
+		masterDto.setSetItemListName(StrutsBaseConst.MASTER_SET_ITEM_LIST_NAME);
+		masterDto.setClientListName(StrutsBaseConst.MASTER_CLIENT_LIST_NAME);
+		masterDto.setDeliveryListName(StrutsBaseConst.MASTER_DELIVERY_LIST_NAME);
+		
+		for (MstMasterDTO items : masterList) 
+		{
+			masterDto.setUserListFlg(items.getUserListFlg());
+			masterDto.setRuleListFlg(items.getRuleListFlg());
+			masterDto.setCorporationListFlg(items.getCorporationListFlg());
+			masterDto.setAccountListFlg(items.getAccountListFlg());
+			masterDto.setChannelListFlg(items.getChannelListFlg());
+			masterDto.setWarehouseListFlg(items.getWarehouseListFlg());
+			masterDto.setMakerListFlg(items.getMakerListFlg());
+			masterDto.setSetItemListFlg(items.getSetItemListFlg());
+			masterDto.setClientListFlg(items.getClientListFlg());
+			masterDto.setDeliveryListFlg(items.getDeliveryListFlg());
+			
+			if(items.getUserListFlg().equals("1")) viewableCount++;
+			if(items.getRuleListFlg().equals("1")) viewableCount++;
+			if(items.getCorporationListFlg().equals("1")) viewableCount++;
+			if(items.getAccountListFlg().equals("1")) viewableCount++;
+			if(items.getChannelListFlg().equals("1")) viewableCount++;
+			if(items.getWarehouseListFlg().equals("1")) viewableCount++;
+			if(items.getMakerListFlg().equals("1")) viewableCount++;
+			if(items.getSetItemListFlg().equals("1")) viewableCount++;
+			if(items.getClientListFlg().equals("1")) viewableCount++;
+			if(items.getDeliveryListFlg().equals("1")) viewableCount++;
+			
+		}
+		
+		masterDto.setViewableCount(viewableCount);
+		masterDto.setIsvisible(masterDto.getViewableCount() > 0 ? "1" : "0");
+		mdto.add(masterDto);
+		return mdto;
+		
 	}
 }

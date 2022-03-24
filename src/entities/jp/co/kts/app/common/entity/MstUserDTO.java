@@ -61,6 +61,7 @@ public class MstUserDTO  {
 	
 	private List<MstRulesDTO> mstRulesList = new ArrayList<>();
 	
+	private List<MstMasterDTO> mstMasterList = new ArrayList<>();
 	/**
 	 * <p>
 	 * システムユーザーID を返却します。
@@ -365,6 +366,20 @@ public class MstUserDTO  {
 	 */
 	public void setMstRulesList(List<MstRulesDTO> mstRulesList) {
 		this.mstRulesList = mstRulesList;
+	}
+
+	/**
+	 * @return the mstMasterList
+	 */
+	public List<MstMasterDTO> getMstMasterList() {
+		return mstMasterList;
+	}
+
+	/**
+	 * @param mstMasterList the mstMasterList to set
+	 */
+	public void setMstMasterList(List<MstMasterDTO> mstMasterList) {
+		this.mstMasterList = mstMasterList;
 	}
 
 }

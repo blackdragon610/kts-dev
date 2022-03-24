@@ -29,8 +29,9 @@
     padding: 10px !important;
     text-align: center !important;
 }
-.ms-20{
+.mx-20{
 	margin-left:20px;
+	margin-right:20px;
 }
 
 li.footer_button {
@@ -40,7 +41,7 @@ li.footer_button {
 	text-align: right;
 }
 
-fieldset table input[type=text] {
+fieldset table input[type=text], fieldset table input[type=password] {
     padding: 5px;
     width: 95%;
 }
@@ -49,3 +50,29 @@ fieldset table input[type=text] {
 .editChildRule{
 	cursor: pointer;	
 }
+
+table.user-list td div{
+	display:flex;
+	align-items: center;
+}
+table.user-list td div span{
+	padding-left:3px;
+}
+.border-none{
+	border:none;
+    background: none;
+} 
+.hand{
+	cursor:pointer;
+} 
+.text-center{
+	text-align: center;
+}
+input[type=password].border-none:focus,
+input[type=password].border-none:active,
+input[type=password].border-none:visited {
+	border:none;
+	box-shadow: none;
+}
+
+

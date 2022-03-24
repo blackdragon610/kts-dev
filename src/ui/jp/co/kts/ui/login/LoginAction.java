@@ -176,7 +176,7 @@ public class LoginAction extends AppBaseAction{
 //		}
 		
 		request.getSession().setAttribute("LOGIN_USER_RULES_LIST", form.getUserDTO().getMstRulesList());
-		
+		request.getSession().setAttribute("LOGIN_USER_MASTER_LIST", form.getUserDTO().getMstMasterList());
 
 		//掲示板表示用
 		form.setNoticeList(service.getNoticeBoard());

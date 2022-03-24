@@ -100,7 +100,7 @@
 		</nested:nest>
 
 		<html:errors/>
-			<fieldset class="searchOptionField w-50 pdg_top_10px pdg_bottom_10px ms-20" style="visibility: hidden;">
+			<fieldset class="searchOptionField pdg_top_10px pdg_bottom_10px mx-20" style="visibility: hidden;">
 				<legend>新規追加</legend>
 				<nested:nest property="ruleDTO">
 					<div class="justify-content-arround">
