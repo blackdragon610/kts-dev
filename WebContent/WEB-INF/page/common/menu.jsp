@@ -50,19 +50,29 @@
 		<li class='has-sub last'><a href='#'><span>マスタ</span></a>
 			<ul id="ruleClass">
 			
-			<logic:iterate name="LOGIN_USER_RULES_LIST" id="listRuleId">
-				<logic:iterate name="listRuleId" property="mstRulesDetailList" id="listRuleId">
-					<logic:equal name="listRuleId" property="isvisible" value="1">
-						<li>
-							<html:link href="">
-								<span><bean:write name="listRuleId" property="listName"/></span>
-								<nested:hidden property="listLink" name="listRuleId" ></nested:hidden>
-							</html:link>
-						</li>
-					</logic:equal>
-				</logic:iterate>
-			</logic:iterate>
+			<logic:equal name="LOGIN_USER_OVERSEAS_INFO_AUTH" value="1">
+				<li><html:link href="initUserList.do" title="ユーザー一覧"><span>ユーザー一覧</span></html:link></li>
+				<li><html:link href="ruleList.do" title="ユーザー一覧"><span>ID・PASS一覧</span></html:link></li>
 				
+			</logic:equal>
+			<logic:notEmpty name="LOGIN_USER_RULES_LIST"> 
+				<logic:iterate name="LOGIN_USER_RULES_LIST" id="listRuleId">
+					<logic:iterate name="listRuleId" property="mstRulesDetailList" id="listRuleId">
+						<logic:equal name="listRuleId" property="isvisible" value="1">
+							<logic:notEqual name="listRuleId" property="listName" value="ユーザー一覧">
+							<logic:notEqual name="listRuleId" property="listName" value="ID・PASS一覧">
+							<li>
+								<html:link href="">
+									<span><bean:write name="listRuleId" property="listName"/></span>
+									<nested:hidden property="listLink" name="listRuleId" ></nested:hidden>
+								</html:link>
+							</li>
+							</logic:notEqual>
+							</logic:notEqual>
+						</logic:equal>
+					</logic:iterate>
+				</logic:iterate>
+			</logic:notEmpty>
 				
 				<%-- <logic:equal name="LOGIN_USER_OVERSEAS_INFO_AUTH" value="1">
 					<li><html:link href="initUserList.do" title="ユーザー一覧"><span>ユーザー一覧</span></html:link></li>
@@ -105,9 +115,7 @@
 
 <script type="text/javascript">
 	var ruleList_li = document.querySelectorAll("#ruleClass > li > a");
-	console.log(ruleList_li);
-	for(var i=0; i < ruleList_li.length; i++ ){
-		console.info(ruleList_li[i].children);
+	for(var i=2; i < ruleList_li.length; i++ ){
 		ruleList_li[i].setAttribute("href", ruleList_li[i].children[1].value);
 	}
 </script>
