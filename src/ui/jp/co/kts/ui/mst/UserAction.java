@@ -126,6 +126,17 @@ public class UserAction extends AppBaseAction {
 				
 				for (MstMasterDTO masterDto : userDto.getMstMasterList()) {
 					if(!masterDto.getChildrenMasterCheckedFlag().equals("-1")) {
+						masterDto.setSysUserId(form.getSysUserId());
+						masterDto.setUserListFlg("1");
+						masterDto.setRuleListFlg("1");
+						masterDto.setCorporationListFlg("1");
+						masterDto.setAccountListFlg("1");
+						masterDto.setChannelListFlg("1");
+						masterDto.setWarehouseListFlg("1");
+						masterDto.setMakerListFlg("1");
+						masterDto.setSetItemListFlg("1");
+						masterDto.setClientListFlg("1");
+						masterDto.setDeliveryListFlg("1");
 						userService.updateMasterByUser(masterDto);
 					}
 				}

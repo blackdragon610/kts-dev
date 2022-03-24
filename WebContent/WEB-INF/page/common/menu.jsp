@@ -58,7 +58,7 @@
 			<logic:iterate name="LOGIN_USER_MASTER_LIST" id="listMasterId">
 				<logic:equal name="listMasterId" property="corporationListFlg" value="1">
 					<li>
-						<html:link href="initCorporationList"><span><bean:write name="listMasterId" property="corporationListName"/></span></html:link>
+						<html:link href="initCorporationList.do"><span><bean:write name="listMasterId" property="corporationListName"/></span></html:link>
 					</li>
 				</logic:equal>
 				<logic:equal name="listMasterId" property="accountListFlg" value="1">
