@@ -240,9 +240,10 @@ public class UserAction extends AppBaseAction {
 			if(userDto.getSysUserId() == form.getSysUserId()) {
 				for (MstRulesDTO ruleDto : userDto.getMstRulesList()) {
 					if(ruleDto.getRuleId() == form.getRuleId()) {
-						
+						int index = 0;
 						for (MstRulesListDTO dDto : ruleDto.getMstRulesDetailList()) {
-							dService.updateExtraRuleDetail(dDto, userDto.getSysUserId(), form.getRuleId(), form.getRuleDetailList());
+							dService.updateExtraRuleDetail(dDto, userDto.getSysUserId(), form.getRuleId(), form.getRuleDetailList()[index]);
+							index++;
 						}
 					}
 				}

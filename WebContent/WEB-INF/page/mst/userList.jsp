@@ -180,8 +180,8 @@
 						<nested:iterate property="mstRulesList" indexId="idx">
 							<nested:notEqual property="ruleName" value="マスタ">
 								<td class="itemColumn">
-									<nested:hidden property="isvisible" styleClass="hidden_visibleFlag_${id}"/>
-									<nested:checkbox property="isvisible" styleClass="visibleFlag_${id} checkBoxTransForm listCheck"></nested:checkbox>
+									<nested:hidden property="isvisible" styleClass="hidden_visibleFlag_${idx}"/>
+									<nested:checkbox property="isvisible" styleClass="visibleFlag_${idx} checkBoxTransForm listCheck"></nested:checkbox>
 									<nested:notEqual property="childCount" value="0">
 										<nested:notEqual property="childCount" value="1">
 											<span class="editChildRule" id="editRulesList_${id}_${idx}"> 詳細</span>
