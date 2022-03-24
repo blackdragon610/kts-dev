@@ -50,9 +50,6 @@
 		$(".addRuleListItem").click(function () {
 			$(".searchOptionField").css("visibility","visible");
 		});
-		/* $(".editRuleListItem").click(function () {
-			$(".searchOptionField").css("visibility","visible");
-		}) */;
 	});
 
 	var isAddData = true;

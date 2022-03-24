@@ -49,10 +49,6 @@
 			$(".searchOptionField").css("visibility","visible");
 		});
 		
-		/* $(".editRuleItem").click(function () {
-			$(".searchOptionField").css("visibility","visible");
-		}); */
-		
 	});
 
 	var isAddData = true;
@@ -105,13 +101,6 @@
 
 		<html:errors/>
 			<fieldset class="searchOptionField w-50 pdg_top_10px pdg_bottom_10px ms-20" style="visibility: hidden;">
-			
-				<%-- <nested:notEqual value="0" property="ruleId">
-					<legend>情報変更</legend>
-				</nested:notEqual>
-				<nested:equal value="0" property="ruleId">
-					<legend>新規追加</legend>
-				</nested:equal> --%>
 				<legend>新規追加</legend>
 				<nested:nest property="ruleDTO">
 					<div class="justify-content-arround">
@@ -145,6 +134,7 @@
 		</div>
 		
 		<html:hidden property="ruleId"  styleId="ruleId"/>
+		<html:hidden property="alertType"  styleId="alertType"/>
 		<table id="mstTable" class="list">
 			<tr>
 				<th class="td_center allDelCheckSize"><input type="checkbox" id="allDelCheck"class="allDelCheck checkBoxTransForm"></th>

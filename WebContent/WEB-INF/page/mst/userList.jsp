@@ -356,6 +356,7 @@
 				$("h4.heading").html("ユーザー一覧");
 				$("#tblUserList").css("display","");
 				$("#tblExtraUserRuleDetail").css("display","none");
+				$("#tblExtraUserRuleDetail ."+ seleletElmentId).css("display","none");
 			}).fail(function(data) {
 				
 			});
