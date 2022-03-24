@@ -83,7 +83,11 @@
 		<table id="mstTable" class="user-list">
 			<tr>
 				<th>ユーザー名</th>
-				<th>マスタ</th>
+				<nested:iterate property="ruleList" indexId="idx">
+					<nested:equal property="ruleName" value="マスタ">
+						<th><nested:write property="ruleName"/></th>
+					</nested:equal>
+				</nested:iterate>
 				<th>法人間請求権限</th>
 				<th>海外情報閲覧権限</th>
 				<nested:iterate property="ruleList" indexId="idx">
@@ -104,20 +108,22 @@
 						<td ondblclick="goDetailUser(<nested:write  property="sysUserId"/>);" style="cursor:pointer">
 							<nested:write  property="userFamilyNmKanji"/><nested:write  property="userFirstNmKanji"/>
 						</td>
-						<nested:iterate property="mstRulesList" indexId="idx">
-							<nested:equal property="ruleName" value="マスタ">
-							<td>
-								<nested:equal property="isvisible" value="1">
-									<nested:equal property="childCount" value="1">&#9898;</nested:equal>
-										<nested:notEqual property="childCount" value="1">
-											<span class="viewChildRule" id="rulesList_${id}_${idx}"> &#9651; 詳細</span>
-										</nested:notEqual>
+						<nested:notEmpty property="mstRulesList">
+							<nested:iterate property="mstRulesList" indexId="idx">
+								<nested:equal property="ruleName" value="マスタ">
+								<td>
+									<nested:equal property="isvisible" value="1">
+										<nested:equal property="childCount" value="1">&#9898;</nested:equal>
+											<nested:notEqual property="childCount" value="1">
+												<span class="viewChildRule" id="rulesList_${id}_${idx}"> &#9651; 詳細</span>
+											</nested:notEqual>
+									</nested:equal>
+										
+									<nested:notEqual property="isvisible" value="1">&#9932;</nested:notEqual>
+								</td>
 								</nested:equal>
-									
-								<nested:notEqual property="isvisible" value="1">&#9932;</nested:notEqual>
-							</td>
-							</nested:equal>
-						</nested:iterate>
+							</nested:iterate>
+						</nested:notEmpty>
 						<td>
 							<nested:equal property="btobBillAuth" value="1">&#9898;</nested:equal>
 							<nested:notEqual property="btobBillAuth" value="1">&#9932;</nested:notEqual>
@@ -127,6 +133,7 @@
 							<nested:equal property="overseasInfoAuth" value="1">&#9898;</nested:equal>
 							<nested:notEqual property="overseasInfoAuth" value="1">&#9932;</nested:notEqual>
 						</td>
+						<nested:notEmpty property="mstRulesList">
 						<nested:iterate property="mstRulesList" indexId="idx">
 							<nested:notEqual property="ruleName" value="マスタ">
 								<td>
@@ -140,6 +147,7 @@
 								</td>
 							</nested:notEqual>
 						</nested:iterate>
+						</nested:notEmpty>
 							<td>
 								<a class="button_main" href="Javascript:void(0);" onclick="goEditUser(<nested:write property="sysUserId"/>, '${id}');">編集</a>
 							</td>

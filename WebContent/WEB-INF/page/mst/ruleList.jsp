@@ -141,6 +141,7 @@
 				<th class="w200">分類</th>
 				<th></th>
 			</tr>
+			<nested:notEmpty property="ruleList">
 			<nested:iterate property="ruleList" indexId="idx">
 				<tr ondblclick="goDetailRule(<nested:write  property="ruleId"/>);">
 					<td class="count salesSlipRow td_center">
@@ -151,6 +152,7 @@
 					<td><a class="button_main" href="javascript:void(0);" onclick="editRule(<nested:write  property="ruleId"/>, '<nested:write property="ruleName" />');">編集</a></td>
 				</tr>
 			</nested:iterate>
+			</nested:notEmpty>
 		</table>
 		
 	</html:form>
