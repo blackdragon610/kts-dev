@@ -104,12 +104,10 @@
 </div>
 
 <script type="text/javascript">
-window.onload = function() {
 	var ruleList_li = document.querySelectorAll("#ruleClass > li > a");
 	console.log(ruleList_li);
 	for(var i=0; i < ruleList_li.length; i++ ){
 		console.info(ruleList_li[i].children);
 		ruleList_li[i].setAttribute("href", ruleList_li[i].children[1].value);
 	}
-};
 </script>

@@ -68,14 +68,7 @@ public class RulesDetailService {
 	}
 	public int updateExtraRuleDetail(MstRulesListDTO dto, long userId, long ruleId, long visible)throws Exception {
 		int result = 0;
-//		RulesDAO dao = new RulesDAO();
-//		if(visible == 1) result = this.checkVisible(dto, userId, visible);
-//		else result = this.unCheckVisible(dto, userId, visible);
-//		if(dto.getIsvisible().equals("1")) {
-//			result = this.checkVisible(dto, userId);
-//		}
-//		else 
-//			result = this.unCheckVisible(dto, userId);
+		
 		RulesDAO dao = new RulesDAO();
 		List<MstUserExtraRulesDTO> extraRulesList = dao.getExtraRulesByListId(dto.getRuleListId(), userId);
 		
@@ -93,41 +86,16 @@ public class RulesDetailService {
 		return result;
 	}
 	
-//	private int checkVisible(MstRulesListDTO dto, long userId, long visible) throws Exception
-//	{
-//		int result = 0;
-//		RulesDAO dao = new RulesDAO();
-//		List<MstUserExtraRulesDTO> extraRulesList = dao.getExtraRulesByListId(dto.getRuleListId(), userId);
-//		
-//		if(extraRulesList.size() < 1) {
-//			result = dao.insertExtraRule(dto.getRuleId(), userId, dto.getRuleListId());	
-//		}
-//		else {
-//			for (MstUserExtraRulesDTO extraDto : extraRulesList) 
-//			{
-//				if(visible > 0)
-//					result = dao.updateExtraRule(extraDto);
-//			}
-//		}
-//			
-//		return result;
-//		
-//	}
-//	
-//	private int unCheckVisible(MstRulesListDTO dto, long userId, long visible) throws Exception
-//	{
-//		int result = 0;
-//		RulesDAO dao = new RulesDAO();
-//		List<MstUserExtraRulesDTO> extraRulesList = dao.getExtraRulesByUserId(dto.getRuleId(), userId);
-//		
-//		if(extraRulesList.size() > 0) {
-//			for (MstUserExtraRulesDTO extraDto : extraRulesList) 
-//			{
-//				if(visible < 1)
-//					result = dao.deleteExtraRule(extraDto);
-//			}
-//		}
-//		return result;
-//		
-//	}
+	public Result<MstRulesDTO> validate(MstRulesListDTO dto) {
+
+		Result<MstRulesDTO> result = new Result<MstRulesDTO>();
+
+		//入力チェック(必須・文字数)
+		ServiceValidator.requiredChecker(result, dto.getListName(), "名称");
+		ServiceValidator.inputChecker(result, dto.getListName(), "名称", 30, true);
+		ServiceValidator.inputChecker(result, dto.getListId(), "ID", 30, true);
+
+		return result;
+	}
+
 }

@@ -15,6 +15,8 @@
 	$(document).ready(function() {
 		$(".overlay").css("display", "none");
 		$("fieldset input").val("");
+		if($("#alertType").val() == "3") 
+			$(".searchOptionField").css("visibility","visible");
 	});
 
 	$(function () {

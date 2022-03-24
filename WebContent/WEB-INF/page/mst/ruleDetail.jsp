@@ -17,6 +17,8 @@
 	$(document).ready(function() {
 		$(".overlay").css("display", "none");
 		$("fieldset input").val("");
+		if($("#alertType").val() == "3") 
+			$(".searchOptionField").css("visibility","visible");
 	});
 
 	$(function () {
@@ -171,6 +173,7 @@
 			
 			<html:hidden property="ruleId"  styleId="ruleId"/>
 			<html:hidden property="ruleListId"  styleId="ruleListId"/>
+			<html:hidden property="alertType"  styleId="alertType"/>
 			<table id="mstTable" class="list">
 				<tr>
 					<th class="td_center allDelCheckSize"><input type="checkbox" id="allDelCheck"class="allDelCheck checkBoxTransForm"></th>

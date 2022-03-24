@@ -79,7 +79,8 @@ public class RulesService {
 		Result<MstRulesDTO> result = new Result<MstRulesDTO>();
 
 		//入力チェック(必須・文字数)
-		ServiceValidator.inputChecker(result, ruleName, "名", 30, true);
+		ServiceValidator.requiredChecker(result, ruleName, "分類");
+		ServiceValidator.inputChecker(result, ruleName, "分類", 30, true);
 
 		return result;
 	}

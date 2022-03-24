@@ -60,6 +60,7 @@ public class RuleAction extends AppBaseAction {
 		 List<MstRulesDTO> rulesList = service.getRulesList();
 		 if(rulesList != null && !rulesList.isEmpty()) {
 			 form.setRuleList(service.getRulesList());
+			 form.setAlertType("0");
 		 }
 		 return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
 	 }
@@ -119,6 +120,7 @@ public class RuleAction extends AppBaseAction {
 			List<ErrorMessage> messages = new ArrayList<ErrorMessage>();
 			messages.addAll(result.getErrorMessages());
 			saveErrorMessages(request, messages);
+			form.setAlertType("3");
 			return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_FAILURE);
 		}
 		//登録処理実行
@@ -164,6 +166,7 @@ public class RuleAction extends AppBaseAction {
 	{
 		RulesDetailService detailService = new RulesDetailService();
 		form.setRuleDetailList(detailService.getRuleDetail(form.getRuleId()));
+		form.setAlertType("0");
 		return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
 	}
 	
@@ -213,7 +216,18 @@ public class RuleAction extends AppBaseAction {
 		//インスタンス生成
 		RulesDetailService detailService = new RulesDetailService();
 		RegistryMessageDTO registryMessageDTO = new RegistryMessageDTO();
-		
+		 //入力チェック
+		 Result<MstRulesDTO> result = detailService.validate(form.getRuleDetailDTO());
+		 
+		 //入力チェック失敗の場合
+		 if (!result.isSuccess()) {
+			 List<ErrorMessage> messages = new ArrayList<ErrorMessage>();
+			 messages.addAll(result.getErrorMessages());
+			 saveErrorMessages(request, messages);
+			 form.setAlertType("3");
+			 return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_FAILURE);
+		 }
+		 
 		//登録処理実行
 		int resultCnt = detailService.registryRuleList(form.getRuleDetailDTO(),form.getRuleId());
 		//実行結果件数が1の場合
