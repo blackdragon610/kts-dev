@@ -31,6 +31,13 @@ public class RulesDetailService {
 		return dao.getRuleDetailInfo(ruleId);
 	}
 	
+	public MstRulesListDTO getRuleDetails(long ruleListId) throws Exception {
+		RulesDAO dao = new RulesDAO();
+		MstRulesListDTO dto = dao.getRuleDetails(ruleListId);
+		
+		return dto;
+	}
+	
 	public int ruleListItemDelete(List<MstRulesListDTO> dto) throws DaoException {
 		int resultCnt = 0;
 		RulesDAO dao = new RulesDAO();

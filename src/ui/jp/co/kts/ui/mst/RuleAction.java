@@ -16,6 +16,7 @@ import jp.co.keyaki.cleave.fw.ui.web.struts.AppBaseForm;
 import jp.co.keyaki.cleave.fw.ui.web.struts.StrutsBaseConst;
 import jp.co.kts.app.common.entity.MstRulesDTO;
 import jp.co.kts.app.common.entity.MstRulesListDTO;
+import jp.co.kts.app.common.entity.MstWarehouseDTO;
 import jp.co.kts.app.output.entity.RegistryMessageDTO;
 import jp.co.kts.service.common.Result;
 import jp.co.kts.service.mst.RulesDetailService;
@@ -37,12 +38,18 @@ public class RuleAction extends AppBaseAction {
 			return  ruleList(appMapping, form, request);
 		} else if ("/ruleItemDelete".equals(appMapping.getPath())) {
 			return ruleItemDelete(appMapping, form, request);
+		} else if ("/initRegistryRule".equals(appMapping.getPath())) {
+			return initRegistryRule(appMapping, form, request);	
 		} else if ("/registryRule".equals(appMapping.getPath())) {
 			return registryRule(appMapping, form, request);
+		} else if ("/editeRule".equals(appMapping.getPath())) {
+			return initUpdateRule(appMapping, form, request);	
 		} else if ("/updateRule".equals(appMapping.getPath())) {
 			return updateRule(appMapping, form, request);
 		} else if ("/detailRule".equals(appMapping.getPath())) {
 			return detailRule(appMapping, form, request);
+		}else if ("/initRegistryRuleDetail".equals(appMapping.getPath())) {
+			return initRegistryRuleDetail(appMapping, form, request);	
 		}else if ("/registryRuleList".equals(appMapping.getPath())) {
 			return registryRuleList(appMapping, form, request);
 		}else if ("/deleteRuleList".equals(appMapping.getPath())) {
@@ -64,6 +71,7 @@ public class RuleAction extends AppBaseAction {
 		 }
 		 return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
 	 }
+	
 	 
 	 protected ActionForward ruleItemDelete(AppActionMapping appMapping, RuleForm form, HttpServletRequest request) throws Exception {
 		//削除対象件数
@@ -106,7 +114,15 @@ public class RuleAction extends AppBaseAction {
 		return ruleList(appMapping, form, request);
 			
 	 }
-	protected ActionForward registryRule(AppActionMapping appMapping, RuleForm form,
+	 protected ActionForward initRegistryRule(AppActionMapping appMapping, RuleForm form,
+	            HttpServletRequest request) throws Exception {
+
+		 MstRulesDTO ruleDTO = new MstRulesDTO();
+		form.setRuleDTO(ruleDTO);
+
+		return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
+	 }
+	 protected ActionForward registryRule(AppActionMapping appMapping, RuleForm form,
 		HttpServletRequest request) throws Exception{
 		//インスタンス生成
 		RulesService service = new RulesService();
@@ -135,7 +151,14 @@ public class RuleAction extends AppBaseAction {
 		saveToken(request);
 		return ruleList(appMapping, form, request);
 	}
+	protected ActionForward initUpdateRule(AppActionMapping appMapping, RuleForm form,
+            HttpServletRequest request) throws Exception {
+
+		RulesService service = new RulesService();
+		form.setRuleDTO(service.getRules(form.getRuleId()));
 	
+		return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
+	}
 	protected ActionForward updateRule(AppActionMapping appMapping, RuleForm form,
 			HttpServletRequest request) throws Exception{
 		 //インスタンス生成
@@ -211,6 +234,16 @@ public class RuleAction extends AppBaseAction {
 		return detailRule(appMapping, form, request);
 			
 	 }
+	
+	protected ActionForward initRegistryRuleDetail(AppActionMapping appMapping, RuleForm form,
+            HttpServletRequest request) throws Exception {
+
+		MstRulesListDTO ruleListDTO = new MstRulesListDTO();
+		form.setRuleDetailDTO(ruleListDTO);
+	
+		return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
+	}
+ 
 	protected ActionForward registryRuleList(AppActionMapping appMapping, RuleForm form,
 			HttpServletRequest request) throws Exception{
 		//インスタンス生成
@@ -239,21 +272,14 @@ public class RuleAction extends AppBaseAction {
 		saveToken(request);
 		return detailRule(appMapping, form, request);
 	}
+	 
+	 
 	protected ActionForward initUpdateRuleList(AppActionMapping appMapping, RuleForm form, HttpServletRequest request, HttpServletResponse response) throws Exception
 	{
 		RulesDetailService detailService = new RulesDetailService();
-		List<MstRulesListDTO> itemList = detailService.getRuleDetailById(form.getRuleId(), form.getRuleListId());
+		form.setRuleDetailDTO(detailService.getRuleDetails(form.getRuleListId()));
 		
-		if (itemList.size() == 0) {
-			PrintWriter printWriter = response.getWriter();
-			printWriter.print(JSON.encode(""));
-		} else {
-			response.setCharacterEncoding("UTF-8");
-			PrintWriter printWriter = response.getWriter();
-			printWriter.print(JSON.encode(itemList));
-		}
-
-		return null;
+		return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
 	}
 	protected ActionForward updateRuleList(AppActionMapping appMapping, RuleForm form,
 			HttpServletRequest request) throws Exception{

@@ -726,3 +726,7 @@ background:#EDEDED;
 .checkBoxTransForm {
 	transform: scale(1.25);
 }
+
+.footer_button{
+	padding-right: 5px;
+}

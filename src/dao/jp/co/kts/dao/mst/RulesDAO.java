@@ -22,9 +22,23 @@ public class RulesDAO extends BaseDAO {
 	public List<MstRulesDTO> getRulesList() throws DaoException {
 
 		SQLParameters parameters = new SQLParameters();
+		parameters.addParameter("getListFlg", "1");
 
 		return selectList("SEL_RULES", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstRulesDTO.class));
 	}
+	
+	public MstRulesDTO getRules(long ruleId) throws DaoException {
+
+		SQLParameters parameters = new SQLParameters();
+		parameters.addParameter("getListFlg", "0");
+		parameters.addParameter("ruleId", ruleId);
+
+		return select("SEL_RULES", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstRulesDTO.class));
+	}
+	/*
+	 * <if-equals value="0" varName="getListFlg"> AND SYS_WAREHOUSE_ID =
+	 * ${sysWarehouseId} </if-equals>
+	 */
 	
 	public List<MstRulesDTO> getRulesByUserId(long userId) throws DaoException {
 
@@ -33,6 +47,8 @@ public class RulesDAO extends BaseDAO {
 
 		return selectList("SEL_RULES_BY_USERID", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstRulesDTO.class));
 	}
+	
+	
 	
 	public int deleteRuleItem(MstRulesDTO dto) throws DaoException{
 		SQLParameters parameters = new SQLParameters();
@@ -61,6 +77,16 @@ public class RulesDAO extends BaseDAO {
 		parameters.addParameter("ruleListId", 0);
 
 		return selectList("SEL_MST_RULE_LIST", parameters , ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstRulesListDTO.class));
+	}
+	
+	public MstRulesListDTO getRuleDetails(long ruleListId) throws DaoException {
+
+		//パラメータ設定
+		SQLParameters parameters = new SQLParameters();
+		parameters.addParameter("ruleId", 0);
+		parameters.addParameter("ruleListId", ruleListId);
+
+		return select("SEL_MST_RULE_LIST", parameters , ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstRulesListDTO.class));
 	}
 	
 	public List<MstRulesListDTO> getRuleDetailInfoByUserId(long ruleId, long userId) throws DaoException {

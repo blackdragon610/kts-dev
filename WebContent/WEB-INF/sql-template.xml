@@ -162,6 +162,9 @@
 		MST_RULES
 		WHERE
 			DELETE_FLAG = '0'
+			<if-equals value="0" varName="getListFlg"> 
+			AND RULE_ID =${ruleId} 
+			</if-equals>
 		ORDER BY
 		RULE_ID
 	</sql-template>
@@ -194,7 +197,9 @@
 		MST_RULES_LIST AS R
 		WHERE
 		R.DEL_FLG = '0'
-		AND R.RULE_ID = ${ruleId}
+		<if-not-equals value="0" varName="ruleId">
+			AND R.RULE_ID = ${ruleId}
+		</if-not-equals>
 		<if-not-equals value="0" varName="ruleListId">
 			AND R.RULE_LIST_ID = ${ruleListId}
 		</if-not-equals>

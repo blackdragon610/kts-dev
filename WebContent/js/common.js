@@ -876,6 +876,7 @@ function actAlert(alertTypeValue) {
 		alert('組立可数更新に失敗しました\r\n再度更新を行ってください。');
 	}
 }
+
 function numActAlert(alertTypeValue, numObj) {
 
 	if (alertTypeValue == '0' || alertTypeValue == '') {

@@ -43,7 +43,7 @@
 		<table id="mstTable">
 			<tr>
 				<th class="w150">名称</th>
-				<th class="w50">権限</th>
+				<th class="td_center allCheckSize"><input type="checkbox" id="allCheck"class="allCheck"></th>
 			</tr>
 			<nested:iterate property="userList" indexId="id">
 				<nested:iterate property="mstMasterList" indexId="idx">
@@ -228,7 +228,7 @@
 
 		<div class="update_detailUserButton">
 			<a class="button_main btnUpdateExtraUserList" href="Javascript:void(0);" onclick="saveExtraRuleDetailByUserId()">更新</a>
-			<a class="button_white" href="Javascript:void(0);" onclick="onclickBack()">戻る</a>
+			<a class="button_white btn-customize" href="Javascript:void(0);" onclick="onclickBack()">戻る</a>
 		</div>
 	</div>
 	<!--  -->
@@ -296,7 +296,7 @@
 							<a class="button_main" href="Javascript:void(0);" onclick="goEditUser(<nested:write property="sysUserId"/>, '${id}');">編集</a>
 						</td>
 						<td>
-							<a class="button_white" href="Javascript:void(0);" onclick="goDelUser(<nested:write property="sysUserId"/>);">削除</a>
+							<a class="button_white btn-customize" href="Javascript:void(0);" onclick="goDelUser(<nested:write property="sysUserId"/>);">削除</a>
 						</td>
 					</tr>
 					<!-- 個々のユーザー権限の編集 -->
@@ -341,7 +341,7 @@
 							<a class="button_main" href="Javascript:void(0);" onclick="goUpdateExtraUserRule(<nested:write  property="sysUserId"/>);">登録</a>
 						</td>
 						<td>
-							<a class="button_white" href="Javascript:void(0);" onclick="goDelUser(<nested:write  property="sysUserId"/>);">削除</a>
+							<a class="button_white btn-customize" href="Javascript:void(0);" onclick="goDelUser(<nested:write  property="sysUserId"/>);">削除</a>
 						</td>
 					</tr>
 				</nested:iterate>
@@ -414,7 +414,15 @@
 	<script>
 		var seleletElmentId = "";
 		window.onload = function() {
-			actAlert(document.getElementById('alertType').value);
+			alertTypeValue = document.getElementById('alertType').value;
+			if (alertTypeValue == '1') {
+				alert('登録しました。\r\n更新を有効にするには、もう一度ログインする必要があります');
+			} else if (alertTypeValue == '2') {
+				alert('更新しました。\r\n更新を有効にするには、もう一度ログインする必要があります');
+			}else if (alertTypeValue == '3') {
+				alert('削除しました。');
+			}
+			
 			document.getElementById('alertType').value='0';
 			
 			if($("#isEditModeAll").val() == 1){
@@ -452,11 +460,33 @@
 						selectRuleId = $(this).parent().find("#ruleId_"+ arrItem[1]).val();
 					}
 					$("#ruleId").val(selectRuleId);
+					var checkedCount = 0;
 					for(var i = 0; i < dynamicColumnsCount; i++){
-						if(tdElement.find(".hidden_visibleFlag_"+i).val() == 1)
+						if(tdElement.find(".hidden_visibleFlag_"+i).val() == 1){
 							tdElement.find(".visibleFlag_"+i).prop( "checked", true );
+							checkedCount++;
+						}
 					}
+					if(checkedCount == dynamicColumnsCount) $("#allCheck").prop("checked", true);
 		        });
+			});
+			$(document).on('click', '#allCheck', function () {
+				var tdElement = $("."+ seleletElmentId).find("td.editCheckBox");
+				
+				var dynamicColumnsCount = tdElement.length;
+				
+				if(this.checked){
+					for(var i = 0; i < dynamicColumnsCount; i++){
+						tdElement.find(".hidden_visibleFlag_"+i).val(1);
+						tdElement.find(".visibleFlag_"+i).prop( "checked", true );
+					}
+				}
+				else{
+					for(var i = 0; i < dynamicColumnsCount; i++){
+						tdElement.find(".hidden_visibleFlag_"+i).val(0);
+						tdElement.find(".visibleFlag_"+i).prop( "checked", false );
+					}
+				}
 			});
 			
 			$(document).on('click', '.viewChildRule', function () {
@@ -502,7 +532,8 @@
 				if(ruleId == 0) targetId = "mastareItemCheckFlg";
 				else targetId = "visibleFlag_"+ arrItemId[1] + "_" + arrItemId[2];
 				
-				console.log("targetId", $("#" + seleletElmentId).parent().find("." + targetId));
+				$("#allCheck").prop( "checked", false );
+				
 				if(ruleCheck > 0)
 					$("#" + seleletElmentId).parent().find("." + targetId).prop( "checked", true );
 				else 
@@ -520,6 +551,7 @@
 			$("#tblExtraUserRuleDetail").css("display","none");
 			$(".btnUpdateExtraUserList").css("display","none");
 			$("#tblExtraUserRuleDetail ."+ seleletElmentId).css("display","none");
+			$("#allCheck").prop( "checked", false );
 		}
 		
 		function goDetailUser(value){

@@ -42,7 +42,14 @@ public class RulesService {
 
 //		return dao.getRulesList();
 	}
-
+	
+	public MstRulesDTO getRules(long ruleId) throws DaoException {
+		// TODO 自動生成されたメソッド・スタブ
+		RulesDAO dao = new RulesDAO();
+		
+		return dao.getRules(ruleId);
+	}
+	
 	public int ruleItemDelete(List<MstRulesDTO> dto) throws DaoException {
 		int resultCnt = 0;
 		RulesDAO dao = new RulesDAO();
@@ -114,24 +121,7 @@ public class RulesService {
 				}
 			}
 		}
-//		List<MstUserExtraRulesDTO> extraRulesList = dao.getExtraRulesByUserId(ruleDto.getRuleId(), userId);
-//		
-//		if(extraRulesList.size() < 1) {
-//			List<MstRulesListDTO> childrenRules = dao.getRuleDetailInfo(ruleDto.getRuleId());
-//			for(MstRulesListDTO chDto : childrenRules) {
-//				result = dao.insertExtraRule(ruleDto.getRuleId(), userId, chDto.getRuleListId());	
-//			}
-//		}
-			
-//		else {
-//			for (MstUserExtraRulesDTO extraDto : extraRulesList) 
-//			{
-//				result = dao.updateExtraRule(extraDto);
-//			}
-//		}
-			
 		return result;
-		
 	}
 	
 	private int unCheckVisible(MstRulesDTO ruleDto, long userId) throws Exception
