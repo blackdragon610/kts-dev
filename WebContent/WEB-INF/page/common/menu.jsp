@@ -154,6 +154,6 @@
 <script type="text/javascript">
 	var ruleList_li = document.querySelectorAll("#ruleClass > li.ruleList > a");
 	for(var i=0; i < ruleList_li.length; i++ ){
-		ruleList_li[i].setAttribute("href", "http://"+ruleList_li[i].children[1].value);
+		ruleList_li[i].setAttribute("href", ruleList_li[i].children[1].value);
 	}
 </script>
