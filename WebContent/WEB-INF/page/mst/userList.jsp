@@ -497,6 +497,7 @@
 					$(".btnUpdateExtraUserList").css("display","none");
 					$("#tblExtraUserRuleDetail").css("display","");
 					$("#tblExtraUserRuleDetail ."+ seleletElmentId).css("display","");
+					$("#allCheck").css("display", "none");
 		        });
 			}); 
 		};
@@ -551,7 +552,9 @@
 			$("#tblExtraUserRuleDetail").css("display","none");
 			$(".btnUpdateExtraUserList").css("display","none");
 			$("#tblExtraUserRuleDetail ."+ seleletElmentId).css("display","none");
+			$("#allCheck").css("display", "");
 			$("#allCheck").prop( "checked", false );
+			
 		}
 		
 		function goDetailUser(value){
