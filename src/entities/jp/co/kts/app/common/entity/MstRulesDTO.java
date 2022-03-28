@@ -43,6 +43,10 @@ public class MstRulesDTO  {
 	private String childrenRuleCheckedFlag = "-1";
 	
 	private int childCount;
+	
+	private int viewableChildCount;
+	
+	private int isAllcheck;
 
 	public long getRuleId() {
 		return ruleId;
@@ -148,6 +152,34 @@ public class MstRulesDTO  {
 	 */
 	public void setChildrenRuleCheckedFlag(String childrenRuleCheckedFlag) {
 		this.childrenRuleCheckedFlag = childrenRuleCheckedFlag;
+	}
+
+	/**
+	 * @return the viewableChildCount
+	 */
+	public int getViewableChildCount() {
+		return viewableChildCount;
+	}
+
+	/**
+	 * @param viewableChildCount the viewableChildCount to set
+	 */
+	public void setViewableChildCount(int viewableChildCount) {
+		this.viewableChildCount = viewableChildCount;
+	}
+
+	/**
+	 * @return the isAllcheck
+	 */
+	public int getIsAllcheck() {
+		return isAllcheck;
+	}
+
+	/**
+	 * @param isAllcheck the isAllcheck to set
+	 */
+	public void setIsAllcheck(int isAllcheck) {
+		this.isAllcheck = isAllcheck;
 	}
 
 	

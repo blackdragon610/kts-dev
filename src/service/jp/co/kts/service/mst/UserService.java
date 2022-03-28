@@ -8,6 +8,7 @@ import jp.co.keyaki.cleave.fw.dao.DaoException;
 import jp.co.keyaki.cleave.fw.ui.web.struts.StrutsBaseConst;
 import jp.co.kts.app.common.entity.MstMasterDTO;
 import jp.co.kts.app.common.entity.MstRulesDTO;
+import jp.co.kts.app.common.entity.MstRulesListDTO;
 import jp.co.kts.app.common.entity.MstUserDTO;
 import jp.co.kts.app.common.entity.MstUserExtraRulesDTO;
 import jp.co.kts.app.extendCommon.entity.ExtendMstUserDTO;
@@ -34,8 +35,19 @@ public class UserService {
 			uDto.setMstRulesList(ruleDto);
 			for (MstRulesDTO rDto : ruleDto) 
 			{
-				rDto.setMstRulesDetailList(ruleDao.getRuleDetailInfoByUserId(rDto.getRuleId(), uDto.getSysUserId()));
+				List<MstRulesListDTO> ruleDetailList = ruleDao.getRuleDetailInfoByUserId(rDto.getRuleId(), uDto.getSysUserId());
+				rDto.setMstRulesDetailList(ruleDetailList);
 				rDto.setChildCount(rDto.getChildCount());
+				int childViewCount = 0;
+				if(ruleDetailList.size() > 1) {
+					for (MstRulesListDTO ruleDetailDto : ruleDetailList) 
+					{
+						if(ruleDetailDto.getIsvisible().equals("1"))  childViewCount++;
+							
+					}
+				}
+				rDto.setViewableChildCount(childViewCount);
+				rDto.setIsAllcheck(childViewCount == rDto.getChildCount() ? 1 : 0);
 			}
 			List<MstMasterDTO> masterList = dao.getMasterList(uDto.getSysUserId());
 			uDto.setMstMasterList(this.setMasterList(masterList));

@@ -6,7 +6,7 @@
 	<jsp:include page="/WEB-INF/page/define/define-meta.jsp" />
 	<link rel="stylesheet" href="./css/mst.css" type="text/css" />
 	<link rel="stylesheet" href="./css/common.css" type="text/css" />
-	<!-- <link rel="stylesheet" href="./css/rules.css" type="text/css" /> -->
+	<link rel="stylesheet" href="./css/rules.css" type="text/css" />
 	<script src="./js/jquery-1.10.2.min.js" type="text/javascript"></script>
 	<script src="./js/validation.js" type="text/javascript"></script>
 

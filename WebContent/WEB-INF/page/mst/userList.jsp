@@ -259,10 +259,14 @@
 						<td>
 							<nested:notEmpty property="mstMasterList">
 								<nested:iterate property="mstMasterList" indexId="idx">
+								
 									<nested:equal property="isvisible" value="1">
 										<nested:equal property="viewableCount" value="1">&#9898;</nested:equal>
 										<nested:notEqual property="viewableCount" value="1">
+											<nested:equal property="viewableCount" value="10">&#9898;</nested:equal>
+											<nested:notEqual property="viewableCount" value="10">
 											<span class="viewChildRule" id="masterList_${id}_${idx}"> &#9651; 詳細</span>
+											</nested:notEqual>
 										</nested:notEqual>
 									</nested:equal>
 									<nested:notEqual property="isvisible" value="1">&#9932;</nested:notEqual>
@@ -283,8 +287,8 @@
 							<nested:iterate property="mstRulesList" indexId="idx">
 								<td>
 									<nested:equal property="isvisible" value="1">
-										<nested:equal property="childCount" value="1">&#9898;</nested:equal>
-										<nested:notEqual property="childCount" value="1">
+										<nested:equal property="isAllcheck" value="1">&#9898;</nested:equal>
+										<nested:notEqual property="isAllcheck" value="1">
 											<span class="viewChildRule" id="rulesList_${id}_${idx}"> &#9651; 詳細</span>
 										</nested:notEqual>
 									</nested:equal>
@@ -466,10 +470,15 @@
 							tdElement.find(".visibleFlag_"+i).prop( "checked", true );
 							checkedCount++;
 						}
+						if($("#sysUserId").val() == 2 && i < 2 && arrItem[0] == "editMasterList"){
+							
+							tdElement.find(".visibleFlag_"+i).attr('disabled', true);
+						}
 					}
 					if(checkedCount == dynamicColumnsCount) $("#allCheck").prop("checked", true);
 		        });
 			});
+			
 			$(document).on('click', '#allCheck', function () {
 				var tdElement = $("."+ seleletElmentId).find("td.editCheckBox");
 				

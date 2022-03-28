@@ -5,6 +5,7 @@
 	<head>
 	<jsp:include page="/WEB-INF/page/define/define-meta.jsp" />
 	<link rel="stylesheet" href="./css/mst.css" type="text/css" />
+	<link rel="stylesheet" href="./css/rules.css" type="text/css" />
 	<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 
 <!--
@@ -91,7 +92,27 @@
 					
 				</table>
 			</nested:nest>
-			<div class="detailCorporetionButton">
+			<div class="buttonArea">
+				<ul style="display: inline-flex;">
+					<li class="footer_button">
+						<a class="button_white btn-customize" href="javascript:void(0);" onclick="goTransaction('detailRule.do');">戻る</a>
+					</li>
+					<nested:notEqual value="0" property="ruleDetailDTO.ruleListId">
+					<li class="footer_button">
+						<a class="button_main" href="Javascript:void(0);" onclick="goTransaction('updateRuleList.do');">更新</a>
+					</li>
+					</nested:notEqual>
+					<nested:equal value="0" property="ruleDetailDTO.ruleListId">
+					<li class="footer_button">
+						<a class="button_main" href="Javascript:void(0);" onclick="goTransaction('registryRuleList.do');">登録</a>
+					</li>
+					</nested:equal>
+				</ul>
+			</div>
+			<%-- <div class="detailCorporetionButton">
+				<div class="update_detailWarehouseButton">
+					<a class="button_white" href="Javascript:void(0);" onclick="goTransaction('detailRule.do');">戻る</a>
+				</div>
 			<nested:notEqual value="0" property="ruleDetailDTO.ruleListId">
 				<div class="update_detailWarehouseButton">
 					<a class="button_main" href="Javascript:void(0);" onclick="goTransaction('updateRuleList.do');">更新</a>
@@ -103,7 +124,7 @@
 				</div>
 			</nested:equal>
 			</div>
-		</html:form>
+ --%>		</html:form>
 
 	</body>
 </html:html>
