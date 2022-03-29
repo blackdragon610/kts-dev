@@ -74,6 +74,7 @@
 				<th></th>
 			</tr>
 			<nested:iterate property="ruleDetailList" indexId="idx">
+			<nested:equal property="isvisible" value="1">
 				<tr>
 					<td class="count salesSlipRow td_center">
 						<nested:checkbox property="itemCheckFlg" styleClass="itemCheckFlg checkBoxTransForm"/>
@@ -96,6 +97,7 @@
 						<a class="button_main" href="javascript:void(0);" onclick="editRuleList(<nested:write property="ruleListId"/>);"> 編集 </a>
 					</td>
 				</tr>
+				</nested:equal>
 			</nested:iterate>
 		</table>
 			

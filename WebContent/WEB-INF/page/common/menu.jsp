@@ -97,20 +97,6 @@
 					</li>
 				</logic:equal>
 			</logic:iterate>
-			<logic:notEmpty name="LOGIN_USER_RULES_LIST"> 
-				<logic:iterate name="LOGIN_USER_RULES_LIST" id="listRuleId">
-					<logic:iterate name="listRuleId" property="mstRulesDetailList" id="listRuleId">
-						<logic:equal name="listRuleId" property="isvisible" value="1">
-							<li class="ruleList">
-								<html:link href="" target="_blank">
-									<span><bean:write name="listRuleId" property="listName"/></span>
-									<nested:hidden property="listLink" name="listRuleId" ></nested:hidden>
-								</html:link>
-							</li>
-						</logic:equal>
-					</logic:iterate>
-				</logic:iterate>
-			</logic:notEmpty>
 				
 				<%-- <logic:equal name="LOGIN_USER_OVERSEAS_INFO_AUTH" value="1">
 					<li><html:link href="initUserList.do" title="ユーザー一覧"><span>ユーザー一覧</span></html:link></li>

@@ -74,14 +74,16 @@
 			</tr>
 			<nested:notEmpty property="ruleList">
 			<nested:iterate property="ruleList" indexId="idx">
-				<tr ondblclick="goDetailRule(<nested:write  property="ruleId"/>);">
-					<td class="count salesSlipRow td_center">
-						<nested:checkbox property="itemCheckFlg" styleClass="itemCheckFlg checkBoxTransForm"/>
-						<nested:hidden property="itemCheckFlg" value="off"/>
-					</td>
-					<td><nested:write property="ruleName" /></td>
-					<td><a class="button_main" href="javascript:void(0);" onclick="editRule(<nested:write  property="ruleId"/>);">編集</a></td>
-				</tr>
+				<%-- <nested:equal property="isvisible" value="1"> --%>
+					<tr ondblclick="goDetailRule(<nested:write  property="ruleId"/>);">
+						<td class="count salesSlipRow td_center">
+							<nested:checkbox property="itemCheckFlg" styleClass="itemCheckFlg checkBoxTransForm"/>
+							<nested:hidden property="itemCheckFlg" value="off"/>
+						</td>
+						<td><nested:write property="ruleName" /></td>
+						<td><a class="button_main" href="javascript:void(0);" onclick="editRule(<nested:write  property="ruleId"/>);">編集</a></td>
+					</tr>
+				<%-- </nested:equal> --%>
 			</nested:iterate>
 			</nested:notEmpty>
 		</table>

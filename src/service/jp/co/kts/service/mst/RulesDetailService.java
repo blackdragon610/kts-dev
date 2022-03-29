@@ -28,7 +28,9 @@ public class RulesDetailService {
 	
 	public List<MstRulesListDTO> getRuleDetail(long ruleId) throws Exception {
 		RulesDAO dao = new RulesDAO();
-		return dao.getRuleDetailInfo(ruleId);
+		UserInfo userInfo = ActionContext.getLoginUserInfo();
+		
+		return dao.getRuleDetailInfoByUserId(ruleId, userInfo.getUserId());
 	}
 	
 	public MstRulesListDTO getRuleDetails(long ruleListId) throws Exception {

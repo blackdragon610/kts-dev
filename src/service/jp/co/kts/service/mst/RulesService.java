@@ -2,6 +2,8 @@ package jp.co.kts.service.mst;
 
 import java.util.List;
 
+import jp.co.keyaki.cleave.fw.core.ActionContext;
+import jp.co.keyaki.cleave.fw.core.security.UserInfo;
 import jp.co.keyaki.cleave.fw.core.util.CipherUtil;
 import jp.co.keyaki.cleave.fw.dao.DaoException;
 import jp.co.kts.app.common.entity.DomesticOrderListDTO;
@@ -30,12 +32,13 @@ public class RulesService {
 	public List<MstRulesDTO> getRulesList() throws DaoException {
 		// TODO 自動生成されたメソッド・スタブ
 		RulesDAO dao = new RulesDAO();
-		
-		List<MstRulesDTO> dto = dao.getRulesList();
+		UserInfo userInfo = ActionContext.getLoginUserInfo();
+
+		List<MstRulesDTO> dto = dao.getRulesByUserId(userInfo.getUserId());
 		
 		for (MstRulesDTO rDto : dto) 
 		{
-			rDto.setMstRulesDetailList(dao.getRuleDetailInfo(rDto.getRuleId()));
+			rDto.setMstRulesDetailList(dao.getRuleDetailInfoByUserId(rDto.getRuleId(), userInfo.getUserId()));
 		}
 		
 		return dto;

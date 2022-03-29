@@ -35,10 +35,6 @@ public class RulesDAO extends BaseDAO {
 
 		return select("SEL_RULES", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstRulesDTO.class));
 	}
-	/*
-	 * <if-equals value="0" varName="getListFlg"> AND SYS_WAREHOUSE_ID =
-	 * ${sysWarehouseId} </if-equals>
-	 */
 	
 	public List<MstRulesDTO> getRulesByUserId(long userId) throws DaoException {
 

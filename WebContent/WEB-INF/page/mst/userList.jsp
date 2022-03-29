@@ -482,11 +482,15 @@
 			$(document).on('click', '#allCheck', function () {
 				var tdElement = $("."+ seleletElmentId).find("td.editCheckBox");
 				
+				var arrItem = seleletElmentId.split('_');
+				
 				var dynamicColumnsCount = tdElement.length;
 				
 				if(this.checked){
 					for(var i = 0; i < dynamicColumnsCount; i++){
-						if($("#sysUserId").val() == 2 && i > 1){
+						tdElement.find(".hidden_visibleFlag_"+i).val(1);
+						tdElement.find(".visibleFlag_"+i).prop( "checked", true );
+						if($("#sysUserId").val() == 2 && i < 2 && arrItem[0] == "editMasterList"){
 							tdElement.find(".hidden_visibleFlag_"+i).val(1);
 							tdElement.find(".visibleFlag_"+i).prop( "checked", true );
 						}
@@ -494,9 +498,11 @@
 				}
 				else{
 					for(var i = 0; i < dynamicColumnsCount; i++){
-						if($("#sysUserId").val() == 2 && i > 1){
-							tdElement.find(".hidden_visibleFlag_"+i).val(0);
-							tdElement.find(".visibleFlag_"+i).prop( "checked", false );
+						tdElement.find(".hidden_visibleFlag_"+i).val(0);
+						tdElement.find(".visibleFlag_"+i).prop( "checked", false );
+						if($("#sysUserId").val() == 2 && i < 2 && arrItem[0] == "editMasterList"){
+							tdElement.find(".hidden_visibleFlag_"+i).val(1);
+							tdElement.find(".visibleFlag_"+i).prop( "checked", true );
 						}
 					}
 				}
