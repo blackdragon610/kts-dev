@@ -50,7 +50,7 @@
 		<li class='has-sub last'><a href='#'><span>マスタ</span></a>
 			<ul id="ruleClass">
 			
-			<logic:equal name="LOGIN_USER_OVERSEAS_INFO_AUTH" value="1">
+			<logic:equal name="LOGIN_USER_ID" value="2">
 				<li><html:link href="initUserList.do" title="ユーザー一覧"><span>ユーザー一覧</span></html:link></li>
 				<li><html:link href="ruleList.do" title="ユーザー一覧"><span>ID・PASS一覧</span></html:link></li>
 				

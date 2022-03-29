@@ -486,14 +486,18 @@
 				
 				if(this.checked){
 					for(var i = 0; i < dynamicColumnsCount; i++){
-						tdElement.find(".hidden_visibleFlag_"+i).val(1);
-						tdElement.find(".visibleFlag_"+i).prop( "checked", true );
+						if($("#sysUserId").val() == 2 && i > 1){
+							tdElement.find(".hidden_visibleFlag_"+i).val(1);
+							tdElement.find(".visibleFlag_"+i).prop( "checked", true );
+						}
 					}
 				}
 				else{
 					for(var i = 0; i < dynamicColumnsCount; i++){
-						tdElement.find(".hidden_visibleFlag_"+i).val(0);
-						tdElement.find(".visibleFlag_"+i).prop( "checked", false );
+						if($("#sysUserId").val() == 2 && i > 1){
+							tdElement.find(".hidden_visibleFlag_"+i).val(0);
+							tdElement.find(".visibleFlag_"+i).prop( "checked", false );
+						}
 					}
 				}
 			});

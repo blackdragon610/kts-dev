@@ -146,6 +146,8 @@ public class LoginAction extends AppBaseAction{
 
 		userInfo.setFamilyNameKana(userDTO.getUserFamilyNmKana());
 		userInfo.setFirstNameKana(userDTO.getUserFirstNmKana());
+		
+		request.getSession().setAttribute("LOGIN_USER_ID", userInfo.getUserId());
 
 		request.getSession().setAttribute(WebFwConst.SESSION_KEY_LOGIN_USER, userInfo);
 		ActionContext.setLoginUserInfo(userInfo);
@@ -155,6 +157,8 @@ public class LoginAction extends AppBaseAction{
 		form.setUserDTO(userService.getUser(userDTO.getSysUserId()));
 		String fullName = (form.getUserDTO().getUserFamilyNmKanji() + " " + form.getUserDTO().getUserFirstNmKanji());
 		request.getSession().setAttribute("LOGIN_USER_NAME", fullName);
+		
+		
 
 		/*  2015/12/15 ooyama ADD START 法人間請求書機能対応  */
 
