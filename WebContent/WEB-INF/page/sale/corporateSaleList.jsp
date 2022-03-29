@@ -450,7 +450,7 @@
 
 		//売上詳細
 		$(".itemListRow").click( function () {
-			$("#sysCorporateSalesSlipId").val($(this).find(".sysCorporateSalesSlipId").val());
+			$("#sysCorporateSalesSlipId").val($(this).parent().parent().parent().find(".sysCorporateSalesSlipId").val());
 			sessionStorage.setItem('toCorporateSaleDetail', 'true');
 			goTransaction("detailCorporateSale.do");
 		});
