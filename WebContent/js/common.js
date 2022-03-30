@@ -877,6 +877,16 @@ function actAlert(alertTypeValue) {
 	}
 }
 
+function actRuleAlert(alertTypeValue, alertDescription) {
+
+	if (alertTypeValue == '0' || alertTypeValue == '') {
+		return;
+	} else if (alertTypeValue >= '1') {
+		alert(alertDescription);
+	
+	}
+}
+
 function numActAlert(alertTypeValue, numObj) {
 
 	if (alertTypeValue == '0' || alertTypeValue == '') {

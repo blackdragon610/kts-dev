@@ -90,7 +90,7 @@ public class RulesService {
 
 		//入力チェック(必須・文字数)
 		ServiceValidator.requiredChecker(result, ruleName, "分類");
-		ServiceValidator.inputChecker(result, ruleName, "分類", 30, true);
+//		ServiceValidator.inputChecker(result, ruleName, "分類", 30, true);
 
 		return result;
 	}

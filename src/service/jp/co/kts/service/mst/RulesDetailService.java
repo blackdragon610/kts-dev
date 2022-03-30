@@ -102,9 +102,11 @@ public class RulesDetailService {
 
 		//入力チェック(必須・文字数)
 		ServiceValidator.requiredChecker(result, dto.getListName(), "名称");
-		ServiceValidator.inputChecker(result, dto.getListName(), "名称", 30, true);
-		ServiceValidator.inputChecker(result, dto.getListId(), "ID", 30, true);
-
+//		ServiceValidator.inputChecker(result, dto.getListName(), "名称", 30, true);
+		ServiceValidator.requiredChecker(result, dto.getListId(), "ID");
+//		ServiceValidator.inputChecker(result, dto.getListId(), "ID", 30, true);
+		ServiceValidator.requiredChecker(result, dto.getListPass(), "ID");
+//		ServiceValidator.inputChecker(result, dto.getListPass(), "ID", 30, true);
 		return result;
 	}
 

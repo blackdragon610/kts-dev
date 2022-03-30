@@ -28,7 +28,7 @@
 
 	<SCRIPT type="text/javascript">
 	window.onload = function() {
-		actAlert(document.getElementById('alertType').value);
+		actRuleAlert(document.getElementById('alertType').value, document.getElementById('alertName').value);
 		document.getElementById('alertType').value='0';
 	}
 	</SCRIPT>
@@ -45,13 +45,14 @@
 			<h4 class="heading">情報登録</h4>
 			</nested:equal>
 	
+			<html:errors/>
 			<nested:hidden property="alertType" styleId="alertType"></nested:hidden>
-
+			<nested:hidden property="registryDto.message" styleId="alertName"></nested:hidden>
 			<nested:nest property="ruleDTO">
 				<table id="mstTable">
 					<tr>
 						<th>
-							分類名
+							分類名<label class="necessary">※</label>
 						</th>
 						<td>
 							<nested:text property="ruleName" maxlength="25" />

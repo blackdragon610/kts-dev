@@ -197,8 +197,8 @@
 			name="ruleForm" scope="session" validate="false">
 			<set-property property="nonSecureAction" value="false" />
 			<set-property property="tokenType" value="nocheck" />
-			<forward name="failure" path="/WEB-INF/page/mst/ruleList.jsp" />
-			<forward name="success" path="/WEB-INF/page/mst/ruleList.jsp" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailRuleList.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailRuleList.jsp" />
 		</action>
 		<action path="/editeRule" type="jp.co.kts.ui.mst.RuleAction"
 			name="ruleForm" scope="session" validate="false">
@@ -211,8 +211,8 @@
 			name="ruleForm" scope="session" validate="false">
 			<set-property property="nonSecureAction" value="false" />
 			<set-property property="tokenType" value="nocheck" />
-			<forward name="failure" path="/WEB-INF/page/mst/ruleList.jsp" />
-			<forward name="success" path="/WEB-INF/page/mst/ruleList.jsp" />
+			<forward name="failure" path="/WEB-INF/page/mst/detailRuleList.jsp" />
+			<forward name="success" path="/WEB-INF/page/mst/detailRuleList.jsp" />
 		</action>
 		
 		<action path="/detailRule" type="jp.co.kts.ui.mst.RuleAction"

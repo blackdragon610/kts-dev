@@ -67,8 +67,9 @@ public class RuleAction extends AppBaseAction {
 		 List<MstRulesDTO> rulesList = service.getRulesList();
 		 if(rulesList != null && !rulesList.isEmpty()) {
 			 form.setRuleList(service.getRulesList());
-			 form.setAlertType("0");
+			 
 		 }
+//		 form.setAlertType("0");
 		 return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
 	 }
 	
@@ -98,7 +99,7 @@ public class RuleAction extends AppBaseAction {
 		}
 		 //削除実行
 		 resultCnt = service.ruleItemDelete(form.getRuleList());
-
+		 
 		if (targetCnt != resultCnt) {
 			messageDTO.setMessageFlg("1");
 			messageDTO.setMessage("削除に失敗しました。");
@@ -110,6 +111,7 @@ public class RuleAction extends AppBaseAction {
 			messageDTO.setMessage("対象の削除が完了しました。");
 			form.setMessageFlg("1");
 			form.setRegistryDto(messageDTO);
+			form.setAlertType("3");
 		}
 		return ruleList(appMapping, form, request);
 			
@@ -136,20 +138,20 @@ public class RuleAction extends AppBaseAction {
 			List<ErrorMessage> messages = new ArrayList<ErrorMessage>();
 			messages.addAll(result.getErrorMessages());
 			saveErrorMessages(request, messages);
-			form.setAlertType("3");
 			return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_FAILURE);
 		}
 		//登録処理実行
 		int resultCnt = service.registryRule(form.getRuleDTO());
 		//実行結果件数が1の場合
 		if (resultCnt == 1) {
-			registryMessageDTO.setRegistryMessage("登録しました");
+			registryMessageDTO.setMessage("["+ form.getRuleDTO().getRuleName() +"] 登録完了いたしました。");
 			form.setRuleId(form.getRuleDTO().getRuleId());
 			form.setRegistryDto(registryMessageDTO);
+			form.setAlertType("1");
 		}
 		//tokenセット
 		saveToken(request);
-		return ruleList(appMapping, form, request);
+		return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
 	}
 	protected ActionForward initUpdateRule(AppActionMapping appMapping, RuleForm form,
             HttpServletRequest request) throws Exception {
@@ -179,17 +181,19 @@ public class RuleAction extends AppBaseAction {
 		 int resultCnt = service.updateRule(form.getRuleDTO(), form.getRuleId());
 		 //実行結果件数が1の場合
 		 if (resultCnt == 1) {
-			 registryMessageDTO.setRegistryMessage("更新しました");
+			 registryMessageDTO.setMessage("更新致しました。");
 			 form.setRegistryDto(registryMessageDTO);
+			 form.setAlertType("2");
 		 }
-		 return ruleList(appMapping, form, request);
+		 return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
+//		 return ruleList(appMapping, form, request);
 	}
 
 	protected ActionForward detailRule(AppActionMapping appMapping, RuleForm form, HttpServletRequest request) throws Exception
 	{
 		RulesDetailService detailService = new RulesDetailService();
 		form.setRuleDetailList(detailService.getRuleDetail(form.getRuleId()));
-		form.setAlertType("0");
+//		form.setAlertType("0");
 		return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
 	}
 	
@@ -218,7 +222,7 @@ public class RuleAction extends AppBaseAction {
 		}
 		 //削除実行
 		 resultCnt = detailService.ruleListItemDelete(form.getRuleDetailList());
-
+		 
 		if (targetCnt != resultCnt) {
 			messageDTO.setMessageFlg("1");
 			messageDTO.setMessage("削除に失敗しました。");
@@ -230,6 +234,7 @@ public class RuleAction extends AppBaseAction {
 			messageDTO.setMessage("対象の削除が完了しました。");
 			form.setMessageFlg("1");
 			form.setRegistryDto(messageDTO);
+			form.setAlertType("3");
 		}
 		return detailRule(appMapping, form, request);
 			
@@ -257,7 +262,6 @@ public class RuleAction extends AppBaseAction {
 			 List<ErrorMessage> messages = new ArrayList<ErrorMessage>();
 			 messages.addAll(result.getErrorMessages());
 			 saveErrorMessages(request, messages);
-			 form.setAlertType("3");
 			 return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_FAILURE);
 		 }
 		 
@@ -265,12 +269,13 @@ public class RuleAction extends AppBaseAction {
 		int resultCnt = detailService.registryRuleList(form.getRuleDetailDTO(),form.getRuleId());
 		//実行結果件数が1の場合
 		if (resultCnt == 1) {
-			registryMessageDTO.setRegistryMessage("登録しました");
+			registryMessageDTO.setMessage("["+form.getRuleDetailDTO().getListName()+"] 登録完了いたしました。");
 			form.setRegistryDto(registryMessageDTO);
+			form.setAlertType("1");
 		}
 		//tokenセット
 		saveToken(request);
-		return detailRule(appMapping, form, request);
+		return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
 	}
 	 
 	 
@@ -287,14 +292,27 @@ public class RuleAction extends AppBaseAction {
 		RulesDetailService detailService = new RulesDetailService();
 		 RegistryMessageDTO registryMessageDTO = new RegistryMessageDTO();
 		 
+		//入力チェック
+		 Result<MstRulesDTO> result = detailService.validate(form.getRuleDetailDTO());
+		 
+		 //入力チェック失敗の場合
+		 if (!result.isSuccess()) {
+			 List<ErrorMessage> messages = new ArrayList<ErrorMessage>();
+			 messages.addAll(result.getErrorMessages());
+			 saveErrorMessages(request, messages);
+			 return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_FAILURE);
+		 }
+		 
 		 //更新処理実行
 		 int resultCnt = detailService.updateRuleList(form.getRuleDetailDTO(), form.getRuleListId());
 		 //実行結果件数が1の場合
 		 if (resultCnt == 1) {
-			 registryMessageDTO.setRegistryMessage("更新しました");
+			 registryMessageDTO.setMessage("更新致しました。");
 			 form.setRegistryDto(registryMessageDTO);
+			 form.setAlertType("2");
 		 }
-		 return detailRule(appMapping, form, request);
+		 
+		 return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
 	}
 
 	
