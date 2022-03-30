@@ -105,8 +105,8 @@ public class RulesDetailService {
 //		ServiceValidator.inputChecker(result, dto.getListName(), "名称", 30, true);
 		ServiceValidator.requiredChecker(result, dto.getListId(), "ID");
 //		ServiceValidator.inputChecker(result, dto.getListId(), "ID", 30, true);
-		ServiceValidator.requiredChecker(result, dto.getListPass(), "ID");
-//		ServiceValidator.inputChecker(result, dto.getListPass(), "ID", 30, true);
+		ServiceValidator.requiredChecker(result, dto.getListPass(), "PASS");
+//		ServiceValidator.inputChecker(result, dto.getListPass(), "PASS", 30, true);
 		return result;
 	}
 
