@@ -53,50 +53,103 @@
 			<logic:equal name="LOGIN_USER_ID" value="2">
 				<li><html:link href="initUserList.do" title="ユーザー一覧"><span>ユーザー一覧</span></html:link></li>
 				<li><html:link href="ruleList.do" title="ユーザー一覧"><span>ID・PASS一覧</span></html:link></li>
-				
+				<logic:iterate name="LOGIN_USER_MASTER_LIST" id="listMasterId">
+					<logic:equal name="listMasterId" property="corporationListFlg" value="1">
+						<li>
+							<html:link href="initCorporationList.do"><span><bean:write name="listMasterId" property="corporationListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="accountListFlg" value="1">
+						<li>
+							<html:link href="initAccountList.do"><span><bean:write name="listMasterId" property="accountListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="channelListFlg" value="1">
+						<li>
+							<html:link href="initChannelList.do"><span><bean:write name="listMasterId" property="channelListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="warehouseListFlg" value="1">
+						<li>
+							<html:link href="initWarehouseList.do"><span><bean:write name="listMasterId" property="warehouseListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="makerListFlg" value="1">
+						<li>
+							<html:link href="initMakerList.do"><span><bean:write name="listMasterId" property="makerListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="setItemListFlg" value="1">
+						<li>
+							<html:link href="initSetItemList.do"><span><bean:write name="listMasterId" property="setItemListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="clientListFlg" value="1">
+						<li>
+							<html:link href="initClientList.do"><span><bean:write name="listMasterId" property="clientListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="deliveryListFlg" value="1">
+						<li>
+							<html:link href="initDeliveryList.do"><span><bean:write name="listMasterId" property="deliveryListName"/></span></html:link>
+						</li>
+					</logic:equal>
+				</logic:iterate>
 			</logic:equal>
-			<logic:iterate name="LOGIN_USER_MASTER_LIST" id="listMasterId">
-				<logic:equal name="listMasterId" property="corporationListFlg" value="1">
-					<li>
-						<html:link href="initCorporationList.do"><span><bean:write name="listMasterId" property="corporationListName"/></span></html:link>
-					</li>
-				</logic:equal>
-				<logic:equal name="listMasterId" property="accountListFlg" value="1">
-					<li>
-						<html:link href="initAccountList.do"><span><bean:write name="listMasterId" property="accountListName"/></span></html:link>
-					</li>
-				</logic:equal>
-				<logic:equal name="listMasterId" property="channelListFlg" value="1">
-					<li>
-						<html:link href="initChannelList.do"><span><bean:write name="listMasterId" property="channelListName"/></span></html:link>
-					</li>
-				</logic:equal>
-				<logic:equal name="listMasterId" property="warehouseListFlg" value="1">
-					<li>
-						<html:link href="initWarehouseList.do"><span><bean:write name="listMasterId" property="warehouseListName"/></span></html:link>
-					</li>
-				</logic:equal>
-				<logic:equal name="listMasterId" property="makerListFlg" value="1">
-					<li>
-						<html:link href="initMakerList.do"><span><bean:write name="listMasterId" property="makerListName"/></span></html:link>
-					</li>
-				</logic:equal>
-				<logic:equal name="listMasterId" property="setItemListFlg" value="1">
-					<li>
-						<html:link href="initSetItemList.do"><span><bean:write name="listMasterId" property="setItemListName"/></span></html:link>
-					</li>
-				</logic:equal>
-				<logic:equal name="listMasterId" property="clientListFlg" value="1">
-					<li>
-						<html:link href="initClientList.do"><span><bean:write name="listMasterId" property="clientListName"/></span></html:link>
-					</li>
-				</logic:equal>
-				<logic:equal name="listMasterId" property="deliveryListFlg" value="1">
-					<li>
-						<html:link href="initDeliveryList.do"><span><bean:write name="listMasterId" property="deliveryListName"/></span></html:link>
-					</li>
-				</logic:equal>
-			</logic:iterate>
+			<logic:notEqual name="LOGIN_USER_ID" value="2">
+				<logic:iterate name="LOGIN_USER_MASTER_LIST" id="listMasterId">
+					<logic:equal name="listMasterId" property="userListFlg" value="1">
+						<li>
+							<html:link href="initUserList.do"><span><bean:write name="listMasterId" property="userListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="ruleListFlg" value="1">
+						<li>
+							<html:link href="ruleList.do"><span><bean:write name="listMasterId" property="ruleListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="corporationListFlg" value="1">
+						<li>
+							<html:link href="initCorporationList.do"><span><bean:write name="listMasterId" property="corporationListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="accountListFlg" value="1">
+						<li>
+							<html:link href="initAccountList.do"><span><bean:write name="listMasterId" property="accountListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="channelListFlg" value="1">
+						<li>
+							<html:link href="initChannelList.do"><span><bean:write name="listMasterId" property="channelListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="warehouseListFlg" value="1">
+						<li>
+							<html:link href="initWarehouseList.do"><span><bean:write name="listMasterId" property="warehouseListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="makerListFlg" value="1">
+						<li>
+							<html:link href="initMakerList.do"><span><bean:write name="listMasterId" property="makerListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="setItemListFlg" value="1">
+						<li>
+							<html:link href="initSetItemList.do"><span><bean:write name="listMasterId" property="setItemListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="clientListFlg" value="1">
+						<li>
+							<html:link href="initClientList.do"><span><bean:write name="listMasterId" property="clientListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="deliveryListFlg" value="1">
+						<li>
+							<html:link href="initDeliveryList.do"><span><bean:write name="listMasterId" property="deliveryListName"/></span></html:link>
+						</li>
+					</logic:equal>
+				</logic:iterate>
+			</logic:notEqual>
 				
 				<%-- <logic:equal name="LOGIN_USER_OVERSEAS_INFO_AUTH" value="1">
 					<li><html:link href="initUserList.do" title="ユーザー一覧"><span>ユーザー一覧</span></html:link></li>

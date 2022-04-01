@@ -11,7 +11,7 @@ public class StrutsBaseConst {
 	public static final String RESOURCES_KEY_DICTIONARY = "dictionary";
 	
 	public static final String MASTER_USER_LIST_NAME = "ユーザー一覧";
-	public static final String MASTER_RULE_LIST_NAME = "D・PASS一覧";
+	public static final String MASTER_RULE_LIST_NAME = "ID・PASS一覧";
 	public static final String MASTER_CORPORATION_LIST_NAME = "会社一覧";
 	public static final String MASTER_ACCOUNT_LIST_NAME = "口座一覧";
 	public static final String MASTER_CHANNEL_LIST_NAME = "販売チャネル一覧";
