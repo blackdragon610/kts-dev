@@ -162,6 +162,9 @@
 		MST_RULES
 		WHERE
 			DELETE_FLAG = '0'
+			<if-equals value="0" varName="getListFlg"> 
+			AND RULE_ID =${ruleId} 
+			</if-equals>
 		ORDER BY
 		RULE_ID
 	</sql-template>
@@ -194,7 +197,9 @@
 		MST_RULES_LIST AS R
 		WHERE
 		R.DEL_FLG = '0'
-		AND R.RULE_ID = ${ruleId}
+		<if-not-equals value="0" varName="ruleId">
+			AND R.RULE_ID = ${ruleId}
+		</if-not-equals>
 		<if-not-equals value="0" varName="ruleListId">
 			AND R.RULE_LIST_ID = ${ruleListId}
 		</if-not-equals>
@@ -395,6 +400,79 @@
 		WHERE
 		SYS_USER_ID = ${sysUserId}
 	</sql-template>
+	<sql-template id="SEL_MASTER">
+		SELECT
+		MASTER_ID
+		,SYS_USER_ID
+		,USER_LIST_FLG
+		,RULE_LIST_FLG
+		,CORPORATION_LIST_FLG
+		,ACCOUNT_LIST_FLG
+		,CHANNEL_LIST_FLG
+		,WAREHOUSE_LIST_FLG
+		,MAKER_LIST_FLG
+		,SET_ITEM_LIST_FLG
+		,CLIENT_LIST_FLG
+		,DELIVERY_LIST_FLG
+		FROM
+		MST_MASTER
+		WHERE
+			DEL_FLG = '0'
+			AND SYS_USER_ID = ${sysUserId}
+		
+	</sql-template>
+	<sql-template id="INS_MASTER_BY_USER">
+		INSERT INTO
+		MST_MASTER(
+		SYS_USER_ID
+		,USER_LIST_FLG
+		,RULE_LIST_FLG
+		,CORPORATION_LIST_FLG
+		,ACCOUNT_LIST_FLG
+		,CHANNEL_LIST_FLG
+		,WAREHOUSE_LIST_FLG
+		,MAKER_LIST_FLG
+		,SET_ITEM_LIST_FLG
+		,CLIENT_LIST_FLG
+		,DELIVERY_LIST_FLG
+		,DEL_FLG
+		,CREATE_DATE
+		,UPDATE_DATE
+		)
+		VALUES(
+		${sysUserId}
+		,${userListFlg}
+		,${ruleListFlg}
+		,${corporationListFlg}
+		,${accountListFlg}
+		,${channelListFlg}
+		,${warehouseListFlg}
+		,${makerListFlg}
+		,${setItemListFlg}
+		,${clientListFlg}
+		,${deliveryListFlg}
+		,'0'
+		,current_timestamp
+		,current_timestamp
+		)
+	</sql-template>
+	<sql-template id="UPD_MASTER_BY_USER">
+		UPDATE MST_MASTER SET
+		USER_LIST_FLG = ${userListFlg}
+		,RULE_LIST_FLG = ${ruleListFlg}
+		,CORPORATION_LIST_FLG = ${corporationListFlg}
+		,ACCOUNT_LIST_FLG = ${accountListFlg}
+		,CHANNEL_LIST_FLG = ${channelListFlg}
+		,WAREHOUSE_LIST_FLG = ${warehouseListFlg}
+		,MAKER_LIST_FLG = ${makerListFlg}
+		,SET_ITEM_LIST_FLG = ${setItemListFlg}
+		,CLIENT_LIST_FLG = ${clientListFlg}
+		,DELIVERY_LIST_FLG = ${deliveryListFlg}
+		,UPDATE_DATE = current_timestamp
+		WHERE
+		SYS_USER_ID = ${sysUserId}
+	</sql-template>
+	
 	<!-- =============== Rules End =================== -->
 
 	<sql-template id="SEL_USER">
@@ -14520,7 +14598,7 @@
 		WHERE
 		DELETE_FLAG = '0'
 		AND
-		MANAGEMENT_CODE IN
+		MANAGEMENT_CODE ILIKE
 		(${managementCodesSet})
 	</sql-template>
 

@@ -333,7 +333,7 @@ public class DomesticExhibitionImportService {
 			itemRateOver = 0;
 			
 			if (!GenericValidator.isBlankOrNull(strPurchasingCost)) {
-				purchasingCost = Long.valueOf(strPurchasingCost);
+				purchasingCost = Double.valueOf(strPurchasingCost);
 			}
 			
 		}

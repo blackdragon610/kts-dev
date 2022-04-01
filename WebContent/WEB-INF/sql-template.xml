@@ -14598,7 +14598,7 @@
 		WHERE
 		DELETE_FLAG = '0'
 		AND
-		MANAGEMENT_CODE ILIKE
+		LOWER(MANAGEMENT_CODE) IN
 		(${managementCodesSet})
 	</sql-template>
 
