@@ -29,13 +29,18 @@ public class RulesDetailService {
 	public List<MstRulesListDTO> getRuleDetail(long ruleId) throws Exception {
 		RulesDAO dao = new RulesDAO();
 		UserInfo userInfo = ActionContext.getLoginUserInfo();
-		
-		return dao.getRuleDetailInfoByUserId(ruleId, userInfo.getUserId());
+		List<MstRulesListDTO> listRulesDetail = dao.getRuleDetailInfoByUserId(ruleId, userInfo.getUserId());
+		for(MstRulesListDTO dto : listRulesDetail) {
+			dto.setListPass(CipherUtil.decodeString(dto.getListPass()));
+		}
+		return listRulesDetail;
+//		return dao.getRuleDetailInfoByUserId(ruleId, userInfo.getUserId());
 	}
 	
 	public MstRulesListDTO getRuleDetails(long ruleListId) throws Exception {
 		RulesDAO dao = new RulesDAO();
 		MstRulesListDTO dto = dao.getRuleDetails(ruleListId);
+		dto.setListPass(CipherUtil.decodeString(dto.getListPass()));
 		
 		return dto;
 	}
@@ -59,8 +64,12 @@ public class RulesDetailService {
 		UserInfo userInfo = ActionContext.getLoginUserInfo();
 		dto.setSysUserId(userInfo.getUserId());
 		dto.setRuleId(ruleId);
+		
+		dto.setListPass(CipherUtil.encodeString(dto.getListPass()));
 
 		result = dao.registryRuleList(dto);
+		dto.setListPass(CipherUtil.decodeString(dto.getListPass()));
+	
 		return result;
 	}
 	public List<MstRulesListDTO> getRuleDetailById(long ruleId, long listId) throws Exception {
@@ -72,7 +81,9 @@ public class RulesDetailService {
 		int result = 0;
 		RulesDAO dao = new RulesDAO();
 		dto.setRuleListId(ruleListId);
+		dto.setListPass(CipherUtil.encodeString(dto.getListPass()));
 		result = dao.updateRuleList(dto);
+		dto.setListPass(CipherUtil.decodeString(dto.getListPass()));
 		return result;
 	}
 	public int updateExtraRuleDetail(MstRulesListDTO dto, long userId, long ruleId, long visible)throws Exception {

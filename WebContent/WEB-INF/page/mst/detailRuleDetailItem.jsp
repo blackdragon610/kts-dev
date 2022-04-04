@@ -61,7 +61,7 @@
 				</tr>
 				<tr>
 					<th>PASS<label class="necessary">※</label></th>
-					<td><nested:password property="listPass" maxlength="30" /></td>
+					<td><nested:text property="listPass" maxlength="30" /></td>
 				</tr>
 				<tr>
 					<th>備考</th>

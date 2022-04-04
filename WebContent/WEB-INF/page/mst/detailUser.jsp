@@ -61,7 +61,8 @@
 							パスワード
 						</th>
 						<td>
-							<nested:password property="password"  maxlength="8" styleClass="alphanumeric" />
+							<%-- <nested:password property="password"  maxlength="8" styleClass="alphanumeric" /> --%>
+							<nested:text property="password"  maxlength="8" styleClass="alphanumeric" />
 						</td>
 					</tr>
 					<tr>
