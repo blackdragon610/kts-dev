@@ -86,7 +86,10 @@
 						<a class="button_white" href="javascript:void(0);" onclick="copyClipBoard('<nested:write property="listId" />','id_<nested:write property="ruleListId" />')" id="id_<nested:write property="ruleListId" />"> 
 						コピー</a>
 					</td> --%>
-					<td><nested:password property="listPass" styleClass="border-none hand text-center" readonly="true"/></td>
+					<td>
+						<%-- <nested:password property="listPass" styleClass="border-none hand text-center" readonly="true"/> --%>
+						<nested:write property="listPass" />
+					</td>
 					<%-- <td>
 						<a class="button_white" href="javascript:void(0);" onclick="copyClipBoard('<nested:write property="listPass" />','pass_<nested:write property="ruleListId" />')" id="pass_<nested:write property="ruleListId" />"> 
 						コピー</a>
