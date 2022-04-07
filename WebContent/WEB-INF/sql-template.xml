@@ -5193,6 +5193,7 @@
 		</if-not-empty>
 		,UPDATE_DATE = current_timestamp
 		,UPDATE_USER_ID = ${updateUserId}
+		,HAIBANG_FLG = ${haibangFlg}
 		WHERE
 		SYS_ITEM_ID = ${sysItemId}
 	</sql-template>
@@ -5386,6 +5387,7 @@
 			,ITEM_PRICE.PRICE
 			,ASSEMBLY_NUM
 			,ANS.ANNUAL_AVERAGE_SALES_NUM
+			,HAIBANG_FLG
 		FROM
 			MST_ITEM
 			LEFT JOIN
@@ -5800,6 +5802,7 @@
 		,ITEM_NUM
 		,ITEM_CODE
 		,ITEM_NM
+		,TOTAL_STOCK_NUM
 		,LEAVE_CLASS_FLG
 
 		,DELETE_FLAG
@@ -5816,6 +5819,7 @@
 		SYS_ITEM_ID
 		,ITEM_CODE
 		,ITEM_NM
+		,TOTAL_STOCK_NUM
 		,LEAVE_CLASS_FLG
 		FROM
 		MST_ITEM
@@ -6046,6 +6050,7 @@
 			,M_ITEM.MODEL
 			,M_ITEM.ITEM_LEAD_TIME
 			,M_ITEM.SYS_SUPPLIER_ID
+			,HAIBANG_FLG
 			,ANS.ANNUAL_AVERAGE_SALES_NUM
 			,ANS.ONE_MONTH_AGO
 			,ANS.TWO_MONTH_AGO
@@ -6120,6 +6125,7 @@
 				,CAR_MODEL
 				,MODEL
 				,ITEM_LEAD_TIME
+				,HAIBANG_FLG
 
 			FROM
 				MST_ITEM
@@ -6529,6 +6535,13 @@
 			WHEN ORDER_POOL_FLG = '1' THEN (ORDER_NUM = 0 or ORDER_NUM is null)
 			END
 		</if-equals>
+		<if-equals value="1" varName="haibangFlg">
+			AND M_ITEM.HAIBANG_FLG = ${haibangFlg}
+		</if-equals>
+		<if-equals value="0" varName="haibangFlg">
+			AND M_ITEM.HAIBANG_FLG = ${haibangFlg}
+		</if-equals>
+		
 
 <!-- 		<if-not-empty varName="itemCodeFrom"> -->
 <!-- 			AND -->

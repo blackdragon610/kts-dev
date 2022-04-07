@@ -74,7 +74,19 @@
 	}
 
 $(function () {
+	if($("#hidden_haibangFlg").val() == "1"){
+		$("#haibangFlg").prop("checked", true);
+	}
+	else $("#haibangFlg").prop("checked", false);
 
+	/* $("#haibangFlg").click(function() {
+		if(this.checked) {
+			$("#haibangFlg").val('1');
+		} else {
+			$("#haibangFlg").val('0');
+		}
+	}); */
+	
 	var count = $('.indexNum').length;
 
 	$('.num').spinner( {
@@ -1217,6 +1229,8 @@ $(function () {
 			}
 			return errorFlg;
 		}
+		
+		
 	}
 
 
@@ -2129,6 +2143,12 @@ function commmaAddFnc() {
 				<li class="footer_button">
 					<nested:notEqual value="0" property="mstItemDTO.sysItemId">
 						<a class="button_white" id="delete" href="#">削除</a>
+					</nested:notEqual>
+				</li>
+				<li class="footer_button">
+					<nested:notEqual value="0" property="mstItemDTO.sysItemId">
+						<label><nested:checkbox property="haibangFlg" styleId="haibangFlg"/>廃盤商品</label>
+						<nested:hidden property="haibangFlg" styleId="hidden_haibangFlg"></nested:hidden>
 					</nested:notEqual>
 				</li>
 			</ul>

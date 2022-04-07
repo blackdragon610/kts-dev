@@ -181,6 +181,8 @@ public class ItemForm extends AppBaseForm{
 
 	/** 注文候補リスト */
 	private List<ExtendMstItemDTO> orderCandidateList = new ArrayList<>();
+	
+	private String haibangFlg;
 
 	/**
 	 * ---------------------------------------getterのみ---------------------------------------------------------
@@ -1175,6 +1177,20 @@ public class ItemForm extends AppBaseForm{
 
 	public void setAddExternalKeepLength(int addExternalKeepLength) {
 		this.addExternalKeepLength = addExternalKeepLength;
+	}
+
+	/**
+	 * @return the haibangFlg
+	 */
+	public String getHaibangFlg() {
+		return haibangFlg;
+	}
+
+	/**
+	 * @param haibangFlg the haibangFlg to set
+	 */
+	public void setHaibangFlg(String haibangFlg) {
+		this.haibangFlg = haibangFlg;
 	}
 
 }

@@ -373,15 +373,18 @@ $(function () {
 
 			var copyFromTr = trs.eq(i);
 			var copyToTr = trs.eq(i + 1);
+			console.log(copyFromTr, copyToTr);
 
 			copyToTr.find(".addItemCode").val(copyFromTr.find(".addItemCode").val());
 			copyToTr.find(".addItemNm").val(copyFromTr.find(".addItemNm").val());
 			copyToTr.find(".addNum").val(copyFromTr.find(".addNum").val());
 			copyToTr.find(".addSysItemId").val(copyFromTr.find(".addSysItemId").val());
+			copyToTr.find(".addTotalStockNum").val(copyFromTr.find(".addTotalStockNum").val());
 
 			copyFromTr.find(".addItemCode").val("");
 			copyFromTr.find(".addItemNm").val("");
 			copyFromTr.find(".addNum").val(0);
+			copyFromTr.find(".addTotalStockNum").val(0);
 			copyFromTr.find(".addSysItemId").val(0);
 		}
 
@@ -404,10 +407,12 @@ $(function () {
 			copyToTr.find(".addItemNm").val(copyFromTr.find(".addItemNm").val());
 			copyToTr.find(".addNum").val(copyFromTr.find(".addNum").val());
 			copyToTr.find(".addSysItemId").val(copyFromTr.find(".addSysItemId").val());
+			copyToTr.find(".addTotalStockNum").val(copyFromTr.find(".addTotalStockNum").val());
 
 			copyFromTr.find(".addItemCode").val("");
 			copyFromTr.find(".addItemNm").val("");
 			copyFromTr.find(".addNum").val(0);
+			copyFromTr.find(".addTotalStockNum").val(0);
 			copyFromTr.find(".addSysItemId").val(0);
 		}
 
@@ -542,6 +547,7 @@ $(function () {
 
 		$("#searchItemCode").val(setItemArea.eq(rowNum).find(".addItemCode").val());
 		$("#searchItemNm").val(setItemArea.eq(rowNum).find(".addItemNm").val());
+		// $("#searchItemStockNum").val(setItemArea.eq(rowNum).find(".addTotalStockNum").val());
 		$("#openerIdx").val(rowNum);
 
 
@@ -1413,10 +1419,11 @@ $(function () {
 			var addNum = new Number(showTr.eq(i).find(".addNum").val());
 			var addItemCode = showTr.eq(i).find(".addItemCode").val();
 			var addItemNm = showTr.eq(i).find(".addItemNm").val();
+			var addTotalStockNum = showTr.eq(i).find(".addTotalStockNum").val();
 
-			if (addNum != 0 || addItemCode != "" || addItemNm != "") {
+			if (addNum != 0 || addItemCode != "" || addItemNm != "" || addTotalStockNum != 0) {
 
-				if (addNum == 0 || addItemCode == "" || addItemNm == "") {
+				if (addNum == 0 || addItemCode == "" || addItemNm == ""  || addTotalStockNum == 0) {
 
 					alert('個数・品番・商品名は必須項目です。');
 					return false;
@@ -1542,6 +1549,7 @@ function commmaAddFnc() {
 		<nested:hidden property="itemCode" styleId="searchItemCode" />
 		<nested:hidden property="itemNm" styleId="searchItemNm" />
 		<nested:hidden property="openerIdx" styleId="openerIdx" />
+		<nested:hidden property="stockNum" styleId="searchItemStockNum" />
 	</nested:nest>
 
 	<nested:notEmpty property="errorMessageDTO">
@@ -1850,6 +1858,7 @@ function commmaAddFnc() {
 					<th>個数</th>
 					<th>品番</th>
 					<th>商品名</th>
+					<th>在庫</th>
 					<th></th>
 				</tr>
 				<!-- 					表示用 -->
@@ -1870,6 +1879,7 @@ function commmaAddFnc() {
 									onchange="PxTextareaAdjuster(this);"
 									onblur="PxTextareaAdjuster(this);">
 								</nested:textarea></td>
+							<td ><nested:text property="totalStockNum" styleClass="w50 addTotalStockNum" maxlength="4" readonly="true"/></td>
 							<td><a class="button_small_main searchAddItem"
 								href="javascript:void(0)">商品検索</a>&nbsp; <a
 								class="button_small_white removeSetItemDisp"
@@ -1897,6 +1907,7 @@ function commmaAddFnc() {
 									onchange="PxTextareaAdjuster(this);"
 									onblur="PxTextareaAdjuster(this);">
 								</nested:textarea></td>
+							<td><nested:text property="totalStockNum" styleClass="w50 addTotalStockNum" maxlength="4" readonly="true"/></td>
 							<td><a class="button_small_main searchAddItem"
 								href="javascript:void(0)">商品検索</a>&nbsp; <a
 								class="button_small_white removeSetItem"

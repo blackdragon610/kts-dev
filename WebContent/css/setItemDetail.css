@@ -57,12 +57,12 @@ body {
 }
 
 #formItem {
-	width: 820px;
+    width: 935px;
 }
 
 .formItemTable {
-	width: 780px;
-	margin: 20px;
+	width: 890px;
+    margin: 20px;
 }
 
 #lastUpdateDetail {
@@ -227,12 +227,12 @@ table tr {
 /* } */
 
 #rightArea {
-	max-width: 800px;
-	min-width: 800px;
-	margin: 15px 60px 20px 0px;
-	border-radius: 8px;
-	padding: 10px 10px 100px 10px;
-	float: left;
+	max-width: 928px;
+    min-width: 800px;
+    margin: 15px 10px 10px 0px;
+    border-radius: 8px;
+    padding: 10px 10px 100px 10px;
+    float: left;
 }
 
 #rightArea li{

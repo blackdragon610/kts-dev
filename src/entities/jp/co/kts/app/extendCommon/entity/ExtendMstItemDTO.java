@@ -41,6 +41,8 @@ public class ExtendMstItemDTO extends MstItemDTO {
 	private long itemRateOver;
 	/** 商品区分 */
 	private String itemType;
+	
+	private String haibangFlg;
 
 
 	public ExtendMstItemDTO(String empty) {
@@ -733,6 +735,21 @@ public class ExtendMstItemDTO extends MstItemDTO {
 	public void setItemType(String itemType) {
 		this.itemType = itemType;
 	}
+
+	/**
+	 * @return the haibangFlg
+	 */
+	public String getHaibangFlg() {
+		return haibangFlg;
+	}
+
+	/**
+	 * @param haibangFlg the haibangFlg to set
+	 */
+	public void setHaibangFlg(String haibangFlg) {
+		this.haibangFlg = haibangFlg;
+	}
+
 
 	/****************************** 更新情報保持用変数END ******************************/
 }

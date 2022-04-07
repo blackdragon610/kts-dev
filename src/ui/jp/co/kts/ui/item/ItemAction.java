@@ -490,6 +490,7 @@ public class ItemAction extends AppBaseAction{
 
 		//最終更新者情報の取得
 		form.setExtendMstUserDTO(userService.getUserName(form.getMstItemDTO().getUpdateUserId()));
+		form.setHaibangFlg(form.getMstItemDTO().getHaibangFlg());
 
 		return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
 	}
@@ -509,6 +510,9 @@ public class ItemAction extends AppBaseAction{
 
 		ItemService itemService = new ItemService();
 		itemService.setFlags(form.getMstItemDTO());
+		
+		form.getMstItemDTO().setHaibangFlg(form.getHaibangFlg().equals("on") ? "1" : "0");
+		
 		//I/O商品
 		form.setErrorMessageDTO(itemService.updateItem(form.getMstItemDTO()));
 		if (!form.getErrorMessageDTO().isSuccess()) {
@@ -517,7 +521,6 @@ public class ItemAction extends AppBaseAction{
 		}
 //		//更新情報をインサート →必要になったら使ってください。
 //		itemService.insertItemInfo(form.getMstItemDTO(), form.getMstItemDTO());
-
 
 		//Kind原価
 		itemService.updateKindCost(form.getMstItemDTO());

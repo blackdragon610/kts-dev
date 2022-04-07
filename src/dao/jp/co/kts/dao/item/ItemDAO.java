@@ -518,6 +518,12 @@ public class ItemDAO extends BaseDAO {
 		if (dto.getOrderNum0Flg().equals("on")) {
 			parameters.addParameter("orderNum0Flg", 1);
 		}
+		
+		//廃盤商品
+		if (dto.getHaibangFlg().equals("on")) {
+			parameters.addParameter("haibangFlg", 1);
+		}
+		else parameters.addParameter("haibangFlg", 0);
 
 		return selectList("SEL_SEARCH_ITEM_LIST", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(SysItemIdDTO.class));
 	}

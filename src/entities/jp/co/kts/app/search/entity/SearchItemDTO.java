@@ -117,6 +117,8 @@ public class SearchItemDTO {
 	private String arrivalDateFrom;
 	/**入荷日TO*/
 	private String arrivalDateTo;
+	
+	private String haibangFlg;
 
 
 
@@ -819,6 +821,20 @@ public class SearchItemDTO {
 	 */
 	public void setOrderNum0Flg(String orderNum0Flg) {
 		this.orderNum0Flg = orderNum0Flg;
+	}
+
+	/**
+	 * @return the haibangFlg
+	 */
+	public String getHaibangFlg() {
+		return haibangFlg;
+	}
+
+	/**
+	 * @param haibangFlg the haibangFlg to set
+	 */
+	public void setHaibangFlg(String haibangFlg) {
+		this.haibangFlg = haibangFlg;
 	}
 
 }

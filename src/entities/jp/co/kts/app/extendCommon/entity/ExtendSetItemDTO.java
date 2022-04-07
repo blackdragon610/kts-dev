@@ -15,6 +15,9 @@ public class ExtendSetItemDTO extends SetItemDTO {
 
 	/** 仕様メモ */
 	private String specMemo;
+	
+	/* 在庫 */
+	private int totalStockNum;
 	/**
 	 * @return itemCode
 	 */
@@ -69,6 +72,20 @@ public class ExtendSetItemDTO extends SetItemDTO {
 	 */
 	public void setSpecMemo(String specMemo) {
 		this.specMemo = specMemo;
+	}
+
+	/**
+	 * @return the totalStockNum
+	 */
+	public int getTotalStockNum() {
+		return totalStockNum;
+	}
+
+	/**
+	 * @param totalStockNum the totalStockNum to set
+	 */
+	public void setTotalStockNum(int totalStockNum) {
+		this.totalStockNum = totalStockNum;
 	}
 
 }

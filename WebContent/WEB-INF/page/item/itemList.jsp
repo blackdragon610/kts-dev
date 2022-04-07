@@ -110,6 +110,8 @@
 								<nested:hidden property="deadStockFlg" value="off"></nested:hidden>
 							<td style="padding-left: 20px;"><label><nested:checkbox property="keepFlg" />キープ有</label></td>
 								<nested:hidden property="keepFlg" value="off"></nested:hidden>
+							<td style="padding-left: 20px;"><label><nested:checkbox property="haibangFlg" />廃盤商品</label></td>
+								<nested:hidden property="haibangFlg" value="off"></nested:hidden>
 						</tr>
 						<tr>
 							<td>商品名</td>
