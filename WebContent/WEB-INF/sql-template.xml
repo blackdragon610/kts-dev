@@ -6539,7 +6539,7 @@
 			AND M_ITEM.HAIBANG_FLG = ${haibangFlg}
 		</if-equals>
 		<if-equals value="0" varName="haibangFlg">
-			AND M_ITEM.HAIBANG_FLG &lt;&gt; '1'
+			AND (M_ITEM.HAIBANG_FLG = '0' OR M_ITEM.HAIBANG_FLG IS NULL) 
 		</if-equals>
 		
 

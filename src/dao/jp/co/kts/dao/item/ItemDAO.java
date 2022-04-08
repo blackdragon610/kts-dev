@@ -351,6 +351,7 @@ public class ItemDAO extends BaseDAO {
 		addParametersFromBeanProperties(dto, parameters);
 
 		parameters.addParameter("getListFlg", "0");
+		parameters.addParameter("haibangFlg", dto.getHaibangFlg().equals("on") ? "1" : "0");
 
 		return select("SEL_SEARCH_ITEM_LIST", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(ResultItemSearchDTO.class));
 }
@@ -520,10 +521,7 @@ public class ItemDAO extends BaseDAO {
 		}
 		
 		//廃盤商品
-		if (dto.getHaibangFlg().equals("on")) {
-			parameters.addParameter("haibangFlg", 1);
-		}
-		else parameters.addParameter("haibangFlg", 0);
+		parameters.addParameter("haibangFlg", dto.getHaibangFlg().equals("on") ? "1" : "0");
 
 		return selectList("SEL_SEARCH_ITEM_LIST", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(SysItemIdDTO.class));
 	}
@@ -797,6 +795,8 @@ public class ItemDAO extends BaseDAO {
 		} else {
 			parameters.addParameter("stockNum", 0);
 		}
+		
+		parameters.addParameter("haibangFlg", dto.getHaibangFlg().equals("on") ? "1" : "0");
 
 		return selectList("SEL_SEARCH_ITEM_LIST", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(ResultItemSearchDTO.class));
 	}
