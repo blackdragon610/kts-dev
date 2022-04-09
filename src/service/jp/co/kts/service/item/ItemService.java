@@ -632,6 +632,7 @@ public class ItemService {
 			SearchItemDTO searchItemDTO = new SearchItemDTO();
 			searchItemDTO.setSysItemId(sysItemIdList.get(i).getSysItemId());
 			searchItemDTO.setHaibangFlg(dto.getHaibangFlg());
+			searchItemDTO.setHaibangContainFlg(dto.getHaibangContainFlg());
 
 			ResultItemSearchDTO itemDTO = new ItemDAO()
 					.getItemSearch(searchItemDTO);

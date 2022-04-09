@@ -6535,13 +6535,14 @@
 			WHEN ORDER_POOL_FLG = '1' THEN (ORDER_NUM = 0 or ORDER_NUM is null)
 			END
 		</if-equals>
-		<if-equals value="1" varName="haibangFlg">
-			AND M_ITEM.HAIBANG_FLG = ${haibangFlg}
-		</if-equals>
-		<if-equals value="0" varName="haibangFlg">
-			AND (M_ITEM.HAIBANG_FLG = '0' OR M_ITEM.HAIBANG_FLG IS NULL) 
-		</if-equals>
-		
+		<if-not-equals value="1" varName="haibangFlgIgnore">
+			<if-equals value="1" varName="haibangFlg">
+				AND M_ITEM.HAIBANG_FLG = ${haibangFlg}
+			</if-equals>
+			<if-equals value="0" varName="haibangFlg">
+				AND (M_ITEM.HAIBANG_FLG = '0' OR M_ITEM.HAIBANG_FLG IS NULL) 
+			</if-equals>
+		</if-not-equals>
 
 <!-- 		<if-not-empty varName="itemCodeFrom"> -->
 <!-- 			AND -->

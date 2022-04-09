@@ -120,6 +120,7 @@ public class SearchItemDTO {
 	
 	private String haibangFlg;
 
+	private String haibangContainFlg;
 
 
 	public SearchItemDTO(String empty) {
@@ -835,6 +836,20 @@ public class SearchItemDTO {
 	 */
 	public void setHaibangFlg(String haibangFlg) {
 		this.haibangFlg = haibangFlg;
+	}
+
+	/**
+	 * @return the haibangContainFlg
+	 */
+	public String getHaibangContainFlg() {
+		return haibangContainFlg;
+	}
+
+	/**
+	 * @param haibangContainFlg the haibangContainFlg to set
+	 */
+	public void setHaibangContainFlg(String haibangContainFlg) {
+		this.haibangContainFlg = haibangContainFlg;
 	}
 
 }
