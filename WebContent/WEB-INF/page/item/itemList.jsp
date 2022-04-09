@@ -648,17 +648,23 @@
 				}
 			}
 			
-			if($('#haibangContainFlg').prop('checked') && $('#haibangFlg').prop('checked')){
-				if(!confirm("この場合、廃盤商品を含む検索となります。 よろしいですか？")){
-					return false;
-				}
-			}
-			
 			$(".overlay").css("display", "block");
 			$(".message").text("検索中");
 
 			goTransaction("itemList.do");
 		});
+		
+		$("#haibangContainFlg").change(function() {
+		    if(this.checked) {
+		    	$('#haibangFlg').prop('checked', false)
+		    }
+		});
+		$("#haibangFlg").change(function() {
+		    if(this.checked) {
+		    	$('#haibangContainFlg').prop('checked', false)
+		    }
+		});
+		
 
 		//************************注文数計算ボタン*********************
 		//画面読み込み時、チェックボックスが販売情報のときは計算し、それ以外は隠す
