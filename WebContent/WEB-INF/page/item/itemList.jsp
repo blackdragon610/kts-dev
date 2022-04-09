@@ -111,8 +111,8 @@
 							<td style="padding-left: 20px;"><label><nested:checkbox property="keepFlg" />キープ有</label></td>
 								<nested:hidden property="keepFlg" value="off"></nested:hidden>
 							<td style="padding-left: 20px;">
-								<label><nested:checkbox property="haibangFlg" />廃盤商品のみ</label>&nbsp;&nbsp;&nbsp;
-								<label><nested:checkbox property="haibangContainFlg" />廃盤商品含む</label>
+								<label><nested:checkbox property="haibangFlg" styleId="haibangFlg"/>廃盤商品のみ</label>&nbsp;&nbsp;&nbsp;
+								<label><nested:checkbox property="haibangContainFlg"  styleId="haibangContainFlg"/>廃盤商品含む</label>
 							</td>
 								<nested:hidden property="haibangFlg" value="off"></nested:hidden>
 								<nested:hidden property="haibangContainFlg" value="off"></nested:hidden>
@@ -647,7 +647,13 @@
 					return false;
 				}
 			}
-
+			
+			if($('#haibangContainFlg').prop('checked') && $('#haibangFlg').prop('checked')){
+				if(!confirm("この場合、廃盤商品を含む検索となります。 よろしいですか？")){
+					return false;
+				}
+			}
+			
 			$(".overlay").css("display", "block");
 			$(".message").text("検索中");
 
