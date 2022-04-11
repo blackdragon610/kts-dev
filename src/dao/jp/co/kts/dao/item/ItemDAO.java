@@ -663,6 +663,10 @@ public class ItemDAO extends BaseDAO {
 		if (dto.getOrderNum0Flg().equals("on")) {
 			parameters.addParameter("orderNum0Flg", 1);
 		}
+		
+		//廃盤商品
+		parameters.addParameter("haibangFlg", dto.getHaibangFlg().equals("on") ? "1" : "0");
+		parameters.addParameter("haibangFlgIgnore", dto.getHaibangContainFlg().equals("on") ? "1" : "0");
 
 		return selectList("SEL_EXPORT_ITEM_LIST", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(ResultItemSearchDTO.class));
 	}
