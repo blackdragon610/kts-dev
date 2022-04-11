@@ -74,7 +74,7 @@ public class CsvDirectImportService {
 		
 		if(fname.contains("発行済データ")) { // ヤマト
 			deliveryId = 1;
-		}else if(fname.contains("Eoa")) { // 佐川
+		}else if(fname.contains("shukka")) { // 佐川
 			deliveryId = 2;
 		}else if(fname.contains("SHUKKADL")) { // 西濃
 			deliveryId = 3;
