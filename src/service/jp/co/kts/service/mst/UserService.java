@@ -92,7 +92,7 @@ public class UserService {
 	public MstUserDTO getUser(long sysUserId) throws Exception {
 
 		UserDAO dao = new UserDAO();
-		RulesDAO ruleDao = new RulesDAO();
+//		RulesDAO ruleDao = new RulesDAO();
 		MstUserDTO dto = new MstUserDTO();
 		dto = dao.getUser(sysUserId);
 		dto.setPassword(CipherUtil.decodeString(dto.getPassword()));

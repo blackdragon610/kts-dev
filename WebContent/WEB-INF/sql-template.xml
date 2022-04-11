@@ -395,7 +395,7 @@
 		UPDATE MST_USER SET
 		BTOB_BILL_AUTH = ${btobBillAuth}
 		,OVERSEAS_INFO_AUTH = ${overseasInfoAuth}
-		,ID_PASS_DEL_AUTH = ${idPassDelAuth}
+		<!-- ,ID_PASS_DEL_AUTH = ${idPassDelAuth} -->
 		,UPDATE_DATE = current_timestamp
 		,UPDATE_USER_ID = ${updateUserId}
 		WHERE
@@ -493,7 +493,7 @@
 		,BTOB_BILL_AUTH
 		,OVERSEAS_INFO_AUTH
 		,RESPONSIBLE_NO
-		,ID_PASS_DEL_AUTH
+		<!-- ,ID_PASS_DEL_AUTH -->
 		FROM
 		MST_USER
 		WHERE

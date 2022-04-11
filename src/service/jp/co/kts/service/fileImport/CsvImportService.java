@@ -587,7 +587,8 @@ public class CsvImportService {
 		//チャンネルID
 		long sysChannelId = new ChannelDAO().getChannelId(csvImportDTO.getOrderRoute());
 		String orderNo = csvImportDTO.getOrderNo();
-		slipDto = getMallId(sysChannelId, csvImportDTO.getSysCorporationId(), orderNo);
+//		slipDto = getMallId(sysChannelId, csvImportDTO.getSysCorporationId(), orderNo);
+		slipDto = getMallId(sysChannelId, csvImportDTO);
 		//伝票情報格納
 		domesticDto.setItemOrderDate(csvImportDTO.getOrderDate());
 		domesticDto.setSysCorporationId(slipDto.getSysCorporationId());
@@ -638,13 +639,16 @@ public class CsvImportService {
 	 * @return
 	 * @throws Exception
 	 */
-	private DomesticOrderSlipDTO getMallId(long sysChannelId, long sysCorporationId, String orderNo) throws Exception {
+	private DomesticOrderSlipDTO getMallId(long sysChannelId, CsvImportDTO csvDTO) throws Exception {
 		DomesticOrderSlipDTO dto = new DomesticOrderSlipDTO();
 		MstUserDTO userInfo = new MstUserDTO();
 		long userId = ActionContext.getLoginUserInfo().getUserId();
 		UserService userService = new UserService();
 		userInfo = userService.getUserName(userId);
 		String authInfo = userInfo.getResponsibleNo();
+		
+		long sysCorporationId = csvDTO.getSysCorporationId();
+		String orderNo = csvDTO.getOrderNo();
 
 		String channelId = String.valueOf(sysChannelId);
 		String corporationId = String.valueOf(sysCorporationId);
@@ -656,6 +660,8 @@ public class CsvImportService {
 			addKey = arrSplit[arrSplit.length-2].substring(arrSplit[arrSplit.length-2].length()-2) + "-" + arrSplit[arrSplit.length-1];	
 		}
 		else addKey = arrSplit[arrSplit.length-1];
+		
+		dto.setNoteTurn(getNoteTurn(authInfo, addKey, csvDTO.getFileNm()));
 		switch (corporationId) {
 		case "1":
 			noteTune = "K";
@@ -757,10 +763,24 @@ public class CsvImportService {
 				dto.setMall(noteTune);
 		}
 		
-		dto.setNoteTurn(authInfo + " - " + noteTune + "/" + addKey);
-
-
+		// dto.setNoteTurn(authInfo + " - " + noteTune + "/" + addKey);
+		
 		return dto;
+	}
+	
+	private String getNoteTurn(String authInfo, String addKey, String FileNm) {
+		String returnFileName = "";
+		if(!authInfo.isEmpty())
+			returnFileName = authInfo + "-";
+		String[] arrSplit = FileNm.split("_"); 
+		if(arrSplit.length > 2)
+		{
+			returnFileName += arrSplit[0] + "_" + arrSplit[1] + "-";	
+		}
+		else
+			returnFileName += arrSplit[0] + "-";
+		returnFileName += addKey;
+		return returnFileName;
 	}
 
 	/**
