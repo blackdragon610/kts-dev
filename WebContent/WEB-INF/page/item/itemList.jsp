@@ -473,6 +473,7 @@
     	window.onpageshow = function(event) {
     		if (sessionStorage.getItem('toItemDetail') == 'true') {
               	var url = window.location.href;
+              	
             	if (url.indexOf("itemList") >= 0) {
                 	location.reload();
             		$(".overlay").css("display", "block");
@@ -483,8 +484,10 @@
     	
     	document.addEventListener("visibilitychange", function() {
     	    if (document.hidden){
+    	    	console.log(url.indexOf("itemList"));
     	    } else {
               	var url = window.location.href;
+              	console.log(url.indexOf("itemList"));
             	if (url.indexOf("itemList") >= 0) {
                 	location.reload();
             		$(".overlay").css("display", "block");

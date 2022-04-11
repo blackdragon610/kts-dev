@@ -59,6 +59,9 @@ public class MstUserDTO  {
 	/** 担当者番号 */
 	private String responsibleNo;
 	
+	/* ID・PASS削除権限 */
+	private String idPassDelAuth;
+	
 	private List<MstRulesDTO> mstRulesList = new ArrayList<>();
 	
 	private List<MstMasterDTO> mstMasterList = new ArrayList<>();
@@ -380,6 +383,20 @@ public class MstUserDTO  {
 	 */
 	public void setMstMasterList(List<MstMasterDTO> mstMasterList) {
 		this.mstMasterList = mstMasterList;
+	}
+
+	/**
+	 * @return the idPassDelAuth
+	 */
+	public String getIdPassDelAuth() {
+		return idPassDelAuth;
+	}
+
+	/**
+	 * @param idPassDelAuth the idPassDelAuth to set
+	 */
+	public void setIdPassDelAuth(String idPassDelAuth) {
+		this.idPassDelAuth = idPassDelAuth;
 	}
 
 }

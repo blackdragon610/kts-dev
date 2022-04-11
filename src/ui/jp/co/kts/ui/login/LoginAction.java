@@ -170,16 +170,6 @@ public class LoginAction extends AppBaseAction{
 		// 海外注文管理権限を設定
 		request.getSession().setAttribute("LOGIN_USER_OVERSEAS_INFO_AUTH", userDTO.getOverseasInfoAuth());
 		
-		/* 2022/03/22 */
-//		Map<String, String> userRuleDetailList = new HashMap<String, String>();
-//		for(MstRulesDTO ruleDto : form.getUserDTO().getMstRulesList()) {
-//			for (MstRulesListDTO rDto : ruleDto.getMstRulesDetailList()) {
-//				if(rDto.getIsvisible().equals("1"))
-//					userRuleDetailList.put(rDto.getListLink(), rDto.getListName());
-//			}
-//		}
-		
-//		request.getSession().setAttribute("LOGIN_USER_RULES_LIST", form.getUserDTO().getMstRulesList());
 		request.getSession().setAttribute("LOGIN_USER_MASTER_LIST", form.getUserDTO().getMstMasterList());
 
 		//掲示板表示用
