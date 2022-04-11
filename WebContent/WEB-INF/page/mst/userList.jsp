@@ -240,7 +240,7 @@
 				<th>マスタ</th>
 				<th>法人間請求権限</th>
 				<th>海外情報閲覧権限</th>
-				<th>ID・PASS削除権限</th>
+				<!-- <th>ID・PASS削除権限</th> -->
 				<nested:iterate property="ruleList" indexId="idx">
 					<th><nested:write property="ruleName"/></th>
 				</nested:iterate>
@@ -284,10 +284,10 @@
 							<nested:equal property="overseasInfoAuth" value="1">&#9898;</nested:equal>
 							<nested:notEqual property="overseasInfoAuth" value="1">&#9932;</nested:notEqual>
 						</td>
-						<td>
+						<%-- <td>
 							<nested:equal property="idPassDelAuth" value="1">&#9898;</nested:equal>
 							<nested:notEqual property="idPassDelAuth" value="1">&#9932;</nested:notEqual>
-						</td>
+						</td> --%>
 						<nested:notEmpty property="mstRulesList">
 							<nested:iterate property="mstRulesList" indexId="idx">
 								<td>
@@ -333,10 +333,10 @@
 							<nested:hidden property="overseasInfoAuth" styleClass="hidden_infoAuthItemCheckFlg"/>
 							<nested:checkbox property="overseasInfoAuth" styleClass="infoAuthItemCheckFlg checkBoxClass"/>
 						</td>
-						<td>
+						<%-- <td>
 							<nested:hidden property="idPassDelAuth" styleClass="hidden_idPassDelItemCheckFlg"/>
 							<nested:checkbox property="idPassDelAuth" styleClass="idPassDelItemCheckFlg checkBoxClass"/>
-						</td>
+						</td> --%>
 						<nested:iterate property="mstRulesList" indexId="idx">
 							<td class="itemColumn"><div class="justify-content-arround">
 								<nested:hidden property="isvisible" styleClass="hidden_visibleFlag_${id}_${idx}"/>
@@ -386,10 +386,10 @@
 							<nested:hidden property="overseasInfoAuth" styleClass="hidden_infoAuthItemCheckFlg"/>
 							<nested:checkbox property="overseasInfoAuth" styleClass="infoAuthItemCheckFlg checkBoxClass"/>
 						</td>
-						<td>
+						<%-- <td>
 							<nested:hidden property="idPassDelAuth" styleClass="hidden_idPassDelItemCheckFlg"/>
 							<nested:checkbox property="idPassDelAuth" styleClass="idPassDelItemCheckFlg checkBoxClass"/>
-						</td>
+						</td> --%>
 						<nested:iterate property="mstRulesList" indexId="idx">
 							<td class="itemColumn"><div class="justify-content-arround">
 								<nested:hidden property="isvisible" styleClass="hidden_visibleFlag_${id}_${idx }"/>
@@ -605,8 +605,8 @@
 				$(".edit_row_"+rowIndex).find(".btobItemCheckFlg").prop( "checked", true );
 			if($(".edit_row_"+rowIndex).find(".hidden_infoAuthItemCheckFlg").val() == 1)
 				$(".edit_row_"+rowIndex).find(".infoAuthItemCheckFlg").prop( "checked", true );
-			if($(".edit_row_"+rowIndex).find(".hidden_idPassDelItemCheckFlg").val() == 1)
-				$(".edit_row_"+rowIndex).find(".idPassDelItemCheckFlg").prop( "checked", true );
+			/* if($(".edit_row_"+rowIndex).find(".hidden_idPassDelItemCheckFlg").val() == 1)
+				$(".edit_row_"+rowIndex).find(".idPassDelItemCheckFlg").prop( "checked", true ); */
 			
 			var dynamicColumnsCount = $(".edit_row_"+rowIndex).find("td.itemColumn").length;
 			for(var j = 0; j < dynamicColumnsCount; j++){
@@ -640,8 +640,8 @@
 					resultArea.eq(i).find(".btobItemCheckFlg").prop( "checked", true );
 				if(resultArea.eq(i).find(".hidden_infoAuthItemCheckFlg").val() == 1)
 					resultArea.eq(i).find(".infoAuthItemCheckFlg").prop( "checked", true );
-				if(resultArea.eq(i).find(".hidden_idPassDelItemCheckFlg").val() == 1)
-					resultArea.eq(i).find(".idPassDelItemCheckFlg").prop( "checked", true );
+				/* if(resultArea.eq(i).find(".hidden_idPassDelItemCheckFlg").val() == 1)
+					resultArea.eq(i).find(".idPassDelItemCheckFlg").prop( "checked", true ); */
 				
 				var dynamicColumnsCount = resultArea.eq(i).find("td.itemColumn").length;
 				for(var j = 0; j < dynamicColumnsCount; j++){
