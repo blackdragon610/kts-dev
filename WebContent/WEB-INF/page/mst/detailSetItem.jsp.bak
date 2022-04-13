@@ -373,6 +373,7 @@ $(function () {
 
 			var copyFromTr = trs.eq(i);
 			var copyToTr = trs.eq(i + 1);
+			console.log(copyFromTr, copyToTr);
 
 			copyToTr.find(".addItemCode").val(copyFromTr.find(".addItemCode").val());
 			copyToTr.find(".addItemNm").val(copyFromTr.find(".addItemNm").val());
@@ -546,6 +547,7 @@ $(function () {
 
 		$("#searchItemCode").val(setItemArea.eq(rowNum).find(".addItemCode").val());
 		$("#searchItemNm").val(setItemArea.eq(rowNum).find(".addItemNm").val());
+		// $("#searchItemStockNum").val(setItemArea.eq(rowNum).find(".addTotalStockNum").val());
 		$("#openerIdx").val(rowNum);
 
 

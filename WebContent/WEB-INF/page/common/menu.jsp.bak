@@ -48,20 +48,123 @@
 		</logic:equal>
 		<!--  2015/12/15 ooyama ADD END 法人間請求書機能対応  -->
 		<li class='has-sub last'><a href='#'><span>マスタ</span></a>
-			<ul>
-				<logic:equal name="LOGIN_USER_OVERSEAS_INFO_AUTH" value="1">
+			<ul id="ruleClass">
+			
+			<logic:equal name="LOGIN_USER_ID" value="2">
+				<li><html:link href="initUserList.do" title="ユーザー一覧"><span>ユーザー一覧</span></html:link></li>
+				<li><html:link href="ruleList.do" title="ユーザー一覧"><span>ID・PASS一覧</span></html:link></li>
+				<logic:iterate name="LOGIN_USER_MASTER_LIST" id="listMasterId">
+					<logic:equal name="listMasterId" property="corporationListFlg" value="1">
+						<li>
+							<html:link href="initCorporationList.do"><span><bean:write name="listMasterId" property="corporationListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="accountListFlg" value="1">
+						<li>
+							<html:link href="initAccountList.do"><span><bean:write name="listMasterId" property="accountListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="channelListFlg" value="1">
+						<li>
+							<html:link href="initChannelList.do"><span><bean:write name="listMasterId" property="channelListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="warehouseListFlg" value="1">
+						<li>
+							<html:link href="initWarehouseList.do"><span><bean:write name="listMasterId" property="warehouseListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="makerListFlg" value="1">
+						<li>
+							<html:link href="initMakerList.do"><span><bean:write name="listMasterId" property="makerListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="setItemListFlg" value="1">
+						<li>
+							<html:link href="initSetItemList.do"><span><bean:write name="listMasterId" property="setItemListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="clientListFlg" value="1">
+						<li>
+							<html:link href="initClientList.do"><span><bean:write name="listMasterId" property="clientListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="deliveryListFlg" value="1">
+						<li>
+							<html:link href="initDeliveryList.do"><span><bean:write name="listMasterId" property="deliveryListName"/></span></html:link>
+						</li>
+					</logic:equal>
+				</logic:iterate>
+			</logic:equal>
+			<logic:notEqual name="LOGIN_USER_ID" value="2">
+				<logic:iterate name="LOGIN_USER_MASTER_LIST" id="listMasterId">
+					<logic:equal name="listMasterId" property="userListFlg" value="1">
+						<li>
+							<html:link href="initUserList.do"><span><bean:write name="listMasterId" property="userListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="ruleListFlg" value="1">
+						<li>
+							<html:link href="ruleList.do"><span><bean:write name="listMasterId" property="ruleListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="corporationListFlg" value="1">
+						<li>
+							<html:link href="initCorporationList.do"><span><bean:write name="listMasterId" property="corporationListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="accountListFlg" value="1">
+						<li>
+							<html:link href="initAccountList.do"><span><bean:write name="listMasterId" property="accountListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="channelListFlg" value="1">
+						<li>
+							<html:link href="initChannelList.do"><span><bean:write name="listMasterId" property="channelListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="warehouseListFlg" value="1">
+						<li>
+							<html:link href="initWarehouseList.do"><span><bean:write name="listMasterId" property="warehouseListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="makerListFlg" value="1">
+						<li>
+							<html:link href="initMakerList.do"><span><bean:write name="listMasterId" property="makerListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="setItemListFlg" value="1">
+						<li>
+							<html:link href="initSetItemList.do"><span><bean:write name="listMasterId" property="setItemListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="clientListFlg" value="1">
+						<li>
+							<html:link href="initClientList.do"><span><bean:write name="listMasterId" property="clientListName"/></span></html:link>
+						</li>
+					</logic:equal>
+					<logic:equal name="listMasterId" property="deliveryListFlg" value="1">
+						<li>
+							<html:link href="initDeliveryList.do"><span><bean:write name="listMasterId" property="deliveryListName"/></span></html:link>
+						</li>
+					</logic:equal>
+				</logic:iterate>
+			</logic:notEqual>
+				
+				<%-- <logic:equal name="LOGIN_USER_OVERSEAS_INFO_AUTH" value="1">
 					<li><html:link href="initUserList.do" title="ユーザー一覧"><span>ユーザー一覧</span></html:link></li>
+					
 				</logic:equal>
 				<li><html:link href="initCorporationList.do" title="会社一覧"><span>会社一覧</span></html:link></li>
 				<li><html:link href="initAccountList.do" title="口座一覧"><span>口座一覧</span></html:link></li>
 				<li><html:link href="initChannelList.do" title="販売チャネル一覧"><span>販売チャネル一覧</span></html:link></li>
 				<li><html:link href="initWarehouseList.do" title="倉庫一覧"><span>倉庫一覧</span></html:link></li>
-<%-- 				<li><html:link href="initVariousGroupList.do" title="各分類一覧"><span>各分類一覧</span></html:link></li> --%>
-<%-- 				<li><html:link href="groupNmList.do" title="分類一覧"><span>分類一覧</span></html:link></li> --%>
+				<li><html:link href="initVariousGroupList.do" title="各分類一覧"><span>各分類一覧</span></html:link></li>
+				<li><html:link href="groupNmList.do" title="分類一覧"><span>分類一覧</span></html:link></li>
 				<li><html:link href="initMakerList.do" title="メーカー一覧"><span>メーカー一覧</span></html:link></li>
 				<li><html:link href="initSetItemList.do" title="セット商品一覧"><span>セット商品一覧</span></html:link></li>
 				<li><html:link href="initClientList.do" title="得意先一覧"><span>得意先一覧</span></html:link></li>
-				<li><html:link href="initDeliveryList.do" title="納入先一覧"><span>納入先一覧</span></html:link></li>
+				<li><html:link href="initDeliveryList.do" title="納入先一覧"><span>納入先一覧</span></html:link></li> --%>
 			</ul>
 		</li>
 		<!--  2016/11/8 nozawa ADD END 法人間請求書機能対応  -->
@@ -86,3 +189,10 @@
 		<li id="loginName" style="float: right;"><span class="nameLabel"><bean:write name="LOGIN_USER_NAME" />   | </span><span class="logout"><a style="color: #F8F8F8;" href="logout.do" >ログアウト</a></span></li>
 	</ul>
 </div>
+
+<!-- <script type="text/javascript">
+	var ruleList_li = document.querySelectorAll("#ruleClass > li.ruleList > a");
+	for(var i=0; i < ruleList_li.length; i++ ){
+		ruleList_li[i].setAttribute("href", ruleList_li[i].children[1].value);
+	}
+</script> -->

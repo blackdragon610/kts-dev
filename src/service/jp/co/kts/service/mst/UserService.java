@@ -63,28 +63,6 @@ public class UserService {
 	public List<MstUserDTO> getUserListAll() throws DaoException {
 		// TODO 自動生成されたメソッド・スタブ
 		UserDAO dao = new UserDAO();
-		
-//		List<MstUserDTO> dto = dao.getUserListAll();
-//		RulesDAO ruleDao = new RulesDAO();
-//		
-//		for (MstUserDTO uDto : dto) 
-//		{
-//			List<MstRulesDTO> ruleDto = ruleDao.getRulesByUserId(uDto.getSysUserId());
-//			uDto.setMstRulesList(ruleDto);
-//			for (MstRulesDTO rDto : ruleDto) 
-//			{
-//				rDto.setMstRulesDetailList(ruleDao.getRuleDetailInfoByUserId(rDto.getRuleId(), uDto.getSysUserId()));
-//				rDto.setChildCount(rDto.getChildCount());
-//			}
-//			List<MstMasterDTO> masterList = dao.getMasterList(uDto.getSysUserId());
-//			try {
-//				uDto.setMstMasterList(this.setMasterList(masterList));
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//		return dto;
 
 		return dao.getUserListAll();
 	}
@@ -92,21 +70,13 @@ public class UserService {
 	public MstUserDTO getUser(long sysUserId) throws Exception {
 
 		UserDAO dao = new UserDAO();
-//		RulesDAO ruleDao = new RulesDAO();
 		MstUserDTO dto = new MstUserDTO();
-		dto = dao.getUser(sysUserId);
-		dto.setPassword(CipherUtil.decodeString(dto.getPassword()));
-		
-//		List<MstRulesDTO> ruleDto = ruleDao.getRulesByUserId(dto.getSysUserId());
-//		for (MstRulesDTO rDto : ruleDto) 
-//		{
-//			rDto.setMstRulesDetailList(ruleDao.getRuleDetailInfoByUserId(rDto.getRuleId(), sysUserId));
-//			rDto.setChildCount(rDto.getChildCount());
-//		}
-		List<MstMasterDTO> masterList = dao.getMasterList(dto.getSysUserId());
+		 dto = dao.getUser(sysUserId);
+		 dto.setPassword(CipherUtil.decodeString(dto.getPassword()));
+ 		List<MstMasterDTO> masterList = dao.getMasterList(dto.getSysUserId());
 		dto.setMstMasterList(this.setMasterList(masterList));
-//		dto.setMstRulesList(ruleDto);
-		return dto;
+
+		 return dto;
 	}
 
 	public void updateUser(MstUserDTO dto) throws Exception {

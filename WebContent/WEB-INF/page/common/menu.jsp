@@ -189,10 +189,3 @@
 		<li id="loginName" style="float: right;"><span class="nameLabel"><bean:write name="LOGIN_USER_NAME" />   | </span><span class="logout"><a style="color: #F8F8F8;" href="logout.do" >ログアウト</a></span></li>
 	</ul>
 </div>
-
-<!-- <script type="text/javascript">
-	var ruleList_li = document.querySelectorAll("#ruleClass > li.ruleList > a");
-	for(var i=0; i < ruleList_li.length; i++ ){
-		ruleList_li[i].setAttribute("href", ruleList_li[i].children[1].value);
-	}
-</script> -->
