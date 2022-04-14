@@ -40,6 +40,14 @@
 			goTransaction('ruleItemDelete.do');
 		});
 		
+		$(".exportDowload").click(function () {
+			if($(".itemCheckFlg:checked").length == 0) {
+				alert("対象データを選択してください。");
+				return false;
+			}
+			goTransaction('ruleListCsvDownLoad.do');
+		});
+		
 	});
 	
 	function goDetailRule(value){
@@ -90,8 +98,11 @@
 		
 		<div class="buttonArea">
 			<ul style="display: inline-flex;">
-			<li class="footer_button">
+				<li class="footer_button">
 					<a class="button_main" href="javascript:void(0);" onclick="goTransaction('initRegistryRule.do');">新規追加</a>
+				</li>
+				<li class="footer_button">
+					<a class="button_white btn-customize exportDowload" href="javascript:void(0);">EXCELダウンロード</a>
 				</li>
 				<li class="footer_button">
 					<a class="button_white btn-customize deleteRuleListItem" href="javascript:void(0);">選択した分類を削除</a>

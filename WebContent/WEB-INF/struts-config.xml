@@ -186,6 +186,13 @@
 			<forward name="failure" path="/WEB-INF/page/top/top.jsp" />
 			<forward name="success" path="/WEB-INF/page/mst/ruleList.jsp" />
 		</action>
+		
+		<action path="/ruleListCsvDownLoad" type="jp.co.kts.ui.mst.RuleAction"
+			name="ruleForm" scope="session" validate="false">
+			<set-property property="nonSecureAction" value="false" />
+			<set-property property="tokenType" value="nocheck" />
+		</action>
+		
 		<action path="/initRegistryRule" type="jp.co.kts.ui.mst.RuleAction"
 			name="ruleForm" scope="session" validate="false">
 			<set-property property="nonSecureAction" value="false" />

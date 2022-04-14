@@ -1,14 +1,16 @@
 package jp.co.kts.ui.mst;
 
-import java.io.PrintWriter;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jp.co.keyaki.cleave.common.util.DateUtil;
 import jp.co.keyaki.cleave.fw.core.ErrorMessage;
 import jp.co.keyaki.cleave.fw.ui.web.struts.AppActionMapping;
 import jp.co.keyaki.cleave.fw.ui.web.struts.AppBaseAction;
@@ -16,13 +18,15 @@ import jp.co.keyaki.cleave.fw.ui.web.struts.AppBaseForm;
 import jp.co.keyaki.cleave.fw.ui.web.struts.StrutsBaseConst;
 import jp.co.kts.app.common.entity.MstRulesDTO;
 import jp.co.kts.app.common.entity.MstRulesListDTO;
-import jp.co.kts.app.common.entity.MstWarehouseDTO;
 import jp.co.kts.app.output.entity.RegistryMessageDTO;
 import jp.co.kts.service.common.Result;
+import jp.co.kts.service.common.ServiceConst;
+import jp.co.kts.service.fileExport.ExportRuleListService;
 import jp.co.kts.service.mst.RulesDetailService;
 import jp.co.kts.service.mst.RulesService;
-import net.arnx.jsonic.JSON;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.struts.action.ActionForward;
 
 public class RuleAction extends AppBaseAction {
@@ -58,6 +62,8 @@ public class RuleAction extends AppBaseAction {
 			return initUpdateRuleList(appMapping, form, request, response);
 		}else if ("/updateRuleList".equals(appMapping.getPath())) {
 			return updateRuleList(appMapping, form, request);
+		}else if ("/ruleListCsvDownLoad".equals(appMapping.getPath())) {
+			return ruleListCsvDownLoad(appMapping, form, request, response);
 		}
 		return appMapping.findForward(StrutsBaseConst.GLOBAL_FORWARD_ERROR);
 	}
@@ -315,5 +321,35 @@ public class RuleAction extends AppBaseAction {
 		 return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
 	}
 
-	
+	private ActionForward ruleListCsvDownLoad(AppActionMapping appMapping, RuleForm form, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		// 現在日付を取得.
+		String date = DateUtil.dateToString("yyyyMMdd");
+		ExportRuleListService exportService = new ExportRuleListService();
+		
+		String filePath = this.getServlet().getServletContext().getRealPath(ServiceConst.RULE_LIST_TEMPLATE_PATH);
+		
+		POIFSFileSystem filein = new POIFSFileSystem(new FileInputStream(filePath));
+		
+		// ワークブックを読み込みます。
+		HSSFWorkbook workBook = new HSSFWorkbook(filein);
+		
+		workBook = exportService.getExportRuleList(form.getRuleList(), workBook);
+		String fname = "ID_PASS_" + date + ".xls";
+		
+		// ファイル名に日本語を使う場合、以下の方法でファイル名を設定.
+		byte[] sJis = fname.getBytes("Shift_JIS");
+		fname = new String(sJis, "ISO8859_1");
+
+		// エクセルファイル出力
+		response.setContentType("application/octet-stream; charset=Windows-31J");
+		response.setHeader("Content-Disposition", "attachment; filename=" + fname);
+		
+		ServletOutputStream fileOutHssf = response.getOutputStream();
+		workBook.write(fileOutHssf);
+		exportService.close();
+		fileOutHssf.close();
+
+		return null;
+	}
 }

@@ -38,7 +38,11 @@ public class RulesService {
 		
 		for (MstRulesDTO rDto : dto) 
 		{
-			rDto.setMstRulesDetailList(dao.getRuleDetailInfoByUserId(rDto.getRuleId(), userInfo.getUserId()));
+			List<MstRulesListDTO> listDto = dao.getRuleDetailInfoByUserId(rDto.getRuleId(), userInfo.getUserId());
+			for(MstRulesListDTO ldto : listDto) {
+				ldto.setListPass(CipherUtil.decodeString(ldto.getListPass()));
+			}
+			rDto.setMstRulesDetailList(listDto);
 		}
 		
 		return dto;

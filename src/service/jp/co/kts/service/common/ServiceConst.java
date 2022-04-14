@@ -108,6 +108,9 @@ public class ServiceConst {
 	 * 国内注文管理一覧の検索結果Excelのダウンロードテンプレートパス
 	 */
 	public static final String DOMESTIC_LIST_TEMPLATE_PATH = "/excelTemplate/domesticList.xls";
+	
+	/* ID・PASS一覧 */
+	public static final String RULE_LIST_TEMPLATE_PATH = "/excelTemplate/ruleListTemplate.xls";
 
 	/**
 	 * 海外注文管理一覧の検索結果Excelのダウンロードテンプレートパス
