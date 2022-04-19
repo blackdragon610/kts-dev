@@ -174,5 +174,13 @@ public class RulesDAO extends BaseDAO {
 		parameters.addParameter("extraId", dto.getExtraId());
 		return update("UPD_EXTRA_RULE_BY_USERID", parameters);
 	}
+	
+	public int deleteExtraRuleByRuleListId(long ruleListId, long ruleId) throws DaoException {
+
+		SQLParameters parameters = new SQLParameters();
+		parameters.addParameter("ruleListId", ruleListId);
+		parameters.addParameter("ruleId", ruleId);
+		return update("DEL_EXTRA_RULE_BY_RULELISTID", parameters);
+	}
 
 }

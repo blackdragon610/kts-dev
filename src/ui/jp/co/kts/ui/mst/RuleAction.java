@@ -25,6 +25,7 @@ import jp.co.kts.service.fileExport.ExportRuleListService;
 import jp.co.kts.service.mst.RulesDetailService;
 import jp.co.kts.service.mst.RulesService;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.struts.action.ActionForward;
@@ -215,6 +216,9 @@ public class RuleAction extends AppBaseAction {
 		List<Long> targetRuleListId = new ArrayList<Long>();
 		//削除する商品の件数をカウントしておく
 		for (MstRulesListDTO dto : form.getRuleDetailList()) {
+			if (StringUtils.isBlank(dto.getItemCheckFlg())) {
+				continue;
+			}
 			if (dto.getItemCheckFlg().equals(ORDER_CHECK_FLG_ON)) {
 				targetCnt++;
 			}

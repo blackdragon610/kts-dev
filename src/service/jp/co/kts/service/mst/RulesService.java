@@ -39,6 +39,7 @@ public class RulesService {
 		for (MstRulesDTO rDto : dto) 
 		{
 			List<MstRulesListDTO> listDto = dao.getRuleDetailInfoByUserId(rDto.getRuleId(), userInfo.getUserId());
+			rDto.setChildCount(listDto.size());
 			for(MstRulesListDTO ldto : listDto) {
 				ldto.setListPass(CipherUtil.decodeString(ldto.getListPass()));
 			}
@@ -67,6 +68,7 @@ public class RulesService {
 			resultCnt += dao.deleteRuleItem(ruleDto);
 			//基本権限が削除されると、子も削除されます。
 			dao.deletRuleListByRuleId(ruleDto.getRuleId());
+			dao.deleteExtraRuleByRuleListId(0, ruleDto.getRuleId());
 		}
 
 		return resultCnt;

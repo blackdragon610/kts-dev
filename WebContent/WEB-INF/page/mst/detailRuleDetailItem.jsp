@@ -57,7 +57,7 @@
 				</tr>
 				<tr>
 					<th>ID<label class="necessary">※</label></th>
-					<td><nested:text property="listId" maxlength="20" /></td>
+					<td><nested:text property="listId" maxlength="40" /></td>
 				</tr>
 				<tr>
 					<th>PASS<label class="necessary">※</label></th>

@@ -2,6 +2,8 @@ package jp.co.kts.service.mst;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
 import jp.co.keyaki.cleave.fw.core.ActionContext;
 import jp.co.keyaki.cleave.fw.core.security.UserInfo;
 import jp.co.keyaki.cleave.fw.core.util.CipherUtil;
@@ -49,10 +51,12 @@ public class RulesDetailService {
 		int resultCnt = 0;
 		RulesDAO dao = new RulesDAO();
 		for (MstRulesListDTO ruleDto : dto) {
+			if(StringUtils.isBlank(ruleDto.getItemCheckFlg())) continue;
 			if (!ruleDto.getItemCheckFlg().equals(RULE_LIST_CHECK_FLG_ON)) {
 				continue;
 			}
 			resultCnt += dao.deleteRuleListItem(ruleDto);
+			dao.deleteExtraRuleByRuleListId(ruleDto.getRuleListId(), 0);
 		}
 
 		return resultCnt;

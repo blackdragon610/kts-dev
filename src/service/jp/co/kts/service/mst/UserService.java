@@ -39,7 +39,7 @@ public class UserService {
 				rDto.setMstRulesDetailList(ruleDetailList);
 				rDto.setChildCount(rDto.getChildCount());
 				int childViewCount = 0;
-				if(ruleDetailList.size() > 1) {
+				if(ruleDetailList.size() > 0) {
 					for (MstRulesListDTO ruleDetailDto : ruleDetailList) 
 					{
 						if(ruleDetailDto.getIsvisible().equals("1"))  childViewCount++;

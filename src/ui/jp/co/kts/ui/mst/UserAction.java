@@ -122,6 +122,8 @@ public class UserAction extends AppBaseAction {
 					if(!ruleDto.getChildrenRuleCheckedFlag().equals("-1")) {
 						ruleService.updateExtraRule(ruleDto, userDto.getSysUserId());
 					}
+					if(ruleDto.getChildCount() < 2)
+						ruleService.updateExtraRule(ruleDto, userDto.getSysUserId());
 				}
 				
 				for (MstMasterDTO masterDto : userDto.getMstMasterList()) {
@@ -168,6 +170,8 @@ public class UserAction extends AppBaseAction {
 				if(!ruleDto.getChildrenRuleCheckedFlag().equals("-1")) {
 					ruleService.updateExtraRule(ruleDto, userDto.getSysUserId());
 				}
+				if(ruleDto.getChildCount() < 2)
+					ruleService.updateExtraRule(ruleDto, userDto.getSysUserId());
 			}
 			for (MstMasterDTO masterDto : userDto.getMstMasterList()) {
 				if(!masterDto.getChildrenMasterCheckedFlag().equals("-1")) {

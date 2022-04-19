@@ -242,7 +242,9 @@
 				<th>海外情報閲覧権限</th>
 				<!-- <th>ID・PASS削除権限</th> -->
 				<nested:iterate property="ruleList" indexId="idx">
+					<nested:notEqual property="childCount" value="0">
 					<th><nested:write property="ruleName"/></th>
+					</nested:notEqual>
 				</nested:iterate>
 				<nested:equal property="isEditModeAll" value="0">
 					<th></th>
@@ -290,15 +292,19 @@
 						</td> --%>
 						<nested:notEmpty property="mstRulesList">
 							<nested:iterate property="mstRulesList" indexId="idx">
+								<nested:notEqual property="childCount" value="0">
 								<td>
-									<nested:equal property="isvisible" value="1">
+									<nested:notEqual property="viewableChildCount" value="0">
+									
 										<nested:equal property="isAllcheck" value="1">&#9898;</nested:equal>
 										<nested:notEqual property="isAllcheck" value="1">
 											<span class="viewChildRule" id="rulesList_${id}_${idx}"> &#9651; 詳細</span>
 										</nested:notEqual>
-									</nested:equal>
-									<nested:notEqual property="isvisible" value="1">&#9932;</nested:notEqual>
+									</nested:notEqual>
+									<nested:equal property="viewableChildCount" value="0">&#9932;</nested:equal>
+									
 								</td>
+								</nested:notEqual>
 							</nested:iterate>
 						</nested:notEmpty>
 						<td>
@@ -338,6 +344,7 @@
 							<nested:checkbox property="idPassDelAuth" styleClass="idPassDelItemCheckFlg checkBoxClass"/>
 						</td> --%>
 						<nested:iterate property="mstRulesList" indexId="idx">
+							<nested:notEqual property="childCount" value="0">
 							<td class="itemColumn"><div class="justify-content-arround">
 								<nested:hidden property="isvisible" styleClass="hidden_visibleFlag_${id}_${idx}"/>
 								<nested:checkbox property="isvisible" styleClass="visibleFlag_${id}_${idx} checkBoxClass listCheck"></nested:checkbox>
@@ -349,6 +356,10 @@
 									</nested:notEqual>
 								</nested:notEqual>
 							</div></td>
+							</nested:notEqual>
+							<nested:equal property="childCount" value="0">
+								<td class="itemColumn" style="display:none;"></td>
+							</nested:equal>
 						</nested:iterate>
 						<td>
 							<a class="button_main" href="Javascript:void(0);" onclick="goUpdateExtraUserRule(<nested:write  property="sysUserId"/>);">登録</a>
@@ -391,6 +402,7 @@
 							<nested:checkbox property="idPassDelAuth" styleClass="idPassDelItemCheckFlg checkBoxClass"/>
 						</td> --%>
 						<nested:iterate property="mstRulesList" indexId="idx">
+							<nested:notEqual property="childCount" value="0">
 							<td class="itemColumn"><div class="justify-content-arround">
 								<nested:hidden property="isvisible" styleClass="hidden_visibleFlag_${id}_${idx }"/>
 								<nested:checkbox property="isvisible" styleClass="visibleFlag_${id}_${idx } checkBoxClass listCheck"></nested:checkbox>
@@ -402,6 +414,10 @@
 									</nested:notEqual>
 								</nested:notEqual>
 							</div></td>
+							</nested:notEqual>
+							<nested:equal property="childCount" value="0">
+								<td class="itemColumn" style="display:none;"></td>
+							</nested:equal>
 						</nested:iterate>
 					</tr>
 				</nested:iterate>
