@@ -14329,7 +14329,7 @@
 		UPDATE
 			EXHIBIT_MANAGE
 		SET
-			POSTAGE = ${postage}
+			ITEM_RATE_OVER = ${itemRateOver}
 		WHERE
 			MANAGEMENT_CODE = ${managementCode}
 	</sql-template>

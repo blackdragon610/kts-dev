@@ -196,13 +196,13 @@ public class BtobBillCorporateSaleCostService {
 			setCheckFlags(dto);
 			saleDAO.updateCorpSalesCost(dto);
 			
-//			DomesticExhibitionDAO domesticDAO = new DomesticExhibitionDAO();
-//			DomesticExhibitionDTO domesticDto = new DomesticExhibitionDTO();
-//			
-//			domesticDto.setManagementCode(dto.getItemCode());
-//			domesticDto.setPostage(dto.getDomePostage());
-//			
-//			domesticDAO.updateItemCodeDomesticExhibition(domesticDto);
+			DomesticExhibitionDAO domesticDAO = new DomesticExhibitionDAO();
+			DomesticExhibitionDTO domesticDto = new DomesticExhibitionDTO();
+			
+			domesticDto.setManagementCode(dto.getItemCode());
+			domesticDto.setItemRateOver(Double.valueOf(String.valueOf(dto.getItemRateOver())));
+			
+			domesticDAO.updateItemCodeDomesticExhibition(domesticDto);
 			
 		}
 
