@@ -45,8 +45,6 @@ public class UserAction extends AppBaseAction {
 			 return goUpdateExtraUserRule(appMapping, form, request);	 
 		} else if ("/updateAllUserList".equals(appMapping.getPath())) {
 			 return updateAllUserList(appMapping, form, request);
-		} else if ("/backViewList".equals(appMapping.getPath())) {
-			 return backViewList(appMapping, form, request);	 
 		} else if ("/editAllUserList".equals(appMapping.getPath())) {
 			 return editAllUserList(appMapping, form, request);	 
 		} else if ("/deleteUser".equals(appMapping.getPath())) {
@@ -57,6 +55,10 @@ public class UserAction extends AppBaseAction {
 			 return registryUser(appMapping, form, request);
 		}else if ("/saveExtraRuleDetailByUserId".equals(appMapping.getPath())) {
 			 return saveExtraRuleDetailByUserId(appMapping, form, request, response);
+		}else if ("/returnUserList".equals(appMapping.getPath())) {
+			 return returnUserList(appMapping, form, request);
+		}else if ("/editDetailList".equals(appMapping.getPath())) {
+			 return editDetailList(appMapping, form, request);
 		}
 
 
@@ -74,6 +76,8 @@ public class UserAction extends AppBaseAction {
 		 form.setRuleList(ruleService.getRulesList());
 		 
 		 form.setIsEditModeAll(0);
+		 form.setRuleId(0);
+		 form.setSelectRowId(-1);
 
 		 return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
 	 }
@@ -154,6 +158,7 @@ public class UserAction extends AppBaseAction {
 		form.setAlertType("2");
 		form.setIsEditModeAll(0);
 		form.setSysUserId(0);
+		form.setSelectRowId(-1);
 		return userList(appMapping, form, request);
 	 }
 	 
@@ -199,6 +204,7 @@ public class UserAction extends AppBaseAction {
 		
 		 form.setAlertType("2");
 		 form.setIsEditModeAll(0);
+		 form.setSelectRowId(-1);
 		 return userList(appMapping, form, request);
 	 }
 	 
@@ -216,12 +222,6 @@ public class UserAction extends AppBaseAction {
 		 return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
 	 }
 	 
-	 protected ActionForward backViewList(AppActionMapping appMapping, UserForm form,
-	            HttpServletRequest request) throws Exception {
-		 
-		 form.setIsEditModeAll(0);
-		 return userList(appMapping, form, request);
-	 }
 	 protected ActionForward deleteUser(AppActionMapping appMapping, UserForm form,
 	            HttpServletRequest request) throws Exception {
 
@@ -232,7 +232,7 @@ public class UserAction extends AppBaseAction {
 		MstUserDTO userDTO = new MstUserDTO();
 		form.setUserDTO(userDTO);
 		form.setAlertType("3");
-
+		form.setSelectRowId(-1);
 		//削除後の一覧を再取得する
 		form.setUserList(service.getUserList());
 
@@ -311,18 +311,33 @@ public class UserAction extends AppBaseAction {
 			}
 		}
 		return null;
-//		if (itemList.size() == 0) {
-//			PrintWriter printWriter = response.getWriter();
-//			printWriter.print(JSON.encode(""));
-//		} else {
-//			response.setCharacterEncoding("UTF-8");
-//			PrintWriter printWriter = response.getWriter();
-//			printWriter.print(JSON.encode("success"));
-//		}
-//		response.setCharacterEncoding("UTF-8");
-//		PrintWriter printWriter = response.getWriter();
-//		printWriter.print(JSON.encode("success"));
-//		return null;
 	 }
+	 protected ActionForward returnUserList(AppActionMapping appMapping, UserForm form,
+	     HttpServletRequest request) throws Exception {
+	
+		 UserService service = new UserService();
+		RulesService ruleService = new RulesService();
+		
+		List<MstUserDTO> userList = service.getUserList();
+		form.setUserList(userList);
+		form.setRuleList(ruleService.getRulesList());
+		
+		return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
+	}
+	 
+	 protected ActionForward editDetailList(AppActionMapping appMapping, UserForm form,
+	            HttpServletRequest request) throws Exception {
 
+		 UserService service = new UserService();
+		 RulesDetailService rService = new RulesDetailService();
+		 if(form.getIsEditModeSingle() > 1) {
+			 List<MstMasterDTO> detailList = service.getMasterList(form.getSysUserId());
+			 form.setMdetailList(detailList);	 
+		 }
+		 else {
+			 form.setRdetailList(rService.getRuleDetailByUserId(form.getRuleId(), form.getSysUserId()));	 
+		 }
+		 
+		 return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
+	 }
 }

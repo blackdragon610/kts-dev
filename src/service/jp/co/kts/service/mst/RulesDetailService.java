@@ -39,6 +39,15 @@ public class RulesDetailService {
 //		return dao.getRuleDetailInfoByUserId(ruleId, userInfo.getUserId());
 	}
 	
+	public List<MstRulesListDTO> getRuleDetailByUserId(long ruleId, long userId) throws Exception {
+		RulesDAO dao = new RulesDAO();
+		List<MstRulesListDTO> listRulesDetail = dao.getRuleDetailInfoByUserId(ruleId, userId);
+		for(MstRulesListDTO dto : listRulesDetail) {
+			dto.setListPass(CipherUtil.decodeString(dto.getListPass()));
+		}
+		return listRulesDetail;
+	}
+	
 	public MstRulesListDTO getRuleDetails(long ruleListId) throws Exception {
 		RulesDAO dao = new RulesDAO();
 		MstRulesListDTO dto = dao.getRuleDetails(ruleListId);

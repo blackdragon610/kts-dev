@@ -56,6 +56,14 @@ public class UserService {
 		return dto;
 //		return dao.getUserList();
 	}
+	
+	public List<MstMasterDTO> getMasterList(long userId) throws Exception{
+		
+		UserDAO dao = new UserDAO();
+		
+		return this.setMasterList(dao.getMasterList(userId));
+	}
+	
 
 	/**
 	 * 全ユーザを取得します(削除フラグは無視)

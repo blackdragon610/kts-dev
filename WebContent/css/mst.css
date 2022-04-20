@@ -98,6 +98,15 @@ div.buttonArea {
 	padding:10px 0px 0px 0px;
 }
 
+div.bottomArea{
+    position: fixed;
+    bottom: 0px;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    background: #e6e6e6;
+    width: 100%;
+}
+
 td.pulldown {
 	background-color: white !important;
 	border: none !important;
