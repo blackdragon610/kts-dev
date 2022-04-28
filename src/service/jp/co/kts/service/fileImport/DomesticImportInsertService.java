@@ -414,7 +414,7 @@ public class DomesticImportInsertService extends DomesticExhibitionImportService
 					itemCode = itemCode.substring(0, itemCode.indexOf("."));
 				}
 
-				managementCdSet.add(itemCode);
+				managementCdSet.add(itemCode.toLowerCase());
 			}
 
 
@@ -426,7 +426,7 @@ public class DomesticImportInsertService extends DomesticExhibitionImportService
 					itemCode = itemCode.substring(0, itemCode.indexOf("."));
 				}
 
-				managementCdSet.add(itemCode);
+				managementCdSet.add(itemCode.toLowerCase());
 			}
 		}
 

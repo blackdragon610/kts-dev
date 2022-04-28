@@ -26,6 +26,131 @@
 （注意・補足）
 
 -->
+	<script>
+		var seleletElmentId = "";
+		window.onload = function() {
+			alertTypeValue = document.getElementById('alertType').value;
+			if (alertTypeValue == '1') {
+				alert('登録しました。\r\n更新を有効にするには、もう一度ログインする必要があります');
+			} else if (alertTypeValue == '2') {
+				alert('更新しました。\r\n更新を有効にするには、もう一度ログインする必要があります');
+			}else if (alertTypeValue == '3') {
+				alert('削除しました。');
+			}
+			
+			document.getElementById('alertType').value='0';
+			
+			if($("#isEditModeAll").val() == 1){
+				initCheckBox();
+			}
+			
+			if(($("#isEditModeSingle").val() == 1 || $("#isEditModeSingle").val() == 3 ) && $("#isEditModeAll").val() == 0 && $("#selectRowId").val() != -1){
+				var rowIndex = $("#selectRowId").val();
+				goEditUser($("#sysUserId").val(), rowIndex);
+			}
+			
+			$(document).on('click', '.checkBoxClass', function () {
+				$(this).unbind().each(function() {
+					var classList = $(this).attr('class').split(' ');
+		        	$(this).parent().find(".hidden_" + classList[0]).val(this.checked?1:0);
+		        });
+			});
+			
+		};
+		
+		function viewChildRule(rowId,ruleId){
+			$("#selectRowId").val(rowId);
+			$("#ruleId").val(ruleId);
+			var selectUserId = $("#sysUserIdx_"+ rowId).val();
+			$("#sysUserId").val(selectUserId);
+			$("#isEditModeSingle").val(0);
+			goTransaction('editDetailList.do');
+		}
+		function editChildRule(rowId, ruleId){
+			$("#selectRowId").val(rowId);
+			$("#ruleId").val(ruleId);
+			var selectUserId = $("#sysUserIdx_"+ rowId).val();
+			$("#sysUserId").val(selectUserId);
+			$("#isEditModeSingle").val(1);
+			goTransaction('editDetailList.do');
+		}
+		function viewChildMaster(rowId){
+			$("#selectRowId").val(rowId);
+			var selectUserId = $("#sysUserIdx_"+ rowId).val();
+			$("#sysUserId").val(selectUserId);			
+			$("#isEditModeSingle").val(2);
+			$("#ruleId").val(0);
+			goTransaction('editDetailList.do');
+		}
+		function editChildMaster(rowId){
+			$("#selectRowId").val(rowId);
+			$("#isEditModeSingle").val(3);
+			var selectUserId = $("#sysUserIdx_"+ rowId).val();
+			$("#sysUserId").val(selectUserId);
+			$("#ruleId").val(0);
+			goTransaction('editDetailList.do');
+		}
+
+		function goDetailUser(value){
+	
+			document.getElementById('sysUserId').value = value;
+			goTransaction('detailUser.do');
+		}
+		
+		function goEditUser(userId, rowIndex){
+			$("#sysUserId").val(userId);
+			$(".view_row_"+rowIndex).css("display","none");
+			$(".edit_row_"+rowIndex).css("display","");
+			if($(".edit_row_"+rowIndex).find(".hidden_mastareItemCheckFlg").val() == 1)
+				$(".edit_row_"+rowIndex).find(".mastareItemCheckFlg").prop( "checked", true );
+			if($(".edit_row_"+rowIndex).find(".hidden_btobItemCheckFlg").val() == 1)
+				$(".edit_row_"+rowIndex).find(".btobItemCheckFlg").prop( "checked", true );
+			if($(".edit_row_"+rowIndex).find(".hidden_infoAuthItemCheckFlg").val() == 1)
+				$(".edit_row_"+rowIndex).find(".infoAuthItemCheckFlg").prop( "checked", true );
+			
+			var dynamicColumnsCount = $(".edit_row_"+rowIndex).find("td.itemColumn").length;
+			for(var j = 0; j < dynamicColumnsCount; j++){
+				if($(".edit_row_"+rowIndex).find(".hidden_visibleFlag_"+rowIndex+"_"+j).val() == 1)
+					$(".edit_row_"+rowIndex).find(".visibleFlag_"+rowIndex+"_"+j).prop( "checked", true );
+			}
+		}
+		
+		function goUpdateExtraUserRule(userId){
+			$("#sysUserId").val(userId);
+			goTransaction('goUpdateExtraUserRule.do');
+		}
+		
+		function goDelUser(userId){
+			$("#sysUserId").val(userId);
+			if(!confirm("選択されてるものを削除します。よろしいですか？")){
+				return false;
+			}
+
+			goTransaction('deleteUser.do');
+		}
+		
+		function initCheckBox(){
+			
+			var resultArea = $('tr.itemRow');
+			for (var i = 0; i < resultArea.size(); i++){
+				console.log(resultArea.eq(i).find("td.itemColumn").length)
+				if(resultArea.eq(i).find(".hidden_mastareItemCheckFlg").val() == 1)
+					resultArea.eq(i).find(".mastareItemCheckFlg").prop( "checked", true );
+				if(resultArea.eq(i).find(".hidden_btobItemCheckFlg").val() == 1)
+					resultArea.eq(i).find(".btobItemCheckFlg").prop( "checked", true );
+				if(resultArea.eq(i).find(".hidden_infoAuthItemCheckFlg").val() == 1)
+					resultArea.eq(i).find(".infoAuthItemCheckFlg").prop( "checked", true );
+				
+				var dynamicColumnsCount = resultArea.eq(i).find("td.itemColumn").length;
+				for(var j = 0; j < dynamicColumnsCount; j++){
+					if(resultArea.eq(i).find(".hidden_visibleFlag_"+i+"_"+j).val() == 1)
+						resultArea.eq(i).find(".visibleFlag_"+i+"_"+j).prop( "checked", true );
+				}
+			}
+		}
+	
+
+	</script>
 
 	</head>
 	<jsp:include page="/WEB-INF/page/common/menu.jsp" />
@@ -39,200 +164,7 @@
 	<nested:hidden property="selectRowId" styleId="selectRowId"/>
 	<nested:hidden property="isEditModeSingle" styleId="isEditModeSingle"/>
 	<!-- ユーザー権限に属するリンクの編集 -->	
-	<%-- <div id="tblExtraUserRuleDetail" style="display:none">
-	
-		<table id="mstTable">
-			<tr>
-				<th class="w150">名称</th>
-				<th class="td_center allCheckSize"><input type="checkbox" id="allCheck"class="allCheck"></th>
-			</tr>
-			<nested:iterate property="userList" indexId="id">
-				<nested:iterate property="mstMasterList" indexId="idx">
-					<tr class="masterList_${id}_${idx}" style="display:none;">
-						<td><nested:write property="userListName" /></td>
-						<td>
-							<nested:equal property="userListFlg" value="1">&#9898;</nested:equal>
-							<nested:notEqual property="userListFlg" value="1">&#9932;</nested:notEqual>
-						</td>
-					</tr>
-					<tr class="masterList_${id}_${idx}" style="display:none;">
-						<td><nested:write property="ruleListName" /></td>
-						<td>
-							<nested:equal property="ruleListFlg" value="1">&#9898;</nested:equal>
-							<nested:notEqual property="ruleListFlg" value="1">&#9932;</nested:notEqual>
-						</td>
-					</tr>
-					<tr class="masterList_${id}_${idx}" style="display:none;">
-						<td><nested:write property="corporationListName" /></td>
-						<td>
-							<nested:equal property="corporationListFlg" value="1">&#9898;</nested:equal>
-							<nested:notEqual property="corporationListFlg" value="1">&#9932;</nested:notEqual>
-						</td>
-					</tr>
-					<tr class="masterList_${id}_${idx}" style="display:none;">
-						<td><nested:write property="accountListName" /></td>
-						<td>
-							<nested:equal property="accountListFlg" value="1">&#9898;</nested:equal>
-							<nested:notEqual property="accountListFlg" value="1">&#9932;</nested:notEqual>
-						</td>
-					</tr>
-					<tr class="masterList_${id}_${idx}" style="display:none;">
-						<td><nested:write property="channelListName" /></td>
-						<td>
-							<nested:equal property="channelListFlg" value="1">&#9898;</nested:equal>
-							<nested:notEqual property="channelListFlg" value="1">&#9932;</nested:notEqual>
-						</td>
-					</tr>
-					<tr class="masterList_${id}_${idx}" style="display:none;">
-						<td><nested:write property="warehouseListName" /></td>
-						<td>
-							<nested:equal property="warehouseListFlg" value="1">&#9898;</nested:equal>
-							<nested:notEqual property="warehouseListFlg" value="1">&#9932;</nested:notEqual>
-						</td>
-					</tr>
-					<tr class="masterList_${id}_${idx}" style="display:none;">
-						<td><nested:write property="makerListName" /></td>
-						<td>
-							<nested:equal property="makerListFlg" value="1">&#9898;</nested:equal>
-							<nested:notEqual property="makerListFlg" value="1">&#9932;</nested:notEqual>
-						</td>
-					</tr>
-					<tr class="masterList_${id}_${idx}" style="display:none;">
-						<td><nested:write property="setItemListName" /></td>
-						<td>
-							<nested:equal property="setItemListFlg" value="1">&#9898;</nested:equal>
-							<nested:notEqual property="setItemListFlg" value="1">&#9932;</nested:notEqual>
-						</td>
-					</tr>
-					<tr class="masterList_${id}_${idx}" style="display:none;">
-						<td><nested:write property="clientListName" /></td>
-						<td>
-							<nested:equal property="clientListFlg" value="1">&#9898;</nested:equal>
-							<nested:notEqual property="clientListFlg" value="1">&#9932;</nested:notEqual>
-						</td>
-					</tr>
-					<tr class="masterList_${id}_${idx}" style="display:none;">
-						<td><nested:write property="deliveryListName" /></td>
-						<td>
-							<nested:equal property="deliveryListFlg" value="1">&#9898;</nested:equal>
-							<nested:notEqual property="deliveryListFlg" value="1">&#9932;</nested:notEqual>
-						</td>
-					</tr>
-					
-					
-					<tr class="editMasterList_${id}_${idx}" style="display:none;">
-						<td> <nested:write property="userListName" /></td>
-						<td class="editCheckBox">
-							<nested:hidden property="userListFlg" styleClass="hidden_visibleFlag_0"/>
-							<nested:checkbox property="userListFlg" styleClass="visibleFlag_0 checkBoxClass"></nested:checkbox>
-							
-						</td>
-					</tr>
-					<tr class="editMasterList_${id}_${idx}" style="display:none;">
-						<td> <nested:write property="ruleListName" /></td>
-						<td class="editCheckBox">
-							<nested:hidden property="ruleListFlg" styleClass="hidden_visibleFlag_1"/>
-							<nested:checkbox property="ruleListFlg" styleClass="visibleFlag_1 checkBoxClass"></nested:checkbox>
-							
-						</td>
-					</tr>
-					<tr class="editMasterList_${id}_${idx}" style="display:none;">
-						<td> <nested:write property="corporationListName" /></td>
-						<td class="editCheckBox">
-							<nested:hidden property="corporationListFlg" styleClass="hidden_visibleFlag_2"/>
-							<nested:checkbox property="corporationListFlg" styleClass="visibleFlag_2 checkBoxClass"></nested:checkbox>
-							
-						</td>
-					</tr>
-					<tr class="editMasterList_${id}_${idx}" style="display:none;">
-						<td> <nested:write property="accountListName" /></td>
-						<td class="editCheckBox">
-							<nested:hidden property="accountListFlg" styleClass="hidden_visibleFlag_3"/>
-							<nested:checkbox property="accountListFlg" styleClass="visibleFlag_3 checkBoxClass"></nested:checkbox>
-							
-						</td>
-					</tr>
-					<tr class="editMasterList_${id}_${idx}" style="display:none;">
-						<td> <nested:write property="channelListName" /></td>
-						<td class="editCheckBox">
-							<nested:hidden property="channelListFlg" styleClass="hidden_visibleFlag_4"/>
-							<nested:checkbox property="channelListFlg" styleClass="visibleFlag_4 checkBoxClass"></nested:checkbox>
-							
-						</td>
-					</tr>
-					<tr class="editMasterList_${id}_${idx}" style="display:none;">
-						<td> <nested:write property="warehouseListName" /></td>
-						<td class="editCheckBox">
-							<nested:hidden property="warehouseListFlg" styleClass="hidden_visibleFlag_5"/>
-							<nested:checkbox property="warehouseListFlg" styleClass="visibleFlag_5 checkBoxClass"></nested:checkbox>
-							
-						</td>
-					</tr>
-					<tr class="editMasterList_${id}_${idx}" style="display:none;">
-						<td> <nested:write property="makerListName" /></td>
-						<td class="editCheckBox">
-							<nested:hidden property="makerListFlg" styleClass="hidden_visibleFlag_6"/>
-							<nested:checkbox property="makerListFlg" styleClass="visibleFlag_6 checkBoxClass"></nested:checkbox>
-							
-						</td>
-					</tr>
-					<tr class="editMasterList_${id}_${idx}" style="display:none;">
-						<td> <nested:write property="setItemListName" /></td>
-						<td class="editCheckBox">
-							<nested:hidden property="setItemListFlg" styleClass="hidden_visibleFlag_7"/>
-							<nested:checkbox property="setItemListFlg" styleClass="visibleFlag_7 checkBoxClass"></nested:checkbox>
-							
-						</td>
-					</tr>
-					<tr class="editMasterList_${id}_${idx}" style="display:none;">
-						<td> <nested:write property="clientListName" /></td>
-						<td class="editCheckBox">
-							<nested:hidden property="clientListFlg" styleClass="hidden_visibleFlag_8"/>
-							<nested:checkbox property="clientListFlg" styleClass="visibleFlag_8 checkBoxClass"></nested:checkbox>
-							
-						</td>
-					</tr>
-					<tr class="editMasterList_${id}_${idx}" style="display:none;">
-						<td> <nested:write property="deliveryListName" /></td>
-						<td class="editCheckBox">
-							<nested:hidden property="deliveryListFlg" styleClass="hidden_visibleFlag_9"/>
-							<nested:checkbox property="deliveryListFlg" styleClass="visibleFlag_9 checkBoxClass"></nested:checkbox>
-							
-						</td>
-					</tr>
-				</nested:iterate>
-				<nested:iterate property="mstRulesList" indexId="idx">
-					<nested:iterate property="mstRulesDetailList" indexId="indx">
-						<tr class="rulesList_${id}_${idx}" style="display:none;">
-							<td>
-								<nested:write property="listName" />
-							</td>
-							<td>
-								<nested:equal property="isvisible" value="1">&#9898;</nested:equal>
-								<nested:notEqual property="isvisible" value="1">&#9932;</nested:notEqual>
-							</td>
-						</tr>
-						<tr class="editRulesList_${id}_${idx}" style="display:none;">
-							<td>
-								<nested:write property="listName" />
-							</td>
-							<td class="editCheckBox">
-								<nested:hidden property="isvisible" styleClass="hidden_visibleFlag_${indx}"/>
-								<nested:checkbox property="listVisible" styleClass="visibleFlag_${indx} checkBoxClass"></nested:checkbox>
-								
-							</td>
-						</tr>
-					</nested:iterate>
-				</nested:iterate>
-			</nested:iterate>
-		</table>
 
-		<div class="update_detailUserButton">
-			<a class="button_main btnUpdateExtraUserList" href="Javascript:void(0);" onclick="saveExtraRuleDetailByUserId()">更新</a>
-			<a class="button_white btn-customize" href="Javascript:void(0);" onclick="onclickBack()">戻る</a>
-		</div>
-	</div> --%>
-	<!--  -->
 	<!-- ユーザー権限の表示 -->
 	<div id="tblUserList">
 		<table id="mstTable" class="user-list">
@@ -303,7 +235,6 @@
 										</nested:notEqual>
 									</nested:notEqual>
 									<nested:equal property="viewableChildCount" value="0">&#9932;</nested:equal>
-									
 								</td>
 								</nested:notEqual>
 							</nested:iterate>
@@ -445,265 +376,5 @@
 
 	</html:form>
 	
-	<script>
-		var seleletElmentId = "";
-		window.onload = function() {
-			alertTypeValue = document.getElementById('alertType').value;
-			if (alertTypeValue == '1') {
-				alert('登録しました。\r\n更新を有効にするには、もう一度ログインする必要があります');
-			} else if (alertTypeValue == '2') {
-				alert('更新しました。\r\n更新を有効にするには、もう一度ログインする必要があります');
-			}else if (alertTypeValue == '3') {
-				alert('削除しました。');
-			}
-			
-			document.getElementById('alertType').value='0';
-			
-			if($("#isEditModeAll").val() == 1){
-				initCheckBox();
-			}
-			
-			if(($("#isEditModeSingle").val() == 1 || $("#isEditModeSingle").val() == 3 ) && $("#isEditModeAll").val() == 0 && $("#selectRowId").val() != -1){
-				var rowIndex = $("#selectRowId").val();
-				goEditUser($("#sysUserId").val(), rowIndex);
-			}
-			
-			$(document).on('click', '.checkBoxClass', function () {
-				$(this).unbind().each(function() {
-					var classList = $(this).attr('class').split(' ');
-		        	$(this).parent().find(".hidden_" + classList[0]).val(this.checked?1:0);
-		        });
-			});
-			
-// 			$(document).on('click', '.editChildRule', function () {
-// 				$(this).unbind().each(function() {
-// 					seleletElmentId = $(this).attr('id');
-// 					// console.log("seleletElmentId", seleletElmentId);
-// 					$("h4.heading").html("詳細画面");
-// 					$("#tblUserList").css("display","none");
-// 					$(".btnUpdateExtraUserList").css("display","");
-// 					$("#tblExtraUserRuleDetail").css("display","");
-// 					$("#tblExtraUserRuleDetail ."+ seleletElmentId).css("display","");
-					
-// 					var arrItem = seleletElmentId.split('_');
-// 					var selectUserId = $(this).parent().parent().parent().find("#sysUserIdx_"+ arrItem[1]).val();
-// 					var selectRuleId = 0;
-// 					$("#sysUserId").val(selectUserId); 
-					
-					
-// 					var tdElement = $("."+ seleletElmentId).find("td.editCheckBox");
-					
-// 					var dynamicColumnsCount = tdElement.length;
-// 					if(arrItem[0] != "editMasterList"){
-// 						selectRuleId = $(this).parent().find("#ruleId_"+ arrItem[1]).val();
-// 					}
-// 					$("#ruleId").val(selectRuleId);
-// 					var checkedCount = 0;
-// 					for(var i = 0; i < dynamicColumnsCount; i++){
-// 						if(tdElement.find(".hidden_visibleFlag_"+i).val() == 1){
-// 							tdElement.find(".visibleFlag_"+i).prop( "checked", true );
-// 							checkedCount++;
-// 						}
-// 						if($("#sysUserId").val() == 2 && i < 2 && arrItem[0] == "editMasterList"){
-							
-// 							tdElement.find(".visibleFlag_"+i).attr('disabled', true);
-// 						}
-// 					}
-// 					if(checkedCount == dynamicColumnsCount) $("#allCheck").prop("checked", true);
-// 		        });
-// 			});
-			
-// 			$(document).on('click', '#allCheck', function () {
-// 				var tdElement = $("."+ seleletElmentId).find("td.editCheckBox");
-				
-// 				var arrItem = seleletElmentId.split('_');
-				
-// 				var dynamicColumnsCount = tdElement.length;
-				
-// 				if(this.checked){
-// 					for(var i = 0; i < dynamicColumnsCount; i++){
-// 						tdElement.find(".hidden_visibleFlag_"+i).val(1);
-// 						tdElement.find(".visibleFlag_"+i).prop( "checked", true );
-// 						if($("#sysUserId").val() == 2 && i < 2 && arrItem[0] == "editMasterList"){
-// 							tdElement.find(".hidden_visibleFlag_"+i).val(1);
-// 							tdElement.find(".visibleFlag_"+i).prop( "checked", true );
-// 						}
-// 					}
-// 				}
-// 				else{
-// 					for(var i = 0; i < dynamicColumnsCount; i++){
-// 						tdElement.find(".hidden_visibleFlag_"+i).val(0);
-// 						tdElement.find(".visibleFlag_"+i).prop( "checked", false );
-// 						if($("#sysUserId").val() == 2 && i < 2 && arrItem[0] == "editMasterList"){
-// 							tdElement.find(".hidden_visibleFlag_"+i).val(1);
-// 							tdElement.find(".visibleFlag_"+i).prop( "checked", true );
-// 						}
-// 					}
-// 				}
-// 			});
-			
-// 			$(document).on('click', '.viewChildRule', function () {
-// 				$(this).unbind().each(function() {
-// 					seleletElmentId = $(this).attr('id');
-// 					$("h4.heading").html("詳細画面");
-// 					$("#tblUserList").css("display","none");
-// 					$(".btnUpdateExtraUserList").css("display","none");
-// 					$("#tblExtraUserRuleDetail").css("display","");
-// 					$("#tblExtraUserRuleDetail ."+ seleletElmentId).css("display","");
-// 					$("#allCheck").css("display", "none");
-// 		        });
-// 			}); 
-		};
-		
-		function viewChildRule(rowId,ruleId){
-			$("#selectRowId").val(rowId);
-			$("#ruleId").val(ruleId);
-			var selectUserId = $("#sysUserIdx_"+ rowId).val();
-			$("#sysUserId").val(selectUserId);
-			$("#isEditModeSingle").val(0);
-			goTransaction('editDetailList.do');
-		}
-		function editChildRule(rowId, ruleId){
-			$("#selectRowId").val(rowId);
-			$("#ruleId").val(ruleId);
-			var selectUserId = $("#sysUserIdx_"+ rowId).val();
-			$("#sysUserId").val(selectUserId);
-			$("#isEditModeSingle").val(1);
-			goTransaction('editDetailList.do');
-		}
-		function viewChildMaster(rowId){
-			$("#selectRowId").val(rowId);
-			var selectUserId = $("#sysUserIdx_"+ rowId).val();
-			$("#sysUserId").val(selectUserId);			
-			$("#isEditModeSingle").val(2);
-			$("#ruleId").val(0);
-			goTransaction('editDetailList.do');
-		}
-		function editChildMaster(rowId){
-			$("#selectRowId").val(rowId);
-			$("#isEditModeSingle").val(3);
-			var selectUserId = $("#sysUserIdx_"+ rowId).val();
-			$("#sysUserId").val(selectUserId);
-			$("#ruleId").val(0);
-			goTransaction('editDetailList.do');
-		}
-// 		function saveExtraRuleDetailByUserId(){
-// 			var userId = $("#sysUserId").val();
-// 			var ruleId = $("#ruleId").val();
-// 			var ruleDetailList = [];
-// 			var checkList = $("." + seleletElmentId + " .editCheckBox").find(':hidden');
-// 			var ruleCheck = 0;
-// 			for(var i = 0; i < checkList.size(); i++){
-// 				ruleDetailList.push(checkList[i].value);
-// 				if(checkList[i].value == 1) ruleCheck = 1;
-// 			}
-			
-// 			$.ajax({
-// 				url : "./saveExtraRuleDetailByUserId.do"
-// 				,type : 'POST'
-// 				,traditional: true
-// 				,data : {
-// 					'ruleDetailList': ruleDetailList
-// 					,'sysUserId': userId
-// 					,'ruleId': ruleId
-// 					}
-// 			}).done(function(data) {
-// 				$("h4.heading").html("ユーザー一覧");
-// 				$("#tblUserList").css("display","");
-// 				$("#tblExtraUserRuleDetail").css("display","none");
-// 				$("#tblExtraUserRuleDetail ."+ seleletElmentId).css("display","none");
-				
-// 				var arrItemId = seleletElmentId.split('_');
-// 				var targetId = "";
-// 				if(ruleId == 0) targetId = "mastareItemCheckFlg";
-// 				else targetId = "visibleFlag_"+ arrItemId[1] + "_" + arrItemId[2];
-				
-// 				$("#allCheck").prop( "checked", false );
-				
-// 				if(ruleCheck > 0)
-// 					$("#" + seleletElmentId).parent().find("." + targetId).prop( "checked", true );
-// 				else 
-// 					$("#" + seleletElmentId).parent().find("." + targetId).prop( "checked", false );
-				
-// 			}).fail(function(data) {
-				
-// 			});
-// 			return;
-// 		}
-		
-// 		function onclickBack(){
-// 			$("h4.heading").html("ユーザー一覧");
-// 			$("#tblUserList").css("display","");
-// 			$("#tblExtraUserRuleDetail").css("display","none");
-// 			$(".btnUpdateExtraUserList").css("display","none");
-// 			$("#tblExtraUserRuleDetail ."+ seleletElmentId).css("display","none");
-// 			$("#allCheck").css("display", "");
-// 			$("#allCheck").prop( "checked", false );
-			
-// 		}
-		
-		function goDetailUser(value){
 	
-			document.getElementById('sysUserId').value = value;
-			goTransaction('detailUser.do');
-		}
-		
-		function goEditUser(userId, rowIndex){
-			$("#sysUserId").val(userId);
-			$(".view_row_"+rowIndex).css("display","none");
-			$(".edit_row_"+rowIndex).css("display","");
-			if($(".edit_row_"+rowIndex).find(".hidden_mastareItemCheckFlg").val() == 1)
-				$(".edit_row_"+rowIndex).find(".mastareItemCheckFlg").prop( "checked", true );
-			if($(".edit_row_"+rowIndex).find(".hidden_btobItemCheckFlg").val() == 1)
-				$(".edit_row_"+rowIndex).find(".btobItemCheckFlg").prop( "checked", true );
-			if($(".edit_row_"+rowIndex).find(".hidden_infoAuthItemCheckFlg").val() == 1)
-				$(".edit_row_"+rowIndex).find(".infoAuthItemCheckFlg").prop( "checked", true );
-			/* if($(".edit_row_"+rowIndex).find(".hidden_idPassDelItemCheckFlg").val() == 1)
-				$(".edit_row_"+rowIndex).find(".idPassDelItemCheckFlg").prop( "checked", true ); */
-			
-			var dynamicColumnsCount = $(".edit_row_"+rowIndex).find("td.itemColumn").length;
-			for(var j = 0; j < dynamicColumnsCount; j++){
-				if($(".edit_row_"+rowIndex).find(".hidden_visibleFlag_"+rowIndex+"_"+j).val() == 1)
-					$(".edit_row_"+rowIndex).find(".visibleFlag_"+rowIndex+"_"+j).prop( "checked", true );
-			}
-		}
-		
-		function goUpdateExtraUserRule(userId){
-			$("#sysUserId").val(userId);
-			goTransaction('goUpdateExtraUserRule.do');
-		}
-		
-		function goDelUser(userId){
-			$("#sysUserId").val(userId);
-			if(!confirm("選択されてるものを削除します。よろしいですか？")){
-				return false;
-			}
-
-			goTransaction('deleteUser.do');
-		}
-		
-		function initCheckBox(){
-			
-			var resultArea = $('tr.itemRow');
-			for (var i = 0; i < resultArea.size(); i++){
-				console.log(resultArea.eq(i).find("td.itemColumn").length)
-				if(resultArea.eq(i).find(".hidden_mastareItemCheckFlg").val() == 1)
-					resultArea.eq(i).find(".mastareItemCheckFlg").prop( "checked", true );
-				if(resultArea.eq(i).find(".hidden_btobItemCheckFlg").val() == 1)
-					resultArea.eq(i).find(".btobItemCheckFlg").prop( "checked", true );
-				if(resultArea.eq(i).find(".hidden_infoAuthItemCheckFlg").val() == 1)
-					resultArea.eq(i).find(".infoAuthItemCheckFlg").prop( "checked", true );
-				/* if(resultArea.eq(i).find(".hidden_idPassDelItemCheckFlg").val() == 1)
-					resultArea.eq(i).find(".idPassDelItemCheckFlg").prop( "checked", true ); */
-				
-				var dynamicColumnsCount = resultArea.eq(i).find("td.itemColumn").length;
-				for(var j = 0; j < dynamicColumnsCount; j++){
-					if(resultArea.eq(i).find(".hidden_visibleFlag_"+i+"_"+j).val() == 1)
-						resultArea.eq(i).find(".visibleFlag_"+i+"_"+j).prop( "checked", true );
-				}
-			}
-		}
-	
-
-	</script>
 </html:html>
