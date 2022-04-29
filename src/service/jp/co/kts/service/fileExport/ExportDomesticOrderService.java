@@ -367,7 +367,6 @@ public class ExportDomesticOrderService {
 					if(!StringUtils.isEmpty(data.getSenderMemo())) {
 						listRemarksList.add("[一言メモ（お届け先）:] " + data.getSenderMemo());
 					}
-					listRemarksList.add("\n\r sadfasfasdfasdfdddddddddddddd \n\r ddddddddddddddddddddddddddddd \n\r eeeeeeeeeeeeeeeeeeeeeeeeeee");
 					listRemarksList.add("\n");
 				}
 //				continue;
