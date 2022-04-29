@@ -332,7 +332,7 @@ public class ExportDomesticOrderService {
 		PdfPTable pdfPTable = new PdfPTable(TABLE_COLS);
 		pdfPTable.setTotalWidth(535);
 		//テーブルにおけるセルの最大表示数
-		int maxRow = 100;
+		int maxRow = 80;
 
 		//空のセルを用意
 		PdfPCell cellItemOrderRemarks = new PdfPCell();
@@ -348,30 +348,36 @@ public class ExportDomesticOrderService {
 		DomesticCsvImportDAO daoo = new DomesticCsvImportDAO();
 		for (DomesticOrderListDTO dto : slipDto.getDomesticOrderItemList()) {
 			//空っぽ、またはnullはこの時点で除外する。
-			if (dto.getListRemarks() == null || dto.getListRemarks().isEmpty()) {
-				if(slipDto.getSysDomesticImportId() > 0) {
-					DomesticCsvImportDTO data = new DomesticCsvImportDTO();
-					data = daoo.getDomesticCsvdataFromDomesticimportId(slipDto.getSysDomesticImportId());
+//			if (dto.getListRemarks() == null || dto.getListRemarks().isEmpty()) {
+			DomesticCsvImportDTO data = new DomesticCsvImportDTO();
+			data = daoo.getDomesticCsvdataFromDomesticimportId(slipDto.getSysDomesticImportId());
+				if(!StringUtils.isEmpty(dto.getOrderRemarks()) || 
+					!StringUtils.isEmpty(data.getDestinationAppointDate()) || 
+					!StringUtils.isEmpty(data.getDestinationAppointTime()) ||
+					!StringUtils.isEmpty(data.getSenderMemo())) {
 					
+					listRemarksList.add("[管理品番:] " + dto.getManagementCode() + " : ");
 					if(!StringUtils.isEmpty(dto.getOrderRemarks())) {
-						listRemarksList.add("[備考:]" + "\n" + dto.getOrderRemarks());
+						listRemarksList.add("[備考:] " + dto.getOrderRemarks());
 					}
 					if(!StringUtils.isEmpty(data.getDestinationAppointDate()) || !StringUtils.isEmpty(data.getDestinationAppointTime())) 
 					{
-						listRemarksList.add("\n[お届け指定日:]" + "\n" + data.getDestinationAppointDate() + data.getDestinationAppointTime()); 
+						listRemarksList.add("[お届け指定日:] " + data.getDestinationAppointDate() + data.getDestinationAppointTime()); 
 					}
 					if(!StringUtils.isEmpty(data.getSenderMemo())) {
-						listRemarksList.add("\n[一言メモ（お届け先）:]" + "\n" + data.getSenderMemo());
+						listRemarksList.add("[一言メモ（お届け先）:] " + data.getSenderMemo());
 					}
+					listRemarksList.add("\n\r sadfasfasdfasdfdddddddddddddd \n\r ddddddddddddddddddddddddddddd \n\r eeeeeeeeeeeeeeeeeeeeeeeeeee");
+					listRemarksList.add("\n");
 				}
-				continue;
-				
-			}
-			listRemarksList.add(dto.getListRemarks());
+//				continue;
+//				
+//			}
+//			listRemarksList.add(dto.getListRemarks());
 		}
 
 		//備考欄開始Y地点が760(改ページ後には備考欄以下のみ表示)の場合、商品終了Y地点を760とする。
-		if (orderRemarksMap.get("remarksDisplayStartPointY") == 760) {
+		if ( ((float) orderRemarksMap.get("remarksDisplayStartPointY")) >= 760) {
 			tableLastDrawingYPosition = orderRemarksMap.get("remarksDisplayStartPointY");
 		}
 
@@ -386,20 +392,21 @@ public class ExportDomesticOrderService {
 			//備考欄と直送先の間(20px)を考慮してあらかじめ引いておく
 			tableLastDrawingYPosition -= 20;
 			
+			float lastPositionYTemp = tableLastDrawingYPosition;
 			//備考欄がそのページに収まりきるかを調べる
 			for (int i = 0; i < listRemarksList.size(); i++) {
 				//備考欄のフォントサイズは10px。備考欄の文字数が50文字を超えると改行され、行数が増えるため計算する。
-				tableLastDrawingYPosition -= 10  * stringIsmanyLinesHaveIsCheck(listRemarksList.get(i));
+				lastPositionYTemp -= 10  * stringIsmanyLinesHaveIsCheck(listRemarksList.get(i));
 				//商品テーブルの終了地点 - 20地点が232を下回ると直送先に被る
-					if (tableLastDrawingYPosition < 232) {
+					if (lastPositionYTemp < 232) {
 					//備考欄表示開始Y地点を760に設定し、改ページする
-					orderRemarksMap.put("remarksDisplayStartPointY", 760);
+					orderRemarksMap.put("remarksDisplayStartPointY", 800);
 					orderRemarksMap.put("isNewPage", 1);
 					return;
 				}
 			}
-
-			//直送先に被らない場合は備考欄を表示する。
+			
+			//直送先に被らない場合は備考欄を表示する。	
 			for (int i = 0; i < listRemarksList.size() ; i++) {
 				//商品の備考をセット
 				orderItemRemarks += " " + listRemarksList.get(i) + lineSep;
@@ -413,28 +420,14 @@ public class ExportDomesticOrderService {
 			//セルをテーブルに追加
 			pdfPTable.addCell(cellItemOrderRemarks);
 			//備考欄テーブルを描画
-//			
-			if(tableLastDrawingYPosition >= 342) {
-				if(orderRemarksMap.get("isNewPage") == 0) {	
-					pdfPTable.writeSelectedRows(0, TABLE_COLS,  0, maxRow + 2, 30, 362, writer.getDirectContent());	
-					//備考欄の表示が終わったら注意書き文言の開始位置を設定 ※備考欄の表示位置 + 10pxの位置
-					noteStartPointY = 362 + 10;
-				}
-				else {
-					pdfPTable.writeSelectedRows(0, TABLE_COLS,  0, maxRow + 2, 30, orderRemarksMap.get("remarksDisplayStartPointY"), writer.getDirectContent());
-					noteStartPointY = orderRemarksMap.get("remarksDisplayStartPointY") + 10;
-				}
-			}
-			else {
-				pdfPTable.writeSelectedRows(0, TABLE_COLS,  0, maxRow + 2, 30, 362+(342 - tableLastDrawingYPosition), writer.getDirectContent());
-				//備考欄の表示が終わったら注意書き文言の開始位置を設定 ※備考欄の表示位置 + 10pxの位置
-				noteStartPointY = (int) (362 + (342 - tableLastDrawingYPosition) + 10);
-			}
-
+			
+			pdfPTable.writeSelectedRows(0, TABLE_COLS,  0, maxRow + 2, 30, /*362*/ tableLastDrawingYPosition, writer.getDirectContent());	
+			//備考欄の表示が終わったら注意書き文言の開始位置を設定 ※備考欄の表示位置 + 10pxの位置
+			noteStartPointY = 362 + 10;
 			
 
 		//商品テーブル終了Y地点の場所によって備考欄の基準が変わる。760以上の時、改ページ先には商品テーブルは存在せず備考欄以下のみである。
-		} else if (tableLastDrawingYPosition >= 760) {
+		} else /* if (tableLastDrawingYPosition >= 760) */ {
 			//続きから表示する際のインデックスを用意するためにカウンタ変数はここで用意した。
 			int i;
 			//備考欄の続きインデックスがある場合はそれから、無い場合は0から始める。
@@ -452,13 +445,14 @@ public class ExportDomesticOrderService {
 				//Y地点が232を下回ると直送先に被る
 				if (tableLastDrawingYPosition < 232) {
 
+					float lastPositionYTemp = tableLastDrawingYPosition;
 					//改ページ後で直送先に被った場合はそのページの最後まで表示するため引き続き計算
 					for (int j = i + 1 ; j < listRemarksList.size(); j++) {
 						//備考欄のフォントサイズは10px。備考欄の文字数が50文字を超えると改行され、行数が増えるため計算する。
-						tableLastDrawingYPosition -= 10 * stringIsmanyLinesHaveIsCheck(listRemarksList.get(j));
+						lastPositionYTemp -= 10 * stringIsmanyLinesHaveIsCheck(listRemarksList.get(j));
 
 						//62がそのページいっぱいに備考欄を表示するY地点の限界
-						if (tableLastDrawingYPosition <= 62) {
+						if (lastPositionYTemp <= 62) {
 							//改ページ後の備考欄開始Y地点、ページ内での備考欄の最大表示数、改ページ先での備考欄の続きから表示するインデックス、改ページフラグを設定
 							orderRemarksMap.put("remarksDisplayStartPointY", 760);
 							orderRemarksMap.put("itemRowMaxIndex", j);
