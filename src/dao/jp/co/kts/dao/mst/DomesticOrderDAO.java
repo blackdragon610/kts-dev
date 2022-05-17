@@ -15,6 +15,7 @@ import jp.co.keyaki.cleave.fw.dao.util.ResultSetHandlerFactory;
 import jp.co.kts.app.common.entity.DomesticOrderItemDTO;
 import jp.co.kts.app.common.entity.DomesticOrderListDTO;
 import jp.co.kts.app.common.entity.DomesticOrderSlipDTO;
+import jp.co.kts.app.common.entity.DomesticOrderStockItemDTO;
 import jp.co.kts.app.extendCommon.entity.ExtendDomesticOrderItemSearchDTO;
 import jp.co.kts.app.extendCommon.entity.ExtendDomesticOrderSlipDTO;
 import jp.co.kts.app.extendCommon.entity.ExtendMstItemDTO;
@@ -528,4 +529,15 @@ public class DomesticOrderDAO extends BaseDAO {
 
 		return update("UPD_DELETE_FOMR_DOMESTIC_ITEM", parameters);
 	}
-}
+
+	
+	public int updateDomesticItemArrival(DomesticOrderStockItemDTO dto) throws DaoException {
+
+		SQLParameters parameters = new SQLParameters();
+		addParametersFromBeanProperties(dto, parameters);
+
+		UserInfo userInfo = ActionContext.getLoginUserInfo();
+		parameters.addParameter("updateUserId", userInfo.getUserId());
+
+		return update("UPD_DOMESTIC_ITEM_ARRIVAL", parameters);
+	}}

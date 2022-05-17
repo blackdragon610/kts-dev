@@ -28,6 +28,7 @@ import jp.co.kts.app.common.entity.DomesticCsvImportDTO;
 import jp.co.kts.app.common.entity.DomesticExhibitionDTO;
 import jp.co.kts.app.common.entity.DomesticOrderItemDTO;
 import jp.co.kts.app.common.entity.DomesticOrderSlipDTO;
+import jp.co.kts.app.common.entity.DomesticOrderStockItemDTO;
 import jp.co.kts.app.common.entity.ExtendKeepCsvImportDTO;
 import jp.co.kts.app.common.entity.MstItemDTO;
 import jp.co.kts.app.common.entity.MstUserDTO;
@@ -3385,5 +3386,143 @@ public class CsvImportService {
 		}
 		
 		return newErrorMessageList;
+	}
+	
+
+	private DomesticOrderStockItemDTO setCsvOrderStockImportList(String[] array) throws IllegalAccessException, Exception {
+		DomesticOrderStockItemDTO csvImportDTO = new DomesticOrderStockItemDTO();
+
+		int i = 0;
+
+		BeanUtils.setProperty(csvImportDTO,"orderNo", array[i++]);					//受注番号		++
+		BeanUtils.setProperty(csvImportDTO,"purchaseOrderNo", array[i++]);			//注文書No.		++
+		BeanUtils.setProperty(csvImportDTO,"serealNum", array[i++]);				//通番
+		BeanUtils.setProperty(csvImportDTO,"orderDate", array[i++]);				//注文書作成日	++
+		BeanUtils.setProperty(csvImportDTO,"arrivalScheduleDate", array[i++]);		//入荷予定日
+		BeanUtils.setProperty(csvImportDTO,"arrivalDate", array[i++]);				//入荷日
+		BeanUtils.setProperty(csvImportDTO,"wholsesalerNm", array[i++]);			//問屋
+		BeanUtils.setProperty(csvImportDTO,"makerNm", array[i++]);					//メーカー			++
+		BeanUtils.setProperty(csvImportDTO,"itemNm", array[i++]);					//商品名
+		BeanUtils.setProperty(csvImportDTO,"makerCode", array[i++]);				//メーカー品番		
+		BeanUtils.setProperty(csvImportDTO,"orderNum", array[i++]);					//数量
+		BeanUtils.setProperty(csvImportDTO,"purchasingCost", array[i++]);			//原価
+		BeanUtils.setProperty(csvImportDTO,"postage", array[i++]);					//送料
+		BeanUtils.setProperty(csvImportDTO,"costComfFlag", array[i++]);				//原価確認
+		BeanUtils.setProperty(csvImportDTO,"orderCharge", array[i++]);				//注文担当
+		BeanUtils.setProperty(csvImportDTO,"personInCharge", array[i++]);			//対応者
+		BeanUtils.setProperty(csvImportDTO,"stockCharge", array[i++]);				//入荷担当
+		BeanUtils.setProperty(csvImportDTO,"correspondence", array[i++]);			//対応Flag
+		BeanUtils.setProperty(csvImportDTO,"chargeDate", array[i++]);				//対応日
+		BeanUtils.setProperty(csvImportDTO,"status", array[i++]);					//ステータス
+		BeanUtils.setProperty(csvImportDTO,"orderRemarks", array[i++]);				//注文備考
+		
+
+		return csvImportDTO;
+
+	}
+
+	/**
+	 * 国内注文取込時ファイルが登録されているか確認する。
+	 * @param corporationId
+	 * @param fileUp
+	 * @param csvImportList
+	 * @return
+	 * @throws Exception
+	 */
+	public ErrorDTO importDomesticOrderStockFile(FormFile fileUp, List<DomesticOrderStockItemDTO> csvImportList) throws Exception {
+
+		InputStream inputStream = fileUp.getInputStream();
+		ErrorDTO csvErrorDTO = new ErrorDTO();
+
+		CsvConfig config = new CsvConfig();
+		CsvReader reader = new CsvReader(config, true);
+		CsvContext context = reader.parse(inputStream);
+
+
+		if (StringUtils.isNotEmpty(exsistDomesticFileNm(fileUp.getFileName()))) {
+
+			csvErrorDTO.setSuccess(false);
+			csvErrorDTO.setFileName("「" + fileUp.getFileName() + "」はすでにインポート済みファイルです。");
+			return csvErrorDTO;
+		}
+
+		for (CsvRecord csvRecord : context) {
+
+			String[] csvLineArray = csvRecord.toArray();
+
+			DomesticOrderStockItemDTO csvImportDTO = new DomesticOrderStockItemDTO();
+			csvImportDTO =  setCsvOrderStockImportList(csvLineArray);
+
+			csvImportDTO.setFileNm(fileUp.getFileName());
+
+			//伝票用Listに格納
+			csvImportList.add(csvImportDTO);
+		}
+		
+		csvErrorDTO = saveDomesticStockScheduleDate(csvImportList);
+		
+		return csvErrorDTO;
+	}
+	
+	/**
+	 * CSVファイルを国内注文伝票に読み替え登録を行います
+	 *
+	 * @param csvImportList
+	 * @return
+	 * @throws Exception
+	 */
+	public ErrorDTO saveDomesticStockScheduleDate(List<DomesticOrderStockItemDTO> csvImportList) throws Exception {
+
+		//インスタンス生成
+		ErrorMessageDTO messageDTO = new ErrorMessageDTO();
+		//商品コード(店舗)の文字列を保持して置く→納入先を振り分ける際に使用する
+		int resultCnt = 0;
+
+		ErrorDTO csvErrorDTO = new ErrorDTO();
+		csvErrorDTO.setSuccess(true);
+		if (csvImportList == null) {
+			csvErrorDTO.setSuccess(false);
+			messageDTO.setErrorMessage("予期せぬエラー!!");
+			csvErrorDTO.getErrorMessageList().add(messageDTO);
+			return csvErrorDTO;
+		}
+
+		List<DomesticOrderStockItemDTO> orderItemList = new ArrayList<DomesticOrderStockItemDTO>();
+		//csvファイルのままだと一つの受注番号で複数行あるのでそれを正規化するイメージs
+		for (int i = 0; i < csvImportList.size(); i++) {
+
+			DomesticOrderStockItemDTO csvImportDTO = csvImportList.get(i);
+			
+			DomesticOrderService dao = new DomesticOrderService();
+			csvErrorDTO = dao.searchDomesticOrderSlipByOrderNo(csvErrorDTO, csvImportDTO);
+			if(csvErrorDTO.isSuccess())
+				orderItemList.add(csvImportDTO);
+			
+
+		}
+		if( csvErrorDTO.getErrorMessageList().size()>0 )
+		{
+			
+		}
+		DomesticOrderService dao = new DomesticOrderService();
+		resultCnt += dao.registryDomesticOrderStockScheduleDate(orderItemList);
+		csvErrorDTO.setTrueCount(resultCnt);
+
+		//国内商品が一件もない場合
+		if (csvErrorDTO.getTrueCount() == 0) {
+			messageDTO.setErrorMessage("国内商品が存在しないCSVファイルです。");
+			csvErrorDTO.getErrorMessageList().add(messageDTO);
+		}
+
+		//注文商品が作成されなかった場合
+		if (resultCnt == 0) {
+			csvErrorDTO.setSuccess(false);
+		}
+
+		if (csvErrorDTO.getErrorMessageList().size() > 0) {
+			csvErrorDTO.setSuccess(false);
+		}
+
+		return csvErrorDTO;
 	}
 }

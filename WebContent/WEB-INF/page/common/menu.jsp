@@ -8,6 +8,7 @@
 				<li><html:link href="initCsvImport.do" title="受注データ取込"><span>受注データ取込</span></html:link></li>
 				<li><html:link href="initDeliveryCsvImport.do" title="配送データ取込"><span>配送データ取込</span></html:link></li>
 				<li><html:link href="initDomesticCsvImport.do" title="国内注文データ取込"><span>国内注文データ取込</span></html:link></li>
+				<li><html:link href="initDomesticOrderStockCsvImport.do" title="国内注文入荷予定日取込"><span>国内注文入荷予定日取込</span></html:link></li>
 			</ul>
 		</li>
 		<li class='has-sub'><a href='#'><span>業販管理</span></a>

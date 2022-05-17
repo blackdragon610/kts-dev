@@ -321,7 +321,6 @@ public class ExportDomesticOrderService {
 		// フォントとサイズの設定
 		pdfContentByte.setFontAndSize(baseFont, 10);
 
-
 		/*------------ 中段商品備考欄表示処理 ここから ----------------------------------------------------------------------------------------------------------*/
 		//TODO 中段商品備考表示処理
 
@@ -416,6 +415,7 @@ public class ExportDomesticOrderService {
 			cellItemOrderRemarks.setHorizontalAlignment(0);
 			//セルの最小高さを設定 (備考欄が少ない時、備考欄枠がせばまってしまい余計な空白が生まれてしまうので最小高さを設定した)
 			cellItemOrderRemarks.setMinimumHeight(130);
+			cellItemOrderRemarks.setLeading(3, 1);
 			//セルをテーブルに追加
 			pdfPTable.addCell(cellItemOrderRemarks);
 			//備考欄テーブルを描画
@@ -469,6 +469,7 @@ public class ExportDomesticOrderService {
 							cellItemOrderRemarks.setHorizontalAlignment(0);
 							//セルの最小高さを設定 (備考欄が少ない時、備考欄枠がせばまってしまい余計な空白が生まれてしまうので最小高さを設定した)
 							cellItemOrderRemarks.setMinimumHeight(130);
+							cellItemOrderRemarks.setLeading(3, 1);
 							//セルをテーブルに追加
 							pdfPTable.addCell(cellItemOrderRemarks);
 							//備考欄テーブルを描画
@@ -510,6 +511,7 @@ public class ExportDomesticOrderService {
 			//セルの最小高さを設定 (備考欄が少ない時、備考欄枠がせばまってしまい余計な空白が生まれてしまうので最小高さを設定した)
 			cellItemOrderRemarks.setMinimumHeight(130);
 			//セルをテーブルに追加
+			cellItemOrderRemarks.setLeading(3, 1);
 			pdfPTable.addCell(cellItemOrderRemarks);
 
 			if (orderRemarksMap.get("remarksDisplayStartPointY") != 0) {

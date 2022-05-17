@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import jp.co.keyaki.cleave.fw.ui.web.struts.AppActionMapping;
 import jp.co.keyaki.cleave.fw.ui.web.struts.AppBaseForm;
 import jp.co.kts.app.common.entity.CsvImportDTO;
+import jp.co.kts.app.common.entity.DomesticOrderStockItemDTO;
 import jp.co.kts.app.common.entity.MstCorporationDTO;
 import jp.co.kts.app.common.entity.MstDeliveryCompanyDTO;
 import jp.co.kts.app.common.entity.MstDeliveryDTO;
@@ -25,6 +26,8 @@ public class CsvImportForm extends AppBaseForm{
 	private static final long serialVersionUID = 1L;
 
 	private List<CsvImportDTO> csvImportList = new ArrayList<>();
+
+	private List<DomesticOrderStockItemDTO> csvOrderStockImportList = new ArrayList<>();
 
 	private int corporationId;
 
@@ -277,5 +280,24 @@ public class CsvImportForm extends AppBaseForm{
 		this.deliveryCompanyId = deliveryCompanyId;
 	}
 	
+
+
+	/**
+	 * @return csvOrderStockImportList
+	 */
+	public List<DomesticOrderStockItemDTO> getCsvOrderStockImportList() {
+		return csvOrderStockImportList;
+	}
+
+
+
+
+	/**
+	 * @param csvImportList セットする csvImportList
+	 */
+	public void setCsvOrderStockImportList(List<DomesticOrderStockItemDTO> csvOrderStockImportList) {
+		this.csvOrderStockImportList = csvOrderStockImportList;
+	}
+
 	
 }

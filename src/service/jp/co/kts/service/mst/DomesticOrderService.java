@@ -15,12 +15,17 @@ import jp.co.kts.app.common.entity.DomesticExhibitionDTO;
 import jp.co.kts.app.common.entity.DomesticOrderItemDTO;
 import jp.co.kts.app.common.entity.DomesticOrderListDTO;
 import jp.co.kts.app.common.entity.DomesticOrderSlipDTO;
+import jp.co.kts.app.common.entity.DomesticOrderStockItemDTO;
 import jp.co.kts.app.common.entity.MstCorporationDTO;
 import jp.co.kts.app.extendCommon.entity.ExtendDomesticOrderItemSearchDTO;
 import jp.co.kts.app.extendCommon.entity.ExtendDomesticOrderSlipDTO;
+import jp.co.kts.app.extendCommon.entity.ExtendMstItemDTO;
 import jp.co.kts.app.extendCommon.entity.ExtendSetDomesticExhibitionDto;
+import jp.co.kts.app.output.entity.ErrorDTO;
+import jp.co.kts.app.output.entity.ErrorMessageDTO;
 import jp.co.kts.app.output.entity.RegistryMessageDTO;
 import jp.co.kts.app.search.entity.DomesticExhibitionSearchDTO;
+import jp.co.kts.app.search.entity.SearchItemDTO;
 import jp.co.kts.dao.common.SequenceDAO;
 import jp.co.kts.dao.mst.CorporationDAO;
 import jp.co.kts.dao.mst.DomesticExhibitionDAO;
@@ -780,5 +785,42 @@ public class DomesticOrderService {
 		DomesticOrderDAO dao = new DomesticOrderDAO();
 		dao.registryDomesticSlipDAO(dto);
 		return dto;
+	}
+	
+	
+	/**
+	 * Csv用
+	 * @param domesticOrderItemList
+	 * @param sysDomesticSlipId
+	 * @throws DaoException
+	 */
+	public int registryDomesticOrderStockScheduleDate(List<DomesticOrderStockItemDTO> domesticOrderItemList) throws DaoException {
+
+		int serealNum = 1;
+		int resultCnt = 0;
+		for (DomesticOrderStockItemDTO dto : domesticOrderItemList) {
+			DomesticOrderDAO dao = new DomesticOrderDAO();
+			resultCnt += dao.updateDomesticItemArrival(dto);
+		}
+		return resultCnt;
+	}
+	
+	public ErrorDTO searchDomesticOrderSlipByOrderNo(ErrorDTO csvErrorDTO, DomesticOrderStockItemDTO dto) throws DaoException {
+
+		DomesticOrderDAO dao = new DomesticOrderDAO();
+		List<DomesticOrderStockItemDTO>	returnSlipList = new ArrayList<>(); 
+		ErrorMessageDTO messageDTO = new ErrorMessageDTO();
+		
+		csvErrorDTO.setSuccess(true);
+		SearchItemDTO searchDto = new SearchItemDTO();
+		searchDto.setOrderNo(dto.getOrderNo());
+		List<ExtendMstItemDTO> mst = dao.getSearchDomesticItemList(searchDto);
+		if(mst.isEmpty())
+		{
+			csvErrorDTO.setSuccess(false);
+			messageDTO.setErrorMessage("受注番号"+dto.getOrderNo() + "は国内商品に存在しない商品です。");
+			csvErrorDTO.getErrorMessageList().add(messageDTO);
+		}
+		return csvErrorDTO;
 	}
 }

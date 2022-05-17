@@ -37,6 +37,17 @@ public class CsvImportAction extends AppBaseAction{
 
 		CsvImportForm form = (CsvImportForm)appForm;
 
+		
+		if ("/initDomesticOrderStockCsvImport".equals(appMapping.getPath())) {
+			//国内注文入荷予定日取込 画面初期処理
+			return initDomesticOrderStockCsvImport(appMapping, form, request);
+		} 
+		
+		else if ("/domesticOrderStockCsvImport".equals(appMapping.getPath())) {
+			// 国内注文入荷予定日 データ取込（単一ファイル）
+			return domesticOrderStockCsvImport(appMapping, form, request);
+			
+		}
 		//受注データ取込画面初期処理
 		if ("/initCsvImport".equals(appMapping.getPath())) {
 			return initCsvImport(appMapping, form, request);
@@ -897,5 +908,59 @@ public class CsvImportAction extends AppBaseAction{
 		return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
 	}
 
+
+	
+	/**
+	 * 助ネコインポート：国内注文データ取込画面初期処理
+	 * @param appMapping
+	 * @param form
+	 * @param request
+	 * @return
+	 */
+	protected ActionForward initDomesticOrderStockCsvImport(AppActionMapping appMapping, CsvImportForm form,
+			HttpServletRequest request) throws Exception {
+		//エラーメッセージ初期化
+		form.setCsvErrorDTO(new ErrorDTO());
+		form.setCsvErrorList(new ArrayList<ErrorDTO>());
+		RegistryMessageDTO messageDTO = new RegistryMessageDTO();
+		//メッセージ初期化
+		form.setRegistryDto(messageDTO);
+		form.setAlertType("0");
+		return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
+	}
+
+	/**
+	 * 助ネコインポート：国内注文データインポート処理
+	 * @param appMapping
+	 * @param form
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
+	protected ActionForward domesticOrderStockCsvImport(AppActionMapping appMapping, CsvImportForm form,
+            HttpServletRequest request) throws Exception {
+		RegistryMessageDTO messageDTO = new RegistryMessageDTO();
+
+		//エラーメッセージ初期化
+		form.setCsvErrorDTO(new ErrorDTO());
+		form.setCsvErrorList(new ArrayList<ErrorDTO>());
+
+		CsvImportService service = new CsvImportService();
+
+		begin();
+
+		form.setCsvErrorDTO(new ErrorDTO());
+
+		//CSVの情報をリストに格納
+		form.setCsvErrorDTO(
+				service.importDomesticOrderStockFile(form.getFileUp(), form.getCsvOrderStockImportList()));
+
+		messageDTO.setMessageFlg("0");
+		messageDTO.setMessage("インポートが完了しました。");
+		form.setRegistryDto(messageDTO);
+		commit();
+		form.setAlertType(WebConst.ALERT_TYPE_REGIST);
+		return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
+	}
 
 }

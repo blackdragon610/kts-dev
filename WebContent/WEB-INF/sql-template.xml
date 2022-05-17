@@ -18098,4 +18098,14 @@ SELECT
 	</sql-template>
 
 
+	<sql-template id="UPD_DOMESTIC_ITEM_ARRIVAL">
+		UPDATE DOMESTIC_ITEM  
+		SET  arrival_schedule_date=${arrivalScheduleDate}
+			,arrival_date=${arrivalDate}
+		FROM DOMESTIC_SLIP DS
+		WHERE DOMESTIC_ITEM.SYS_DOMESTIC_SLIP_ID = DS.SYS_DOMESTIC_SLIP_ID
+					 AND DS.ORDER_NO = ${orderNo}
+	</sql-template>
+	
+	
 </sql-templates>
