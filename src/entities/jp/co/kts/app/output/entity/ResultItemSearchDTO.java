@@ -112,7 +112,16 @@ public class ResultItemSearchDTO extends MstItemDTO {
 	/** 注文アラート対象フラグ */
 	private String deliveryAlertTargetFlg = "0";
 
+	/** 総在庫数入力値 */
+	private int temporaryStockNum = 0;
+	public int getTemporaryStockNum() {
+	    return temporaryStockNum;
+	}
+	public void setTemporaryStockNum(int temporaryStockNum) {
+	    this.temporaryStockNum = temporaryStockNum;
+	}
 
+	
 	/**
 	 * システム入荷予定IDを取得します。
 	 * @return システム入荷予定ID

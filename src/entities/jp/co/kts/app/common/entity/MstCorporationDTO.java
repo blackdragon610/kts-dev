@@ -64,7 +64,27 @@ public class MstCorporationDTO  {
 	/** 法人掛け率 */
 	private BigDecimal corporationRateOver;
 
+	/** 売上高利益率 */
+	private float salesProfitRate;
 
+	/** 購入利益率 */
+	private float purchaseProfitRate;
+
+	public float getSalesProfitRate() {
+		return salesProfitRate;
+	}
+	public void setSalesProfitRate(float salesProfitRate) {
+		this.salesProfitRate = salesProfitRate;
+	}
+	public float getPurchaseProfitRate() {
+		return this.purchaseProfitRate;
+	}
+	public void setPurchaseProfitRate(float purchaseProfitRate) {
+		this.purchaseProfitRate = purchaseProfitRate;
+	}
+
+
+	
 	public BigDecimal getCorporationRateOver() {
 		return corporationRateOver;
 	}

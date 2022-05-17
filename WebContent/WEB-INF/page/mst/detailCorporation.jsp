@@ -142,6 +142,26 @@
 							<nested:text property="corporationRateOver" styleClass="w100 rateOver" maxlength="5" />&nbsp;％
 						</td>
 					</tr>
+					
+					<tr>
+						<th>
+							売上高利益率
+						</th>
+						<td>
+							<nested:text property="salesProfitRate" styleClass="w100 rateOver" maxlength="5" />&nbsp;％
+						</td>
+					</tr>
+
+					<tr>
+						<th>
+							購入利益率
+						</th>
+						<td>
+							<nested:text property="purchaseProfitRate" styleClass="w100 rateOver" maxlength="5" />&nbsp;％
+						</td>
+					</tr>
+
+					
 				</table>
 
 			</nested:nest>

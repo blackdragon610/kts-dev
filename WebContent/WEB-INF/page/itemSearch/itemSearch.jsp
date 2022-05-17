@@ -69,8 +69,8 @@ $(function () {
 		itemArea.eq(idx).find(".addCost").val(selectArea.find(".cost").val());
 		itemArea.eq(idx).find(".addPieceRate").val(selectArea.find(".price").val());
 		itemArea.eq(idx).find(".addTotalStockNum").html(selectArea.find(".totalStockNum").val());
-		itemArea.eq(idx).find(".addTotalStockNum").val(selectArea.find(".totalStockNum").val());
 		itemArea.eq(idx).find(".addTemporaryStockNum").html('(' + selectArea.find(".temporaryStockNum").val() + ')');
+		itemArea.eq(idx).find(".addTemporaryStockNum").val(selectArea.find(".temporaryStockNum").val());
 		itemArea.eq(idx).find(".addAssemblyNum").html(selectArea.find(".assemblyNum").val());
 		itemArea.eq(idx).find(".addOrderNum").val(0);
 		itemArea.eq(idx).find(".scheduledLeavingDate").val("");

@@ -378,12 +378,12 @@ $(function () {
 			copyToTr.find(".addItemNm").val(copyFromTr.find(".addItemNm").val());
 			copyToTr.find(".addNum").val(copyFromTr.find(".addNum").val());
 			copyToTr.find(".addSysItemId").val(copyFromTr.find(".addSysItemId").val());
-			copyToTr.find(".addTotalStockNum").val(copyFromTr.find(".addTotalStockNum").val());
+			copyToTr.find(".addTemporaryStockNum").val(copyFromTr.find(".addTemporaryStockNum").val());
 
 			copyFromTr.find(".addItemCode").val("");
 			copyFromTr.find(".addItemNm").val("");
 			copyFromTr.find(".addNum").val(0);
-			copyFromTr.find(".addTotalStockNum").val(0);
+			copyFromTr.find(".addTemporaryStockNum").val(0);
 			copyFromTr.find(".addSysItemId").val(0);
 		}
 
@@ -406,12 +406,12 @@ $(function () {
 			copyToTr.find(".addItemNm").val(copyFromTr.find(".addItemNm").val());
 			copyToTr.find(".addNum").val(copyFromTr.find(".addNum").val());
 			copyToTr.find(".addSysItemId").val(copyFromTr.find(".addSysItemId").val());
-			copyToTr.find(".addTotalStockNum").val(copyFromTr.find(".addTotalStockNum").val());
+			copyToTr.find(".addTemporaryStockNum").val(copyFromTr.find(".addTemporaryStockNum").val());
 
 			copyFromTr.find(".addItemCode").val("");
 			copyFromTr.find(".addItemNm").val("");
 			copyFromTr.find(".addNum").val(0);
-			copyFromTr.find(".addTotalStockNum").val(0);
+			copyFromTr.find(".addTemporaryStockNum").val(0);
 			copyFromTr.find(".addSysItemId").val(0);
 		}
 
@@ -1417,11 +1417,11 @@ $(function () {
 			var addNum = new Number(showTr.eq(i).find(".addNum").val());
 			var addItemCode = showTr.eq(i).find(".addItemCode").val();
 			var addItemNm = showTr.eq(i).find(".addItemNm").val();
-			var addTotalStockNum = showTr.eq(i).find(".addTotalStockNum").val();
+			var addTemporaryStockNum = showTr.eq(i).find(".addTemporaryStockNum").val();
 
-			if (addNum != 0 || addItemCode != "" || addItemNm != "" || addTotalStockNum != 0) {
+			if (addNum != 0 || addItemCode != "" || addItemNm != "" || addTemporaryStockNum != 0) {
 
-				if (addNum == 0 || addItemCode == "" || addItemNm == ""  || addTotalStockNum == 0) {
+				if (addNum == 0 || addItemCode == "" || addItemNm == ""  || addTemporaryStockNum == 0) {
 
 					alert('個数・品番・商品名は必須項目です。');
 					return false;
@@ -1877,7 +1877,7 @@ function commmaAddFnc() {
 									onchange="PxTextareaAdjuster(this);"
 									onblur="PxTextareaAdjuster(this);">
 								</nested:textarea></td>
-							<td ><nested:text property="totalStockNum" styleClass="w50 addTotalStockNum" maxlength="4" readonly="true"/></td>
+							<td ><nested:text property="temporaryStockNum" styleClass="w50 addTemporaryStockNum" maxlength="4" readonly="true"/><!-- totalStockNum --></td>
 							<td><a class="button_small_main searchAddItem"
 								href="javascript:void(0)">商品検索</a>&nbsp; <a
 								class="button_small_white removeSetItemDisp"
@@ -1905,7 +1905,7 @@ function commmaAddFnc() {
 									onchange="PxTextareaAdjuster(this);"
 									onblur="PxTextareaAdjuster(this);">
 								</nested:textarea></td>
-							<td><nested:text property="totalStockNum" styleClass="w50 addTotalStockNum" maxlength="4" readonly="true"/></td>
+							<td><nested:text property="temporaryStockNum" styleClass="w50 addTemporaryStockNum" maxlength="4" readonly="true"/></td>
 							<td><a class="button_small_main searchAddItem"
 								href="javascript:void(0)">商品検索</a>&nbsp; <a
 								class="button_small_white removeSetItem"

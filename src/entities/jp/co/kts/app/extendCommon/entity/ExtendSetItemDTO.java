@@ -18,6 +18,8 @@ public class ExtendSetItemDTO extends SetItemDTO {
 	
 	/* 在庫 */
 	private int totalStockNum;
+
+	private int temporaryStockNum;
 	/**
 	 * @return itemCode
 	 */
@@ -87,5 +89,13 @@ public class ExtendSetItemDTO extends SetItemDTO {
 	public void setTotalStockNum(int totalStockNum) {
 		this.totalStockNum = totalStockNum;
 	}
-
+	
+	
+	
+	public int getTemporaryStockNum() {
+		return temporaryStockNum;
+	}
+	public void setTemporaryStockNum(int temporaryStockNum) {
+		this.temporaryStockNum = temporaryStockNum;
+	}
 }

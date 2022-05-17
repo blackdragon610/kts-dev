@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -503,6 +504,23 @@ public class ExportPickListService {
 		else
 			pdfContentByte.showText("");
 
+		
+		// 表示位置の設定
+		pdfContentByte.setTextMatrix(200, 660);
+
+		// 表示する文字列の設定
+		pdfContentByte.showText("日付");
+
+		// 表示位置の設定
+		pdfContentByte.setTextMatrix(225, 660);
+
+		// 表示する文字列の設定
+		if (slipDto.getOrderDate() != null)
+			pdfContentByte.showText(slipDto.getOrderDate() + "," + TimeZone.getTimeZone("Asia/Tokyo").getDisplayName());
+		else 
+			pdfContentByte.showText("");
+		
+		
 		{
 			// Get SlipNo 
 			
