@@ -412,14 +412,14 @@ public class ExportCorporatePickListServiceNew {
 		pdfContentByte.setTextMatrix(200, 660);
 
 		// 表示する文字列の設定
-		pdfContentByte.showText("日付");
+		pdfContentByte.showText("運送日付");
 
 		// 表示位置の設定
 		pdfContentByte.setTextMatrix(240, 660);
 
 		// 表示する文字列の設定
-		if (slipDto.getOrderDate() != null)
-			pdfContentByte.showText(slipDto.getOrderDate() + "," + TimeZone.getTimeZone("Asia/Tokyo").getDisplayName());
+		if (StringUtils.isNotEmpty(slipDto.getDestinationAppointDate()))
+			pdfContentByte.showText(slipDto.getDestinationAppointDate() + " " + WebConst.APPOINT_TIME_EHIDEN_MAP.get(slipDto.getDestinationAppointTime()) != null ? WebConst.APPOINT_TIME_EHIDEN_MAP.get(slipDto.getDestinationAppointTime()) : "");
 		else 
 			pdfContentByte.showText("");
 		

@@ -36,6 +36,9 @@ public class MstChannelDTO  {
 	/** 更新者ID */
 	private int updateUserId;
 
+	/** 売上高利益率 */
+	private float salesProfitRate;
+	
 	/**
 	 * <p>
 	 * システム販売チャネルID を返却します。
@@ -194,6 +197,20 @@ public class MstChannelDTO  {
 	 */
 	public void setUpdateUserId(int updateUserId) {
 		this.updateUserId = updateUserId;
+	}
+
+	/**
+	 * @return the salesProfitRate
+	 */
+	public float getSalesProfitRate() {
+		return salesProfitRate;
+	}
+
+	/**
+	 * @param salesProfitRate the salesProfitRate to set
+	 */
+	public void setSalesProfitRate(float salesProfitRate) {
+		this.salesProfitRate = salesProfitRate;
 	}
 
 }

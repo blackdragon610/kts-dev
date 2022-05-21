@@ -49,6 +49,7 @@ import jp.co.kts.app.extendCommon.entity.ExtendSalesSlipDTO;
 import jp.co.kts.app.output.entity.StoreDTO;
 import jp.co.kts.service.mst.ClientService;
 import jp.co.kts.service.sale.SaleDisplayService;
+import jp.co.kts.ui.web.struts.WebConst;
 import net.arnx.jsonic.JSON;
 
 public class ExportPickListService {
@@ -509,14 +510,14 @@ public class ExportPickListService {
 		pdfContentByte.setTextMatrix(200, 660);
 
 		// 表示する文字列の設定
-		pdfContentByte.showText("日付");
+		pdfContentByte.showText("運送日付");
 
 		// 表示位置の設定
 		pdfContentByte.setTextMatrix(225, 660);
 
 		// 表示する文字列の設定
-		if (slipDto.getOrderDate() != null)
-			pdfContentByte.showText(slipDto.getOrderDate() + "," + TimeZone.getTimeZone("Asia/Tokyo").getDisplayName());
+		if (StringUtils.isNotEmpty(slipDto.getDestinationAppointDate()))
+			pdfContentByte.showText(slipDto.getDestinationAppointDate() + " " + WebConst.APPOINT_TIME_EHIDEN_MAP.get(slipDto.getDestinationAppointTime()) != null ? WebConst.APPOINT_TIME_EHIDEN_MAP.get(slipDto.getDestinationAppointTime()) : "");
 		else 
 			pdfContentByte.showText("");
 		

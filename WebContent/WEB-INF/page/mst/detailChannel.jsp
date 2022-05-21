@@ -62,6 +62,14 @@
 							<nested:text property="url" maxlength="200" />
 						</td>
 					</tr>
+					<tr>
+						<th>
+							売上高利益率
+						</th>
+						<td>
+							<nested:text property="salesProfitRate" styleClass="w100 rateOver" maxlength="5" />&nbsp;％
+						</td>
+					</tr>
 				</table>
 
 			</nested:nest>

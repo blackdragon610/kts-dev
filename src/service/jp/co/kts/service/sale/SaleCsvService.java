@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 
 import jp.co.keyaki.cleave.common.util.StringUtil;
 import jp.co.keyaki.cleave.fw.dao.DaoException;
+import jp.co.kts.app.common.entity.CorporateSalesSlipDTO;
 import jp.co.kts.app.common.entity.CsvImportDTO;
 import jp.co.kts.app.common.entity.ItemCostDTO;
 import jp.co.kts.app.common.entity.SalesSlipDTO;

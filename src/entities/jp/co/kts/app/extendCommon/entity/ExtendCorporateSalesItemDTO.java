@@ -88,21 +88,6 @@ public class ExtendCorporateSalesItemDTO extends CorporateSalesItemDTO {
 
 	private int updatedFlag;
 
-	private float salesProfitRate;
-	private float purchaseProfitRate;
-	public float getSalesProfitRate() {
-		return salesProfitRate;
-	}
-	public void setSalesProfitRate(float salesProfitRate) {
-		this.salesProfitRate = salesProfitRate;
-	}
-	public float getPurchaseProfitRate() {
-		return purchaseProfitRate;
-	}
-	public void setPurchaseProfitRate(float purchaseProfitRate) {
-		this.purchaseProfitRate = purchaseProfitRate;
-	}
-	
 	public String getShipmentPlanDate() {
 		return shipmentPlanDate;
 	}
