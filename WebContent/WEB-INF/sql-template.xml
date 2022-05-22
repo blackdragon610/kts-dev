@@ -7751,11 +7751,17 @@
 	</sql-template>
 
 	<!-- 	全セット商品組立可数更新関数 -->
-	<sql-template id="SELECT_PALLCALCASSEMBLYNUM">
-		SELECT PALLASSEMBLYNUM(${updateUserId});
+<!-- 	<sql-template id="SELECT_PALLCALCASSEMBLYNUM"> -->
+<!-- 		SELECT PALLASSEMBLYNUM(${updateUserId}); -->
+<!-- 	</sql-template> -->
+
+
+	<!-- 	全セット商品組立可数更新関数 -->
+	<sql-template id="SELECT_REBUILDASSEMBLYNUM">
+		SELECT REBUILD_ASSEMBLY_NUM(${updateUserId});
 	</sql-template>
-
-
+	
+	
 	<sql-template id="PARENT_SET_ITEM_LIST">
 		SELECT
 		SI.SYS_ITEM_ID,
