@@ -85,6 +85,20 @@ public class CorporateSaleDAO extends BaseDAO {
 		return update("UPD_CORP_SALES_SLIP", parameters);
 	}
 
+	public int updateCorporateSalesSlipTransAndSlipnoByOrderNo(String strTransportCorporationSystem, String strSlipNo, String strOrderNo) throws DaoException, ParseException {
+
+		SQLParameters parameters = new SQLParameters();
+		parameters.addParameter("TransportCorporationSystem", strTransportCorporationSystem);
+		parameters.addParameter("SlipNo", strSlipNo);
+		parameters.addParameter("OrderNo", strOrderNo);
+
+		//parameters.addParameter("receiveDate", new CorporateReceiveService().getCorporateReceiveLatestDate(dto.getSysCorporateSalesSlipId()));
+
+		UserInfo userInfo = ActionContext.getLoginUserInfo();
+		parameters.addParameter("updateUserId", userInfo.getUserId());
+		return update("UPD_CORP_SALES_TRANS_SLIPNO_SLIP_BY_ORDERNO", parameters);
+	}
+
 	public void deleteCorporateSalesSlip(long sysCorporateSalesSlipId) throws DaoException {
 
 		SQLParameters parameters = new SQLParameters();

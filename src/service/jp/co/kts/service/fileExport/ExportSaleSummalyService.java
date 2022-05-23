@@ -3,6 +3,8 @@ package jp.co.kts.service.fileExport;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
@@ -32,6 +34,12 @@ public class ExportSaleSummalyService extends ExportExcelSalesService {
 		sheetIdx = 0;
 	}
 
+	@Override
+	public HSSFWorkbook getFileExportSales(HttpSession session, SaleSearchDTO saleSearchDTO,
+			HSSFWorkbook workBook) throws Exception {
+		
+		return getFileExportSales(saleSearchDTO, workBook);
+	}
 	@Override
 	public HSSFWorkbook getFileExportSales(SaleSearchDTO saleSearchDTO,
 			HSSFWorkbook workBook) throws Exception {

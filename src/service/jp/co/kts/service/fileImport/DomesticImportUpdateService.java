@@ -96,7 +96,9 @@ public class DomesticImportUpdateService extends DomesticExhibitionImportService
 				managementCdSet.add(managementCd.toLowerCase());
 			}
 			DomesticExhibitionService domesticService = new DomesticExhibitionService();
-			List<DomesticExhibitionDTO> domesticExhibitionDtoList = domesticService.getDomesticExhibitionDTOList(managementCdSet);
+			
+			// speed no-select
+			//List<DomesticExhibitionDTO> domesticExhibitionDtoList = domesticService.getDomesticExhibitionDTOList(managementCdSet);
 
 			// 事前にDBからメーカー名が一部一致しているもののみ取得しておく
 			Set<String> makerNmSet = new LinkedHashSet<>();
@@ -175,18 +177,19 @@ public class DomesticImportUpdateService extends DomesticExhibitionImportService
 				String newCd = String.valueOf(managementCd.toLowerCase());
 				//品番が存在しない場合エラー
 				boolean existsManagementCode = false;
-				for(DomesticExhibitionDTO domesticExhibitonDto : domesticExhibitionDtoList) {
-					String oldCd = String.valueOf(domesticExhibitonDto.getManagementCode().toLowerCase());
-					if(newCd.equals(oldCd)) {
-						managementCd = domesticExhibitonDto.getManagementCode();
-						existsManagementCode = true;
-						break;
-					}
-				}
-				if(!existsManagementCode) {
-					dto.getResult().addErrorMessage("LED00126",
-					String.valueOf(errorIndex), managementCd);
-				}
+//				speed check management_code
+//				for(DomesticExhibitionDTO domesticExhibitonDto : domesticExhibitionDtoList) {
+//					String oldCd = String.valueOf(domesticExhibitonDto.getManagementCode().toLowerCase());
+//					if(newCd.equals(oldCd)) {
+//						managementCd = domesticExhibitonDto.getManagementCode();
+//						existsManagementCode = true;
+//						break;
+//					}
+//				}
+//				if(!existsManagementCode) {
+//					dto.getResult().addErrorMessage("LED00126",
+//					String.valueOf(errorIndex), managementCd);
+//				}
 
 				//品番の必須チェック
 				ServiceValidator.requiredChecker(dto.getResult(), managementCd, (errorIndex) + "行目の管理品番");
@@ -270,14 +273,14 @@ public class DomesticImportUpdateService extends DomesticExhibitionImportService
 					errorIndex++;
 					continue;
 				}
-
-				//システム管理IDの取得
-				for(DomesticExhibitionDTO domesticExhibitonDto : domesticExhibitionDtoList) {
-					if(managementCd.equals(domesticExhibitonDto.getManagementCode())) {
-						domesticExhibitionDto.setSysManagementId(domesticExhibitonDto.getSysManagementId());
-						break;
-					}
-				}
+//				speed check id
+//				//システム管理IDの取得
+//				for(DomesticExhibitionDTO domesticExhibitonDto : domesticExhibitionDtoList) {
+//					if(managementCd.equals(domesticExhibitonDto.getManagementCode())) {
+//						domesticExhibitionDto.setSysManagementId(domesticExhibitonDto.getSysManagementId());
+//						break;
+//					}
+//				}
 				// domesticExhibitionDto.setSysManagementId(domesticService.getSysManagementId(managementCd));
 
 				//仕入原価の計算を行う
@@ -295,12 +298,20 @@ public class DomesticImportUpdateService extends DomesticExhibitionImportService
 				errorIndex++;
 			}
 
+			int idx = 0;
 			//出品DB更新処理
 			DomesticExhibitionDAO dao = new DomesticExhibitionDAO();
 			for (DomesticExhibitionDTO domesticExhibitionDto : domesticExhibitionList) {
 
+				// speed by no-select
+				String managementCd = domesticExhibitionDto.getManagementCode();				
+				if ( StringUtils.isBlank(managementCd)) continue;				
 				//FIXME 存在しない品番はvalidate処理でチェック済みなので以下の処理でエラーメッセージを出力することはないはず・・・
-				if (dao.updateDomesticExhibition(domesticExhibitionDto) != RESULT_UPDATE_CNT){
+				//if (dao.updateDomesticExhibition(domesticExhibitionDto) != RESULT_UPDATE_CNT){
+				//<---
+				System.out.println(( idx++) + " . Management Code : " + domesticExhibitionDto.getManagementCode());
+				// new update
+				if (dao.updateDomesticExhibitionByCode(domesticExhibitionDto) != RESULT_UPDATE_CNT){
 						dto.getResult().addErrorMessage("LED00116", domesticExhibitionDto.getManagementCode());
 				}
 			}

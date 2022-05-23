@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
@@ -282,10 +283,12 @@ public class SaleAction extends AppBaseAction{
 	private ActionForward searchSaleList(AppActionMapping appMapping,
 			SaleForm form, HttpServletRequest request) throws DaoException {
 
+		HttpSession session = request.getSession(false);	
+		
 		SaleDisplayService saleDisplayService = new SaleDisplayService();
-
+		
 		saleDisplayService.setFlags(form.getSaleSearchDTO());
-		form.setSysSalesSlipIdList(saleDisplayService.getSysSalesSlipIdList(form.getSaleSearchDTO()));
+		form.setSysSalesSlipIdList(saleDisplayService.getSysSalesSlipIdList(session , form.getSaleSearchDTO()));
 		saleDisplayService.setFlags(form.getSaleSearchDTO());
 
 		// 検索件数が０件の場合失敗
@@ -318,7 +321,7 @@ public class SaleAction extends AppBaseAction{
 
 		//検索条件をセッションとして保持
 //		form.setSessionSaleSearchDTO(form.getSaleSearchDTO());
-
+		
 		return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
 	}
 
@@ -602,7 +605,10 @@ public class SaleAction extends AppBaseAction{
 
 		SaleDisplayService saleDisplayService = new SaleDisplayService();
 		saleDisplayService.setFlags(form.getSaleSearchDTO());
-		workBook = exportSaleList.getFileExportSales(form.getSaleSearchDTO(), workBook);
+		
+		HttpSession session = request.getSession(false);
+		
+		workBook = exportSaleList.getFileExportSales(session, form.getSaleSearchDTO(), workBook);
 		saleDisplayService.setFlags(form.getSaleSearchDTO());
 
 		// 現在日付を取得.

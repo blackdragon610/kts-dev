@@ -12,6 +12,7 @@ import jp.co.keyaki.cleave.fw.dao.DaoException;
 import jp.co.keyaki.cleave.fw.dao.SQLParameters;
 import jp.co.keyaki.cleave.fw.dao.util.ResultSetHandlerFactory;
 import jp.co.kts.app.common.entity.DomesticOrderListDTO;
+import jp.co.kts.app.common.entity.DomesticOrderSlipDTO;
 import jp.co.kts.app.extendCommon.entity.ExtendSalesSlipDTO;
 import jp.co.kts.app.search.entity.DomesticOrderListSearchDTO;
 
@@ -234,5 +235,14 @@ public class DomesticSlipDAO extends BaseDAO {
 
 		return update("UPDATE_ORDER_LIST_STATUS", parameters);
 	}
+	// speed session-block
+	public DomesticOrderSlipDTO getMaxId() throws DaoException {
+		
+		SQLParameters parameters = new SQLParameters();
 
+		return select("GET_DOMESTIC_SLIP_MAX_ID", parameters,
+				ResultSetHandlerFactory.getNameMatchBeanRowHandler(DomesticOrderSlipDTO.class));
+		
+	}
+	//<----
 }

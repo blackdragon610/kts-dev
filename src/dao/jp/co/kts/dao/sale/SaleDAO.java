@@ -1,6 +1,9 @@
 package jp.co.kts.dao.sale;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -199,7 +202,7 @@ public class SaleDAO extends BaseDAO {
 						.getNameMatchBeanRowHandler(ExtendSalesSlipDTO.class));
 	}
 
-	public List<SysSalesSlipIdDTO> getSearchSalesSlipList(SaleSearchDTO dto)
+	public List<SysSalesSlipIdDTO> getSearchSalesSlipList(HttpSession session , SaleSearchDTO dto)
 			throws DaoException {
 
 		SQLParameters parameters = new SQLParameters();
@@ -326,10 +329,27 @@ public class SaleDAO extends BaseDAO {
 		// }
 
 		parameters.addParameter("getListFlg", "1");
-
-		return selectList("SEL_SEARCH_SALES_SLIP", parameters,
+		
+		
+// ################ it's unknown speed down error #################
+// ### so that  		SysSalesSlipIdDTO => ExtendSalesSlipDTO ###
+//		return selectList("SEL_SEARCH_SALES_SLIP", parameters,
+//		ResultSetHandlerFactory
+//				.getNameMatchBeanRowHandler(SysSalesSlipIdDTO.class));
+		List<ExtendSalesSlipDTO> result = selectList("SEL_SEARCH_SALES_SLIP", parameters,
 				ResultSetHandlerFactory
-						.getNameMatchBeanRowHandler(SysSalesSlipIdDTO.class));
+				.getNameMatchBeanRowHandler(ExtendSalesSlipDTO.class));
+		List<SysSalesSlipIdDTO> rtn = new ArrayList<>();
+		for(int i=0; i<result.size(); i++)
+		{
+			SysSalesSlipIdDTO one = new SysSalesSlipIdDTO();
+			one.setSysSalesSlipId(result.get(i).getSysSalesSlipId());
+			rtn.add(one);
+		}
+
+		//検索結果をセッションとして保持
+		session.setAttribute("getSearchSalesSlipList(SaleSearchDTO)", result );
+		return rtn;
 	}
 
 	public List<ExportSaleSummalyDTO> getExportSaleSummay(SaleSearchDTO dto)
@@ -545,6 +565,18 @@ public class SaleDAO extends BaseDAO {
 		UserInfo userInfo = ActionContext.getLoginUserInfo();
 		parameters.addParameter("updateUserId", userInfo.getUserId());
 		return update("UPD_SALES_SLIP", parameters);
+	}
+
+	public int updateSalesSlipTransAndSlipnoByOrderno(String strTransportCorporationSystem, String strSlipNo, String strOrderNo) throws DaoException {
+
+		SQLParameters parameters = new SQLParameters();
+		parameters.addParameter("OrderNo", strOrderNo);
+		parameters.addParameter("SlipNo", strSlipNo);
+		parameters.addParameter("TransportCorporationSystem", strTransportCorporationSystem);
+
+		UserInfo userInfo = ActionContext.getLoginUserInfo();
+		parameters.addParameter("updateUserId", userInfo.getUserId());
+		return update("UPD_SALES_SLIP_TRANS_SLIPNO_BY_ORDERNO", parameters);
 	}
 
 	public int updateSalesSlipPostage(ExtendSalesSlipDTO dto) throws DaoException {

@@ -9,6 +9,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 
@@ -315,10 +317,10 @@ public class SaleDisplayService extends SaleService {
 	}
 
 	public List<SysSalesSlipIdDTO> getSysSalesSlipIdList(
+			HttpSession session, 
 			SaleSearchDTO saleSearchDTO) throws DaoException {
 
-		List<SysSalesSlipIdDTO> list = new SaleDAO()
-				.getSearchSalesSlipList(saleSearchDTO);
+		List<SysSalesSlipIdDTO> list = new SaleDAO().getSearchSalesSlipList(session , saleSearchDTO);
 
 		return list;
 	}

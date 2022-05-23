@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -158,7 +159,7 @@ public class ExportItemListService extends FileExportExcelService implements Aut
 	 * @return
 	 * @throws DaoException
 	 */
-	public XSSFWorkbook getExportItemInfoList(SearchItemDTO searchItemDTO, XSSFWorkbook workBook, String authInfo, int sheetNo) throws DaoException {
+	public XSSFWorkbook getExportItemInfoList(HttpSession session, SearchItemDTO searchItemDTO, XSSFWorkbook workBook, String authInfo, int sheetNo) throws DaoException {
 
 		XSSFSheet sheet = workBook.getSheetAt(sheetNo);
 		// 埋め込み計算式を動作させるための記述
@@ -173,7 +174,10 @@ public class ExportItemListService extends FileExportExcelService implements Aut
 		}
 
 		ItemDAO itemDAO = new ItemDAO();
-		List<ResultItemSearchDTO> mstItemList = itemDAO.getExportItemSearchList(searchItemDTO);
+		// speed session-block
+		//List<ResultItemSearchDTO> mstItemList = itemDAO.getExportItemSearchList(searchItemDTO);
+		List<ResultItemSearchDTO> mstItemList = (List<ResultItemSearchDTO>) session.getAttribute("getExportItemSearchList(searchItemDTO)" );
+		//<----
 //		ExtendMstItemDTO mstItemDTO = new ExtendMstItemDTO();
 
 		//メモrowStartIdx = 0

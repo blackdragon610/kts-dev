@@ -161,6 +161,37 @@ public class DomesticExhibitionDAO extends BaseDAO {
 		return update("UPD_DOMESTICEXHIBITION", parameters);
 	}
 
+
+	/**
+	 * 更新処理
+	 * @param dto
+	 * @return
+	 * @throws DaoException
+	 */
+
+	public int updateDomesticExhibitionByCode(DomesticExhibitionDTO dto) throws DaoException {
+		SQLParameters parameters = new SQLParameters();
+
+		if (!StringUtils.isBlank(dto.getOpenPriceFlg())) {
+			dto.setOpenPriceFlg(StringUtil.switchCheckBox(dto.getOpenPriceFlg()));
+		} else {
+			dto.setOpenPriceFlg("0");
+		}
+		addParametersFromBeanProperties(dto, parameters);
+		UserInfo userInfo = ActionContext.getLoginUserInfo();
+		parameters.addParameter("updateUserId", userInfo.getUserId());
+		int iRet = 0;
+		try
+		{
+			iRet = update("UPD_DOMESTICEXHIBITION_BY_CODE", parameters);
+		}
+		catch(Exception e)
+		{
+			System.out.println("UPD_DOMESTICEXHIBITION_BY_CODE : " + e.getMessage());
+		}
+		return iRet;
+	}
+	
 	public int updateItemCodeDomesticExhibition(DomesticExhibitionDTO dto) throws DaoException {
 		SQLParameters parameters = new SQLParameters();
 

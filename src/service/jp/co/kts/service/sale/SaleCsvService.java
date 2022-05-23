@@ -11,6 +11,7 @@ import jp.co.keyaki.cleave.common.util.StringUtil;
 import jp.co.keyaki.cleave.fw.dao.DaoException;
 import jp.co.kts.app.common.entity.CorporateSalesSlipDTO;
 import jp.co.kts.app.common.entity.CsvImportDTO;
+import jp.co.kts.app.common.entity.DomesticOrderStockItemDTO;
 import jp.co.kts.app.common.entity.ItemCostDTO;
 import jp.co.kts.app.common.entity.SalesSlipDTO;
 import jp.co.kts.app.extendCommon.entity.ExtendCorporateSalesSlipDTO;
@@ -475,46 +476,61 @@ public class SaleCsvService extends SaleService {
 
 			CsvImportDTO csvImportDTO = csvImportList.get(i);
 
-			// DBに格納する値 : for ExtendSalesSlipDTO
-			ExtendSalesSlipDTO salesSlipDTO = getExtendSalesSlip(csvImportDTO.getOrderNo());
-			if (salesSlipDTO != null) {
-				// UPDATE : ExtendSalesSlipDTO ==== save jis, transport system.
-				salesSlipDTO.setTransportCorporationSystem(csvImportDTO.getTransportCorporationSystem());
-				salesSlipDTO.setSlipNo(csvImportDTO.getSlipNo());
-	
-				long sysSalesSlipId = getSysSalesSlipId(salesSlipDTO.getOrderNo());
-				salesSlipDTO.setSysSalesSlipId(sysSalesSlipId);
-
-				System.out.println("Found SaleSlip DTO: (id, orderno, slipno)" + 
-							sysSalesSlipId + ":" + salesSlipDTO.getOrderNo() + ":" + salesSlipDTO.getSlipNo());
-				
-				SaleDAO saleDAO = new SaleDAO();
-				errorDTO.setTrueCount(errorDTO.getTrueCount() + saleDAO.updateSalesSlip(salesSlipDTO));
-			}
+			//			spped up updating
+//			// DBに格納する値 : for ExtendSalesSlipDTO
+//			ExtendSalesSlipDTO salesSlipDTO = getExtendSalesSlip(csvImportDTO.getOrderNo());
+//			if (salesSlipDTO != null) {
+//				// UPDATE : ExtendSalesSlipDTO ==== save jis, transport system.
+//				salesSlipDTO.setTransportCorporationSystem(csvImportDTO.getTransportCorporationSystem());
+//				salesSlipDTO.setSlipNo(csvImportDTO.getSlipNo());
+//	
+//				long sysSalesSlipId = getSysSalesSlipId(salesSlipDTO.getOrderNo());
+//				salesSlipDTO.setSysSalesSlipId(sysSalesSlipId);
+//
+//				System.out.println("Found SaleSlip DTO: (id, orderno, slipno)" + 
+//							sysSalesSlipId + ":" + salesSlipDTO.getOrderNo() + ":" + salesSlipDTO.getSlipNo());
+//				
+//				SaleDAO saleDAO = new SaleDAO();
+//				errorDTO.setTrueCount(errorDTO.getTrueCount() + saleDAO.updateSalesSlip(salesSlipDTO));
+//			}
+			SaleDAO saleDAO = new SaleDAO();
+			errorDTO.setTrueCount(errorDTO.getTrueCount() + saleDAO.updateSalesSlipTransAndSlipnoByOrderno(	
+							csvImportDTO.getTransportCorporationSystem(),
+							csvImportDTO.getSlipNo(),
+							csvImportDTO.getOrderNo()
+						));
+			//<--------
 			
-			// For CorporateSalesSlipDto
-			List<ExtendCorporateSalesSlipDTO> list = getCorporateSaleSlipByOrderNo(csvImportDTO.getOrderNo());
-			if (list != null) {
-				
-				for (int j=0; j< list.size(); j++) {
-					ExtendCorporateSalesSlipDTO corpSalesSlipDTO = list.get(j);
-					
-					// update : ExtendCorporateSalesSlipDTO ==== save jis, transport system
-					corpSalesSlipDTO.setTransportCorporationSystem(csvImportDTO.getTransportCorporationSystem());
-					corpSalesSlipDTO.setSlipNo(csvImportDTO.getSlipNo());
-					
-					long sysCorpSalesSlipId = corpSalesSlipDTO.getSysCorporateSalesSlipId();
-					corpSalesSlipDTO.setSysCorporateSalesSlipId(sysCorpSalesSlipId);
-					
-					System.out.println("Found CorpSaleSlip DTO: (id, orderno, slipno)" + 
-							sysCorpSalesSlipId + ":" + corpSalesSlipDTO.getOrderNo() + ":" + corpSalesSlipDTO.getSlipNo());
+			//			speed up updating
+//			// For CorporateSalesSlipDto
+//			List<ExtendCorporateSalesSlipDTO> list = getCorporateSaleSlipByOrderNo(csvImportDTO.getOrderNo());
+//			if (list != null) {
+//				
+//				for (int j=0; j< list.size(); j++) {
+//					ExtendCorporateSalesSlipDTO corpSalesSlipDTO = list.get(j);
+//					
+//					// update : ExtendCorporateSalesSlipDTO ==== save jis, transport system
+//					corpSalesSlipDTO.setTransportCorporationSystem(csvImportDTO.getTransportCorporationSystem());
+//					corpSalesSlipDTO.setSlipNo(csvImportDTO.getSlipNo());
+//					
+//					long sysCorpSalesSlipId = corpSalesSlipDTO.getSysCorporateSalesSlipId();
+//					corpSalesSlipDTO.setSysCorporateSalesSlipId(sysCorpSalesSlipId);
+//					
+//					System.out.println("Found CorpSaleSlip DTO: (id, orderno, slipno)" + 
+//							sysCorpSalesSlipId + ":" + corpSalesSlipDTO.getOrderNo() + ":" + corpSalesSlipDTO.getSlipNo());
+//
+//					CorporateSaleDAO corpSaleDAO = new CorporateSaleDAO();
+//					errorDTO.setTrueCount(errorDTO.getTrueCount() + corpSaleDAO.updateCorporateSalesSlip(corpSalesSlipDTO));					
+//				}
+//			}
 
-					CorporateSaleDAO corpSaleDAO = new CorporateSaleDAO();
-					errorDTO.setTrueCount(errorDTO.getTrueCount() + corpSaleDAO.updateCorporateSalesSlip(corpSalesSlipDTO));					
-				}
-				
-			}
-
+			CorporateSaleDAO corpSaleDAO = new CorporateSaleDAO();
+			errorDTO.setTrueCount(errorDTO.getTrueCount() + corpSaleDAO.updateCorporateSalesSlipTransAndSlipnoByOrderNo(
+					csvImportDTO.getTransportCorporationSystem(),
+					csvImportDTO.getSlipNo(),
+					csvImportDTO.getOrderNo()
+					));					
+			//<-----------
 		}
 		return errorDTO;
 	}
@@ -864,4 +880,48 @@ public class SaleCsvService extends SaleService {
 		}
 		return csvErrorDTO;
 	}
+	
+
+	/**
+	 * 型がList<CsvImportDTO>になってしまっているものを法人ごとのList<List<CsvImportDTO>>にし返却します
+	 *
+	 * @param csvImportList
+	 * @return
+	 * @throws DaoException
+	 * @throws ParseException
+	 */
+	public List<List<DomesticOrderStockItemDTO>> csvOrderStockToSaleSlipList(List<DomesticOrderStockItemDTO> csvImportList) throws DaoException, ParseException {
+
+		List<List<DomesticOrderStockItemDTO>> csvImportLists = new ArrayList<>();
+
+		//要検討、そもそもひとつにまとめたのは考慮不足？
+		//複数のCSVファイルがひとつのlistになってしまっているので、分割して更新。
+		String fileNm = StringUtils.EMPTY;
+		List<DomesticOrderStockItemDTO> dividedCsvImportList = new ArrayList<>();
+		for (DomesticOrderStockItemDTO dto: csvImportList) {
+
+			//0番目の場合
+			if (StringUtils.isEmpty(fileNm)) {
+				fileNm = dto.getFileNm();
+			}
+
+			//csvファイルが切り替わる判定
+			if (StringUtils.equals(fileNm, dto.getFileNm())) {
+
+				dividedCsvImportList.add(dto);
+
+			} else {
+
+				//更新
+				csvImportLists.add(dividedCsvImportList);
+				dividedCsvImportList = new ArrayList<DomesticOrderStockItemDTO>();
+				dividedCsvImportList.add(dto);
+				fileNm = dto.getFileNm();
+			}
+		}
+
+		csvImportLists.add(dividedCsvImportList);
+		return csvImportLists;
+	}
+
 }

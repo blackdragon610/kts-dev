@@ -1,13 +1,18 @@
 package jp.co.kts.service.fileExport;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import jp.co.keyaki.cleave.fw.dao.DaoException;
+import jp.co.keyaki.cleave.fw.dao.util.ResultSetHandlerFactory;
 import jp.co.kts.app.extendCommon.entity.ExtendSalesSlipDTO;
+import jp.co.kts.app.output.entity.SysSalesSlipIdDTO;
 import jp.co.kts.app.search.entity.SaleSearchDTO;
 import jp.co.kts.dao.sale.SaleDAO;
 import jp.co.kts.ui.web.struts.WebConst;
@@ -35,10 +40,18 @@ public class ExportSaleListService extends ExportExcelSalesService {
 		 */
 		colIdx = 0;
 	}
-
+	
+	@Override
+	public HSSFWorkbook getFileExportSales(
+			SaleSearchDTO saleSearchDTO,
+			HSSFWorkbook workBook) throws DaoException {
+		return getFileExportSales(null, saleSearchDTO, workBook);
+	}
 
 	@Override
-	public HSSFWorkbook getFileExportSales(SaleSearchDTO saleSearchDTO,
+	public HSSFWorkbook getFileExportSales(
+			HttpSession session, 
+			SaleSearchDTO saleSearchDTO,
 			HSSFWorkbook workBook) throws DaoException {
 
 		sheet = workBook.getSheetAt(0);
@@ -70,8 +83,15 @@ public class ExportSaleListService extends ExportExcelSalesService {
 		workBook.setSheetName(0, "売上表");
 
 		SaleDAO saleDAO = new SaleDAO();
-		List<ExtendSalesSlipDTO> salesSlipList = saleDAO.getExportSaleSearchList(saleSearchDTO);
-
+		
+		List<ExtendSalesSlipDTO> salesSlipList =
+				session == null ? 
+				saleDAO.getExportSaleSearchList(saleSearchDTO) : 
+		//検索結果をセッション 取得     //List<ExtendSalesSlipDTO> salesSlipList = 
+				(List<ExtendSalesSlipDTO>)session.getAttribute("getSearchSalesSlipList(SaleSearchDTO)");
+		
+		
+		
 		row = sheet.getRow(0);
 		if (row == null) {
 			row = sheet.createRow(0);
