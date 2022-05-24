@@ -1289,7 +1289,7 @@
 						</a>
 					
 					</td>
-					<td><nested:write property="itemNm" /></td>
+					<td style="overflow-wrap: anywhere;"><nested:write property="itemNm" /></td>
 					<td class="orderNumEdit"><nested:write property="orderNum" /></td>
 					<td class="pieceRateEdit"><nested:write property="pieceRate" format="###,###,###" />&nbsp;円</td>
 					<td class="corporationRateOverEdit"><nested:write property="corporationRateOver" />&nbsp;％</td>

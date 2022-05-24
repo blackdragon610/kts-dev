@@ -376,8 +376,8 @@ table.summary td {
 }
 
 .cost {
-	max-width: 80px;
-	min-width: 80px;
+	max-width: 100px;
+	min-width: 100px;
 }
 
 .kindCost {
@@ -396,15 +396,15 @@ table.summary td {
 }
 
 
-.reflectHd {
-	max-width: 80px;
-	min-width: 80px;
-}
+/* .reflectHd { */
+/* 	max-width: 80px; */
+/* 	min-width: 80px; */
+/* } */
 
-.calcHd {
-	max-width: 100px;
-	min-width: 100px;
-}
+/* .calcHd { */
+/* 	max-width: 100px; */
+/* 	min-width: 100px; */
+/* } */
 
 .check {
 	width: 20px;
