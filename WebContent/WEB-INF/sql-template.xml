@@ -3155,41 +3155,42 @@
 		S_ITEM.SYS_SALES_SLIP_ID
 		<!-- ,SUM(PIECE_RATE * ORDER_NUM) AS SUM_PIECE_RATE -->
 		,COUNT(NOT_ITEM.SYS_ITEM_ID)AS NOT_MST_ITEM_COUNT
+		,M_ITEM.SYS_ITEM_ID
+		,M_ITEM.haibang_flg
 		FROM
-		SALES_ITEM AS
-		S_ITEM
-		<if-equals value="1" varName="itemCodeAreaFlg">
-			INNER JOIN
-			(SELECT
-			SYS_ITEM_ID
-			FROM
-			MST_ITEM
-			WHERE
-			1 = 1
-			<if-not-empty varName="itemCode">
-				AND
-				ITEM_CODE LIKE ${itemCode}
-			</if-not-empty>
-			<if-not-empty varName="itemNm">
-				AND
-				ITEM_NM LIKE ${itemNm}
-			</if-not-empty>
-			<if-not-empty varName="itemCodeFrom">
-				AND
-				<!-- TO_NUMBER(ITEM_CODE, '00000000000') &gt;= TO_NUMBER(${itemCodeFrom},
-					'00000000000') -->
-				TO_NUMBER(ITEM_CODE, '00000000000') &gt;= ${itemCodeFrom}
-			</if-not-empty>
-			<if-not-empty varName="itemCodeTo">
-				AND
-				<!-- TO_NUMBER(ITEM_CODE, '00000000000') &lt;= TO_NUMBER(${itemCodeTo},
-					'00000000000') -->
-				TO_NUMBER(ITEM_CODE, '00000000000') &lt;= ${itemCodeTo}
-			</if-not-empty>
-			)AS M_ITEM
-			ON
-			M_ITEM.SYS_ITEM_ID = S_ITEM.SYS_ITEM_ID
-		</if-equals>
+		SALES_ITEM AS S_ITEM
+		
+		INNER JOIN
+		(SELECT
+		SYS_ITEM_ID
+		,haibang_flg
+		FROM
+		MST_ITEM
+		WHERE
+		1 = 1
+		AND haibang_flg = '0'
+		<if-not-empty varName="itemCode">
+			AND
+			ITEM_CODE LIKE ${itemCode}
+		</if-not-empty>
+		<if-not-empty varName="itemNm">
+			AND
+			ITEM_NM LIKE ${itemNm}
+		</if-not-empty>
+		<if-not-empty varName="itemCodeFrom">
+			AND
+			<!-- TO_NUMBER(ITEM_CODE, '00000000000') &gt;= TO_NUMBER(${itemCodeFrom},
+				'00000000000') -->
+			TO_NUMBER(ITEM_CODE, '00000000000') &gt;= ${itemCodeFrom}
+		</if-not-empty>
+		<if-not-empty varName="itemCodeTo">
+			AND
+			<!-- TO_NUMBER(ITEM_CODE, '00000000000') &lt;= TO_NUMBER(${itemCodeTo},
+				'00000000000') -->
+			TO_NUMBER(ITEM_CODE, '00000000000') &lt;= ${itemCodeTo}
+		</if-not-empty>
+		)AS M_ITEM ON M_ITEM.SYS_ITEM_ID = S_ITEM.SYS_ITEM_ID
+		
 		LEFT JOIN
 		(SELECT
 		SYS_SALES_SLIP_ID
@@ -3218,12 +3219,15 @@
 		</if-not-empty>
 		GROUP BY
 		S_ITEM.SYS_SALES_SLIP_ID
+		,M_ITEM.SYS_ITEM_ID
+		,M_ITEM.haibang_flg
 		)AS S_ITEM
 		ON
 		S_ITEM.SYS_SALES_SLIP_ID =
 		SLIP.SYS_SALES_SLIP_ID
 		WHERE
 		1 = 1
+		AND S_ITEM.haibang_flg = '0'
 		<!-- <if-equals value="1" varName="getListFlg"> -->
 		<!-- <if-not-empty varName="itemCodeFrom"> -->
 		<!-- AND -->
@@ -8903,38 +8907,36 @@
 		(SELECT
 		ITEM.SYS_CORPORATE_SALES_SLIP_ID
 		,COUNT(NOT_ITEM.SYS_ITEM_ID) AS NOT_MST_ITEM_COUNT
+		,M_ITEM.sys_item_id
+		,M_ITEM.haibang_flg
 		FROM
 		CORPORATE_SALES_ITEM AS ITEM
-		<if-not-empty varName="itemCodeAreaFlg">
-			<if-equals value="1" varName="itemCodeAreaFlg">
-				INNER JOIN
-				(SELECT
+		
+		INNER JOIN
+			(SELECT
 				SYS_ITEM_ID
-				FROM
-				MST_ITEM
-				WHERE
-				1 = 1
-				<if-not-empty varName="itemCode">
-					AND
-					ITEM_CODE LIKE ${itemCode}
-				</if-not-empty>
-				<if-not-empty varName="itemNm">
-					AND
-					ITEM_NM LIKE ${itemNm}
-				</if-not-empty>
-				<if-not-empty varName="itemCodeFrom">
-					AND
-					TO_NUMBER(ITEM_CODE, '00000000000') &gt;= ${itemCodeFrom}
-				</if-not-empty>
-				<if-not-empty varName="itemCodeTo">
-					AND
-					TO_NUMBER(ITEM_CODE, '00000000000') &lt;= ${itemCodeTo}
-				</if-not-empty>
-				)AS M_ITEM
-				ON
-				M_ITEM.SYS_ITEM_ID = ITEM.SYS_ITEM_ID
-			</if-equals>
-		</if-not-empty>
+				,haibang_flg
+			FROM MST_ITEM
+			WHERE 1 = 1
+				AND haibang_flg = '0'
+			<if-not-empty varName="itemCode">
+				AND
+				ITEM_CODE LIKE ${itemCode}
+			</if-not-empty>
+			<if-not-empty varName="itemNm">
+				AND
+				ITEM_NM LIKE ${itemNm}
+			</if-not-empty>
+			<if-not-empty varName="itemCodeFrom">
+				AND
+				TO_NUMBER(ITEM_CODE, '00000000000') &gt;= ${itemCodeFrom}
+			</if-not-empty>
+			<if-not-empty varName="itemCodeTo">
+				AND
+				TO_NUMBER(ITEM_CODE, '00000000000') &lt;= ${itemCodeTo}
+			</if-not-empty>
+		)AS M_ITEM ON M_ITEM.SYS_ITEM_ID = ITEM.SYS_ITEM_ID
+		
 		LEFT JOIN
 		(SELECT
 		SYS_CORPORATE_SALES_SLIP_ID
@@ -9005,6 +9007,8 @@
 		</if-not-empty>
 		GROUP BY
 		ITEM.SYS_CORPORATE_SALES_SLIP_ID
+		,M_ITEM.sys_item_id
+		,M_ITEM.haibang_flg
 		HAVING
 		1 = 1
 		<if-not-equals value="1" varName="searchAllFlg">
@@ -9042,6 +9046,7 @@
 		C_SLIP.SYS_CORPORATE_SALES_SLIP_ID = C_ITEM.SYS_CORPORATE_SALES_SLIP_ID
 		WHERE
 		1 = 1
+		AND haibang_flg = '0'
 		ORDER BY
 		1 = 1
 		<!--ƒ\[ƒgðŒ -->
