@@ -197,12 +197,9 @@
 								<nested:iterate property="mstMasterList" indexId="idx">
 								
 									<nested:equal property="isvisible" value="1">
-										<nested:equal property="viewableCount" value="1">&#9898;</nested:equal>
-										<nested:notEqual property="viewableCount" value="1">
-											<nested:equal property="viewableCount" value="10">&#9898;</nested:equal>
-											<nested:notEqual property="viewableCount" value="10">
+										<nested:equal property="viewableCount" value="10">&#9898;</nested:equal>
+										<nested:notEqual property="viewableCount" value="10">
 											<span onclick="viewChildMaster(${id })" id="masterList_${id}_${idx}"> &#9651; 詳細</span>
-											</nested:notEqual>
 										</nested:notEqual>
 									</nested:equal>
 									<nested:notEqual property="isvisible" value="1">&#9932;</nested:notEqual>
