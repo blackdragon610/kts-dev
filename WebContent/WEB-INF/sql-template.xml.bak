@@ -391,10 +391,26 @@
 		WHERE
 		EXTRA_ID = ${extraId}
 	</sql-template>
+	<sql-template id="DEL_EXTRA_RULE_BY_RULELISTID">
+		UPDATE
+		MST_EXTRA_USER_RULE
+		SET
+		DEL_FLG = '1'
+		WHERE
+		TRUE
+		<if-not-equals value="0" varName="ruleListId">
+			AND RULE_LIST_ID = ${ruleListId}
+		</if-not-equals>
+		<if-not-equals value="0" varName="ruleId">
+			AND RULE_ID = ${ruleId}
+		</if-not-equals>
+	</sql-template>
+	
 	<sql-template id="UPD_MAIN_USER_RULE">
 		UPDATE MST_USER SET
 		BTOB_BILL_AUTH = ${btobBillAuth}
 		,OVERSEAS_INFO_AUTH = ${overseasInfoAuth}
+		<!-- ,ID_PASS_DEL_AUTH = ${idPassDelAuth} -->
 		,UPDATE_DATE = current_timestamp
 		,UPDATE_USER_ID = ${updateUserId}
 		WHERE
@@ -492,6 +508,7 @@
 		,BTOB_BILL_AUTH
 		,OVERSEAS_INFO_AUTH
 		,RESPONSIBLE_NO
+		<!-- ,ID_PASS_DEL_AUTH -->
 		FROM
 		MST_USER
 		WHERE
@@ -547,6 +564,14 @@
 		WHERE
 		SYS_USER_ID = ${sysUserId}
 	</sql-template>
+	
+	<sql-template id="GET_DOMESTIC_SLIP_MAX_ID">
+		SELECT
+		COALESCE(MAX(SYS_DOMESTIC_SLIP_ID),0) sys_domestic_slip_id
+		FROM
+		DOMESTIC_SLIP
+	</sql-template>
+
 
 	<sql-template id="SEL_MAX_USER_ID">
 		SELECT
@@ -602,6 +627,7 @@
 		,UPDATE_USER_ID
 		,ABBREVIATION
 		,COALESCE(CORPORATION_RATE_OVER,0) AS CORPORATION_RATE_OVER
+		,PURCHASE_PROFIT_RATE
 		FROM
 		MST_CORPORATION
 		WHERE
@@ -661,6 +687,9 @@
 		<if-not-equals value="0" varName="corporationRateOver">
 			,CORPORATION_RATE_OVER = ${corporationRateOver}
 		</if-not-equals>
+		<if-not-null varName="purchaseProfitRate">
+			,PURCHASE_PROFIT_RATE = ${purchaseProfitRate}
+		</if-not-null>
 		WHERE
 		SYS_CORPORATION_ID = ${sysCorporationId}
 	</sql-template>
@@ -685,6 +714,7 @@
 		,CREATE_USER_ID
 		,UPDATE_DATE
 		,UPDATE_USER_ID
+		,SALES_PROFIT_RATE
 		FROM
 		MST_CHANNEL
 		WHERE
@@ -717,12 +747,11 @@
 
 	<sql-template id="UPD_CHANNEL">
 		UPDATE MST_CHANNEL SET
-		CHANNEL_NM =
-		${channelNm}
+		CHANNEL_NM = ${channelNm}
 		,URL = ${url}
-		,UPDATE_DATE =
-		current_timestamp
+		,UPDATE_DATE = current_timestamp
 		,UPDATE_USER_ID = ${updateUserId}
+		,SALES_PROFIT_RATE = ${salesProfitRate}
 		WHERE
 		SYS_CHANNEL_ID = ${sysChannelId}
 	</sql-template>
@@ -2401,6 +2430,29 @@
 		SYS_SALES_SLIP_ID =
 		${sysSalesSlipId}
 	</sql-template>
+	
+	<sql-template id="UPD_SALES_SLIP_TRANS_SLIPNO_BY_ORDERNO">
+		UPDATE SALES_SLIP SET
+				 SLIP_NO = ${SlipNo}
+				,TRANSPORT_CORPORATION_SYSTEM = ${TransportCorporationSystem}
+				,UPDATE_USER_ID = ${updateUserId}
+		WHERE
+				ORDER_NO = ${OrderNo}
+	</sql-template>
+	
+	<sql-template id="UPD_CORP_SALES_TRANS_SLIPNO_SLIP_BY_ORDERNO">
+		UPDATE CORPORATE_SALES_SLIP SET
+				SLIP_NO = ${SlipNo}
+				,TRANSPORT_CORPORATION_SYSTEM = ${TransportCorporationSystem}
+				,UPDATE_USER_ID = ${updateUserId}
+				<if-not-empty varName="receiveDate">
+					,RECEIVE_DATE = ${receiveDate}
+				</if-not-empty>
+		WHERE
+				ORDER_NO = ${OrderNo}
+	</sql-template>
+
+
 	<sql-template id="UPD_SALES_SLIP_POSTAGE">
 		UPDATE SALES_SLIP SET
 		POSTAGE = ${postage}
@@ -3103,41 +3155,42 @@
 		S_ITEM.SYS_SALES_SLIP_ID
 		<!-- ,SUM(PIECE_RATE * ORDER_NUM) AS SUM_PIECE_RATE -->
 		,COUNT(NOT_ITEM.SYS_ITEM_ID)AS NOT_MST_ITEM_COUNT
+		,M_ITEM.SYS_ITEM_ID
+		,M_ITEM.haibang_flg
 		FROM
-		SALES_ITEM AS
-		S_ITEM
-		<if-equals value="1" varName="itemCodeAreaFlg">
-			INNER JOIN
-			(SELECT
-			SYS_ITEM_ID
-			FROM
-			MST_ITEM
-			WHERE
-			1 = 1
-			<if-not-empty varName="itemCode">
-				AND
-				ITEM_CODE LIKE ${itemCode}
-			</if-not-empty>
-			<if-not-empty varName="itemNm">
-				AND
-				ITEM_NM LIKE ${itemNm}
-			</if-not-empty>
-			<if-not-empty varName="itemCodeFrom">
-				AND
-				<!-- TO_NUMBER(ITEM_CODE, '00000000000') &gt;= TO_NUMBER(${itemCodeFrom},
-					'00000000000') -->
-				TO_NUMBER(ITEM_CODE, '00000000000') &gt;= ${itemCodeFrom}
-			</if-not-empty>
-			<if-not-empty varName="itemCodeTo">
-				AND
-				<!-- TO_NUMBER(ITEM_CODE, '00000000000') &lt;= TO_NUMBER(${itemCodeTo},
-					'00000000000') -->
-				TO_NUMBER(ITEM_CODE, '00000000000') &lt;= ${itemCodeTo}
-			</if-not-empty>
-			)AS M_ITEM
-			ON
-			M_ITEM.SYS_ITEM_ID = S_ITEM.SYS_ITEM_ID
-		</if-equals>
+		SALES_ITEM AS S_ITEM
+		
+		INNER JOIN
+		(SELECT
+		SYS_ITEM_ID
+		,haibang_flg
+		FROM
+		MST_ITEM
+		WHERE
+		1 = 1
+		AND haibang_flg = '0'
+		<if-not-empty varName="itemCode">
+			AND
+			ITEM_CODE LIKE ${itemCode}
+		</if-not-empty>
+		<if-not-empty varName="itemNm">
+			AND
+			ITEM_NM LIKE ${itemNm}
+		</if-not-empty>
+		<if-not-empty varName="itemCodeFrom">
+			AND
+			<!-- TO_NUMBER(ITEM_CODE, '00000000000') &gt;= TO_NUMBER(${itemCodeFrom},
+				'00000000000') -->
+			TO_NUMBER(ITEM_CODE, '00000000000') &gt;= ${itemCodeFrom}
+		</if-not-empty>
+		<if-not-empty varName="itemCodeTo">
+			AND
+			<!-- TO_NUMBER(ITEM_CODE, '00000000000') &lt;= TO_NUMBER(${itemCodeTo},
+				'00000000000') -->
+			TO_NUMBER(ITEM_CODE, '00000000000') &lt;= ${itemCodeTo}
+		</if-not-empty>
+		)AS M_ITEM ON M_ITEM.SYS_ITEM_ID = S_ITEM.SYS_ITEM_ID
+		
 		LEFT JOIN
 		(SELECT
 		SYS_SALES_SLIP_ID
@@ -3166,12 +3219,15 @@
 		</if-not-empty>
 		GROUP BY
 		S_ITEM.SYS_SALES_SLIP_ID
+		,M_ITEM.SYS_ITEM_ID
+		,M_ITEM.haibang_flg
 		)AS S_ITEM
 		ON
 		S_ITEM.SYS_SALES_SLIP_ID =
 		SLIP.SYS_SALES_SLIP_ID
 		WHERE
 		1 = 1
+		AND S_ITEM.haibang_flg = '0'
 		<!-- <if-equals value="1" varName="getListFlg"> -->
 		<!-- <if-not-empty varName="itemCodeFrom"> -->
 		<!-- AND -->
@@ -5193,6 +5249,7 @@
 		</if-not-empty>
 		,UPDATE_DATE = current_timestamp
 		,UPDATE_USER_ID = ${updateUserId}
+		,HAIBANG_FLG = ${haibangFlg}
 		WHERE
 		SYS_ITEM_ID = ${sysItemId}
 	</sql-template>
@@ -5386,6 +5443,7 @@
 			,ITEM_PRICE.PRICE
 			,ASSEMBLY_NUM
 			,ANS.ANNUAL_AVERAGE_SALES_NUM
+			,HAIBANG_FLG
 		FROM
 			MST_ITEM
 			LEFT JOIN
@@ -5800,6 +5858,8 @@
 		,ITEM_NUM
 		,ITEM_CODE
 		,ITEM_NM
+		,TOTAL_STOCK_NUM
+		,TEMPORARY_STOCK_NUM
 		,LEAVE_CLASS_FLG
 
 		,DELETE_FLAG
@@ -5816,6 +5876,8 @@
 		SYS_ITEM_ID
 		,ITEM_CODE
 		,ITEM_NM
+		,TOTAL_STOCK_NUM
+		,TEMPORARY_STOCK_NUM
 		,LEAVE_CLASS_FLG
 		FROM
 		MST_ITEM
@@ -6046,6 +6108,7 @@
 			,M_ITEM.MODEL
 			,M_ITEM.ITEM_LEAD_TIME
 			,M_ITEM.SYS_SUPPLIER_ID
+			,HAIBANG_FLG
 			,ANS.ANNUAL_AVERAGE_SALES_NUM
 			,ANS.ONE_MONTH_AGO
 			,ANS.TWO_MONTH_AGO
@@ -6082,14 +6145,7 @@
 			<!-- 未入荷商品総合計 -->
 			<if-not-empty varName="sysItemId">
 				<if-not-equals value="0" varName="sysItemId">
-					,(SELECT
-						SUM(ARRIVAL_NUM)
-					FROM
-						ARRIVAL_SCHEDULE
-					WHERE
-						ARRIVAL_FLAG = '0'
-						AND SYS_ITEM_ID = ${sysItemId}
-						AND DELETE_FLAG = '0') AS SUM_NOT_IN_STOCK
+					,VIEW_ARRIVAL_SUM.arrival_num AS SUM_NOT_IN_STOCK
 				</if-not-equals>
 			</if-not-empty>
 		FROM
@@ -6120,6 +6176,7 @@
 				,CAR_MODEL
 				,MODEL
 				,ITEM_LEAD_TIME
+				,HAIBANG_FLG
 
 			FROM
 				MST_ITEM
@@ -6195,54 +6252,8 @@
 					SET_ITEM_FLG = ${setItemFlg}
 				</if-equals>
 			)AS M_ITEM
-		LEFT JOIN
-			(SELECT
-				A_S_ARRIVAL_SCHEDULE_DATE.SYS_ITEM_ID
-				,A_S_ARRIVAL_SCHEDULE_DATE.ARRIVAL_SCHEDULE_DATE
-				,A_S_ARRIVAL_SCHEDULE_DATE_ID.SYS_ARRIVAL_SCHEDULE_ID
-				,A_S_ORDER_DATE.ITEM_ORDER_DATE
-				,A_S_ORDER_DATE.ARRIVAL_NUM
-			FROM
-				(SELECT
-					SYS_ITEM_ID
-					,MIN(ARRIVAL_SCHEDULE_DATE)AS ARRIVAL_SCHEDULE_DATE
-				FROM
-					ARRIVAL_SCHEDULE
-				WHERE
-					DELETE_FLAG = '0'
-					AND ARRIVAL_FLAG = '0'
-				GROUP BY
-					SYS_ITEM_ID
-				)AS A_S_ARRIVAL_SCHEDULE_DATE
-			INNER JOIN
-				(SELECT
-					SYS_ITEM_ID
-					,ARRIVAL_SCHEDULE_DATE
-					,MIN(SYS_ARRIVAL_SCHEDULE_ID)AS SYS_ARRIVAL_SCHEDULE_ID
-				FROM
-					ARRIVAL_SCHEDULE
-				WHERE
-					DELETE_FLAG = '0'
-					AND ARRIVAL_FLAG = '0'
-				GROUP BY
-					SYS_ITEM_ID
-					,ARRIVAL_SCHEDULE_DATE
-				)AS A_S_ARRIVAL_SCHEDULE_DATE_ID
-
-			ON A_S_ARRIVAL_SCHEDULE_DATE.ARRIVAL_SCHEDULE_DATE = A_S_ARRIVAL_SCHEDULE_DATE_ID.ARRIVAL_SCHEDULE_DATE
-				AND A_S_ARRIVAL_SCHEDULE_DATE.SYS_ITEM_ID = A_S_ARRIVAL_SCHEDULE_DATE_ID.SYS_ITEM_ID
-			INNER JOIN
-				(SELECT
-					SYS_ARRIVAL_SCHEDULE_ID
-					,ITEM_ORDER_DATE
-					,ARRIVAL_NUM
-				FROM
-					ARRIVAL_SCHEDULE
-				) AS A_S_ORDER_DATE
-			ON A_S_ARRIVAL_SCHEDULE_DATE_ID.SYS_ARRIVAL_SCHEDULE_ID = A_S_ORDER_DATE.SYS_ARRIVAL_SCHEDULE_ID
-			)AS A_S_ORDER_DATE
-		ON M_ITEM.SYS_ITEM_ID = A_S_ORDER_DATE.SYS_ITEM_ID
-
+		LEFT JOIN view_arrival_sum_byid as view_arrival_sum ON view_arrival_sum.sys_item_id=M_ITEM.SYS_ITEM_ID
+		LEFT JOIN view_order_arrival_date AS A_S_ORDER_DATE ON M_ITEM.SYS_ITEM_ID = A_S_ORDER_DATE.SYS_ITEM_ID
 
 		LEFT JOIN
 			(SELECT
@@ -6258,55 +6269,7 @@
 			)AS B_ORDER
 		ON M_ITEM.SYS_ITEM_ID = B_ORDER.SYS_ITEM_ID
 
-		LEFT JOIN
-			(SELECT
-				W_S_PRIORITY.SYS_ITEM_ID
-				,W_S_PRIORITY_WAREHOUSE_NM.WAREHOUSE_NM
-				,W_S_PRIORITY_WAREHOUSE_NM.LOCATION_NO
-				,W_S_PRIORITY_WAREHOUSE_NM.STOCK_NUM
-				,W_S_PRIORITY_WAREHOUSE_NM.SYS_WAREHOUSE_ID
-				,SYS_WAREHOUSE_STOCK_ID
-			FROM
-				(SELECT
-					SYS_ITEM_ID
-					,MIN(TO_NUMBER(PRIORITY, '00'))AS PRIORITY
-				FROM
-					WAREHOUSE_STOCK
-				WHERE
-					DELETE_FLAG = '0'
-				<if-not-equals value="0" varName="sysWarehouseId">
-					AND
-					SYS_WAREHOUSE_ID = ${sysWarehouseId}
-				</if-not-equals>
-
-				GROUP BY
-					SYS_ITEM_ID
-				)AS W_S_PRIORITY
-			INNER JOIN
-				(SELECT
-					SYS_WAREHOUSE_STOCK_ID
-					,TO_NUMBER(PRIORITY, '00')AS PRIORITY
-					,SYS_ITEM_ID
-					,LOCATION_NO
-					,STOCK_NUM
-					,M_WAREHOUSE.SYS_WAREHOUSE_ID
-					,WAREHOUSE_NM
-				FROM
-					WAREHOUSE_STOCK
-					INNER JOIN
-						(SELECT
-							SYS_WAREHOUSE_ID
-							,WAREHOUSE_NM
-						FROM
-							MST_WAREHOUSE
-						)AS M_WAREHOUSE
-					ON M_WAREHOUSE.SYS_WAREHOUSE_ID = WAREHOUSE_STOCK.SYS_WAREHOUSE_ID
-				WHERE WAREHOUSE_STOCK.DELETE_FLAG = '0'
-				)AS W_S_PRIORITY_WAREHOUSE_NM
-			ON W_S_PRIORITY.PRIORITY = W_S_PRIORITY_WAREHOUSE_NM.PRIORITY
-			AND W_S_PRIORITY.SYS_ITEM_ID = W_S_PRIORITY_WAREHOUSE_NM.SYS_ITEM_ID
-
-			)AS W_STOCK
+		LEFT JOIN VIEW_WAREHOUSE_STOCK_PRIORITY AS W_STOCK
 
 		ON M_ITEM.SYS_ITEM_ID = W_STOCK.SYS_ITEM_ID
 
@@ -6529,6 +6492,14 @@
 			WHEN ORDER_POOL_FLG = '1' THEN (ORDER_NUM = 0 or ORDER_NUM is null)
 			END
 		</if-equals>
+		<if-not-equals value="1" varName="haibangFlgIgnore">
+			<if-equals value="1" varName="haibangFlg">
+				AND M_ITEM.HAIBANG_FLG = ${haibangFlg}
+			</if-equals>
+			<if-equals value="0" varName="haibangFlg">
+				AND (M_ITEM.HAIBANG_FLG = '0' OR M_ITEM.HAIBANG_FLG IS NULL) 
+			</if-equals>
+		</if-not-equals>
 
 <!-- 		<if-not-empty varName="itemCodeFrom"> -->
 <!-- 			AND -->
@@ -6663,14 +6634,7 @@
 		,W_STOCK.SYS_WAREHOUSE_STOCK_ID
 		<!--,W_STOCK.STOCK_NUM -->
 		,TO_NUMBER(M_ITEM.ITEM_CODE, '00000000000')
-		,(SELECT
-			SUM(ARRIVAL_NUM)
-		FROM
-			ARRIVAL_SCHEDULE
-		WHERE
-			ARRIVAL_FLAG = '0'
-			AND SYS_ITEM_ID = M_ITEM.SYS_ITEM_ID
-			AND DELETE_FLAG = '0') AS SUM_NOT_IN_STOCK
+		,VIEW_ARRIVAL_SUM.arrival_num AS SUM_NOT_IN_STOCK
 
 		FROM
 			(SELECT
@@ -6708,42 +6672,23 @@
 				,PACKING_SIZE
 				,WEIGHT
 				,DOCUMENT_REMARKS
-
+				,MST_ITEM.HAIBANG_FLG
 			FROM
 				MST_ITEM
-				INNER JOIN
-					(SELECT
-						SYS_ITEM_ID
-						,COST
-					FROM
-						ITEM_COST
-					WHERE
-						DELETE_FLAG ='0'
-						AND SYS_CORPORATION_ID = (SELECT SYS_CORPORATION_ID FROM MST_CORPORATION
-					WHERE
-						FILE_CORPORATION_NM ILIKE 'kts')
-					)ITEM_COST
-					ON MST_ITEM.SYS_ITEM_ID = ITEM_COST.SYS_ITEM_ID
-
+				 INNER JOIN   
+				 	ITEM_COST  
+					
+					
+					
+					
+					
+					
+					
+					
+					ON ( MST_ITEM.SYS_ITEM_ID = ITEM_COST.SYS_ITEM_ID AND    ITEM_COST.DELETE_FLAG ='0'  AND ITEM_COST.SYS_CORPORATION_ID = (SELECT SYS_CORPORATION_ID FROM MST_CORPORATION WHERE	 FILE_CORPORATION_NM ILIKE 'kts') )
 				<!-- 会社・工場名 -->
 
-					LEFT JOIN
-						(SELECT
-							M_SUP.SYS_SUPPLIER_ID
-							,M_SUP.SUPPLIER_NO
-							,M_SUP.COMPANY_FACTORY_NM
-							,M_SUP.COUNTRY
-							,M_SUP.TRADE_TERMS
-							,M_SUP.CURRENCY_ID
-							,M_SUP.LEAD_TIME
-							,CL.CURRENCY_NM
-						FROM
-							MST_SUPPLIER M_SUP
-							INNER JOIN CURRENCY_LEDGER CL
-							ON (M_SUP.CURRENCY_ID = CL.CURRENCY_ID)
-						WHERE
-							M_SUP.DELETE_FLAG = '0'
-						) MSP
+					LEFT JOIN view_supplier as MSP
 						ON (MST_ITEM.SYS_SUPPLIER_ID = MSP.SYS_SUPPLIER_ID
 
 					)
@@ -6815,54 +6760,8 @@
 					SET_ITEM_FLG = ${setItemFlg}
 				</if-equals>
 			)AS M_ITEM
-		LEFT JOIN
-			(SELECT
-				A_S_ARRIVAL_SCHEDULE_DATE.SYS_ITEM_ID
-				,A_S_ARRIVAL_SCHEDULE_DATE.ARRIVAL_SCHEDULE_DATE
-				,A_S_ARRIVAL_SCHEDULE_DATE_ID.SYS_ARRIVAL_SCHEDULE_ID
-				,A_S_ORDER_DATE.ITEM_ORDER_DATE
-				,A_S_ORDER_DATE.ARRIVAL_NUM
-			FROM
-				(SELECT
-					SYS_ITEM_ID
-					,MIN(ARRIVAL_SCHEDULE_DATE)AS ARRIVAL_SCHEDULE_DATE
-				FROM
-					ARRIVAL_SCHEDULE
-				WHERE
-					DELETE_FLAG = '0'
-					AND ARRIVAL_FLAG = '0'
-				GROUP BY
-					SYS_ITEM_ID
-				)AS A_S_ARRIVAL_SCHEDULE_DATE
-			INNER JOIN
-				(SELECT
-					SYS_ITEM_ID
-					,ARRIVAL_SCHEDULE_DATE
-					,MIN(SYS_ARRIVAL_SCHEDULE_ID)AS SYS_ARRIVAL_SCHEDULE_ID
-				FROM
-					ARRIVAL_SCHEDULE
-				WHERE
-					DELETE_FLAG = '0'
-					AND ARRIVAL_FLAG = '0'
-				GROUP BY
-					SYS_ITEM_ID
-					,ARRIVAL_SCHEDULE_DATE
-				)AS A_S_ARRIVAL_SCHEDULE_DATE_ID
-
-			ON A_S_ARRIVAL_SCHEDULE_DATE.ARRIVAL_SCHEDULE_DATE = A_S_ARRIVAL_SCHEDULE_DATE_ID.ARRIVAL_SCHEDULE_DATE
-				AND A_S_ARRIVAL_SCHEDULE_DATE.SYS_ITEM_ID = A_S_ARRIVAL_SCHEDULE_DATE_ID.SYS_ITEM_ID
-			INNER JOIN
-				(SELECT
-					SYS_ARRIVAL_SCHEDULE_ID
-					,ITEM_ORDER_DATE
-					,ARRIVAL_NUM
-				FROM
-					ARRIVAL_SCHEDULE
-				) AS A_S_ORDER_DATE
-			ON A_S_ARRIVAL_SCHEDULE_DATE_ID.SYS_ARRIVAL_SCHEDULE_ID = A_S_ORDER_DATE.SYS_ARRIVAL_SCHEDULE_ID
-			)AS A_S_ORDER_DATE
-		ON M_ITEM.SYS_ITEM_ID = A_S_ORDER_DATE.SYS_ITEM_ID
-
+		LEFT JOIN view_arrival_sum_byid as view_arrival_sum ON view_arrival_sum.sys_item_id=M_ITEM.SYS_ITEM_ID
+		LEFT JOIN view_order_arrival_date AS A_S_ORDER_DATE ON M_ITEM.SYS_ITEM_ID = A_S_ORDER_DATE.SYS_ITEM_ID
 
 		LEFT JOIN
 			(SELECT
@@ -6878,55 +6777,7 @@
 			)AS B_ORDER
 		ON M_ITEM.SYS_ITEM_ID = B_ORDER.SYS_ITEM_ID
 
-		LEFT JOIN
-			(SELECT
-				W_S_PRIORITY.SYS_ITEM_ID
-				,W_S_PRIORITY_WAREHOUSE_NM.WAREHOUSE_NM
-				,W_S_PRIORITY_WAREHOUSE_NM.LOCATION_NO
-				,W_S_PRIORITY_WAREHOUSE_NM.STOCK_NUM
-				,W_S_PRIORITY_WAREHOUSE_NM.SYS_WAREHOUSE_ID
-				,SYS_WAREHOUSE_STOCK_ID
-			FROM
-				(SELECT
-					SYS_ITEM_ID
-					,MIN(TO_NUMBER(PRIORITY, '00'))AS PRIORITY
-				FROM
-					WAREHOUSE_STOCK
-				WHERE
-					DELETE_FLAG = '0'
-				<if-not-equals value="0" varName="sysWarehouseId">
-					AND
-					SYS_WAREHOUSE_ID = ${sysWarehouseId}
-				</if-not-equals>
-
-				GROUP BY
-					SYS_ITEM_ID
-				)AS W_S_PRIORITY
-			INNER JOIN
-				(SELECT
-					SYS_WAREHOUSE_STOCK_ID
-					,TO_NUMBER(PRIORITY, '00')AS PRIORITY
-					,SYS_ITEM_ID
-					,LOCATION_NO
-					,STOCK_NUM
-					,M_WAREHOUSE.SYS_WAREHOUSE_ID
-					,WAREHOUSE_NM
-				FROM
-					WAREHOUSE_STOCK
-					INNER JOIN
-						(SELECT
-							SYS_WAREHOUSE_ID
-							,WAREHOUSE_NM
-						FROM
-							MST_WAREHOUSE
-						)AS M_WAREHOUSE
-					ON M_WAREHOUSE.SYS_WAREHOUSE_ID = WAREHOUSE_STOCK.SYS_WAREHOUSE_ID
-				WHERE WAREHOUSE_STOCK.DELETE_FLAG = '0'
-				)AS W_S_PRIORITY_WAREHOUSE_NM
-			ON W_S_PRIORITY.PRIORITY = W_S_PRIORITY_WAREHOUSE_NM.PRIORITY
-			AND W_S_PRIORITY.SYS_ITEM_ID = W_S_PRIORITY_WAREHOUSE_NM.SYS_ITEM_ID
-
-			)AS W_STOCK
+		LEFT JOIN VIEW_WAREHOUSE_STOCK_PRIORITY AS W_STOCK
 
 		ON M_ITEM.SYS_ITEM_ID = W_STOCK.SYS_ITEM_ID
 
@@ -7127,12 +6978,6 @@
 			${backOrderDateTo}
 		</if-not-empty>
 
-		<if-not-empty varName="sysSupplierId">
-			AND
-			M_ITEM.SYS_SUPPLIER_ID = ${sysSupplierId}
-		</if-not-empty>
-
-
 		<if-equals value="1" varName="deadStockFlg">
 			AND
 			M_ITEM.DEAD_STOCK_FLAG = ${deadStockFlg}
@@ -7143,6 +6988,16 @@
 			M_ITEM.ORDER_POOL_FLG = ${orderPoolFlg}
 		</if-equals>
 
+		<if-not-empty varName="sysSupplierId">
+			AND
+			M_ITEM.SYS_SUPPLIER_ID = ${sysSupplierId}
+		</if-not-empty>
+		
+		<if-not-equals value="0" varName="sysWarehouseId">
+			AND
+			SYS_WAREHOUSE_ID = ${sysWarehouseId}
+		</if-not-equals>
+
 		<if-not-empty varName="specMemo">
 			AND M_ITEM.SPEC_MEMO ILIKE ${specMemo}
 		</if-not-empty>
@@ -7152,7 +7007,14 @@
 			WHEN ORDER_POOL_FLG = '1' THEN (ORDER_NUM = 0 or ORDER_NUM is null)
 			END
 		</if-equals>
-
+		<if-not-equals value="1" varName="haibangFlgIgnore">
+			<if-equals value="1" varName="haibangFlg">
+				AND M_ITEM.HAIBANG_FLG = ${haibangFlg}
+			</if-equals>
+			<if-equals value="0" varName="haibangFlg">
+				AND (M_ITEM.HAIBANG_FLG = '0' OR M_ITEM.HAIBANG_FLG IS NULL) 
+			</if-equals>
+		</if-not-equals>
 
 
 <!-- 		<if-not-empty varName="itemCodeFrom"> -->
@@ -7707,11 +7569,17 @@
 	</sql-template>
 
 	<!-- 	全セット商品組立可数更新関数 -->
-	<sql-template id="SELECT_PALLCALCASSEMBLYNUM">
-		SELECT PALLASSEMBLYNUM(${updateUserId});
+<!-- 	<sql-template id="SELECT_PALLCALCASSEMBLYNUM"> -->
+<!-- 		SELECT PALLASSEMBLYNUM(${updateUserId}); -->
+<!-- 	</sql-template> -->
+
+
+	<!-- 	全セット商品組立可数更新関数 -->
+	<sql-template id="SELECT_REBUILDASSEMBLYNUM">
+		SELECT REBUILD_ASSEMBLY_NUM(${updateUserId});
 	</sql-template>
-
-
+	
+	
 	<sql-template id="PARENT_SET_ITEM_LIST">
 		SELECT
 		SI.SYS_ITEM_ID,
@@ -9039,38 +8907,36 @@
 		(SELECT
 		ITEM.SYS_CORPORATE_SALES_SLIP_ID
 		,COUNT(NOT_ITEM.SYS_ITEM_ID) AS NOT_MST_ITEM_COUNT
+		,M_ITEM.sys_item_id
+		,M_ITEM.haibang_flg
 		FROM
 		CORPORATE_SALES_ITEM AS ITEM
-		<if-not-empty varName="itemCodeAreaFlg">
-			<if-equals value="1" varName="itemCodeAreaFlg">
-				INNER JOIN
-				(SELECT
+		
+		INNER JOIN
+			(SELECT
 				SYS_ITEM_ID
-				FROM
-				MST_ITEM
-				WHERE
-				1 = 1
-				<if-not-empty varName="itemCode">
-					AND
-					ITEM_CODE LIKE ${itemCode}
-				</if-not-empty>
-				<if-not-empty varName="itemNm">
-					AND
-					ITEM_NM LIKE ${itemNm}
-				</if-not-empty>
-				<if-not-empty varName="itemCodeFrom">
-					AND
-					TO_NUMBER(ITEM_CODE, '00000000000') &gt;= ${itemCodeFrom}
-				</if-not-empty>
-				<if-not-empty varName="itemCodeTo">
-					AND
-					TO_NUMBER(ITEM_CODE, '00000000000') &lt;= ${itemCodeTo}
-				</if-not-empty>
-				)AS M_ITEM
-				ON
-				M_ITEM.SYS_ITEM_ID = ITEM.SYS_ITEM_ID
-			</if-equals>
-		</if-not-empty>
+				,haibang_flg
+			FROM MST_ITEM
+			WHERE 1 = 1
+				AND haibang_flg = '0'
+			<if-not-empty varName="itemCode">
+				AND
+				ITEM_CODE LIKE ${itemCode}
+			</if-not-empty>
+			<if-not-empty varName="itemNm">
+				AND
+				ITEM_NM LIKE ${itemNm}
+			</if-not-empty>
+			<if-not-empty varName="itemCodeFrom">
+				AND
+				TO_NUMBER(ITEM_CODE, '00000000000') &gt;= ${itemCodeFrom}
+			</if-not-empty>
+			<if-not-empty varName="itemCodeTo">
+				AND
+				TO_NUMBER(ITEM_CODE, '00000000000') &lt;= ${itemCodeTo}
+			</if-not-empty>
+		)AS M_ITEM ON M_ITEM.SYS_ITEM_ID = ITEM.SYS_ITEM_ID
+		
 		LEFT JOIN
 		(SELECT
 		SYS_CORPORATE_SALES_SLIP_ID
@@ -9141,6 +9007,8 @@
 		</if-not-empty>
 		GROUP BY
 		ITEM.SYS_CORPORATE_SALES_SLIP_ID
+		,M_ITEM.sys_item_id
+		,M_ITEM.haibang_flg
 		HAVING
 		1 = 1
 		<if-not-equals value="1" varName="searchAllFlg">
@@ -9178,6 +9046,7 @@
 		C_SLIP.SYS_CORPORATE_SALES_SLIP_ID = C_ITEM.SYS_CORPORATE_SALES_SLIP_ID
 		WHERE
 		1 = 1
+		AND haibang_flg = '0'
 		ORDER BY
 		1 = 1
 		<!--ソート条件 -->
@@ -11110,16 +10979,21 @@
 			,S_SLIP.CORPORATION_NM
 			,COALESCE(S_SLIP.CORPORATION_RATE_OVER,0) AS CORPORATION_RATE_OVER
 			,COALESCE(I_COST.KIND_COST,0) AS ITEM_KIND_COST
+			,S_SLIP.PURCHASE_PROFIT_RATE
+			,S_SLIP.SALES_PROFIT_RATE
 		FROM
 		SALES_ITEM AS SITEM
 		INNER JOIN
 		(SELECT
 			SLIP.SYS_SALES_SLIP_ID
 			,SLIP.SYS_CORPORATION_ID
+			,SLIP.SYS_CHANNEL_ID
 			,SLIP.ORDER_NO
 			,SLIP.SHIPMENT_PLAN_DATE
 			,CORPORATION.CORPORATION_NM
 			,CORPORATION.CORPORATION_RATE_OVER
+			,CORPORATION.PURCHASE_PROFIT_RATE AS PURCHASE_PROFIT_RATE
+			,CHANNEL.SALES_PROFIT_RATE AS SALES_PROFIT_RATE
 		FROM
 			SALES_SLIP AS SLIP
 		INNER JOIN
@@ -11127,6 +11001,7 @@
 			SYS_CORPORATION_ID
 			,CORPORATION_NM
 			,CORPORATION_RATE_OVER
+			,PURCHASE_PROFIT_RATE
 		FROM
 			MST_CORPORATION
 			WHERE
@@ -11134,6 +11009,17 @@
 		) AS CORPORATION
 		ON
 			CORPORATION.SYS_CORPORATION_ID = SLIP.SYS_CORPORATION_ID
+		INNER JOIN
+			(SELECT
+				SYS_CHANNEL_ID
+				,SALES_PROFIT_RATE
+			FROM
+				MST_CHANNEL
+				WHERE
+				1 = 1
+			) AS CHANNEL
+			ON
+				CHANNEL.SYS_CHANNEL_ID = SLIP.SYS_CHANNEL_ID
 		) AS S_SLIP
 		ON
 		SITEM.SYS_SALES_SLIP_ID = S_SLIP.SYS_SALES_SLIP_ID
@@ -14287,11 +14173,32 @@
 			SYS_MANAGEMENT_ID = ${sysManagementId}
 	</sql-template>
 
+	<sql-template id="UPD_DOMESTICEXHIBITION_BY_CODE">
+		UPDATE
+			EXHIBIT_MANAGE
+		SET
+			SYS_MAKER_ID = ${sysMakerId}
+			,MAKER_CODE = ${makerCode}
+			,ITEM_NM = ${itemNm}
+			,WHOLSESALER_NM = ${wholsesalerNm}
+			,LIST_PRICE = ${listPrice}
+			,ITEM_RATE_OVER = ${itemRateOver}
+			,POSTAGE = ${postage}
+			,PURCHASING_COST = ${purchasingCost}
+			,OPEN_PRICE_FLG = ${openPriceFlg}
+			,UPDATE_DATE = current_timestamp
+			,UPDATE_USER_ID = ${updateUserId}
+			,DEPARTMENT_NM = ${departmentNm}
+		WHERE
+			delete_flag = '0' AND
+			MANAGEMENT_CODE = ${managementCode}
+	</sql-template>
+	
 	<sql-template id="UPD_DOMESTICEXHIBITION_ITEM_CODE">
 		UPDATE
 			EXHIBIT_MANAGE
 		SET
-			POSTAGE = ${postage}
+			ITEM_RATE_OVER = ${itemRateOver}
 		WHERE
 			MANAGEMENT_CODE = ${managementCode}
 	</sql-template>
@@ -14598,7 +14505,7 @@
 		WHERE
 		DELETE_FLAG = '0'
 		AND
-		MANAGEMENT_CODE ILIKE
+		LOWER(MANAGEMENT_CODE) IN
 		(${managementCodesSet})
 	</sql-template>
 
@@ -18060,4 +17967,14 @@ SELECT
 	</sql-template>
 
 
+	<sql-template id="UPD_DOMESTIC_ITEM_ARRIVAL">
+		UPDATE DOMESTIC_ITEM  
+		SET  arrival_schedule_date=${arrivalScheduleDate}
+			,arrival_date=${arrivalDate}
+		FROM DOMESTIC_SLIP DS
+		WHERE DOMESTIC_ITEM.SYS_DOMESTIC_SLIP_ID = DS.SYS_DOMESTIC_SLIP_ID
+					 AND DS.ORDER_NO = ${orderNo}
+	</sql-template>
+	
+	
 </sql-templates>

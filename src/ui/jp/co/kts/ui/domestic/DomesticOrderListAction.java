@@ -163,14 +163,17 @@ public class DomesticOrderListAction extends AppBaseAction {
 		}
 		DomesticOrderListService service = new DomesticOrderListService();
 		//国内商品のIDを検索
-		form.setDomesticOrderItemIdList(service.getDomesticOrderIdList(form.getDomesticOrderListSearchDTO()));
+		List<DomesticOrderListDTO> ret = service.getDomesticOrderIdList(form.getDomesticOrderListSearchDTO());
+		form.setDomesticOrderItemIdList(ret);
 		//検索結果の件数を設定
 		form.setSysDomesticItemIdListSize(form.getDomesticOrderItemIdList().size());
 		//ページング処理用の設定
 		form.setDomesticOrderPageMax(WebConst.LIST_PAGE_MAX_MAP.get(form.getDomesticOrderListSearchDTO().getListPageMax()));
 		form.setPageIdx(0);
 		//国内商品情報検索実行
-		form.setDomesticOrderItemInfoList(service.getDomesticOrderList(form.getDomesticOrderItemIdList(), form.getPageIdx(), form.getDomesticOrderListSearchDTO()));
+		List<DomesticOrderListDTO> lstResult = service.getDomesticOrderList(form.getDomesticOrderItemIdList(), form.getPageIdx(), form.getDomesticOrderListSearchDTO());
+		(request.getSession()).setAttribute("getDomesticOrderItemIdList(DomesticOrderListDTO)", lstResult);
+		form.setDomesticOrderItemInfoList( lstResult );
 
 		if (form.getSysDomesticItemIdListSize() == SEARCH_RESULT_CNT
 				&& !form.getMessageFlg().equals("1")) {

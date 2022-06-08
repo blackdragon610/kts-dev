@@ -3576,7 +3576,7 @@ public class CsvImportService {
 	 * @return
 	 * @throws Exception
 	 */
-	public ErrorDTO importDomesticOrderStockFile(FormFile fileUp, List<DomesticOrderStockItemDTO> csvImportList) throws Exception {
+	public ErrorDTO importDomesticOrderStockFile(long corporationId, FormFile fileUp, List<DomesticOrderStockItemDTO> csvImportList) throws Exception {
 
 		InputStream inputStream = fileUp.getInputStream();
 		ErrorDTO csvErrorDTO = new ErrorDTO();
@@ -3604,7 +3604,7 @@ public class CsvImportService {
 
 			csvImportDTO.setSysImportId((new SequenceDAO().getMaxSysDomesticImportId() + 1));
 
-//			csvImportDTO.setSysCorporationId(corporationId);
+			csvImportDTO.setSysCorporationId(corporationId);
 
 			//登録実行
 //			new DomesticCsvImportDAO().registryDomesticCsvImport(csvImportDTO);

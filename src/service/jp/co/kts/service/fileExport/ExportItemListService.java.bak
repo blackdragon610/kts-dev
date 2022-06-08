@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -90,7 +89,7 @@ public class ExportItemListService extends FileExportExcelService implements Aut
 	 * @return
 	 * @throws DaoException
 	 */
-	public XSSFWorkbook getExportItemList(HttpSession session, SearchItemDTO searchItemDTO, XSSFWorkbook workBook) throws DaoException {
+	public XSSFWorkbook getExportItemList(SearchItemDTO searchItemDTO, XSSFWorkbook workBook) throws DaoException {
 
 		XSSFSheet sheet = workBook.getSheetAt(0);
 		// シート名の設定.
@@ -98,13 +97,7 @@ public class ExportItemListService extends FileExportExcelService implements Aut
 		workBook.setSheetName(0, "在庫表");
 
 		ItemDAO itemDAO = new ItemDAO();
-		//List<ResultItemSearchDTO> mstItemList = itemDAO.getExportItemSearchList(searchItemDTO);
-		List<ResultItemSearchDTO> mstItemList = (List<ResultItemSearchDTO>) session.getAttribute("getSysItemIdList(searchItemDTO)" );
-		if(mstItemList==null)
-		{
-			mstItemList = itemDAO.getExportItemSearchList(searchItemDTO);
-		}
-		
+		List<ResultItemSearchDTO> mstItemList = itemDAO.getExportItemSearchList(searchItemDTO);
 
 		//値の始まりの行
 		rowIdx = 1;
@@ -183,8 +176,7 @@ public class ExportItemListService extends FileExportExcelService implements Aut
 		ItemDAO itemDAO = new ItemDAO();
 		// speed session-block
 		//List<ResultItemSearchDTO> mstItemList = itemDAO.getExportItemSearchList(searchItemDTO);
-		List<ResultItemSearchDTO> 	mstItemList = (List<ResultItemSearchDTO>) session.getAttribute("getExportItemSearchList(searchItemDTO)" );
-		if(mstItemList==null)		mstItemList = itemDAO.getExportItemSearchList(searchItemDTO);
+		List<ResultItemSearchDTO> mstItemList = (List<ResultItemSearchDTO>) session.getAttribute("getExportItemSearchList(searchItemDTO)" );
 		//<----
 //		ExtendMstItemDTO mstItemDTO = new ExtendMstItemDTO();
 
@@ -458,15 +450,13 @@ public class ExportItemListService extends FileExportExcelService implements Aut
 	 * @return
 	 * @throws DaoException
 	 */
-	public XSSFWorkbook getKeepOrderList(HttpSession session, SearchItemDTO searchItemDTO, XSSFWorkbook workBook) throws DaoException {
+	public XSSFWorkbook getKeepOrderList(SearchItemDTO searchItemDTO, XSSFWorkbook workBook) throws DaoException {
 
 		XSSFSheet sheet = workBook.getSheetAt(0);
 		workBook.setSheetName(0, "受注情報");
 		
 		ItemDAO itemDAO = new ItemDAO();		
-		//List<ResultItemSearchDTO> mstItemList = itemDAO.getExportItemSearchList(searchItemDTO);
-		List<ResultItemSearchDTO> 	mstItemList = (List<ResultItemSearchDTO>) session.getAttribute("getExportItemSearchList(searchItemDTO)" );
-		if(mstItemList==null)		mstItemList = itemDAO.getExportItemSearchList(searchItemDTO);
+		List<ResultItemSearchDTO> mstItemList = itemDAO.getExportItemSearchList(searchItemDTO);
 		
 		rowIdx = 1;
 		for(ResultItemSearchDTO dto : mstItemList) {		
@@ -868,7 +858,7 @@ public class ExportItemListService extends FileExportExcelService implements Aut
 	 * @throws DaoException
 	 * @throws ParseException
 	 */
-	public HSSFWorkbook getExportDoemsticExhibiti(HttpServletRequest request, DomesticExhibitionSearchDTO domesticSearchDTO, HSSFWorkbook workBook) throws DaoException, ParseException {
+	public HSSFWorkbook getExportDoemsticExhibiti(DomesticExhibitionSearchDTO domesticSearchDTO, HSSFWorkbook workBook) throws DaoException, ParseException {
 
 		HSSFSheet sheet = workBook.getSheetAt(0);
 		// シート名の設定.

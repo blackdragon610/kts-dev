@@ -26,6 +26,7 @@ import jp.co.keyaki.cleave.fw.ui.web.struts.AppBaseAction;
 import jp.co.keyaki.cleave.fw.ui.web.struts.AppBaseForm;
 import jp.co.keyaki.cleave.fw.ui.web.struts.StrutsBaseConst;
 import jp.co.kts.app.common.entity.DomesticOrderListDTO;
+import jp.co.kts.app.common.entity.MstCorporationDTO;
 import jp.co.kts.app.extendCommon.entity.ExtendDomesticOrderSlipDTO;
 import jp.co.kts.app.output.entity.RegistryMessageDTO;
 import jp.co.kts.app.search.entity.DomesticOrderListSearchDTO;
@@ -43,6 +44,13 @@ public class DomesticOrderListAction extends AppBaseAction {
 	private static final String ORDER_CHECK_FLG_ON = "on";
 	//検索結果0件
 	private static final int SEARCH_RESULT_CNT = 0;
+	//法人情報取得時使用
+	private static final Long SYS_CORP_ID_1 = (long)1;
+	private static final Long SYS_CORP_ID_2 = (long)2;
+	private static final Long SYS_CORP_ID_3 = (long)3;
+	private static final Long SYS_CORP_ID_4 = (long)4;
+	private static final Long SYS_CORP_ID_5 = (long)5;
+	private static final Long SYS_CORP_ID_6 = (long)6;
 
 	@Override
 	protected ActionForward doExecute(AppActionMapping appMapping,
@@ -108,6 +116,29 @@ public class DomesticOrderListAction extends AppBaseAction {
 		form.setDomesticOrderItemInfoList(new ArrayList<DomesticOrderListDTO>());
 		//検索条件項目初期化
 		form.setDomesticOrderListSearchDTO(new DomesticOrderListSearchDTO());
+		
+		DomesticOrderService service = new DomesticOrderService();
+		
+		//法人情報取得
+		List<Long> corporList = new ArrayList<Long>();
+
+		corporList.add(SYS_CORP_ID_1);
+		corporList.add(SYS_CORP_ID_2);
+		corporList.add(SYS_CORP_ID_3);
+		corporList.add(SYS_CORP_ID_4);
+		corporList.add(SYS_CORP_ID_5);
+		corporList.add(SYS_CORP_ID_6);
+
+		form.setCorporationListDTO(service.getCorporationList(corporList));
+
+		//インスタンスの生成
+		MstCorporationDTO corpoDto = new MstCorporationDTO();
+		//法人情報に店舗を追加
+		corpoDto.setSysCorporationId(99);
+		corpoDto.setCorporationNm("店舗");
+
+		form.getCorporationListDTO().add(corpoDto);
+		
 		//移動ステータス初期化
 		form.setMoveStatus(StringUtils.EMPTY);
 

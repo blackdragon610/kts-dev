@@ -626,9 +626,6 @@ public class ItemService {
 			idDto.setSysItemId(sysItemId);
 			ret.add(idDto);	
 		}
-		
-		// speed session-block
-		session.setAttribute("List<SysItemIdDTO>getSysItemIdList(searchItemDTO)", ret );
 		return ret;
 	}
 

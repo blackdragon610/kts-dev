@@ -59,7 +59,7 @@ $(function () {
 			alert("法人とファイルを選択してください。");
 			return;
 		}
-
+*/
 		//チェックされている値取得
 		var radio =$("input:radio[name='deliveryRadio']:checked").val();
 
@@ -67,20 +67,20 @@ $(function () {
 
 			alert("「データを全て上書き」か「送り状番号のみ付与」を選択してください");
 		}
- */
+
 		$(".overlay").css("display", "block");
 
-/* 		//伝票上書
+ 		//伝票上書
 		if (radio == "save") {
- */
+
 			goTransaction("saveDeliveryCsvImport.do");
 
-/* 		//配送番号のみ付与
+ 		//配送番号のみ付与
 		} else if (radio == "addSlipNo") {
-
+console.log("addSlipNo");
 			goTransaction("addSlipNoDeliveryCsvImport.do");
 		}
- */
+
 	});
 
 	$(".listImportButton").click(function () {
@@ -157,13 +157,12 @@ $(function () {
 
 	<h4 class="heading">配送データ取込</h4>
 
-<!-- 	<table class="copyRadio">
+ 	<table class="copyRadio">
 		<tr>
 			<td><label><input type="radio" name="deliveryRadio" value="save" checked/>データを全て上書き</label></td>
 			<td><label><input type="radio" name="deliveryRadio" value="addSlipNo" />送り状番号のみ付与</label></td>
 		</tr>
 	</table>
- -->
 	<div id="errorArea">
 		<nested:nest property="csvErrorDTO">
 			<nested:notEmpty property="fileName">

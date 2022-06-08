@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
@@ -43,7 +42,6 @@ import jp.co.kts.app.extendCommon.entity.ExtendWarehouseStockDTO;
 import jp.co.kts.app.output.entity.ErrorMessageDTO;
 import jp.co.kts.app.output.entity.RegistryMessageDTO;
 import jp.co.kts.app.output.entity.ResultItemSearchDTO;
-import jp.co.kts.app.output.entity.SysItemIdDTO;
 import jp.co.kts.service.common.ServiceConst;
 import jp.co.kts.service.fileExport.ExportItemListService;
 import jp.co.kts.service.item.ItemService;
@@ -894,35 +892,30 @@ public class ItemAction extends AppBaseAction{
 		//在庫情報
 		case WebConst.DOWNLOAD_TYPE_CODE2:
 			// speed session-block
-			//form.setSysItemIdList(itemService.getSysItemIdList(session, form.getSearchItemDTO()));
-			form.setSysItemIdList( (List<SysItemIdDTO>) session.getAttribute("List<SysItemIdDTO>getSysItemIdList(searchItemDTO)" ));			
+			form.setSysItemIdList(itemService.getSysItemIdList(session, form.getSearchItemDTO()));
 			workBook = exportItemListService.getExportStockItemInfoList(form.getSysItemIdList(), workBook, sheetNo);
 			fname = "在庫情報_" + date + ".xlsx";
 			break;
 		//価格情報
 		case WebConst.DOWNLOAD_TYPE_CODE3:
 			// speed session-block
-			//form.setSysItemIdList(itemService.getSysItemIdList(session, form.getSearchItemDTO()));
-			form.setSysItemIdList( (List<SysItemIdDTO>) session.getAttribute("List<SysItemIdDTO>getSysItemIdList(searchItemDTO)" ));
+			form.setSysItemIdList(itemService.getSysItemIdList(session, form.getSearchItemDTO()));
 			workBook = exportItemListService.getExportPriceInfoList(form.getSysItemIdList(), workBook, authInfo, sheetNo);
 			fname = "価格情報_" + date + ".xlsx";
 			break;
 		//助ネコCSV
 		case WebConst.DOWNLOAD_TYPE_CODE4:
-			// speed session-block
-			workBook = exportItemListService.getExportItemList(session, form.getSearchItemDTO(), workBook);
+			workBook = exportItemListService.getExportItemList(form.getSearchItemDTO(), workBook);
 			break;
 		// 通常のDL機能（新規機能が全て実装されるまで！！）
 		case StringUtils.EMPTY:
-			// speed session-block
-			workBook = exportItemListService.getExportItemList(session, form.getSearchItemDTO(), workBook);
+			workBook = exportItemListService.getExportItemList(form.getSearchItemDTO(), workBook);
 			fname = "商品情報_" + date + ".xlsx";
 			break;
 		//新在庫Excel
 		case WebConst.DOWNLOAD_TYPE_CODE5:
 			// speed session-block
-			//form.setSysItemIdList(itemService.getSysItemIdList(session, form.getSearchItemDTO()));
-			form.setSysItemIdList( (List<SysItemIdDTO>) session.getAttribute("List<SysItemIdDTO>getSysItemIdList(searchItemDTO)" ));
+			form.setSysItemIdList(itemService.getSysItemIdList(session, form.getSearchItemDTO()));
 			sheetNo = 0;
 			// speed session-block
 			workBook = exportItemListService.getExportItemInfoList(session, form.getSearchItemDTO(), workBook, authInfo, sheetNo);
@@ -934,8 +927,7 @@ public class ItemAction extends AppBaseAction{
 			fname = "新在庫情報_" + date + ".xlsx";
 			break;
 		case WebConst.DOWNLOAD_TYPE_CODE6:
-			// speed session-block
-			workBook = exportItemListService.getKeepOrderList(session, form.getSearchItemDTO(), workBook);
+			workBook = exportItemListService.getKeepOrderList(form.getSearchItemDTO(), workBook);
 			fname = "受注_" + date + ".xlsx";
 			break;
 		}

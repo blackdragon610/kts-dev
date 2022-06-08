@@ -420,8 +420,7 @@ public class DomesticExhibitionAction extends AppBaseAction {
 		DomesticExhibitionService service = new DomesticExhibitionService();
 		//セット商品フラグ読み替え
 		service.setFlagsSwutch(form.getDomesticExhibitionSearchDTO());
-		// speed session block
-		workBook = exportItemListService.getExportDoemsticExhibiti(request, form.getDomesticExhibitionSearchDTO(), workBook);
+		workBook = exportItemListService.getExportDoemsticExhibiti(form.getDomesticExhibitionSearchDTO(), workBook);
 		fname = "出品DB情報_" + date + ".xls";
 
 		// ファイル名に日本語を使う場合、以下の方法でファイル名を設定.
