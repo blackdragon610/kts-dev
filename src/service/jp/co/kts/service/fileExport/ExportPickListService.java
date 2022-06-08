@@ -516,8 +516,11 @@ public class ExportPickListService {
 		pdfContentByte.setTextMatrix(225, 660);
 
 		// 表示する文字列の設定
-		if (StringUtils.isNotEmpty(slipDto.getDestinationAppointDate()))
-			pdfContentByte.showText(slipDto.getDestinationAppointDate() + " " + WebConst.APPOINT_TIME_EHIDEN_MAP.get(slipDto.getDestinationAppointTime()) != null ? WebConst.APPOINT_TIME_EHIDEN_MAP.get(slipDto.getDestinationAppointTime()) : "");
+		if (StringUtils.isNotEmpty(slipDto.getDestinationAppointDate())) {
+			String date = slipDto.getDestinationAppointDate();
+			String time = slipDto.getDestinationAppointTime();
+			pdfContentByte.showText(date + " " + time);
+		}
 		else 
 			pdfContentByte.showText("");
 		

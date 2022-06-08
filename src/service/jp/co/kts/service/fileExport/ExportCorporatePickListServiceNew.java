@@ -418,8 +418,11 @@ public class ExportCorporatePickListServiceNew {
 		pdfContentByte.setTextMatrix(240, 660);
 
 		// 表示する文字列の設定
-		if (StringUtils.isNotEmpty(slipDto.getDestinationAppointDate()))
-			pdfContentByte.showText(slipDto.getDestinationAppointDate() + " " + WebConst.APPOINT_TIME_EHIDEN_MAP.get(slipDto.getDestinationAppointTime()) != null ? WebConst.APPOINT_TIME_EHIDEN_MAP.get(slipDto.getDestinationAppointTime()) : "");
+		if (StringUtils.isNotEmpty(slipDto.getDestinationAppointDate())) {
+			String date = slipDto.getDestinationAppointDate();
+			String time = WebConst.APPOINT_TIME_EHIDEN_MAP.get(slipDto.getDestinationAppointTime()) != null ? WebConst.APPOINT_TIME_EHIDEN_MAP.get(slipDto.getDestinationAppointTime()) : "";
+			pdfContentByte.showText(date + " " + time);
+		}
 		else 
 			pdfContentByte.showText("");
 		
