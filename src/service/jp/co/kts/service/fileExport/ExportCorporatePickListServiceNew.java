@@ -420,7 +420,13 @@ public class ExportCorporatePickListServiceNew {
 		// 表示する文字列の設定
 		if (StringUtils.isNotEmpty(slipDto.getDestinationAppointDate())) {
 			String date = slipDto.getDestinationAppointDate();
-			String time = WebConst.APPOINT_TIME_EHIDEN_MAP.get(slipDto.getDestinationAppointTime()) != null ? WebConst.APPOINT_TIME_EHIDEN_MAP.get(slipDto.getDestinationAppointTime()) : "";
+			String time = "";
+			if(slipDto.getTransportCorporationSystem().equals(WebConst.TRANSPORT_CORPORATION_SYSTEM_NAME_2))
+				time = WebConst.APPOINT_TIME_EHIDEN_MAP.get(slipDto.getDestinationAppointTime()) != null ? WebConst.APPOINT_TIME_EHIDEN_MAP.get(slipDto.getDestinationAppointTime()) : "";
+			else if(slipDto.getTransportCorporationSystem().equals( WebConst.TRANSPORT_CORPORATION_SYSTEM_NAME_1))
+				time = WebConst.APPOINT_TIME_B2_MAP.get(slipDto.getDestinationAppointTime()) != null ? WebConst.APPOINT_TIME_B2_MAP.get(slipDto.getDestinationAppointTime()) : "";
+			else if(slipDto.getTransportCorporationSystem().equals(WebConst.TRANSPORT_CORPORATION_SYSTEM_NAME_4))
+				time = WebConst.APPOINT_TIME_SEINO_MAP.get(slipDto.getDestinationAppointTime()) != null ? WebConst.APPOINT_TIME_SEINO_MAP.get(slipDto.getDestinationAppointTime()) : "";
 			pdfContentByte.showText(date + " " + time);
 		}
 		else 
