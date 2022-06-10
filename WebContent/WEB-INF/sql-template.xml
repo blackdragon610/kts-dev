@@ -16838,9 +16838,10 @@ SELECT
 		<if-not-empty varName="chargeDateFrom">
 			AND DI.CHARGE_DATE &gt;= ${chargeDateFrom}
 		</if-not-empty>
-		
-		<if-not-empty varName="chargeDateFrom">
-			AND DI.CHARGE_DATE &gt;= ${chargeDateFrom}
+		<if-not-empty varName="chargeDateTo">
+			AND DI.CHARGE_DATE != ''
+			AND DI.CHARGE_DATE IS NOT NULL
+			AND DI.CHARGE_DATE &lt;= ${chargeDateTo}
 		</if-not-empty>
 		
 		<if-not-empty varName="sysCorporationId">
