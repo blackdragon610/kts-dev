@@ -87,10 +87,10 @@ public class ExportSaleListService extends ExportExcelSalesService {
 		List<ExtendSalesSlipDTO> salesSlipList =
 				session == null ? 
 				saleDAO.getExportSaleSearchList(saleSearchDTO) : 
-		//検索結果をセッション 取得     //List<ExtendSalesSlipDTO> salesSlipList = 
 				(List<ExtendSalesSlipDTO>)session.getAttribute("getSearchSalesSlipList(SaleSearchDTO)");
 		
-		
+		//検索結果をセッション 取得     
+//		List<ExtendSalesSlipDTO> salesSlipList = saleDAO.getExportSaleSearchList(saleSearchDTO);
 		
 		row = sheet.getRow(0);
 		if (row == null) {

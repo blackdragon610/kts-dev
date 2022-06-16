@@ -72,11 +72,6 @@ public class ExtendSalesItemDTO extends SalesItemDTO {
 	
 	private int postage;
 	
-	private float purchaseProfitRate;
-	
-	private float salesProfitRate;
-
-	
 	/*  2015/12/15 ooyama ADD END 法人間請求書機能対応  */
 
 
@@ -314,31 +309,4 @@ public class ExtendSalesItemDTO extends SalesItemDTO {
 		this.postage = postage;
 	}
 
-	/**
-	 * @return the purchaseProfitRate
-	 */
-	public float getPurchaseProfitRate() {
-		return purchaseProfitRate;
-	}
-
-	/**
-	 * @param purchaseProfitRate the purchaseProfitRate to set
-	 */
-	public void setPurchaseProfitRate(float purchaseProfitRate) {
-		this.purchaseProfitRate = purchaseProfitRate;
-	}
-
-	/**
-	 * @return the salesProfitRate
-	 */
-	public float getSalesProfitRate() {
-		return salesProfitRate;
-	}
-
-	/**
-	 * @param salesProfitRate the salesProfitRate to set
-	 */
-	public void setSalesProfitRate(float salesProfitRate) {
-		this.salesProfitRate = salesProfitRate;
-	}
 }

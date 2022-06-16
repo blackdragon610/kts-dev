@@ -142,17 +142,22 @@
 							<nested:text property="corporationRateOver" styleClass="w100 rateOver" maxlength="5" />&nbsp;％
 						</td>
 					</tr>
-					<tr>
-						<th>
-							購入利益率
-						</th>
-						<td>
-							<nested:text property="purchaseProfitRate" styleClass="w100 rateOver" maxlength="5" />&nbsp;％
-						</td>
-					</tr>
 				</table>
-
 			</nested:nest>
+			
+<!-- 			<table id="mstTable" class="list"> -->
+<!-- 				<tr> -->
+<!-- 					<th rowspan="2">販売チャネル</th> -->
+<!-- 					<th rowspan="2">税</th> -->
+<!-- 					<th rowspan="2">ロイヤリティ</th> -->
+<!-- 					<th colspan="2">利益判定の色</th> -->
+<!-- 				</tr> -->
+<!-- 				<tr> -->
+<!-- 					<th>オレンジ</th> -->
+<!-- 					<th>赤</th> -->
+<!-- 				</tr> -->
+				
+<!-- 			</table> -->
 			<div class="update_detailCorporetionButton">
 			<nested:notEqual value="0" property="corporationDTO.sysCorporationId">
 				<div class="update_detailUserButton">

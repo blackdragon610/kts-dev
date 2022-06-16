@@ -88,9 +88,9 @@
 			var postage = removeComma($(".domePostageKindEdit").eq(index).text());
 			var profit = parseInt(parseInt(pieceRate)/1.1) - parseInt(parseInt(pieceRate)*0.1) - parseInt(cost) - parseInt(postage);
 			var color = '';
-			if(profit < 0 ){
+			if(profit < 100 ){
 				color = "red";
-			}else if(profit > 800){
+			}else if(profit > 700){
 				color = "white";
 			}else {
 				color = "orange";
@@ -428,9 +428,9 @@
 							var profit = parseInt(parseInt(pieceRate)/1.1) - parseInt(parseInt(pieceRate)*0.1) - parseInt(cost) - parseInt(postage);
 
 							var color = '';
-							if(profit < 0 ){
+							if(profit < 100 ){
 								color = "red";
-							}else if(profit > 800){
+							}else if(profit > 700){
 								color = "white";
 							}else {
 								color = "orange";

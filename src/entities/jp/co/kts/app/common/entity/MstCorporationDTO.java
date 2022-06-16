@@ -64,10 +64,6 @@ public class MstCorporationDTO  {
 	/** 法人掛け率 */
 	private BigDecimal corporationRateOver;
 	
-	/** 購入利益率 */
-	private float purchaseProfitRate;
-
-
 	public BigDecimal getCorporationRateOver() {
 		return corporationRateOver;
 	}
@@ -384,21 +380,6 @@ public class MstCorporationDTO  {
 	public void setCorporationFullNm(String corporationFullNm) {
 		this.corporationFullNm = corporationFullNm;
 	}
-
-	/**
-	 * @return the purchaseProfitRate
-	 */
-	public float getPurchaseProfitRate() {
-		return purchaseProfitRate;
-	}
-
-	/**
-	 * @param purchaseProfitRate the purchaseProfitRate to set
-	 */
-	public void setPurchaseProfitRate(float purchaseProfitRate) {
-		this.purchaseProfitRate = purchaseProfitRate;
-	}
-
 
 }
 

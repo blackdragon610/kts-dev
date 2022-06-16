@@ -108,19 +108,12 @@
 			cost = parseInt(cost);
 			var postage = removeComma($(".domePostageKindEdit").eq(index).text());
 			
-// 			var profit = parseInt(parseInt(pieceRate)/1.1) - parseInt(parseInt(pieceRate)*0.1) - parseInt(cost) - parseInt(postage);
-			
-			var salesProfitRate = removeComma($(".salesProfitRate_link").eq(index).val());
-			var purchaseProfitRate = removeComma($(".purchaseProfitRate_link").eq(index).val());
-			salesProfitRate = salesProfitRate-0;
-			purchaseProfitRate = purchaseProfitRate-0;
-			if(salesProfitRate==0)	salesProfitRate = 1.1;
-			var profit = parseInt(parseInt(pieceRate)/salesProfitRate) - parseInt(parseInt(pieceRate)*purchaseProfitRate) - parseInt(cost) - parseInt(postage);
-		
+			var profit = parseInt(parseInt(pieceRate)/1.1) - parseInt(parseInt(pieceRate)*0.1) - parseInt(cost) - parseInt(postage);
+
 			var color = '';
-			if(profit < 0 ){
+			if(profit < 100 ){
 				color = "red";
-			}else if(profit > 800){
+			}else if(profit > 700){
 				color = "white";
 			}else {
 				color = "orange";
@@ -463,19 +456,12 @@
 							
 							var storeFlag = $(".storeFlag").eq(index).val();
 							
-// 							var profit = parseInt(parseInt(pieceRate)/1.1) - parseInt(parseInt(pieceRate)*0.1) - parseInt(cost) - parseInt(postage);
-							
-							var salesProfitRate = removeComma($(".salesProfitRate_link").eq(index).val());
-							var purchaseProfitRate = removeComma($(".purchaseProfitRate_link").eq(index).val());
-							salesProfitRate = salesProfitRate-0;
-							purchaseProfitRate = purchaseProfitRate-0;
-							if(salesProfitRate==0)	salesProfitRate = 1.1;
-							var profit = parseInt(parseInt(pieceRate)/salesProfitRate) - parseInt(parseInt(pieceRate)*purchaseProfitRate) - parseInt(cost) - parseInt(postage);
+							var profit = parseInt(parseInt(pieceRate)/1.1) - parseInt(parseInt(pieceRate)*0.1) - parseInt(cost) - parseInt(postage);
 							
 							var color = '';
-							if(profit < 0 ){
+							if(profit < 100 ){
 								color = "red";
-							}else if(profit > 800){
+							}else if(profit > 700){
 								color = "white";
 							}else {
 								color = "orange";
@@ -1377,8 +1363,6 @@
 						<nested:write property="saleSlipNo" />
 						<nested:hidden property="sysSalesSlipId" styleClass="sysSalesSlipId_Link"></nested:hidden>
 					</a>
-					<nested:hidden property="salesProfitRate" styleClass="salesProfitRate_link"></nested:hidden>
-					<nested:hidden property="purchaseProfitRate" styleClass="purchaseProfitRate_link"></nested:hidden>
 				</td>
 				<td><nested:write property="corporationNm" /></td>
 				<td><nested:write property="shipmentPlanDate" /></td>

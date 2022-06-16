@@ -340,11 +340,16 @@ public class SaleDAO extends BaseDAO {
 				ResultSetHandlerFactory
 				.getNameMatchBeanRowHandler(ExtendSalesSlipDTO.class));
 		List<SysSalesSlipIdDTO> rtn = new ArrayList<>();
+		long slipId = 0;
 		for(int i=0; i<result.size(); i++)
 		{
+			
 			SysSalesSlipIdDTO one = new SysSalesSlipIdDTO();
 			one.setSysSalesSlipId(result.get(i).getSysSalesSlipId());
-			rtn.add(one);
+			if(slipId != result.get(i).getSysSalesSlipId()) {
+				slipId = result.get(i).getSysSalesSlipId();
+				rtn.add(one);
+			}
 		}
 
 		//検索結果をセッションとして保持

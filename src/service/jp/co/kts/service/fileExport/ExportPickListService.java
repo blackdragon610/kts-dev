@@ -513,7 +513,7 @@ public class ExportPickListService {
 		pdfContentByte.showText("運送日付");
 
 		// 表示位置の設定
-		pdfContentByte.setTextMatrix(225, 660);
+		pdfContentByte.setTextMatrix(240, 660);
 
 		// 表示する文字列の設定
 		if (StringUtils.isNotEmpty(slipDto.getDestinationAppointDate())) {

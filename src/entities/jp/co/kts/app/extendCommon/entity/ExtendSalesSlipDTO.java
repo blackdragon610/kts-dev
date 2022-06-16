@@ -26,6 +26,8 @@ public class ExtendSalesSlipDTO extends SalesSlipDTO {
 	private long sysItemId;
 
 	private List<ExtendSalesItemDTO> pickItemList = new ArrayList<>();
+	
+	private List<ExtendSalesItemDTO> saleItemList = new ArrayList<>();
 
 	private int notItemCount;
 
@@ -390,6 +392,18 @@ public class ExtendSalesSlipDTO extends SalesSlipDTO {
 	 */
 	public void setRslLeaveFlag(String rslLeaveFlag) {
 		RslLeaveFlag = rslLeaveFlag;
+	}
+	/**
+	 * @return the saleItemList
+	 */
+	public List<ExtendSalesItemDTO> getSaleItemList() {
+		return saleItemList;
+	}
+	/**
+	 * @param saleItemList the saleItemList to set
+	 */
+	public void setSaleItemList(List<ExtendSalesItemDTO> saleItemList) {
+		this.saleItemList = saleItemList;
 	}
 
 }

@@ -385,11 +385,12 @@ public class SaleDisplayService extends SaleService {
 			// }
 			setFlagsDisp(salesSlipDTO);
 			salesSlipList.add(salesSlipDTO);
+			
 		}
 		// salesSlipList.add(null);
 		return salesSlipList;
 	}
-
+	
 	// public ExtendSalesSlipDTO getSearchSalesSlip(SaleSearchDTO saleSearchDTO)
 	// throws DaoException {
 	//
