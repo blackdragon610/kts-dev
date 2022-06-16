@@ -75,7 +75,10 @@ public class ExtendSalesSlipDTO extends SalesSlipDTO {
 
 	/** 外部倉庫コード */
 	private String externalWarehouseCode;
+	
+	private long noTaxSumPieceRate;
 
+	private long inTaxSumPieceRate;
 
 	public String getExternalWarehouseCode() {
 		return externalWarehouseCode;
@@ -404,6 +407,30 @@ public class ExtendSalesSlipDTO extends SalesSlipDTO {
 	 */
 	public void setSaleItemList(List<ExtendSalesItemDTO> saleItemList) {
 		this.saleItemList = saleItemList;
+	}
+	/**
+	 * @return the noTaxSumPieceRate
+	 */
+	public long getNoTaxSumPieceRate() {
+		return noTaxSumPieceRate;
+	}
+	/**
+	 * @param noTaxSumPieceRate the noTaxSumPieceRate to set
+	 */
+	public void setNoTaxSumPieceRate(long noTaxSumPieceRate) {
+		this.noTaxSumPieceRate = noTaxSumPieceRate;
+	}
+	/**
+	 * @return the inTaxSumPieceRate
+	 */
+	public long getInTaxSumPieceRate() {
+		return inTaxSumPieceRate;
+	}
+	/**
+	 * @param inTaxSumPieceRate the inTaxSumPieceRate to set
+	 */
+	public void setInTaxSumPieceRate(long inTaxSumPieceRate) {
+		this.inTaxSumPieceRate = inTaxSumPieceRate;
 	}
 
 }

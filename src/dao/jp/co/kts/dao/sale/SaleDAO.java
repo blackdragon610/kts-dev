@@ -346,6 +346,13 @@ public class SaleDAO extends BaseDAO {
 			
 			SysSalesSlipIdDTO one = new SysSalesSlipIdDTO();
 			one.setSysSalesSlipId(result.get(i).getSysSalesSlipId());
+			one.setInTaxSumPieceRate(result.get(i).getInTaxSumPieceRate());
+			one.setNoTaxSumPieceRate(result.get(i).getNoTaxSumPieceRate());
+			one.setSumClaimPrice(result.get(i).getSumClaimPrice());
+			one.setSumCost(result.get(i).getCost());
+			one.setSumGrossMargin(result.get(i).getGrossMargin());
+			one.setSysCorporationId(result.get(i).getSysCorporationId());
+			
 			if(slipId != result.get(i).getSysSalesSlipId()) {
 				slipId = result.get(i).getSysSalesSlipId();
 				rtn.add(one);
