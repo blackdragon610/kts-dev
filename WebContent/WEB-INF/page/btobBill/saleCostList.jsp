@@ -102,18 +102,25 @@
 			if (pieceRate == "") {
 				pieceRate = 0;
 			}
-			
 			pieceRate = parseInt(pieceRate);
 			var cost = removeComma($(".costEdit").eq(index).text());
 			cost = parseInt(cost);
 			var postage = removeComma($(".domePostageKindEdit").eq(index).text());
-			
-			var profit = parseInt(parseInt(pieceRate)/1.1) - parseInt(parseInt(pieceRate)*0.1) - parseInt(cost) - parseInt(postage);
+			postage = parseInt(postage);
+			var taxFlag = $(".taxFlg").eq(index).val();
+			var royalty = $(".royalty").eq(index).val();
+			var orgColorRange = $(".orgColorRange").eq(index).val();
+			var redColorRange = $(".redColorRange").eq(index).val();
+			var profit = 0;
+			if(taxFlag == 1)
+				profit = parseInt(pieceRate/1.1) - parseInt((pieceRate/1.1)/(royalty/100)) - parseInt(cost) - parseInt(postage);
+			else
+				profit = parseInt(pieceRate) - parseInt(pieceRate/(royalty/100)) - parseInt(postage);
 
 			var color = '';
-			if(profit < 100 ){
+			if(profit < parseInt(redColorRange) ){
 				color = "red";
-			}else if(profit > 700){
+			}else if(profit > parseInt(orgColorRange)){
 				color = "white";
 			}else {
 				color = "orange";
@@ -456,16 +463,25 @@
 							
 							var storeFlag = $(".storeFlag").eq(index).val();
 							
-							var profit = parseInt(parseInt(pieceRate)/1.1) - parseInt(parseInt(pieceRate)*0.1) - parseInt(cost) - parseInt(postage);
-							
+							var taxFlag = $(".taxFlg").eq(index).val();
+							var royalty = $(".royalty").eq(index).val();
+							var orgColorRange = $(".orgColorRange").eq(index).val();
+							var redColorRange = $(".redColorRange").eq(index).val();
+							var profit = 0;
+							if(taxFlag == 1)
+								profit = parseInt(parseInt(pieceRate)/1.1) - parseInt(parseInt(parseInt(pieceRate)/1.1)/(parseInt(royalty)/100)) - parseInt(cost) - parseInt(postage);
+							else
+								profit = parseInt(pieceRate) - parseInt(parseInt(pieceRate)/(parseInt(royalty)/100)) - parseInt(postage);
+
 							var color = '';
-							if(profit < 100 ){
+							if(profit < parseInt(redColorRange) ){
 								color = "red";
-							}else if(profit > 700){
+							}else if(profit > parseInt(orgColorRange)){
 								color = "white";
 							}else {
 								color = "orange";
 							}
+							
 							profit = new String(profit).replace(/,/g, "");
 							while (profit != (profit = profit.replace(/^(-?\d+)(\d{3})/, "$1,$2")));
 							
@@ -1363,6 +1379,10 @@
 						<nested:write property="saleSlipNo" />
 						<nested:hidden property="sysSalesSlipId" styleClass="sysSalesSlipId_Link"></nested:hidden>
 					</a>
+					<nested:hidden property="taxFlg" styleClass="taxFlg"></nested:hidden>
+					<nested:hidden property="royalty" styleClass="royalty"></nested:hidden>
+					<nested:hidden property="orgColorRange" styleClass="orgColorRange"></nested:hidden>
+					<nested:hidden property="redColorRange" styleClass="redColorRange"></nested:hidden>
 				</td>
 				<td><nested:write property="corporationNm" /></td>
 				<td><nested:write property="shipmentPlanDate" /></td>

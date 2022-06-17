@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import jp.co.keyaki.cleave.fw.ui.web.struts.AppActionMapping;
 import jp.co.keyaki.cleave.fw.ui.web.struts.AppBaseForm;
 import jp.co.kts.app.common.entity.MstCorporationDTO;
+import jp.co.kts.app.common.entity.MstProfitDTO;
 
 public class CorporationForm extends AppBaseForm {
 
@@ -23,6 +24,8 @@ public class CorporationForm extends AppBaseForm {
 	private MstCorporationDTO corporationDTO = new MstCorporationDTO();
 
 	private String alertType;
+	
+	private List<MstProfitDTO> channelProfitList = new ArrayList<>();
 
 	/**
 	 * @return sysCorporationId
@@ -132,6 +135,32 @@ public class CorporationForm extends AppBaseForm {
 	protected void doReset(AppActionMapping appMapping,
 			HttpServletRequest request) {
 		this.alertType = "0";
+	}
+
+
+
+
+
+
+
+	/**
+	 * @return the channelProfitList
+	 */
+	public List<MstProfitDTO> getChannelProfitList() {
+		return channelProfitList;
+	}
+
+
+
+
+
+
+
+	/**
+	 * @param channelProfitList the channelProfitList to set
+	 */
+	public void setChannelProfitList(List<MstProfitDTO> channelProfitList) {
+		this.channelProfitList = channelProfitList;
 	}
 
 }

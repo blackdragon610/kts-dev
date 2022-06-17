@@ -11,6 +11,7 @@ import jp.co.keyaki.cleave.fw.dao.DaoException;
 import jp.co.keyaki.cleave.fw.dao.SQLParameters;
 import jp.co.keyaki.cleave.fw.dao.util.ResultSetHandlerFactory;
 import jp.co.kts.app.common.entity.MstCorporationDTO;
+import jp.co.kts.app.common.entity.MstProfitDTO;
 
 public class CorporationDAO extends BaseDAO {
 
@@ -29,7 +30,7 @@ public class CorporationDAO extends BaseDAO {
 
 		return select("SEL_CORPORATION", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstCorporationDTO.class));
 	}
-
+	
 	/**
 	 * 法人IDから法人名を取得する
 	 * @param sysCorporationId
@@ -95,6 +96,33 @@ public class CorporationDAO extends BaseDAO {
 		}
 
 		return select("SEL_CORPORATION", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstCorporationDTO.class));
+	}
+
+	public List<MstProfitDTO> getChannelProfitList(long sysCorporationId) throws DaoException {
+		SQLParameters parameters = new SQLParameters();
+		parameters.addParameter("sysCorporationId", sysCorporationId);
+
+		return selectList("SEL_PROFIT_BY_CORPORATIONID", parameters, ResultSetHandlerFactory.getNameMatchBeanRowHandler(MstProfitDTO.class));
+	}
+	
+	public void updateProfit(MstProfitDTO profitDTO, String tax_flag) throws DaoException {
+		SQLParameters parameters = new SQLParameters();
+		addParametersFromBeanProperties(profitDTO, parameters);
+
+		UserInfo userInfo = ActionContext.getLoginUserInfo();
+		parameters.addParameter("updateUserId", userInfo.getUserId());
+		parameters.addParameter("taxFlg", tax_flag);
+		update("UPD_PROFIT_BY_CORPORATIONID", parameters);
+	}
+	
+	public void deleteChannelProfitList(long sysCorporationId) throws DaoException {
+
+		SQLParameters parameters = new SQLParameters();
+		parameters.addParameter("sysCorporationId", sysCorporationId);
+
+		UserInfo userInfo = ActionContext.getLoginUserInfo();
+		parameters.addParameter("updateUserId", userInfo.getUserId());
+		update("UPD_DEL_PROFIT_BY_CORPORATIONID", parameters);
 	}
 
 }

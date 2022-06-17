@@ -145,19 +145,36 @@
 				</table>
 			</nested:nest>
 			
-<!-- 			<table id="mstTable" class="list"> -->
-<!-- 				<tr> -->
-<!-- 					<th rowspan="2">販売チャネル</th> -->
-<!-- 					<th rowspan="2">税</th> -->
-<!-- 					<th rowspan="2">ロイヤリティ</th> -->
-<!-- 					<th colspan="2">利益判定の色</th> -->
-<!-- 				</tr> -->
-<!-- 				<tr> -->
-<!-- 					<th>オレンジ</th> -->
-<!-- 					<th>赤</th> -->
-<!-- 				</tr> -->
+			<table id="mstTable" class="list">
+				<tr>
+					<th rowspan="2">販売チャネル</th>
+					<th rowspan="2">税</th>
+					<th rowspan="2">ロイヤリティ</th>
+					<th colspan="2">利益判定の色</th>
+				</tr>
+				<tr>
+					<th>オレンジ</th>
+					<th>赤</th>
+				</tr>
+				<nested:iterate property="channelProfitList" indexId="idx">
+					<tr>
+						<td><nested:write  property="channelNm"/></td>
+						<td>
+							<nested:checkbox property="taxFlg"></nested:checkbox>
+						</td>
+						<td>
+							<nested:text property="royalty" styleClass="w50 royalty" maxlength="4" />&nbsp;％
+						</td>
+						<td>
+							<nested:text property="orgColorRange" styleClass="w50" maxlength="5" />
+						</td>
+						<td>
+							<nested:text property="redColorRange" styleClass="w50" maxlength="5" />
+						</td>
+					</tr>
+				</nested:iterate>
 				
-<!-- 			</table> -->
+			</table>
 			<div class="update_detailCorporetionButton">
 			<nested:notEqual value="0" property="corporationDTO.sysCorporationId">
 				<div class="update_detailUserButton">

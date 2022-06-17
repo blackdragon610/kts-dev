@@ -53,7 +53,7 @@ public class CorporationAction extends AppBaseAction {
 
 			 CorporationService service = new CorporationService();
 			 form.setCorporationDTO(service.getCorporation(form.getSysCorporationId()));
-
+			 form.setChannelProfitList(service.getChannelProfitList(form.getSysCorporationId()));
 			 return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
 		 }
 
@@ -62,6 +62,7 @@ public class CorporationAction extends AppBaseAction {
 
 			 CorporationService service = new CorporationService();
 			 service.updateCorporation(form.getCorporationDTO());
+			 service.updateChannelProfitList(form.getChannelProfitList());
 			 form.setAlertType("2");
 			 return appMapping.findForward(StrutsBaseConst.FORWARD_NAME_SUCCESS);
 		 }
@@ -71,7 +72,7 @@ public class CorporationAction extends AppBaseAction {
 
 			 CorporationService service = new CorporationService();
 			 service.deleteCorporation(form.getCorporationDTO().getSysCorporationId());
-
+			 service.deleteChannelProfitList(form.getCorporationDTO().getSysCorporationId());
 			 MstCorporationDTO corporationDTO = new MstCorporationDTO();
 			 form.setCorporationDTO(corporationDTO);
 			 form.setAlertType("3");
