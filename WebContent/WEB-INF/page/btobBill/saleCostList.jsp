@@ -113,9 +113,9 @@
 			var redColorRange = $(".redColorRange").eq(index).val();
 			var profit = 0;
 			if(taxFlag == 1)
-				profit = parseInt(pieceRate/1.1) - parseInt((pieceRate/1.1)/(royalty/100)) - parseInt(cost) - parseInt(postage);
+				profit = parseInt(pieceRate/1.1) - parseInt((pieceRate/1.1)*(royalty/100)) - parseInt(cost) - parseInt(postage);
 			else
-				profit = parseInt(pieceRate) - parseInt(pieceRate/(royalty/100)) - parseInt(postage);
+				profit = parseInt(pieceRate) - parseInt(pieceRate*(royalty/100)) - parseInt(cost) - parseInt(postage);
 
 			var color = '';
 			if(profit < parseInt(redColorRange) ){
@@ -469,9 +469,9 @@
 							var redColorRange = $(".redColorRange").eq(index).val();
 							var profit = 0;
 							if(taxFlag == 1)
-								profit = parseInt(parseInt(pieceRate)/1.1) - parseInt(parseInt(parseInt(pieceRate)/1.1)/(parseInt(royalty)/100)) - parseInt(cost) - parseInt(postage);
+								profit = parseInt(parseInt(pieceRate)/1.1) - parseInt((pieceRate/1.1)*(royalty/100)) - parseInt(cost) - parseInt(postage);
 							else
-								profit = parseInt(pieceRate) - parseInt(parseInt(pieceRate)/(parseInt(royalty)/100)) - parseInt(postage);
+								profit = parseInt(pieceRate) - parseInt(pieceRate*(royalty/100)) - parseInt(cost) - parseInt(postage);
 
 							var color = '';
 							if(profit < parseInt(redColorRange) ){

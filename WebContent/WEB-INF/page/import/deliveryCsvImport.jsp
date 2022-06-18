@@ -77,7 +77,6 @@ $(function () {
 
  		//配送番号のみ付与
 		} else if (radio == "addSlipNo") {
-console.log("addSlipNo");
 			goTransaction("addSlipNoDeliveryCsvImport.do");
 		}
 
