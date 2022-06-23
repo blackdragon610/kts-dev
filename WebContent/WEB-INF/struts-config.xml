@@ -2836,8 +2836,8 @@
 	</action-mappings>
 
 	<controller maxFileSize="250M"
-				bufferSize="7000K"
-				memFileSize="7000K"
+				bufferSize="50M"
+				memFileSize="50M"
 				tempDir="/usr/local/kts/tmp"></controller>
 
 	<!-- ======================================== Message Resources Definitions -->
