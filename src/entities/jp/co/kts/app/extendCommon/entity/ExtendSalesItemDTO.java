@@ -72,6 +72,7 @@ public class ExtendSalesItemDTO extends SalesItemDTO {
 	
 	private int postage;
 	
+	// profit calc  reference
 	private String taxFlg;
 	
 	private float royalty;

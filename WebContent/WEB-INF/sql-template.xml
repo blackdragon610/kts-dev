@@ -10976,6 +10976,7 @@
 		<if-equals value="2" varName="sortOrder">DESC</if-equals>
 	</sql-template>
 
+<!-- 	profit calculator   get royalty of channel in sale -->
 	<sql-template id="SEL_SEARCH_SALES_COST">
 		SELECT
 			SITEM.SYS_SALES_ITEM_ID
@@ -17977,6 +17978,7 @@ SELECT
 					 AND DS.ORDER_NO = ${orderNo}
 	</sql-template>
 	
+<!-- 	profit calculator  reference -->
 	<sql-template id="SEL_PROFIT_BY_CORPORATIONID">
 		SELECT
 			PROFIT.SYS_PROFIT_ID
@@ -18019,5 +18021,7 @@ SELECT
 		WHERE
 			SYS_CORPORATION_ID = ${sysCorporationId}
 	</sql-template>
+	
+<!-- 	end -->
 	
 </sql-templates>

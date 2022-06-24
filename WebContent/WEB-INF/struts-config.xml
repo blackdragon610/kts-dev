@@ -2835,6 +2835,7 @@
 
 	</action-mappings>
 
+<!-- 	File Upload increase 50M -->
 	<controller maxFileSize="250M"
 				bufferSize="50M"
 				memFileSize="50M"

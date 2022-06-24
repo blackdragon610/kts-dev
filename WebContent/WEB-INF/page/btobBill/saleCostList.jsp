@@ -107,6 +107,8 @@
 			cost = parseInt(cost);
 			var postage = removeComma($(".domePostageKindEdit").eq(index).text());
 			postage = parseInt(postage);
+			
+// 			profit calc
 			var taxFlag = $(".taxFlg").eq(index).val();
 			var royalty = $(".royalty").eq(index).val();
 			var orgColorRange = $(".orgColorRange").eq(index).val();
@@ -116,7 +118,7 @@
 				profit = parseInt(pieceRate/1.1) - parseInt((pieceRate/1.1)*(royalty/100)) - parseInt(cost) - parseInt(postage);
 			else
 				profit = parseInt(pieceRate) - parseInt(pieceRate*(royalty/100)) - parseInt(cost) - parseInt(postage);
-
+// 			end
 			var color = '';
 			if(profit < parseInt(redColorRange) ){
 				color = "red";
@@ -462,7 +464,7 @@
 							pieceRate = parseInt(pieceRate);
 							
 							var storeFlag = $(".storeFlag").eq(index).val();
-							
+							// profit calc
 							var taxFlag = $(".taxFlg").eq(index).val();
 							var royalty = $(".royalty").eq(index).val();
 							var orgColorRange = $(".orgColorRange").eq(index).val();
@@ -472,7 +474,7 @@
 								profit = parseInt(parseInt(pieceRate)/1.1) - parseInt((pieceRate/1.1)*(royalty/100)) - parseInt(cost) - parseInt(postage);
 							else
 								profit = parseInt(pieceRate) - parseInt(pieceRate*(royalty/100)) - parseInt(cost) - parseInt(postage);
-
+							// end
 							var color = '';
 							if(profit < parseInt(redColorRange) ){
 								color = "red";
@@ -1379,10 +1381,12 @@
 						<nested:write property="saleSlipNo" />
 						<nested:hidden property="sysSalesSlipId" styleClass="sysSalesSlipId_Link"></nested:hidden>
 					</a>
+					<!-- profit calc -->
 					<nested:hidden property="taxFlg" styleClass="taxFlg"></nested:hidden>
 					<nested:hidden property="royalty" styleClass="royalty"></nested:hidden>
 					<nested:hidden property="orgColorRange" styleClass="orgColorRange"></nested:hidden>
 					<nested:hidden property="redColorRange" styleClass="redColorRange"></nested:hidden>
+					<!-- end -->
 				</td>
 				<td><nested:write property="corporationNm" /></td>
 				<td><nested:write property="shipmentPlanDate" /></td>

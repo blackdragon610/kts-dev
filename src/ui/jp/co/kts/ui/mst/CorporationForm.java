@@ -25,6 +25,7 @@ public class CorporationForm extends AppBaseForm {
 
 	private String alertType;
 	
+	// profit calc
 	private List<MstProfitDTO> channelProfitList = new ArrayList<>();
 
 	/**

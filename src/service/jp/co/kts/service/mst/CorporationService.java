@@ -76,7 +76,7 @@ public class CorporationService {
 		return dto.getCorporationNm();
 	}
 	
-
+	// profit calc 
 	public List<MstProfitDTO> getChannelProfitList(long sysCorporationId) throws DaoException   {
 
 		CorporationDAO dao = new CorporationDAO();
@@ -99,5 +99,6 @@ public class CorporationService {
 		dao.deleteChannelProfitList(sysCorporationId);
 
 	}
+	// end
 
 }

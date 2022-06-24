@@ -145,6 +145,7 @@
 				</table>
 			</nested:nest>
 			
+<!-- 			profit calc -- channelList -->
 			<table id="mstTable" class="list">
 				<tr>
 					<th rowspan="2">販売チャネル</th>
@@ -175,6 +176,7 @@
 				</nested:iterate>
 				
 			</table>
+<!-- 			end -->
 			<div class="update_detailCorporetionButton">
 			<nested:notEqual value="0" property="corporationDTO.sysCorporationId">
 				<div class="update_detailUserButton">
